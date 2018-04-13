@@ -1,0 +1,12 @@
+body {
+  padding-top: 70px;
+}
+
+.my_search {
+  width: 300%;
+}
+
+.padding_bottom_big { padding-bottom: 20px !important; }
+.padding_top_big { padding-top: 20px !important; }
+
+.clr_green { color: green; }
