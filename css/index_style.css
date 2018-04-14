@@ -8,6 +8,8 @@ body {
 
 .padding_bottom_big { padding-bottom: 20px !important; }
 .padding_top_big { padding-top: 20px !important; }
-
+.margin-top-small {margin-top: 10px !important;}
 .clr_green { color: green; }
-
+.my_banner_cover {
+  width: 100%
+}
