@@ -3,7 +3,7 @@ $('.price_range').jRange({
   to: 1000000,
   step: 10000,
   format: '%s VND',
-  width: 330,
+  width: 340,
   showLabels: true,
   isRange : true
 });
