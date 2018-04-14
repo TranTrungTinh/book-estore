@@ -69,7 +69,7 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-12 col-md-3">
+      <div class="col-sm-12 col-md-2">
         <div class="panel panel-success">
           <div class="panel-heading">
             <h2 class="panel-title clr_green">DANH MỤC SẢN PHẨM</h2>
@@ -114,16 +114,39 @@
             <h3 class="panel-title">Tìm kiếm</h3>
           </div>
           <div class="panel-body">
-            <p>Giá tiền</p>
-            <div>
-              <h2><input type="hidden" class="price_range" value="0,500" /></h2>
-              <button type="button" class="btn btn-default margin-top-small">Lọc</button>
-            </div>
+            <p>Giá từ:</p>
+            <p>
+              <!-- <span>Giá từ:</span>  -->
+              <select >
+                <option selected>10,000</option>
+                <option>20,000</option>
+                <option>30,000</option>
+                <option>50,000</option>
+                <option>100,000</option>
+                <option>200,000</option>
+                <option>300,000</option>
+                <option>500,000</option>
+                <option>1 triệu</option>
+              </select>
+              <span>&nbsp;đến:&nbsp;</span>
+              <select >
+                <option>20,000</option>
+                <option>30,000</option>
+                <option>50,000</option>
+                <option>100,000</option>
+                <option>200,000</option>
+                <option>300,000</option>
+                <option>500,000</option>
+                <option>1 triệu</option>
+                <option selected>2 triệu</option>
+              </select>
+            </p>
+            <p><a href="#" class="btn btn-default" >Lọc</a></p>
           </div>
         </div>
       </div>
 
-      <div class="col-sm-12 col-md-9">
+      <div class="col-sm-12 col-md-10">
         
         <div class="row padding_bottom_big">
           <div class="col-sm-12">
@@ -218,18 +241,21 @@
         
         <div class="row">
           <div class="col-sm-12">
-            <div class="alert alert-success margin-bottom-small">Sach ban chay</div>
+            <div class="alert alert-success margin-bottom-small fs-20">SACH MOI NHAT</div>
           </div>
 
           <div class="col-sm-4 col-md-3 ">
             <div class="thumbnail">
-              <img src="./images/book01.jpg" alt="...">
+              <img src="./images/book01.jpg" alt="..." class="my_banner_cover">
               <div class="caption">
                 <h4>Chi con mot ngay de song</h4>
-                <p>59.000&nbsp;₫ <strike>98.000&nbsp;₫</strike></p>
+                <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
+                <p>So luong da ban: <span class="badge">10</span></p>
                 <p>
-                  <a href="#" class="btn btn-primary" role="button">Button</a> 
-                  <a href="#" class="btn btn-default" role="button">Button</a>
+                  <a href="#" class="btn btn-danger btn-block btn-lg" role="button">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                    <span>Them vao gio hang</span>
+                  </a>
                 </p>
               </div>
             </div>
@@ -269,14 +295,24 @@
           </div>
         </div>
         
-        <!-- <div class="row">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="alert alert-success margin-bottom-small fs-20">SACH BAN CHAY NHAT</div>
+          </div>
+
           <div class="col-sm-4 col-md-3 ">
             <div class="thumbnail">
-              <img src="./images/book01.jpg" alt="...">
+              <img src="./images/book01.jpg" alt="..." class="my_banner_cover">
               <div class="caption">
-                <h3>Thumbnail label</h3>
-                <p>...</p>
-                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                <h4>Chi con mot ngay de song</h4>
+                <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
+                <p>So luong da ban: <span class="badge">10</span></p>
+                <p>
+                  <a href="#" class="btn btn-danger btn-block btn-lg" role="button">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                    <span>Them vao gio hang</span>
+                  </a>
+                </p>
               </div>
             </div>
           </div>
@@ -313,7 +349,63 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="alert alert-success margin-bottom-small fs-20">SACH DUOC XEM NHIEU NHAT</div>
+          </div>
+
+          <div class="col-sm-4 col-md-3 ">
+            <div class="thumbnail">
+              <img src="./images/book01.jpg" alt="..." class="my_banner_cover">
+              <div class="caption">
+                <h4>Chi con mot ngay de song</h4>
+                <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
+                <p>So luong da ban: <span class="badge">10</span></p>
+                <p>
+                  <a href="#" class="btn btn-danger btn-block btn-lg" role="button">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                    <span>Them vao gio hang</span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 col-md-3 ">
+            <div class="thumbnail">
+              <img src="./images/book02.jpg" alt="...">
+              <div class="caption">
+                <h3>Thumbnail label</h3>
+                <p>...</p>
+                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 col-md-3 ">
+            <div class="thumbnail">
+              <img src="./images/book03.jpg" alt="...">
+              <div class="caption">
+                <h3>Thumbnail label</h3>
+                <p>...</p>
+                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 col-md-3 ">
+            <div class="thumbnail">
+              <img src="./images/book03.jpg" alt="...">
+              <div class="caption">
+                <h3>Thumbnail label</h3>
+                <p>...</p>
+                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>

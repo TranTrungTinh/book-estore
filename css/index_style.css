@@ -11,9 +11,17 @@ body {
 .padding_bottom_large {padding-top: 30px !important;}
 .margin-top-small {margin-top: 10px !important;}
 .margin-bottom-small {margin-bottom: 5px !important;}
+
+.fs-20 {font-size: 20px};
+.fs-16 {font-size: 16px};
+
 .clr_green { color: green; }
 .my_banner_cover {
   width: 100%
+}
+.price-tag {
+  font-weight: 700;
+  font-size: 16px;
 }
 
 
