@@ -7,7 +7,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/index_style.css">
-  <link rel="stylesheet" href="./css/jquery.range.css">
   <title>Book e-Store</title>
 </head>
 
@@ -47,7 +46,7 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="#" class="">
+            <a href="javascript:;" class="" data-toggle="modal" data-target=".bs-example-modal-lg">
               <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
               <span>Chào Trần Trung Tính</span>
             </a>
@@ -114,6 +113,7 @@
           
         </div>
 
+        <!-- Search panel -->
         <div class="panel panel-info">
           <div class="panel-heading">
             <h3 class="panel-title">Tìm kiếm</h3>
@@ -417,6 +417,113 @@
 
   </div>
 
+  <!-- Login tab modal -->
+  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="gridSystemModalLabel">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            Đăng nhập / Đăng ký tài khoản
+          </h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="row my_banner_cover">
+            <div class="col-md-3 margin-left-small">
+              <h2 class="label-login">Đăng nhập</h2>
+              <p class="label-login-content">
+                Đăng nhập để theo dõi đơn hàng, lưu
+                danh sách sản phẩm yêu thích, nhận
+                nhiều ưu đãi hấp dẫn.</p>
+              <img src="./images/bg-login.png" alt="Bg-login" class="my_banner_cover padding-top-small" />
+            </div>
+            <div class="col-md-8 margin-left-big">
+              <!-- Nav tabs -->
+              <ul class="nav nav-pills nav-justified padding_bottom_big" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Đăng nhập</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Tạo tài khoản</a></li>
+              </ul>
+
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <!-- Dang nhap -->
+                <div role="tabpanel" class="tab-pane active" id="home">
+                  <div class="form-horizontal">
+                    <div class="form-group">
+                      <label for="inputEmailLogin" class="col-sm-2 control-label label-login-content">Email</label>
+                      <div class="col-sm-10">
+                        <input type="email" class="form-control input-lg" id="inputEmailLogin" placeholder="Nhập Email">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPasswordLogin" class="col-sm-2 control-label label-login-content">Mật khẩu</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control input-lg" id="inputPasswordLogin" placeholder="Mật khẩu từ 6 đến 32 ký tự">
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-warning btn-lg btn-block btn-login">Đăng nhập</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Dang ky -->
+                <div role="tabpanel" class="tab-pane" id="profile">
+                  <div class="form-horizontal">
+                    <div class="form-group">
+                      <label for="inputNameRegister" class="col-sm-2 control-label label-login-content">Họ tên:</label>
+                      <div class="col-sm-10">
+                        <input type="email" class="form-control input-lg" id="inputNameRegister" placeholder="Nhập Họ tên">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputEmailRegister" class="col-sm-2 control-label label-login-content">Email:</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control input-lg" id="inputEmailRegister" placeholder="Nhập Email">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPasswordRegister" class="col-sm-2 control-label label-login-content">Mật khẩu</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control input-lg" id="inputPasswordRegister" placeholder="Mật khẩu từ 6 đến 32 ký tự">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inlineRadioOptions" class="col-sm-2 control-label label-login-content">Giới tính:</label>
+                      <div class="col-sm-10">
+                        <label class="radio-inline">
+                          <input type="radio" name="inlineRadioOptions" id="genderMale" checked/> 
+                          <img src="./images/glyphicons/png/glyphicons-35-old-man.png" alt="" />
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="inlineRadioOptions" id="genderFemale"/>
+                          <img src="./images/glyphicons/png/glyphicons-36-woman.png" alt="" /> 
+                        </label>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-warning btn-lg btn-block btn-login">Tạo tài khoản</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="./js/jquery.js"></script>
   <script src="./js//bootstrap.min.js"></script>
