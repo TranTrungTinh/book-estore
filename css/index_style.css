@@ -30,9 +30,19 @@ body {
 .clr_green { color: green; }
 .clr_red { color: red; }
 .clr_orange { color: orange; }
+
+.my_main_logo {
+  padding-top: 7px;
+  font-weight: 700;
+  font-size: 30px;
+}
+.my_height {
+  height: 315px;
+}
 .my_banner_cover {
   width: 100%
 }
+
 .price-tag {
   font-weight: 700;
   font-size: 16px;
