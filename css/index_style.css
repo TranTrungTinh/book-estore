@@ -13,6 +13,7 @@ body {
 .padding_bottom_large {padding-top: 30px !important;}
 /*margin*/
 .margin-top-small {margin-top: 10px !important;}
+.margin-7 {margin: 6.5px !important;}
 .margin-bottom-small {margin-bottom: 5px !important;}
 .margin-left-small { margin-left: 10px; }
 .margin-left-big { margin-left: 50px; }
@@ -32,8 +33,15 @@ body {
 .clr_orange { color: orange; }
 
 .my_main_logo {
-  padding-top: 7px;
+  padding: 7px;
+  /* text-transform: uppercase; */
   font-weight: 700;
+  background-image: linear-gradient(to right, #7ed56f, #28b485);
+  display: inline-block;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.2rem;
   font-size: 30px;
 }
 .my_height {
