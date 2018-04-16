@@ -32,11 +32,11 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
         <form class="navbar-form navbar-left">
-          <div class="form-group">
+          <div class="form-group has-success">
             <div class="input-group my_search">
               <input type="text" class="form-control input-lg" placeholder="Tìm sản phẩm, danh mục hay thương hiệu mong muốn ...">
               <span class="input-group-btn">
-                <button class="btn btn-default btn-lg" type="button">
+                <button class="btn btn-success btn-lg" type="button">
                   <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Tìm kiếm
                 </button>
               </span>
@@ -44,46 +44,53 @@
           </div>
         </form>
 
-        <ul class="nav navbar-nav navbar-right margin-7">
+        <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="javascript:;" class="" data-toggle="modal" data-target=".bs-example-modal-lg">
-              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-              <span>Chào Trần Trung Tính</span>
+            <a href="javascript:;" class="my_account" data-toggle="modal" data-target=".bs-example-modal-lg">
+              <div class="row">
+                <div class="col-sm-2">
+                  <span class="glyphicon glyphicon-user my_account_logo" aria-hidden="true"></span>
+                </div>
+                <div class="col-sm-10">
+                  <span>Chào Trần Trung Tính</span>
+                  <br>
+                  <span class="fs-12">Tài khoản</span>
+                </div>
+              </div>
             </a>
           </li>
           <li>
-            <a class="btn btn-default btn-lg" href="#">
+            <button class="btn btn-danger btn-lg my_shopping_cart height-50" type="button">
               <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-              Giỏ hàng
-              <span class="badge">0</span>
-            </a>
+              <span>&nbsp;Giỏ hàng&nbsp;&nbsp;</span>
+              <span class="badge fs-20">9</span>
+            </button>
           </li>
         </ul>
       </div>
       <!-- /.navbar-collapse -->
+
     </div>
     <!-- /.container-fluid -->
   </nav>
-
+  <div class="row">
+    <div class="col-sm-12 fs-22">
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Library</a></li>
+        <li class="active">Data</li>
+      </ol>
+    </div>
+  </div>
 
   <div class="container-fluid">
-    
-    <div class="row">
-      <div class="col-sm-12 fs-20">
-        <ol class="breadcrumb">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Library</a></li>
-          <li class="active">Data</li>
-        </ol>
-      </div>
-    </div>
     
     <div class="row">
       <div class="col-sm-12 col-md-2">
         <!-- Danh muc San pham panel -->
         <div class="panel panel-success">
           <div class="panel-heading">
-            <h2 class="panel-title clr_red fs-18 fw-700">DANH MỤC SẢN PHẨM</h2>
+            <h2 class="panel-title panel-title-header">DANH MỤC SÁCH</h2>
           </div>
           <div class="padding_bottom_big"></div>
 
@@ -124,27 +131,28 @@
           </div>
           
         </div>
+
         <!-- Danh muc nha xuat ban -->
         <div class="panel panel-warning">
           <div class="panel-heading">
-            <h3 class="panel-title">NHÀ XUẤT BẢN</h3>
+            <h3 class="panel-title panel-title-header">NHÀ XUẤT BẢN</h3>
           </div>
           <div class="list-group">
-            <button type="button" class="list-group-item">
+            <a href="javascript:;" class="list-group-item">
               Cras justo odio
               <span class="badge">14</span>
-            </button>
-            <button type="button" class="list-group-item">Dapibus ac facilisis in</button>
-            <button type="button" class="list-group-item">Morbi leo risus</button>
-            <button type="button" class="list-group-item">Porta ac consectetur ac</button>
-            <button type="button" class="list-group-item">Vestibulum at eros</button>
+            </a>
+            <a href="javascript:;" class="list-group-item">Dapibus ac facilisis in</a>
+            <a href="javascript:;" class="list-group-item">Morbi leo risus</a>
+            <a href="javascript:;" class="list-group-item">Porta ac consectetur ac</a>
+            <a href="javascript:;" class="list-group-item">Vestibulum at eros</a>
           </div>
         </div>
 
         <!-- Search panel -->
         <div class="panel panel-info">
           <div class="panel-heading">
-            <h3 class="panel-title">TÌM KIẾM</h3>
+            <h3 class="panel-title panel-title-header">TÌM KIẾM</h3>
           </div>
           <div class="panel-body">
             <p>Giá từ:</p>
@@ -833,7 +841,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="gridSystemModalLabel">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            Đăng nhập / Đăng ký tài khoản
+            <span>&nbsp;Đăng nhập / Đăng ký tài khoản</span>
           </h4>
         </div>
         <div class="modal-body">

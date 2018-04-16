@@ -1,39 +1,8 @@
 body {
-  padding-top: 70px;
+  padding-top: 75px;
 }
-
-.my_search {
-  width: 300%;
-}
-
-/*padding*/
-.padding_bottom_big { padding-bottom: 20px !important; }
-.padding_top_big { padding-top: 20px !important; }
-.padding_top_small { padding-top: 10px !important; }
-.padding_bottom_large {padding-top: 30px !important;}
-/*margin*/
-.margin-top-small {margin-top: 10px !important;}
-.margin-7 {margin: 6.5px !important;}
-.margin-bottom-small {margin-bottom: 5px !important;}
-.margin-left-small { margin-left: 10px; }
-.margin-left-big { margin-left: 50px; }
-/*font size*/
-.fs-20 {font-size: 20px};
-.fs-18 {font-size: 18px};
-.fs-16 {font-size: 16px};
-/*font weight*/
-.fw-700 {font-weight: 700};
-.fw-bold {font-weight: bold};
-/*bg color*/
-.bg-blue {background-color: #3498db !important;}
-.bg-red {background-color: #e74c3c !important;}
-
-.clr_green { color: green; }
-.clr_red { color: red; }
-.clr_orange { color: orange; }
-
 .my_main_logo {
-  padding: 7px;
+  padding: 7px 3px 3px 5px;
   /* text-transform: uppercase; */
   font-weight: 700;
   background-image: linear-gradient(to right, #7ed56f, #28b485);
@@ -44,6 +13,56 @@ body {
   letter-spacing: 0.2rem;
   font-size: 30px;
 }
+.my_search {
+  margin-top: 5px;
+  width: 250%;
+}
+.my_account {
+  margin: 5px 0 0 0;
+}
+.my_account_logo {
+  font-size: 35px;
+  color: #7f8c8d;
+}
+.my_shopping_cart {
+  margin: 10px 10px 0 0;
+}
+/*height*/
+.height-50 {height: 55px !important;}
+/*padding*/
+.padding_bottom_big { padding-bottom: 20px !important; }
+.padding_top_big { padding-top: 20px !important; }
+.padding_top_small { padding-top: 10px !important; }
+.padding_bottom_large {padding-top: 30px !important;}
+/*margin*/
+.margin-top-small {margin-top: 10px !important;}
+.margin-bottom-small {margin-bottom: 5px !important;}
+.margin-left-small { margin-left: 10px; }
+.margin-left-big { margin-left: 50px; }
+/*font size*/
+.fs-22 {font-size: 22px};
+.fs-21 {font-size: 21px};
+.fs-20 {font-size: 20px};
+.fs-19 {font-size: 19px};
+.fs-18 {font-size: 18px};
+.fs-17 {font-size: 17px};
+.fs-12 {font-size: 12px};
+/*font weight*/
+.fw-700 {font-weight: 700};
+.fw-bold {font-weight: bold};
+/*bg color*/
+.bg-blue {background-color: #3498db !important;}
+.bg-red {background-color: #e74c3c !important;}
+.clr_green { color: green; }
+.clr_red { color: red; }
+.clr_orange { color: orange; }
+
+.panel-title-header {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
 .my_height {
   height: 315px;
 }
