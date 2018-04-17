@@ -1,4 +1,5 @@
 body {
+  font-size: 16px;
   padding-top: 75px;
 }
 .my_main_logo {
@@ -40,8 +41,7 @@ body {
 .margin-left-small { margin-left: 10px; }
 .margin-left-big { margin-left: 50px; }
 /*font size*/
-.fs-22 {font-size: 22px};
-.fs-21 {font-size: 21px};
+
 .fs-20 {font-size: 20px};
 .fs-19 {font-size: 19px};
 .fs-18 {font-size: 18px};
@@ -56,6 +56,7 @@ body {
 .clr_green { color: green; }
 .clr_red { color: red; }
 .clr_orange { color: orange; }
+.clr_blue { color: #ced6e0;}
 
 .panel-title-header {
   font-size: 16px;
@@ -90,10 +91,33 @@ body {
   text-align: justify;
   color: #7f8c8d;
 }
-/* .gender {
+.my_footer {
+  width: 100%;
+  max-height: 300px;
+  padding: 20px;
+  background-color: #636e72;
+}
+.my_footer_icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #bdc3c7;
+}
+.my_icon {
+  position: absolute;
+  top: 10px;
+  left: 9px;
+  
+  color: #fff;
+  font-size: 30px;
+}
+.my_footer_text {
+  color: #f1f2f6;
+  font-size: 20px;
+}
+.my_footer_text_content {
+  color: #d7d7d7;
   font-size: 16px;
-  font-weight: 300;  
-  color: #222f3e;
-} */
-
+}
 
