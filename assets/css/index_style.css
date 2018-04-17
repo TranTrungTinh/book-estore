@@ -41,12 +41,11 @@ body {
 .margin-left-small { margin-left: 10px; }
 .margin-left-big { margin-left: 50px; }
 /*font size*/
-
-.fs-20 {font-size: 20px};
-.fs-19 {font-size: 19px};
-.fs-18 {font-size: 18px};
-.fs-17 {font-size: 17px};
-.fs-12 {font-size: 12px};
+.fs-20 {font-size: 20px !important; }
+.fs-19 {font-size: 19px}
+.fs-18 {font-size: 18px}
+.fs-17 {font-size: 17px}
+.fs-12 {font-size: 12px}
 /*font weight*/
 .fw-700 {font-weight: 700};
 .fw-bold {font-weight: bold};
@@ -62,6 +61,25 @@ body {
   font-size: 16px;
   text-transform: uppercase;
   font-weight: 700;
+}
+/* .alert {
+  transition: all 0.2s;
+}
+.alert:hover {
+  transform: translateY(-5px);
+} */
+.row > .col-md-3 > img {
+  border-radius: 5px;
+  cursor: pointer;
+}
+.row > .col-md-3 > img:hover {
+  box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.5);
+}
+.thumbnail {
+  cursor: pointer;
+}
+.thumbnail:hover {
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
 }
 
 .my_height {
