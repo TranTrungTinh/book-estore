@@ -1,5 +1,33 @@
+@media screen and (max-width: 760px) {
+    #Navigator {
+        position: fixed;
+        width: 110%;
+    }
+    #Content > section {
+        position: fixed;
+        top: 100px!important;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 760px) {
+    #Content > section {
+        top: 0!important;
+    }
+}
+
 body {
     overflow: hidden;
+}
+
+#Content > :not(:first-child) {
+    display: none;
+}
+
+#Navigator {
+    border-radius: 0;
+    padding-right: 0;
+    z-index: 1000;
 }
 
 #Products .form-group {
@@ -27,7 +55,6 @@ body {
 }
 
 nav {
-    bottom: 0;
     left: 50%;;
     position: absolute;
     transform: translateX(-50%);
@@ -35,7 +62,7 @@ nav {
 
 section {
     height: 100vh;
-    padding: 35px;
+    padding: 25px;
     position: relative;
 }
 
