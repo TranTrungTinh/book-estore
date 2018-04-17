@@ -8,6 +8,7 @@
     <title>Book Estore - Admin</title>
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/admin_style.css">
 </head>
 
 <body>
@@ -30,28 +31,30 @@
         </div>
 
         <div class="col-sm-9 col-md-9 col-lg-9">
-            <div id="Dashboard">
+            <section id="Dashboard">
                 <h1>ĐIỀU KHIỂN</h1>
-            </div>
+                <hr/ >
+            </section>
 
-            <div id="Products">
+            <section id="Products">
                 <h1>SẢN PHẨM</h1>
+                <hr/ >
 
                 <form action="" class="form-inline">
-                    <div class="form-group">
-                        <p class="col-xs-12 col-sm-4 col-md-4">Hiển thị theo: </p>
+                    <div class="form-group col-xs-12 col-sm 6 col-md-6 col-lg-6">
+                        <label for="TypeOfInfo">Hiển thị theo: </label>
 
-                        <select name="TypeOfInfo" id="TypeOfInfo" class="form-control col-xs-12 col-sm-8 col-md-8">
+                        <select name="TypeOfInfo" id="TypeOfInfo" class="form-control">
                             <option value="product" selected>Sản phẩm</option>
                             <option value="type">Loại sản phẩm</option>
                             <option value="publisher">Nhà xuất bản</option>
                         </select>
                     </div>
+                    
+                    <div class="form-group col-xs-12 col-sm 6 col-md-6 col-lg-6">
+                        <input type="text" name="TypeOfInfoSearch" id="TypeOfInfoSearch" class="form-control" placeholder="Tìm kiếm">
 
-                    <div class="form-group">
-                        <input type="text" name="TypeOfInfoSearch" id="TypeOfInfoSearch" class="form-control col-xs-12 col-sm-8 col-md-8" placeholder="Tìm kiếm">
-
-                        <input type="button" value="Tìm kiếm" class="btn btn-success col-xs-12 col-sm-4 col-md-4">
+                        <input type="button" value="Tìm kiếm" class="btn btn-default">
                     </div>
                 </form>
 
@@ -161,10 +164,11 @@
                         </li>
                     </ul>
                 </nav>
-            </div>
+            </section>
 
-            <div id="Orders">
+            <section id="Orders">
                 <h1>ĐƠN HÀNG</h1>
+                <hr/ >
 
                 <table class="table table-hover">
                     <thead>
@@ -273,13 +277,14 @@
                         </li>
                     </ul>
                 </nav>
-            </div>
+            </section>
         </div>
 
     </div>
 
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js//admin_script.js"></script>
 </body>
 
 </html>

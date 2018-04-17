@@ -1,0 +1,49 @@
+body {
+    overflow: hidden;
+}
+
+#Products .form-group {
+    padding-left: 0;
+}
+
+#Products .form-group > * {
+    margin-right: 10px;
+}
+
+#Products .form-group > input:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#Products .form-group > input:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -15px;
+    margin-right: 0;
+}
+
+#Products > table {
+    margin: 75px 0;
+}
+
+nav {
+    bottom: 0;
+    left: 50%;;
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+section {
+    height: 100vh;
+    padding: 35px;
+    position: relative;
+}
+
+tbody {
+    background: white;
+    overflow-y: auto;
+}
+
+thead {
+    background: whitesmoke;
+}
