@@ -20,4 +20,6 @@ $('#Navigator > .nav > li').on('click', () => {
             }
         }
     }
+    
+    return false;
 })
