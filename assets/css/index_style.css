@@ -85,6 +85,7 @@ body {
 .my_height {
   height: 315px;
 }
+
 .my_banner_cover {
   width: 100%
 }
@@ -109,9 +110,10 @@ body {
   text-align: justify;
   color: #7f8c8d;
 }
+
 .my_footer {
   width: 100%;
-  max-height: 300px;
+  max-height: 550px;
   padding: 20px;
   background-color: #636e72;
 }

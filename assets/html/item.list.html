@@ -1,5 +1,8 @@
 
 <div class="row">
+  <div class="col-sm-12">
+    <div class="alert alert-info margin-bottom-small fs-20" id="my_title_list"></div>
+  </div>
   <div class="col-sm-4 col-md-3">
     <div class="thumbnail">
       <img src="./assets/media/images/book01.jpg" alt="..." class="my_banner_cover">
@@ -169,3 +172,7 @@
     </div>
   </div>
 </div>
+<script>
+  $('#my_title_list').html(localStorage.getItem('titleList'));
+</script>
+
