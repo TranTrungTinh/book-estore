@@ -13,52 +13,50 @@
 
 <body>
     <div class="row">
-        <div class="col-sm-4 col-md-3 col-lg-3" id="Navigator">
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active">
+        <nav class="col-sm-4 col-md-3 col-lg-3" id="Navigator">
+            <ul class="nav nav-stacked">
+                <li>
                     <a href="#Dashboard">
-                        <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>&nbsp; &nbsp; Điều khiển</a>
+                        <span class="glyphicon glyphicon-dashboard" aria-hidden="true">&nbsp;&nbsp;</span>ĐIỀU KHIỂN</a>
                 </li>
                 <li>
                     <a href="#Products">
-                        <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp; &nbsp; Sản phẩm</a>
+                        <span class="glyphicon glyphicon-inbox" aria-hidden="true">&nbsp;&nbsp;</span>SẢN PHẨM</a>
                 </li>
                 <li>
                     <a href="#Orders">
-                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp; &nbsp; Đơn hàng</a>
+                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;&nbsp;</span>ĐƠN HÀNG</a>
                 </li>
             </ul>
-        </div>
-
+        </nav>
         <div class="col-sm-8 col-md-9 col-lg-9" id="Content">
             <section id="Dashboard">
                 <h1>ĐIỀU KHIỂN</h1>
-                <hr/ >
+                <hr/>
             </section>
-
             <section id="Products">
                 <h1>SẢN PHẨM</h1>
-                <hr/ >
-
+                <hr/>
                 <form action="" class="form-inline">
-                    <div class="form-group col-xs-12 col-sm 6 col-md-6 col-lg-6">
-                        <label for="TypeOfInfo">Hiển thị theo: </label>
-
-                        <select name="TypeOfInfo" id="TypeOfInfo" class="form-control">
+                    <div class="input-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <span class="input-group-addon" id="TypeOfInfo">Hiển thị</span>
+                        <select name="TypeOfInfo" aria-describedby="TypeOfInfo" class="form-control">
                             <option value="product" selected>Sản phẩm</option>
                             <option value="type">Loại sản phẩm</option>
                             <option value="publisher">Nhà xuất bản</option>
                         </select>
                     </div>
-                    
-                    <div class="form-group col-xs-12 col-sm 6 col-md-6 col-lg-6">
-                        <input type="text" name="TypeOfInfoSearch" id="TypeOfInfoSearch" class="form-control" placeholder="Tìm kiếm">
 
-                        <input type="button" value="Tìm kiếm" class="btn btn-default">
+                    <div class="input-group col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                        <button type="button" class="btn btn-info" id="AddNewProduct" style="width: 100%">Thêm</button>
+                    </div>
+
+                    <div class="input-group col-xs-12 col-sm-4 col-md-5 col-lg-5">
+                        <input type="text" name="TypeOfInfoSearch" id="TypeOfInfoSearch" class="form-control" placeholder="Nội dung, từ khóa..." maxlength="256" minlength="1">
+                        <span class="input-group-btn"><input type="button" value="Tìm kiếm" class="btn btn-default"></span>
                     </div>
                 </form>
-
-                <table class="table table-hover" id="ProductsPanel">
+                <table class="table table-condensed table-bordered table-striped" id="ProductsPanel">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -68,16 +66,16 @@
                             <th>Tác giả</th>
                             <th>Thể loại</th>
                             <th>Nhà sản xuất</th>
+                            <th>Tồn kho</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>
-                                <button>
-                                    <img src="" alt="">
-                                </button>
+                            <td class="image-cropper">
+                                <img src="" alt="Hình minh họa sản phẩm">
                             </td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -86,11 +84,10 @@
                         </tr>
                         <tr>
                             <th scope="row">2</th>
-                            <td>
-                                <button>
-                                    <img src="" alt="">
-                                </button>
+                            <td class="image-cropper">
+                                <img src="" alt="Hình minh họa sản phẩm">
                             </td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -99,11 +96,10 @@
                         </tr>
                         <tr>
                             <th scope="row">3</th>
-                            <td>
-                                <button>
-                                    <img src="" alt="">
-                                </button>
+                            <td class="image-cropper">
+                                <img src="" alt="Hình minh họa sản phẩm"">
                             </td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -112,11 +108,10 @@
                         </tr>
                         <tr>
                             <th scope="row">4</th>
-                            <td>
-                                <button>
-                                    <img src="" alt="">
-                                </button>
+                            <td class="image-cropper">
+                                <img src="" alt="Hình minh họa sản phẩm"">
                             </td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -125,11 +120,10 @@
                         </tr>
                         <tr>
                             <th scope="row">5</th>
-                            <td>
-                                <button>
-                                    <img src="" alt="">
-                                </button>
+                            <td class="image-cropper">
+                                <img src="" alt="Hình minh họa sản phẩm"">
                             </td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -138,7 +132,6 @@
                         </tr>
                     </tbody>
                 </table>
-
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <li class="disabled">
@@ -165,12 +158,30 @@
                     </ul>
                 </nav>
             </section>
-
             <section id="Orders">
                 <h1>ĐƠN HÀNG</h1>
-                <hr/ >
+                <hr/>
 
-                <table class="table table-hover">
+                <form action="" class="form-inline">
+                    <div class="input-group col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                        <span class="input-group-addon" id="TypeOfInfo">Hiển thị</span>
+                        <select name="TypeOfInfo" aria-describedby="TypeOfInfo" class="form-control">
+                            <option value="-1" selected>Tất cả</option>
+                            <option value="1">Chưa giao</option>
+                            <option value="2">Đang giao</option>
+                            <option value="3">Đã giao</option>
+                            <option value="0">Hủy</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <!-- add minlength and/or maxlength to input after code format is decided -->
+                        <input type="text" name="TypeOfInfoSearch" id="TypeOfInfoSearch" class="form-control" placeholder="Mã đơn hàng">
+                        <span class="input-group-btn"><input type="button" value="Tìm kiếm" class="btn btn-default"></span>
+                    </div>
+                </form>
+
+                <table class="table table-condensed table-bordered table-striped">
                     <thead>
                         <th>#</th>
                         <th>Mã đơn hàng</th>
@@ -185,11 +196,11 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <select name="OrderStatus_1" id="OrderStatus_1" class="form-control">
-                                    <option value="waiting" selected>Chưa giao</option>
-                                    <option value="delivering">Đang giao</option>
-                                    <option value="delivered">Đã giao</option>
-                                    <option value="cancel">Huỷ</option>
+                                <select class="form-control">
+                                    <option value="1" selected>Chưa giao</option>
+                                    <option value="2">Đang giao</option>
+                                    <option value="3">Đã giao</option>
+                                    <option value="0">Huỷ</option>
                                 </select>
                             </td>
                         </tr>
@@ -199,11 +210,11 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <select name="OrderStatus_2" id="OrderStatus_2" class="form-control">
-                                    <option value="waiting" selected>Chưa giao</option>
-                                    <option value="delivering">Đang giao</option>
-                                    <option value="delivered">Đã giao</option>
-                                    <option value="cancel">Huỷ</option>
+                                <select class="form-control">
+                                    <option value="1" selected>Chưa giao</option>
+                                    <option value="2">Đang giao</option>
+                                    <option value="3">Đã giao</option>
+                                    <option value="0">Huỷ</option>
                                 </select>
                             </td>
                         </tr>
@@ -213,11 +224,11 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <select name="OrderStatus_3" id="OrderStatus_3" class="form-control">
-                                    <option value="waiting" selected>Chưa giao</option>
-                                    <option value="delivering">Đang giao</option>
-                                    <option value="delivered">Đã giao</option>
-                                    <option value="cancel">Huỷ</option>
+                                <select class="form-control">
+                                    <option value="1" selected>Chưa giao</option>
+                                    <option value="2">Đang giao</option>
+                                    <option value="3">Đã giao</option>
+                                    <option value="0">Huỷ</option>
                                 </select>
                             </td>
                         </tr>
@@ -227,11 +238,11 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <select name="OrderStatus_4" id="OrderStatus_4" class="form-control">
-                                    <option value="waiting" selected>Chưa giao</option>
-                                    <option value="delivering">Đang giao</option>
-                                    <option value="delivered">Đã giao</option>
-                                    <option value="cancel">Huỷ</option>
+                                <select class="form-control">
+                                    <option value="1" selected>Chưa giao</option>
+                                    <option value="2">Đang giao</option>
+                                    <option value="3">Đã giao</option>
+                                    <option value="0">Huỷ</option>
                                 </select>
                             </td>
                         </tr>
@@ -241,17 +252,16 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <select name="OrderStatus_5" id="OrderStatus_5" class="form-control">
-                                    <option value="waiting" selected>Chưa giao</option>
-                                    <option value="delivering">Đang giao</option>
-                                    <option value="delivered">Đã giao</option>
-                                    <option value="cancel">Huỷ</option>
+                                <select class="form-control">
+                                    <option value="1" selected>Chưa giao</option>
+                                    <option value="2">Đang giao</option>
+                                    <option value="3">Đã giao</option>
+                                    <option value="0">Huỷ</option>
                                 </select>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <li class="disabled">
@@ -279,9 +289,7 @@
                 </nav>
             </section>
         </div>
-
     </div>
-
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js//admin_script.js"></script>
