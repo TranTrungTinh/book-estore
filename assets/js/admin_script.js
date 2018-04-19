@@ -1,16 +1,17 @@
 function changeOrderRowStatus(row) {
+    let tr = row.closest('tr')
     switch (parseInt(row.value)) {
             case 1:
-                row.closest('tr').className = 'warning';
+                tr.className = 'warning';
                 break;
             case 2:
-                row.closest('tr').className = 'active';
+                tr.className = 'active';
                 break;
             case 3:
-                row.closest('tr').className = 'success';
+                tr.className = 'success';
                 break;
             default: // 0
-                row.closest('tr').className = 'danger';
+                tr.className = 'danger';
                 break;
         }
 }
@@ -25,22 +26,22 @@ window.onload = () => {
     });
 }
 
-$('#Navigator > .nav > li').on('click', () => {
-    if (event.target.tagName === 'A') {
+$('#Navigator > .nav > li').click((e) => {
         // change section accordingly
+        e.preventDefault();
         let sections = $('#Content > section');
         for (let i = 0; i < sections.length; i++) {
-            if (('#' + sections[i].getAttribute('id')) === event.target.getAttribute('href')) {
+            if (('#' + sections[i].getAttribute('id')) === e.target.getAttribute('href')) {
                 sections[i].style.display = 'block';
             } else {
                 sections[i].style.display = 'none';
             }
         }
-    }
 
-    return false;
+        return false;
 });
 
-$('#Orders > table select').on('change', () => {
-    changeOrderRowStatus(event.target);
+$('#Orders > table select').change((e) => {
+    e.preventDefault();
+    changeOrderRowStatus(e.target);
 });
