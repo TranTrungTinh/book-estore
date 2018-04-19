@@ -1,18 +1,36 @@
 @media screen and (max-width: 760px) {
-    #Navigator {
-        position: fixed;
-        width: 110%;
-    }
-    #Content > section {
-        position: fixed;
-        top: 100px!important;
+    #AddNewProduct {
         width: 100%;
     }
+
+    .btn-hamburger {
+        display: block!important;
+    }
+
+    #Content > section {
+        position: fixed;
+        top: 190px!important;
+        width: 100%;
+    }
+
+    #Navigator {
+        position: fixed;
+    }
+        #Navigator > ul > li {
+            font-size: 1.3em!important;
+            height: 45px!important;
+            line-height: 45px!important;
+        }
 }
 
 @media screen and (min-width: 760px) {
     #Content > section {
         top: 0!important;
+    }
+    
+
+    #Navigator {
+        height: 100vh!important;
     }
 }
 
@@ -20,54 +38,46 @@ body {
     overflow: hidden;
 }
 
+/* dashboard as default */
 #Content > :not(:first-child) {
     display: none;
 }
 
 #Navigator {
+    background-color: #1565C0;
     border-radius: 0;
     padding-right: 0;
+    position: relative;
     z-index: 1000;
 }
-
-#Products .form-group {
-    padding-left: 0;
-}
-
-#Products .form-group > * {
-    margin-right: 10px;
-}
-
-#Products .form-group > input:first-child {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-#Products .form-group > input:last-child {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    margin-left: -15px;
-    margin-right: 0;
-}
-
-#Products > table {
-    margin: 75px 0;
-}
-
-nav {
-    left: 50%;;
-    position: absolute;
-    transform: translateX(-50%);
-}
+    #Navigator > ul > li {
+        display: block;
+        font-size: 1.5em;
+        font-weight: bolder;
+        height: 85px;
+        line-height: 85px;
+        margin-bottom: 20px;
+    }
+        #Navigator > ul > li > a {
+            color:  white;
+        }
+            #Navigator > ul > li > a:hover, #Navigator > ul > li > a:active {
+                color: black;    
+            }
+            #Navigator > ul > li > a > span {
+                margin-left: 20px;
+            }
 
 section {
     height: 100vh;
     padding: 25px;
     position: relative;
 }
+    section > form > * {
+        margin: 0 15px 20px 0;
+    }
 
 tbody {
-    background: white;
     overflow-y: auto;
 }
 
