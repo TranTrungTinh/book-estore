@@ -34,10 +34,6 @@
     }
 }
 
-body {
-    overflow: hidden;
-}
-
 /* dashboard as default */
 #Content > :not(:first-child) {
     display: none;
@@ -76,10 +72,6 @@ section {
     section > form > * {
         margin: 0 15px 20px 0;
     }
-
-tbody {
-    overflow-y: auto;
-}
 
 thead {
     background: whitesmoke;
