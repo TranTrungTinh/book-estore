@@ -3,9 +3,6 @@ Storage.prototype.setObject = function(key, value) {
   this.setItem(key, JSON.stringify(value));
 }
 
-Storage.prototype.getObject = function(key) {
-  return JSON.parse(this.getItem(key));
-}
 
 // First run
 $( () => {
@@ -41,15 +38,20 @@ $('#menu-list').on('click', '.list-group-item' , e => {
 // Hien thi chi tiet san pham
 $('#main-content').on('click', '.thumbnail', e => {
   $('#home-page').hide();
+  $('#detail-page').html('');
   $('#detail-page').show();
   $('#detail-page').load('assets/html/item.detail.html');
-  
-  // const _this = e.currentTarget
-  // const image = _this.children[0].attributes[0].nodeValue;
-  // const title = _this.children[1].children[0].innerText;
-  // const price = _this.children[1].children[1].firstChild.innerText;
-  // const sales = _this.children[1].children[2].firstElementChild.innerText;
-  // const book = { title, image, price, sales };
+
+  const _this = e.currentTarget
+  const image = _this.children[0].attributes[0].nodeValue;
+  const title = _this.children[1].children[0].innerText;
+  const price = _this.children[1].children[1].firstElementChild.innerText;
+  const sales = _this.children[1].children[2].firstElementChild.innerText;
+  const book = { title, image, price, sales };
+
+  if (localStorage.getItem('book')) 
+    localStorage.removeItem('book');
+  localStorage.setObject('book', book);
   // console.log(book);
   // console.log(e);
   // window.location.href = 'https://www.google.com';
