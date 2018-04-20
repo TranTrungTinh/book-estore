@@ -7,6 +7,10 @@
         display: block!important;
     }
 
+    .modal-content {
+        transform: translateY(-35%);
+    }
+
     #Navigator {
         position: fixed;
     }
@@ -18,10 +22,10 @@
 }
 
 @media screen and (min-width: 760px) {
-    #Content > section {
-        top: 0!important;
+    .modal-content {
+        min-width: 700px;
+        transform: translateY(-55%);
     }
-    
 
     #Navigator {
         height: 100vh!important;
@@ -37,15 +41,41 @@ h1 {
     font-weight: bolder;
 }
 
-.image-cropper {
+.img-cropper {
 
 }
-    .image-cropper-default {
+    .img-cropper-default {
 
     }
-    .image-cropper-big {
+    .img-cropper-big {
         
     }
+
+.modal-content {
+    margin-top: 80%;
+}
+    .modal-header {
+        background-color: #1565C0;
+        color: white;
+    }
+    .modal-body {
+        margin-bottom: 0;
+        overflow-y: auto;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+        .modal-body > div > input, .modal-body > div > div.btn {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+            .modal-body > div > div.btn > input {
+                width: 100%;
+            }
+        .modal-body textarea {
+            margin-bottom: 10px;
+            min-height: 100px;
+            width: 100%;
+        }
 
 #Navigator {
     background-color: #1565C0;
@@ -56,7 +86,7 @@ h1 {
 }
     #Navigator > ul > li {
         display: block;
-        font-size: 1.32em;
+        font-size: 1.28em;
         font-weight: bolder;
         height: 85px;
         line-height: 85px;
@@ -75,16 +105,9 @@ h1 {
 #Products > table > tbody > tr {
     height: 70px;
 }
-    #Product > table > tbbody > td > input {
-        overflow-y: auto;
-    }
-    .product-detail {
-        height: 250px!important;
-    }
 
 section {
     padding: 25px;
-    position: relative;
 }
     section > form > * {
         margin: 0 15px 20px 0;
@@ -93,10 +116,3 @@ section {
 thead {
     background: whitesmoke;
 }
-
-textarea {
-    overflow-y: auto;
-}
-    .textarea-detail {
-        height: 170px;
-    }

@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="input-group col-xs-12 col-sm-2 col-md-2 col-lg-2">
-                        <button type="button" class="btn btn-info" id="AddNewProduct" style="width: 100%">Thêm</button>
+                        <button type="button" class="btn btn-primary" id="AddNewProduct" style="width: 100%">Thêm</button>
                     </div>
 
                     <div class="input-group col-xs-12 col-sm-4 col-md-5 col-lg-5">
@@ -62,135 +62,122 @@
                             <th>#</th>
                             <th>Hình minh hoạ</th>
                             <th>Đơn giá</th>
+                            <th>Tồn kho</th>
                             <th>Mô tả</th>
                             <th>Tác giả</th>
                             <th>Thể loại</th>
                             <th>Nhà sản xuất</th>
-                            <th>Tồn kho</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr data-toggle="modal" data-target="#DetailModal">
                             <th scope="row">1</th>
                             <td class="image-cropper image-cropper-default">
-                                <img src="" alt="Hình minh họa sản phẩm">
+                                <img src="" alt="Ảnh minh họa">
                             </td>
-                            <td>
-                                <input type="number" class="form-group" value="0">
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <input type="number" class="form-group" value="0">
-                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
-                        <tr>
+                        <tr data-toggle="modal" data-target="#DetailModal">
                             <th scope="row">2</th>
                             <td class="image-cropper">
-                                <img src="" alt="Hình minh họa sản phẩm">
+                                <img src="" alt="Ảnh minh họa">
                             </td>
-                            <td>
-                                <input type="number" class="form-group" value="0"></td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <input type="number" class="form-group" value="0">
-                            </td>
+                            <td><td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
-                        <tr>
+                        <tr data-toggle="modal" data-target="#DetailModal">
                             <th scope="row">3</th>
                             <td class="image-cropper">
-                                <img src="" alt="Hình minh họa sản phẩm"">
+                                <img src="" alt="Ảnh minh họa"">
                             </td>
-                            <td>
-                                <input type="number" class="form-group" value="0">
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <input type="number" class="form-group" value="0">
-                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
-                        <tr>
+                        <tr data-toggle="modal" data-target="#DetailModal">
                             <th scope="row">4</th>
                             <td class="image-cropper">
-                                <img src="" alt="Hình minh họa sản phẩm"">
+                                <img src="" alt="Ảnh minh họa"">
                             </td>
-                            <td>
-                                <input type="number" class="form-group" value="0">
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <input type="number" class="form-group" value="0">
-                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
-                        <tr>
+                        <tr data-toggle="modal" data-target="#DetailModal">
                             <th scope="row">5</th>
                             <td class="image-cropper">
-                                <img src="" alt="Hình minh họa sản phẩm"">
+                                <img src="" alt="Ảnh minh họa"">
                             </td>
-                            <td>
-                                <input type="number" class="form-group" value="0">
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <textarea></textarea>
-                            </td>
-                            <td>
-                                <input type="number" class="form-group" value="0">
-                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
+                <!-- modal -->
+                <div class="modal fade" id="DetailModal" role="dialog">
+                    <div class="modal-dialog ">
+                        <div class="modal-content">
+                            <form>
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Thông tin chi tiết sản phẩm</h4>
+                                </div>
+                                <div class="modal-body form-group">
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                        <label>Hình ảnh</label>
+                                        <div class="img-cropper img-cropper-big btn btn-default">
+                                            <img src="" alt="Ảnh minh họa">
+                                            <input type="file" name="ProductImage" accept="image/*" class="btn btn-default">
+                                        </div>
+                                        <!-- price -->
+                                        <label for="ProductPrice">Đơn giá</label>
+                                        <input type="number" name="ProductPrice" min="0" class="form-control" required>
+                                        <!-- amount -->
+                                        <label for="ProductAmount">Tồn kho</label>
+                                        <input type="number" name="ProductAmount" min="0" class="form-control" value="0" required>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                                        <!-- desciption -->
+                                        <label>Mô tả</label>
+                                        <textarea class="form-control"></textarea>
+                                        <!-- author -->
+                                        <label for="ProductAuthor">Tác giả</label>
+                                        <input type="text" name="ProductAuthor" placeholder="Họ và tên..." class="form-control" required>
+                                        <!-- type -->
+                                        <label for="ProductType">Thể loại</label>
+                                        <input type="text" name="ProductType" placeholder="Trinh thám, lãng mạn..." class="form-control" required>
+                                        <!-- publichser -->
+                                        <label for="ProductPublisher">Nhà xuất bản</label>
+                                        <input type="text" name="ProductPublisher" placeholder="NXB Trẻ, NXB Kim Đồng..." class="form-control" value="0" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" data-dismiss="modal">Lưu thông tin</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                    <button class="btn btn-danger" data-dismiss="modal">Xóa</button>
+                                </div>
+                            </form>
+                        </div>      
+                    </div>
+                </div>
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         <li class="disabled">

@@ -57,21 +57,17 @@ var prevSelectedRow;
 $('#Products > table > tbody > tr').click((e) => {
     e.preventDefault();
     let tr = e.target.closest('tr');
-    if (tr && tr !== prevSelectedRow) {
-        tr.classList.toggle('product-detail');
-        let textarea = tr.getElementsByTagName('textarea');
-        $.each(textarea, (index, el) => {
-            el.classList.toggle('textarea-detail');
-        });
+    // copy current selected row info into modal
+    let modal = $('.modal')[0];
+    // product image
+    let img = tr.getElementsByTagName('img')[0];
+    modal.getElementsByTagName('img')[0].src = img.src;
+    // product price, amount, author, type, publisher
+    let input = modal.getElementsByTagName('input');
+    let td = tr.getElementsByTagName('td');
+    for (let i = 1; i < input.length; i++) {
+        input[i].value = td[i].innerHTML;
     }
-    // collapse all other rows by remove their 'detail' class
-    if (prevSelectedRow && prevSelectedRow != tr) {
-        prevSelectedRow.className = '';
-        prevSelectedRow.getElementsByTagName('textarea')[0].className = '';
-        let textarea = prevSelectedRow.getElementsByTagName('textarea');
-        $.each(textarea, (index, el) => {
-            el.className = '';
-        });
-    }
-    prevSelectedRow = tr;
+    // product description
+    modal.getElementsByTagName('textarea')[0].innerHTML = td[2].innerHTML;
 });
