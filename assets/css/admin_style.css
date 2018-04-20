@@ -7,12 +7,6 @@
         display: block!important;
     }
 
-    #Content > section {
-        position: fixed;
-        top: 190px!important;
-        width: 100%;
-    }
-
     #Navigator {
         position: fixed;
     }
@@ -39,6 +33,20 @@
     display: none;
 }
 
+h1 {
+    font-weight: bolder;
+}
+
+.image-cropper {
+
+}
+    .image-cropper-default {
+
+    }
+    .image-cropper-big {
+        
+    }
+
 #Navigator {
     background-color: #1565C0;
     border-radius: 0;
@@ -48,7 +56,7 @@
 }
     #Navigator > ul > li {
         display: block;
-        font-size: 1.5em;
+        font-size: 1.32em;
         font-weight: bolder;
         height: 85px;
         line-height: 85px;
@@ -64,8 +72,17 @@
                 margin-left: 20px;
             }
 
+#Products > table > tbody > tr {
+    height: 70px;
+}
+    #Product > table > tbbody > td > input {
+        overflow-y: auto;
+    }
+    .product-detail {
+        height: 250px!important;
+    }
+
 section {
-    height: 100vh;
     padding: 25px;
     position: relative;
 }
@@ -76,3 +93,10 @@ section {
 thead {
     background: whitesmoke;
 }
+
+textarea {
+    overflow-y: auto;
+}
+    .textarea-detail {
+        height: 170px;
+    }
