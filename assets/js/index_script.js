@@ -9,13 +9,17 @@ Storage.prototype.getObject = function(key) {
 
 // First run
 $( () => {
+  // $('#home-page').show();
+  $('#detail-page').hide();
+  $('.navbar').load('assets/html/navigation.html');
+  $('#menu-list').load('assets/html/menu.list.html');
   $('#main-content').load('assets/html/home.html');
-  $('#menu-list').load('assets/html/menu.list.html')
-  $('.navbar').load('assets/html/navigation.html')
 });
 
 // Main logo click
-$('.navbar-brand').click(e => {
+$(document).on('click', '.navbar-brand' , e => {
+  $('#home-page').show();
+  $('#detail-page').hide();
   $('#main-content').html('');
   $('#main-content').load('assets/html/home.html');
 });
@@ -36,13 +40,17 @@ $('#menu-list').on('click', '.list-group-item' , e => {
 
 // Hien thi chi tiet san pham
 $('#main-content').on('click', '.thumbnail', e => {
-  const _this = e.currentTarget
-  const image = _this.children[0].attributes[0].nodeValue;
-  const title = _this.children[1].children[0].innerText;
-  const price = _this.children[1].children[1].firstChild.innerText;
-  const sales = _this.children[1].children[2].firstElementChild.innerText;
-  const book = { title, image, price, sales };
-  console.log(book);
+  $('#home-page').hide();
+  $('#detail-page').show();
+  $('#detail-page').load('assets/html/item.detail.html');
+  
+  // const _this = e.currentTarget
+  // const image = _this.children[0].attributes[0].nodeValue;
+  // const title = _this.children[1].children[0].innerText;
+  // const price = _this.children[1].children[1].firstChild.innerText;
+  // const sales = _this.children[1].children[2].firstElementChild.innerText;
+  // const book = { title, image, price, sales };
+  // console.log(book);
   // console.log(e);
   // window.location.href = 'https://www.google.com';
 });
