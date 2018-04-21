@@ -77,7 +77,9 @@ body {
   box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.5);
 }
 .thumbnail {
+  border: 0 none;
   cursor: pointer;
+  border-radius: 5px;
 }
 .thumbnail:hover {
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
@@ -219,4 +221,23 @@ body {
 }
 .item_detail_add_cart > button {
   height: 65px;
+}
+
+/* Item same type */
+.item_same_title {
+  padding: 50px 0 0 20px; 
+  font-size: 22px;
+  font-weight: 400;
+  color: #2c3e50;
+  text-transform: uppercase;
+}
+.item_same_type,
+.item_same_producer {
+  margin: 0px 20px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.item_same_type > .col-sm-2,
+.item_same_producer > .col-sm-2 {
+  width: 20%;
 }

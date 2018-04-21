@@ -17,7 +17,7 @@ $( () => {
 $(document).on('click', '.navbar-brand' , e => {
   $('#home-page').show();
   $('#detail-page').hide();
-  $('#main-content').html('');
+  // $('#main-content').html('');
   $('#main-content').load('assets/html/home.html');
 });
 
