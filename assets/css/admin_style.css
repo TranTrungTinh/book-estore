@@ -40,14 +40,19 @@ h1 {
     font-weight: bolder;
 }
 
-.img-cropper {
-
+.img-wrapper {
+    overflow: hidden;
 }
-    .img-cropper-default {
-
+    .img-wrapper > img {
+        display: block;
+        height: 100%;
+        margin: 0 auto;
     }
-    .img-cropper-big {
-        
+    .img-wrapper-sm {
+        height: 64px;
+    }
+    .img-wrapper-md {
+        height: 128px;
     }
 
 .modal-content {
@@ -108,11 +113,18 @@ h1 {
         margin-bottom: 20px;
         margin-right: 25px;
     }
-
 #Products > table > tbody > tr {
     cursor: pointer;
     max-height: 50px;
 }
+    #Products > table > tbody > tr > td:last-child {
+        width: 30%;
+    }
+        div.detail-wrapper {
+            box-sizing: border-box;
+            height: 50px;
+            overflow-y: auto;
+        }
 
 section {
     padding: 25px;
