@@ -19,6 +19,10 @@ function changeOrderRowStatus(row) {
 window.onload = () => {
     // dashboard as default
     $('#Navigator > .nav > li > a:first').trigger('click');
+    // load products list into table
+    $('#Products > table > tbody').load('../html/admin_products_list.html');
+    // load orders list into table
+    $('#Orders > table > tbody').load('../html/admin_orders_list.html');
     // set color for order rows based on its status
     let rows = $('#Orders > table select');
     if (rows) {
