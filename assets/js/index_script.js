@@ -6,11 +6,12 @@ Storage.prototype.setObject = function(key, value) {
 
 // First run
 $( () => {
-  // $('#home-page').show();
-  $('#detail-page').hide();
+  $('#home-page').hide();
+  // $('#detail-page').hide();
   $('.navbar').load('assets/html/navigation.html');
   $('#menu-list').load('assets/html/menu.list.html');
   $('#main-content').load('assets/html/home.html');
+  $('#acount-page').load('assets/html/account.html');
 });
 
 // Main logo click
@@ -30,7 +31,7 @@ $('#menu-list').on('click', '.list-group-item' , e => {
     localStorage.removeItem('titleList');
   localStorage.setItem('titleList', title);
 
-  $('#main-content').html('');
+  // $('#main-content').html('');
   $('#main-content').load('assets/html/item.list.html');
   // location.replace('/books/' + title);
 });
@@ -38,7 +39,7 @@ $('#menu-list').on('click', '.list-group-item' , e => {
 // Hien thi chi tiet san pham
 $('#main-content').on('click', '.thumbnail', e => {
   $('#home-page').hide();
-  $('#detail-page').html('');
+  // $('#detail-page').html('');
   $('#detail-page').show();
   $('#detail-page').load('assets/html/item.detail.html');
 
@@ -55,4 +56,9 @@ $('#main-content').on('click', '.thumbnail', e => {
   // console.log(book);
   // console.log(e);
   // window.location.href = 'https://www.google.com';
+});
+
+$('#main-content').on('click', '.btn-danger', e => {
+  e.preventDefault();
+  alert('abc');
 });
