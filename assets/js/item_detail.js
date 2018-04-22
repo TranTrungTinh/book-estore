@@ -42,3 +42,15 @@ $('#detail-page').on('click', '.thumbnail', e => {
   $('#detail-page').load('assets/html/item.detail.html');
   
 });
+
+$('#btnSub').click(e => {
+  e.preventDefault();
+  let count = $('#txtTotal').val();
+  if(+count > 1) 
+    $('#txtTotal').val(+(--count));
+});
+$('#btnAdd').click(e => {
+  e.preventDefault();
+  let count = $('#txtTotal').val();
+  $('#txtTotal').val(+(++count));
+});
