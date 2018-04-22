@@ -1,17 +1,18 @@
 function changeOrderRowStatus(row) {
     let tr = row.closest('tr')
-    switch (parseInt(row.value)) {
-        case 1:
+    switch (row.value) {
+        case 'pending':
             tr.className = 'warning';
             break;
-        case 2:
+        case 'delivering':
             tr.className = 'active';
             break;
-        case 3:
+        case 'done':
             tr.className = 'success';
             break;
-        default: // 0
+        case 'canccel':
             tr.className = 'danger';
+        default:
             break;
     }
 }
@@ -19,10 +20,10 @@ function changeOrderRowStatus(row) {
 window.onload = () => {
     // dashboard as default
     $('#Navigator > .nav > li > a:first').trigger('click');
-    // load products list into table
-    $('#Products > table > tbody').load('../html/admin_products_list.html');
-    // load orders list into table
-    $('#Orders > table > tbody').load('../html/admin_orders_list.html');
+    // // load products list into table
+    // $('#Products > table > tbody').load('../html/admin_products_list.html');
+    // // load orders list into table
+    // $('#Orders > table > tbody').load('../html/admin_orders_list.html');
     // set color for order rows based on its status
     let rows = $('#Orders > table select');
     if (rows) {
@@ -40,6 +41,16 @@ $('#Navigator > .nav > li').click((e) => {
         for (let i = 0; i < sections.length; i++) {
             let sectionId = sections[i].getAttribute('id');
             if (('#' + sectionId) === e.target.getAttribute('href')) {
+                switch(sectionId) {
+                    case 'Products':
+                    $('#Products > table > tbody').load('../html/admin_products_list.html');
+                    break;
+                    case 'Orders':
+                    $('#Orders > table > tbody').load('../html/admin_orders_list.html');
+                    break;
+                    default:
+                    break;
+                }
                 $('#' + sectionId).show('slide');
             } else {
                 $('#' + sectionId).hide();
