@@ -143,17 +143,7 @@ $('#ProductsSearch').click(() => {
 });
 // Orders
 $('#Orders .form-inline select').change(() => {
-    let filterOrderStt = $('#Orders .form-inline select')[0].value;
-
-    $.each($('#Orders tbody tr'), (index, ele) => {
-        let rowOrderStt = ele.getElementsByTagName('select')[0].value;
-        if(filterOrderStt !== rowOrderStt) {
-            $(ele).hide();
-        }
-        else {
-            $(ele).hide().fadeIn('fast');
-        }
-    });
+    $('#OrdersSearch').click();
 });
 
 $('#OrdersSearch').click(() => {
@@ -163,18 +153,26 @@ $('#OrdersSearch').click(() => {
     $.each($('#Orders tbody tr'), (index, ele) => {
         let rowOrderStt = ele.getElementsByTagName('select')[0].value,
         orderCode = ele.getElementsByTagName('td')[0].textContent;
-        if(orderCode.length < 1) return;
-        // not found
-        if(orderCode.toLowerCase()
-        .indexOf(strToSearch.toLowerCase()) < 0 ||
-         (filterOrderStt !== 'all' && filterOrderStt !== rowOrderStt)) {
-            $(ele).hide();
+        if(strToSearch.length > 0) {
+            // not found
+            if(orderCode.toLowerCase().indexOf(strToSearch.toLowerCase()) < 0 || 
+            (filterOrderStt !== 'all' && filterOrderStt !== rowOrderStt)) {
+                $(ele).hide();
+            }
+            // found
+            else if(orderCode.toLowerCase().indexOf(strToSearch.toLowerCase()) > -1 && 
+            (filterOrderStt === 'all' || filterOrderStt === rowOrderStt)) {
+                $(ele).hide().fadeIn('fast');
+            }
         }
-        // found
-        else if(orderCode.toLowerCase()
-        .indexOf(strToSearch.toLowerCase()) > -1 && 
-        (filterOrderStt === 'all' || filterOrderStt === rowOrderStt)) {
-            $(ele).hide().fadeIn('fast');
+        else {
+            if(filterOrderStt !== 'all' && filterOrderStt !== rowOrderStt) {
+                $(ele).hide();
+            }
+            // filterOrderStt === 'all' || filterOrderStt === rowOrderStt
+            else {
+                $(ele).hide().fadeIn('fast');
+            }
         }
     });
 });
