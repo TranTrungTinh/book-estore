@@ -32,10 +32,10 @@ function loadList(container, url, func) {
 function loadListBySection(id) {
     switch (id) {
         case 'Products':
-            loadList($('#Products > table > tbody'), '../html/admin_products_list.html');
+            loadList($('#Products tbody'), '../html/admin_products_list.html');
             break;
         case 'Orders':
-            loadList($('#Orders > table > tbody'), '../html/admin_orders_list.html', changeAllOrdersStatus);
+            loadList($('#Orders tbody'), '../html/admin_orders_list.html', changeAllOrdersStatus);
             break;
         default:
             break;
@@ -50,7 +50,7 @@ window.onload = () => {
 $('#Navigator > .nav > li').click((e) => {
     // load/reload section accordingly
     e.preventDefault();
-    let sections = $('#Content > section');
+    let sections = $('#Content section');
     for (let i = 0; i < sections.length; i++) {
         let sectionId = sections[i].getAttribute('id');
         if (('#' + sectionId) === e.target.getAttribute('href')) {
@@ -65,13 +65,13 @@ $('#Navigator > .nav > li').click((e) => {
 });
 
 // change order row color when its status changed
-$('#Orders > table').change((e) => {
+$('#Orders table').change((e) => {
     e.preventDefault();
     changeOrderRowStatus(e.target);
 });
 
 var selectedItem;
-$('#Products > table > tbody').click((e) => {
+$('#Products tbody').click((e) => {
     e.preventDefault();
     let tr = e.target.closest('tr');
     selectedItem = tr;
@@ -87,7 +87,7 @@ $('#Products > table > tbody').click((e) => {
     $('#DetailModal textarea')[0].value = td[td.length - 1].textContent;
 });
 
-// Clear all field content
+// clear all field content
 $('#AddNewProduct').click(() => {
     selectedItem = null;
     $('#DetailModal img')[0].src = '';
@@ -97,30 +97,91 @@ $('#AddNewProduct').click(() => {
     $('#DetailModal textarea')[0].value = '';
 })
 
-// Refresh button
+// refresh button
 $('.btn-refresh').click((e) => {
     e.preventDefault();
-    loadListBySection(e.target.closest('section').id);
+    let section = e.target.closest('section');
+    loadListBySection(section.id);
+    // re-filtering
+    $(section)[0].getElementsByClassName('btn-search')[0].click();
+    // after this all info are reset to default as they were hard-coded
 })
 
-// Add new product to Products list
+// item filtering by categories
+// Products
+$('#ProductsSearch').click(() => {
+    let typeOfInfoOnCol = 0;
+    switch ($('#Products .form-inline')[0].getElementsByTagName('select')[0].value) {
+        case 'product':
+            typeOfInfoOnCol = 1;
+            break;
+        case 'author':
+            typeOfInfoOnCol = 4;
+            break;
+        case 'type':
+            typeOfInfoOnCol = 5;
+            break;
+        case 'publisher':
+            typeOfInfoOnCol = 6;
+            break;
+        default:
+        typeOfInfoOnCol = 0;
+            break;
+    }
+    $.each($('#Products tbody tr'), (index, ele) => {
+        if(ele.getElementsByTagName('td')[typeOfInfoOnCol].textContent.toLowerCase()
+        .indexOf($('#StrToSearchProducts')[0]
+        .value.toLowerCase()) < 0) {
+            $(ele).hide();
+        }
+        else {
+            $(ele).hide().fadeIn('fast');
+        }
+    });
+});
+// Orders
+$('#OrdersSearch').click(() => {
+    let orderStatus = $('#Orders .form-inline')[0].getElementsByTagName('select')[0].value;
+
+    $.each($('#Orders tbody tr'), (index, ele) => {
+        if(ele.getElementsByTagName('td')[0].textContent.toLowerCase()
+        .indexOf($('#StrToSearchOrders')[0]
+        .value.toLowerCase()) < 0 ||
+         (orderStatus !== 'all' &&
+         orderStatus !== ele.getElementsByTagName('select')[0].value)) {
+            $(ele).hide();
+        }
+        else if(ele.getElementsByTagName('td')[0].textContent.toLowerCase()
+        .indexOf($('#StrToSearchOrders')[0]
+        .value.toLowerCase()) > -1 && 
+        (orderStatus === 'all' || 
+        orderStatus === ele.getElementsByTagName('select')[0].value)){
+            console.log('aaa');
+            $(ele).hide().fadeIn('fast');
+        }
+    });
+});
+
+// add new product to Products list
 $('#ModalSave').click(() => {
     let imgSrc,
-        price = $('#DetailModal input')[1].value,
-        amount = $('#DetailModal input')[2].value,
-        author = $('#DetailModal input')[3].value,
-        type = $('#DetailModal input')[4].value,
-        publisher = $('#DetailModal input')[5].value,
+        title = $('#DetailModal input')[1].value,
+        price = $('#DetailModal input')[2].value,
+        amount = $('#DetailModal input')[3].value,
+        author = $('#DetailModal input')[4].value,
+        type = $('#DetailModal input')[5].value,
+        publisher = $('#DetailModal input')[6].value,
         description = $('#DetailModal textarea')[0].value;
 
     // add new product
     if(!selectedItem) {
-        imgSrc = $('#DetailModal input')[0].files[0].name
+        imgSrc = $('#DetailModal input')[0].value;
         let tr = document.createElement('tr');
         tr.innerHTML = '<tr data-toggle="modal" data-target="#DetailModal">' +
             '<td class="img-wrapper img-wrapper-sm">' +
             '<img src="' + imgSrc + '" alt="Ảnh minh họa">' +
             '</td>' +
+            '<td>' + title + '</td>' +
             '<td>' + price + '</td>' +
             '<td>' + amount + '</td>' +
             '<td>' + author + '</td>' +
@@ -133,26 +194,26 @@ $('#ModalSave').click(() => {
             '</td>' +
             '</tr>';
             
-        $('#Products > table > tbody')[0].appendChild(tr);
+        $('#Products tbody')[0].appendChild(tr);
     }
     // update product info
     else {
         imgSrc = $('#DetailModal img')[0].src || $('#DetailModal input')[0].files[0].name;
-        console.log(description);
         let tds = selectedItem.getElementsByTagName('td');
         tds[0].getElementsByTagName('img')[0].src = imgSrc;
-        tds[1].textContent = price;
-        tds[2].textContent = amount;
-        tds[3].textContent = author;
-        tds[4].textContent = type;
-        tds[5].textContent = publisher;
-        tds[6].getElementsByClassName('detail-wrapper')[0].innerHTML = description;
+        tds[1].textContent = title;
+        tds[2].textContent = price;
+        tds[3].textContent = amount;
+        tds[4].textContent = author;
+        tds[5].textContent = type;
+        tds[6].textContent = publisher;
+        tds[7].getElementsByClassName('detail-wrapper')[0].innerHTML = description;
     }
 });
 
-// Delete seelected Products
+// delete seelected Products
 $('#ModalDelete').click(() => {
     if (selectedItem) {
-        $('#Products > table > tbody')[0].removeChild(selectedItem);
+        $('#Products tbody')[0].removeChild(selectedItem);
     }
 });
