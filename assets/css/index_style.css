@@ -120,6 +120,11 @@ body {
   color: #7f8c8d;
 }
 
+/* Search title */
+#my_title_search {
+  font-size: 22px;
+  font-weight: 600;
+}
 .my_footer {
   
   width: 100%;

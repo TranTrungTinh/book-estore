@@ -29,6 +29,43 @@ $(document).on('click', '.navbar-brand' , e => {
   $('#main-content').load('assets/html/home.html');
 });
 
+// hanlde search button
+$(document).on('click', '#btnSearch' , e => {
+  $('#home-page').show();
+  $('#detail-page').hide();
+  $('#item-cart-page').hide();
+  $('#acount-page').hide();
+
+  const keyWord = $('#txtSearch').val() || '';
+  if(!keyWord) return swal("Có lỗi xảy ra!", "Vui lòng nhập từ khoá", "error");
+
+  if (localStorage.getItem('keyWord')) 
+    localStorage.removeItem('keyWord');
+  localStorage.setItem('keyWord', keyWord);
+  $('#txtSearch').val('')
+  $('#main-content').load('assets/html/item.search.html');
+});
+// hanlde search enter key
+$(document).on('keypress', '#txtSearch', e => {
+  if(e.keyCode == 13) {
+    e.preventDefault();
+    $('#home-page').show();
+    $('#detail-page').hide();
+    $('#item-cart-page').hide();
+    $('#acount-page').hide();
+
+    const keyWord = $('#txtSearch').val() || '';
+    if(!keyWord) return;
+
+    if (localStorage.getItem('keyWord')) 
+      localStorage.removeItem('keyWord');
+    localStorage.setItem('keyWord', keyWord);
+    
+    $('#txtSearch').val('')
+    $('#main-content').load('assets/html/item.search.html');
+  }
+});
+
 // Hien thi danh sach san pham
 $('#menu-list').on('click', '.list-group-item' , e => {
   // e.preventDefault();
