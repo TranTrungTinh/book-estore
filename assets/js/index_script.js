@@ -6,11 +6,16 @@ Storage.prototype.setObject = function(key, value) {
 
 // First run
 $( () => {
-  $('#home-page').hide();
-  // $('#detail-page').hide();
+  $('#home-page').show();
+  $('#detail-page').hide();
+  $('#item-cart-page').hide();
+  $('#acount-page').hide();
+
   $('.navbar').load('assets/html/navigation.html');
   $('#menu-list').load('assets/html/menu.list.html');
   $('#main-content').load('assets/html/home.html');
+  $('#detail-page').load('assets/html/item.detail.html');  
+  $('#item-cart-page').load('assets/html/item.cart.html');
   $('#acount-page').load('assets/html/account.html');
 });
 
@@ -18,7 +23,9 @@ $( () => {
 $(document).on('click', '.navbar-brand' , e => {
   $('#home-page').show();
   $('#detail-page').hide();
-  // $('#main-content').html('');
+  $('#item-cart-page').hide();
+  $('#acount-page').hide();
+
   $('#main-content').load('assets/html/home.html');
 });
 
@@ -31,15 +38,15 @@ $('#menu-list').on('click', '.list-group-item' , e => {
     localStorage.removeItem('titleList');
   localStorage.setItem('titleList', title);
 
-  // $('#main-content').html('');
   $('#main-content').load('assets/html/item.list.html');
-  // location.replace('/books/' + title);
 });
 
 // Hien thi chi tiet san pham
 $('#main-content').on('click', '.thumbnail', e => {
   $('#home-page').hide();
-  // $('#detail-page').html('');
+  $('#item-cart-page').hide();
+  $('#acount-page').hide();
+
   $('#detail-page').show();
   $('#detail-page').load('assets/html/item.detail.html');
 
@@ -61,4 +68,47 @@ $('#main-content').on('click', '.thumbnail', e => {
 $('#main-content').on('click', '.btn-danger', e => {
   e.preventDefault();
   alert('abc');
+});
+
+// handle btn shopping cart
+$(document).on('click', '#btn-shopping-cart' , e => {
+  $('#home-page').hide();
+  $('#detail-page').hide();
+  $('#acount-page').hide();
+
+  $('#item-cart-page').show();
+  
+});
+
+// handle sign in
+$('#btn-signin').click(e => {
+  $('#home-page').hide();
+  $('#detail-page').hide();
+  $('#item-cart-page').hide();
+
+  $('.close').trigger('click');
+
+  $('#acount-page').show();
+  $('.acount-history-panel').hide();
+  // $('#acount-page').load('assets/html/account.html');
+});
+
+
+
+// handle acount
+$('#acount-page').on('click', '#acount-info', e => {
+  const isActive = $('#acount-info').hasClass('active');
+  if(isActive) return;
+  $('#acount-history').removeClass('active');
+  $('#acount-info').addClass('active');
+  $('.acount-info-panel').show()
+  $('.acount-history-panel').hide()
+});
+$('#acount-page').on('click', '#acount-history', e => {
+  const isActive = $('#acount-history').hasClass('active');
+  if(isActive) return;
+  $('#acount-info').removeClass('active');
+  $('#acount-history').addClass('active');
+  $('.acount-history-panel').show()
+  $('.acount-info-panel').hide()
 });
