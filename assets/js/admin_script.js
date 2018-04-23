@@ -111,7 +111,7 @@ $('.btn-refresh').click((e) => {
 // Products
 $('#ProductsSearch').click(() => {
     let typeOfInfoOnCol = 0;
-    switch ($('#Products .form-inline')[0].getElementsByTagName('select')[0].value) {
+    switch ($('#Products .form-inline select')[0].value) {
         case 'product':
             typeOfInfoOnCol = 1;
             break;
@@ -128,10 +128,12 @@ $('#ProductsSearch').click(() => {
         typeOfInfoOnCol = 0;
             break;
     }
+
+    let strToSearch = $('#StrToSearchProducts')[0].value;
+    if(strToSearch.length < 1) return;
     $.each($('#Products tbody tr'), (index, ele) => {
         if(ele.getElementsByTagName('td')[typeOfInfoOnCol].textContent.toLowerCase()
-        .indexOf($('#StrToSearchProducts')[0]
-        .value.toLowerCase()) < 0) {
+        .indexOf(strToSearch.toLowerCase()) < 0) {
             $(ele).hide();
         }
         else {
@@ -140,23 +142,38 @@ $('#ProductsSearch').click(() => {
     });
 });
 // Orders
-$('#OrdersSearch').click(() => {
-    let orderStatus = $('#Orders .form-inline')[0].getElementsByTagName('select')[0].value;
+$('#Orders .form-inline select').change(() => {
+    let filterOrderStt = $('#Orders .form-inline select')[0].value;
 
     $.each($('#Orders tbody tr'), (index, ele) => {
-        if(ele.getElementsByTagName('td')[0].textContent.toLowerCase()
-        .indexOf($('#StrToSearchOrders')[0]
-        .value.toLowerCase()) < 0 ||
-         (orderStatus !== 'all' &&
-         orderStatus !== ele.getElementsByTagName('select')[0].value)) {
+        let rowOrderStt = ele.getElementsByTagName('select')[0].value;
+        if(filterOrderStt !== rowOrderStt) {
             $(ele).hide();
         }
-        else if(ele.getElementsByTagName('td')[0].textContent.toLowerCase()
-        .indexOf($('#StrToSearchOrders')[0]
-        .value.toLowerCase()) > -1 && 
-        (orderStatus === 'all' || 
-        orderStatus === ele.getElementsByTagName('select')[0].value)){
-            console.log('aaa');
+        else {
+            $(ele).hide().fadeIn('fast');
+        }
+    });
+});
+
+$('#OrdersSearch').click(() => {
+    let filterOrderStt = $('#Orders .form-inline select')[0].value,
+    strToSearch = $('#StrToSearchOrders')[0].value;
+    if(strToSearch.length < 1) return;
+    $.each($('#Orders tbody tr'), (index, ele) => {
+        let rowOrderStt = ele.getElementsByTagName('select')[0].value,
+        orderCode = ele.getElementsByTagName('td')[0].textContent;
+        if(orderCode.length < 1) return;
+        // not found
+        if(orderCode.toLowerCase()
+        .indexOf(strToSearch.toLowerCase()) < 0 ||
+         (filterOrderStt !== 'all' && filterOrderStt !== rowOrderStt)) {
+            $(ele).hide();
+        }
+        // found
+        else if(orderCode.toLowerCase()
+        .indexOf(strToSearch.toLowerCase()) > -1 && 
+        (filterOrderStt === 'all' || filterOrderStt === rowOrderStt)) {
             $(ele).hide().fadeIn('fast');
         }
     });
