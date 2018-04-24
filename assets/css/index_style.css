@@ -90,8 +90,8 @@ body {
 .thumbnail:hover {
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
 }
-
-.my_height {
+.item-cover-img img {
+  width: 100%;
   height: 315px;
 }
 
@@ -125,6 +125,12 @@ body {
   font-size: 22px;
   font-weight: 600;
 }
+
+/* #btnFilter {
+  margin: 10px;
+  width: 100px;
+} */
+
 .my_footer {
   
   width: 100%;
@@ -212,6 +218,8 @@ body {
   padding: 20px;
   overflow-y: scroll;
   max-height: 300px;
+  /* border-bottom: solid 4px rgb(248, 248, 248); */
+  
 }::-webkit-scrollbar {
   width: 0px;
   background: transparent;
@@ -223,19 +231,23 @@ body {
 
 }
 .item_detail_total {
-  width: 145px;
+  padding: 5px 0 5px 40px;
 }
 .item_detail_total > p {
-  padding: 0;
   font-size: 14px;
   color: gray;
   opacity: 0.8;
 }
-.item_detail_total > .input-group > input.form-control {
+.item_detail_total > .input-group {
+  width: 115px;
+}
+.item_detail_total input,
+.item_detail_total button {
+  height: 35px;
   text-align: center;
 }
 .item_detail_add_cart {
-  padding: 10px 5px;
+  padding: 10px 0;
 }
 .item_detail_add_cart > button {
   height: 65px;
@@ -272,8 +284,8 @@ body {
   .item-cart-root-buy {
     width: 408px;
     position: fixed;
-    top: 240px;
-    right: 180px;
+    top: 264px;
+    right: 80px;
   }
 }
 
@@ -346,18 +358,14 @@ body {
 
 /*  item cart title */
 #item-cart-page {
-  margin: 20px 40px;
+  margin: 20px;
 }
 #item-cart-page > .row > div.alert {
-  margin-left: 20px;
-  margin-right: 130px;
+  margin: 20px 50px 20px 20px;
 }
 
-.item-cart-title {
-  font-size: 16px;
-}
 .item-cart-title > .glyphicon {
-  font-size: 20px;
+  font-size: 22px;
   padding-right: 20px;
 }
 .cart-title {
@@ -375,6 +383,7 @@ body {
 
 
 .item-cart-author  {
+  padding: 2px 5px;  
   font-size: 16px;
 }
 .item-cart-author > p:first-child {
@@ -388,6 +397,7 @@ body {
 }
 
 .item-cart-price {
+  padding: 2px 10px;
   font-size: 18px;
 }
 .item-cart-price > p:first-child {
@@ -396,7 +406,16 @@ body {
   color: orangered;
 }
 .item-cart-total {
-  padding: 2px 30px;
+  padding: 2px 50px;
+  /* width: 100px; */
+}
+.item-cart-total input {
+  text-align: center;
+  height: 35px;
+  
+}
+.item-cart-total button {
+  height: 35px;
 }
 
 .item-cart-buy {
