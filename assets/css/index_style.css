@@ -15,10 +15,7 @@ body {
   letter-spacing: 0.2rem;
   font-size: 30px;
 }
-.my_search {
-  margin-top: 5px;
-  width: 250%;
-}
+
 .my_account {
   margin: 5px 0 0 0;
 }
@@ -268,6 +265,12 @@ body {
   border-radius: 5px;
 }
 @media screen and (max-width: 760px) {
+
+  .my_search {
+    margin-top: 5px;
+    width: 150%;
+  }
+
   .item_same_type > .col-md-2,
   .item_same_producer > .col-md-2 {
     margin-top: 15px;
@@ -275,6 +278,12 @@ body {
   }
 }
 @media screen and (min-width: 760px) {
+
+  .my_search {
+    margin-top: 5px;
+    width: 200%;
+  }
+
   .item_same_type > .col-md-2,
   .item_same_producer > .col-md-2 {
     margin-top: 15px;
