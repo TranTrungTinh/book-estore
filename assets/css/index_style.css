@@ -268,7 +268,7 @@ body {
 
   .my_search {
     margin-top: 5px;
-    width: 150%;
+    width: 100%;
   }
 
   .item_same_type > .col-md-2,
@@ -281,7 +281,7 @@ body {
 
   .my_search {
     margin-top: 5px;
-    width: 200%;
+    width: 230%;
   }
 
   .item_same_type > .col-md-2,
