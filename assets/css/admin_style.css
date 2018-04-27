@@ -1,3 +1,6 @@
+/*=============================== start @media ===============================*/
+
+/* 750px */
 @media screen and (max-width: 750px) {
     .modal-dialog {
         transform: translateY(-30%)!important;
@@ -11,6 +14,10 @@
             height: 45px!important;
             line-height: 45px!important;
         }
+
+    section, .table-scroll {
+        height: 48vh!important;
+    }
 }
 
 @media screen and (min-width: 750px) {
@@ -22,30 +29,49 @@
     #Navigator {
         height: 100vh!important;
     }
-}
 
-@media screen and (max-width: 992px) {
-    div.table-scroll {
-        height: 55vh;
+    section, .table-scroll {
+        height: 62vh!important;
     }
 }
 
-@media screen and (min-width: 992px) {
-    /* ?? md == 992 ??*/
-    #AddNewProduct {
-        margin-left: 20px!important;
+/* 1200px */
+@media screen and (max-width: 1200px) {
+    .btn-add {
+        padding-left: 0!important;
     }
 
-    div.table-scroll {
-        height: 65vh;
+    .btn-refresh {
+        padding: 0!important;
     }
 }
+
+@media screen and (min-width: 1200px) {
+    section, .table-scroll {
+        height: 72vh!important;
+    }
+}
+
+/*=============================== end @media ===============================*/
 
 body {
     overflow-x: hidden;
 }
 
-/* dashboard as default */
+.btn-add  {
+    padding-right: 15px;
+}
+    .btn-add > button, .btn-refresh > button {
+        width: 100%;
+    }
+
+.btn-refresh  {
+    padding-right: 15px;
+}
+    #Products .btn-refresh {
+        padding-left: 0;
+    }
+
 #Content > :not(:first-child) {
     display: none;
 }
@@ -149,15 +175,22 @@ section {
     height: 100vh;
     padding: 25px;
 }
-    section >  div.form-inline > * {
-        margin: 0 15px 20px 0;
+    section > .form-inline > * {
+        margin-bottom: 15px;
     }
 
+select {
+    width: 100%!important;
+}
+
 .table-scroll {
-    overflow-x: hidden;
     overflow-y: auto;
 }
 
 thead {
     background: whitesmoke;
+}
+
+textarea {
+    resize: none;
 }
