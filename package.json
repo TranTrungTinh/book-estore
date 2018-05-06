@@ -1,0 +1,19 @@
+{
+  "name": "book-estore",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/trhdon123/book-estore.git",
+  "author": "Tran Trung Tinh <trantrungtinh4954@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js -e js,ejs,css"
+  },
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "reload": "^2.2.2"
+  }
+}

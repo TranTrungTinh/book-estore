@@ -13,15 +13,21 @@
 
 <body>
 
-  <nav class="navbar navbar-default navbar-fixed-top"></nav>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <%- include('./html/navigation.ejs') %>
+  </nav>
 
   <div class="container-fluid">
     
     <div class="row" id="home-page">
       
-        <div class="col-sm-12 col-md-3" id="menu-list"></div>
+        <div class="col-sm-12 col-md-3" id="menu-list">
+          <%- include('./html/menu.list.ejs') %>
+        </div>
 
-        <div class="col-sm-12 col-md-9" id="main-content"></div>
+        <div class="col-sm-12 col-md-9" id="main-content">
+          <%- include('./html/home.ejs') %>
+        </div>
 
     </div>
     
@@ -198,8 +204,9 @@
 
   <script src="./assets/js/jquery-3.3.1.min.js"></script>
   <script src="./assets/js//bootstrap.min.js"></script>
-  <script src="./assets/js/sweetalert.min.js"></script>
-  <script src="./assets/js/index_script.js"></script>
+  <!-- <script src="./assets/js/sweetalert.min.js"></script>
+  <script src="./assets/js/index_script.js"></script> -->
 </body>
 
 </html>
+<script src="reload/reload.js"></script>
