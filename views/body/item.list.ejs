@@ -1,7 +1,7 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <div class="alert alert-info margin-bottom-small fs-20" id="my_title_list">SACH HAY NHAT</div>
+    <div class="alert alert-info margin-bottom-small fs-20" id="my-title-list"></div>
   </div>
   <div class="col-sm-4 col-md-3">
     <div class="thumbnail">
@@ -193,5 +193,8 @@
     </nav>
   </div>
 </div>
+<script>
+  document.getElementById('my-title-list').innerText = localStorage.getItem('titleList');
+</script>
 
 
