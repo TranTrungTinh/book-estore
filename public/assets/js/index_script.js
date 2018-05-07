@@ -3,7 +3,6 @@ Storage.prototype.setObject = function(key, value) {
   this.setItem(key, JSON.stringify(value));
 }
 
-
 // First run
 $( () => {
   $('#home-page').show();

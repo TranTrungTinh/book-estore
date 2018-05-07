@@ -1,0 +1,171 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+        aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="javascript:;">
+        <p class="my_main_logo">BOOK eSTORE</p>
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <form class="navbar-form navbar-left">
+        <div class="form-group has-success">
+          <div class="input-group my_search">
+            <input type="text" class="form-control input-lg" placeholder="Tìm sản phẩm, danh mục hay thương hiệu mong muốn ..." id="txtSearch"
+            />
+            <span class="input-group-btn">
+              <button class="btn btn-success btn-lg" type="button" id="btnSearch">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Tìm kiếm
+              </button>
+            </span>
+          </div>
+        </div>
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="javascript:;" class="my_account" data-toggle="modal" data-target=".bs-example-modal-lg">
+            <div class="row">
+              <div class="col-sm-2">
+                <span class="glyphicon glyphicon-user my_account_logo" aria-hidden="true"></span>
+              </div>
+              <div class="col-sm-10">
+                <span>Chào Trần Trung Tính</span>
+                <br>
+                <span class="fs-12">Tài khoản</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <button class="btn btn-danger navbar-btn btn-lg my_shopping_cart height-50" type="button" id="btn-shopping-cart">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            <span>&nbsp;Giỏ hàng&nbsp;&nbsp;</span>
+            <span class="badge fs-20">3</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Login tab modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="gridSystemModalLabel">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          <span>&nbsp;Đăng nhập / Đăng ký tài khoản</span>
+        </h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="row my_banner_cover">
+          <div class="col-md-3 margin-left-small">
+            <h2 class="label-login">Đăng nhập</h2>
+            <p class="label-login-content">
+              Đăng nhập để theo dõi đơn hàng, lưu danh sách sản phẩm yêu thích, nhận nhiều ưu đãi hấp dẫn.</p>
+            <img src="./assets/media/images/bg-login.png" alt="Bg-login" class="my_banner_cover padding-top-small" />
+          </div>
+          <div class="col-md-8 margin-left-big">
+            <!-- Nav tabs -->
+            <ul class="nav nav-pills nav-justified padding_bottom_big" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Đăng nhập</a>
+              </li>
+              <li role="presentation">
+                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Tạo tài khoản</a>
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <!-- Dang nhap -->
+              <div role="tabpanel" class="tab-pane active" id="home">
+                <div class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputEmailLogin" class="col-sm-2 control-label label-login-content">Email</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control input-lg" id="inputEmailLogin" placeholder="Nhập Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPasswordLogin" class="col-sm-2 control-label label-login-content">Mật khẩu</label>
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control input-lg" id="inputPasswordLogin" placeholder="Mật khẩu từ 6 đến 32 ký tự">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="button" class="btn btn-warning btn-lg btn-block btn-login" id="btn-signin">Đăng nhập</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Dang ky -->
+              <div role="tabpanel" class="tab-pane" id="profile">
+                <div class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputNameRegister" class="col-sm-2 control-label label-login-content">Họ tên:</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control input-lg" id="inputNameRegister" placeholder="Nhập Họ tên">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmailRegister" class="col-sm-2 control-label label-login-content">Email:</label>
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control input-lg" id="inputEmailRegister" placeholder="Nhập Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPasswordRegister" class="col-sm-2 control-label label-login-content">Mật khẩu</label>
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control input-lg" id="inputPasswordRegister" placeholder="Mật khẩu từ 6 đến 32 ký tự">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inlineRadioOptions" class="col-sm-2 control-label label-login-content">Giới tính:</label>
+                    <div class="col-sm-10">
+                      <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="genderMale" checked/>
+                        <img src="./assets/media/images/glyphicons/png/glyphicons-35-old-man.png" alt="" />
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="genderFemale" />
+                        <img src="./assets/media/images/glyphicons/png/glyphicons-36-woman.png" alt="" />
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="button" class="btn btn-warning btn-lg btn-block btn-login" id="btn-signup">Tạo tài khoản</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
