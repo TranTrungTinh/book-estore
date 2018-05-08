@@ -1,4 +1,5 @@
 const express = require('express');
+const parser = require('body-parser').urlencoded({extended: false});
 
 const app = express();
 
@@ -19,6 +20,16 @@ app.get('/book', (req, res) => {
 
 app.get('/shopping-cart', (req, res) => {
   res.render('render/payment');
+});
+
+app.get('/account', (req, res) => {
+  res.render('render/account');
+});
+
+app.post('/signin', parser, (req, res) => {
+  const {email, password} = req.body;
+  if(email === 'aaa' && password === '123') return res.send({success: true});
+  res.send({success: false});
 });
 
 app.listen(3000, () => console.log('Server started port 3000'));

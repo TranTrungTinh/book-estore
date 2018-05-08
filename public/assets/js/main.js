@@ -35,3 +35,14 @@ $('#main-content').on('click', '.thumbnail > img', e => {
 $(document).on('click', '#btn-shopping-cart' , e => {
   window.location.href = 'http://localhost:3000/shopping-cart';
 });
+// Handle login
+$('#btn-signin').click(e => {
+  e.preventDefault();
+  const email = $('#inputEmailLogin').val();
+  const password = $('#inputPasswordLogin').val();
+  $.post('/signin', {email, password}, data => {
+    if(data.success) return window.location.href = 'http://localhost:3000/account';
+    swal("Có lỗi xảy ra!", "Sai email hay password", "error");
+  });
+  // console.log({email, password});
+});
