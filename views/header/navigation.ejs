@@ -34,13 +34,13 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="javascript:;" class="my_account" data-toggle="modal" data-target=".bs-example-modal-lg">
+          <a href="javascript:;" class="my_account" id="btn-account">
             <div class="row">
-              <div class="col-sm-2">
+              <div class="col-md-2">
                 <span class="glyphicon glyphicon-user my_account_logo" aria-hidden="true"></span>
               </div>
-              <div class="col-sm-10">
-                <span>Chào Trần Trung Tính</span>
+              <div class="col-md-10">
+                <span id="toggle-account"></span>
                 <br>
                 <span class="fs-12">Tài khoản</span>
               </div>
@@ -59,7 +59,7 @@
   </div>
 </nav>
 <!-- Login tab modal -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myModelLogin">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -169,3 +169,7 @@
     </div>
   </div>
 </div>
+<script>
+  if(!localStorage.getItem('account')) document.getElementById('toggle-account').innerText = 'Đăng nhập';
+  else document.getElementById('toggle-account').innerText = 'Chào ' + localStorage.getItem('account');
+</script>

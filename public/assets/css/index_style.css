@@ -17,7 +17,8 @@ body {
 }
 
 .my_account {
-  margin: 5px 0 0 0;
+  margin: 5px 5px 0 0;
+  width: 250px;
 }
 .my_account_logo {
   font-size: 35px;
@@ -72,13 +73,6 @@ body {
   border-radius: 5px;
 }
 
-.row > .col-md-3 > img {
-  border-radius: 5px;
-  cursor: pointer;
-}
-.row > .col-md-3 > img:hover {
-  box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.5);
-}
 .thumbnail {
   border: 0 none;
   cursor: pointer;
@@ -89,9 +83,13 @@ body {
 }
 .item-cover-img img {
   width: 100%;
-  height: 315px;
+  height: 300px;
+  border-radius: 5px;
+  cursor: pointer;
 }
-
+.item-cover-img img:hover {
+  box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.5);
+}
 .my_banner_cover {
   width: 100%
 }
@@ -123,10 +121,12 @@ body {
   font-weight: 600;
 }
 
-/* #btnFilter {
-  margin: 10px;
-  width: 100px;
-} */
+/* Add cursor with menu tab */
+#collapseListGroupHeadingVN,
+#collapseListGroupHeadingNXB,
+#collapseListGroupHeadingTG {
+  cursor: pointer;
+}
 
 .my_footer {
   width: 100%;
