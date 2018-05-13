@@ -26,6 +26,10 @@ app.get('/account', (req, res) => {
   res.render('render/account');
 });
 
+app.get('/admin', (req, res) => {
+  res.render('render/admin');
+});
+
 app.post('/signin', parser, (req, res) => {
   const {email, password} = req.body;
   if(email === 'aaa' && password === '123') return res.send({success: true});
@@ -36,6 +40,9 @@ app.listen(3000, () => console.log('Server started port 3000'));
 require('reload')(app);
 
 // handle error round
-app.get("*" , (req , res) => {
+app.get('/error', (req, res) => {
   res.render('render/error');
+});
+app.get('*',function(req,res){
+  res.redirect('/error');
 });
