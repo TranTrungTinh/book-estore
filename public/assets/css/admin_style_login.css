@@ -1,0 +1,50 @@
+h1 {
+    font-weight: bolder;
+    font-size: 5em;
+    text-align: center;
+}
+
+h2 {
+    font-weight: bolder;
+    margin-top: -30px!important;
+    padding-left: 50px!important;
+    text-align: center;
+}
+
+input {
+    height: 40px!important;
+}
+input[type=submit] {
+    background: #1565C0;
+    font-size: 1.3em;
+    font-weight: bolder;
+    width: 100%;
+}
+input[type=text] {
+    margin-top: 15px;
+}
+
+.modal {
+    background:linear-gradient(135deg, #5b247a 0%,#1bcedf 100%);
+}
+.modal-dialog {
+    left: 50%;
+    margin: 0;
+    max-width: 500px;
+    min-width: 320px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-60%);
+    width: 100%;
+}
+    .modal-content {
+        background: transparent;
+        border-radius: 0;
+        border-width: 0;
+        box-shadow: none!important;
+        color: white;
+    }
+        form > * {
+            border-width: 0!important;
+            padding: 5px 25px!important;
+        }
