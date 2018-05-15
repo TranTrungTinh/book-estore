@@ -1,4 +1,6 @@
 <!-- Danh muc San pham panel -->
+<% const {categories, authors, publishers} = results; %>
+
 <div class="panel panel-success">
   <div class="panel-heading" role="tab" id="collapseListGroupHeadingVN">
     <h3 class="panel-title panel-title-header">
@@ -10,30 +12,12 @@
   <div class="panel-collapse collapse.in" role="tabpanel" id="collapseListGroupVN" aria-labelledby="collapseListGroupHeadingVN"
     aria-expanded="true">
     <div class="list-group">
-      <a href="/category/technology" class="list-group-item">
-        <span class="my_title_item">Sách khoa học, công nghệ</span>
-        <span class="badge">12</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_title_item">Sách văn học</span>
-        <span class="badge">27</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_title_item">Sách kinh tế</span>
-        <span class="badge">24</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_title_item">Sách thiếu nhi</span>
-        <span class="badge">18</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_title_item">Sách dạy nấu ăn</span>
-        <span class="badge">20</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_title_item">Sách tham khảo</span>
-        <span class="badge">34</span>
-      </a>
+      <% categories.forEach(e => { %>
+        <a href="/category/technology" class="list-group-item">
+          <span class="my_title_item"><%= e.NAME %></span>
+          <span class="badge"><%= e.ID %></span>
+        </a>
+      <% }); %>
     </div>
   </div>
 </div>
@@ -49,26 +33,12 @@
   <div class="panel-collapse collapse" role="tabpanel" id="collapseListGroupNXB" aria-labelledby="collapseListGroupHeadingNXB"
     aria-expanded="true">
     <div class="list-group">
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_nxb_item">NXB Kim Đồng</span>
-        <span class="badge">34</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_nxb_item">NXB Trẻ</span>
-        <span class="badge">40</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_nxb_item">Nhà sách Sao Mai</span>
-        <span class="badge">29</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_nxb_item">Nhà sách Văn Lang</span>
-        <span class="badge">58</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_nxb_item">Nhà sách Khang Việt</span>
-        <span class="badge">37</span>
-      </a>
+      <% publishers.forEach(e => { %>
+        <a href="javascript:;" class="list-group-item">
+          <span class="my_nxb_item"><%= e.NAME %></span>
+          <span class="badge"><%= e.ID %></span>
+        </a>
+      <% }); %>
     </div>
   </div>
 
@@ -85,26 +55,14 @@
   <div class="panel-collapse collapse" role="tabpanel" id="collapseListGroupTG" aria-labelledby="collapseListGroupHeadingTG"
     aria-expanded="true">
     <div class="list-group">
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_nxb_item">NXB Kim Đồng</span>
-        <span class="badge">34</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_nxb_item">NXB Trẻ</span>
-        <span class="badge">40</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_nxb_item">Nhà sách Sao Mai</span>
-        <span class="badge">29</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_nxb_item">Nhà sách Văn Lang</span>
-        <span class="badge">58</span>
-      </a>
-      <a href="javascript:;" class="list-group-item">
-        <span class="my_nxb_item">Nhà sách Khang Việt</span>
-        <span class="badge">37</span>
-      </a>
+      <div class="list-group">
+        <% authors.forEach(e => { %>
+          <a href="javascript:;" class="list-group-item">
+            <span class="my_nxb_item"><%= e.NAME %></span>
+            <span class="badge"><%= e.ID %></span>
+          </a>
+        <% }); %>
+      </div>
     </div>
   </div>
 

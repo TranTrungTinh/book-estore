@@ -1,14 +1,13 @@
 const express = require('express');
 const parser = require('body-parser').urlencoded({extended: false});
 
+const { homeRouter } = require('./routes/home.route');
 const app = express();
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use('/home', homeRouter);
 
-app.get('/', (req, res) => {
-  res.render('render/index');
-});
 
 app.get('/category/technology', (req, res) => {
   res.render('render/items');
