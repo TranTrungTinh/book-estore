@@ -77,7 +77,20 @@ body {
   border: 0 none;
   cursor: pointer;
   border-radius: 5px;
+  max-height: 600px;
 }
+.thumbnail > .caption > h4 {
+  padding: 10px 5px;
+  height: 100px;
+}
+.thumbnail > .caption > p {
+  padding: 1px 5px;
+}
+.thumbnail > .caption .price-tag {
+  font-weight: 600;
+  font-size: 20px;
+}
+
 .thumbnail:hover {
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
 }
@@ -91,13 +104,11 @@ body {
   box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.5);
 }
 .my_banner_cover {
-  width: 100%
+  max-width: 100%;
+  max-height: 250px;
 }
 
-.price-tag {
-  font-weight: 700;
-  font-size: 16px;
-}
+
 .label-login {
   margin: 0;
   font-size: 36px;
