@@ -96,6 +96,9 @@ body {
   max-height: 600px;
 }
 .thumbnail > .caption > h4 {
+  width: 100%;
+  overflow: scroll;
+  text-overflow: ellipsis;
   padding: 10px 5px;
   height: 100px;
 }
@@ -103,8 +106,12 @@ body {
   padding: 1px 5px;
 }
 .thumbnail > .caption .price-tag {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 20px;
+}
+.thumbnail > .caption .price-discount {
+  font-weight: 500;
+  color: red;
 }
 
 .thumbnail:hover {
@@ -121,7 +128,7 @@ body {
 }
 .my_banner_cover {
   max-width: 100%;
-  max-height: 250px;
+  max-height: 240px;
 }
 
 /* ========== Thumbnail item home page ========== */
