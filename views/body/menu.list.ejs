@@ -13,7 +13,7 @@
     <div class="list-group">
       <% categories.forEach(e => { %>
         <a href="/category/technology" class="list-group-item">
-          <span class="my_title_item"><%= e.NAME %></span>
+          <span class="my-menu-name"><%= e.NAME %></span>
           <span class="badge"><%= e.ID %></span>
         </a>
       <% }); %>
@@ -34,7 +34,7 @@
     <div class="list-group">
       <% publishers.forEach(e => { %>
         <a href="javascript:;" class="list-group-item">
-          <span class="my_nxb_item"><%= e.NAME %></span>
+          <span class="my-menu-name"><%= e.NAME %></span>
           <span class="badge"><%= e.ID %></span>
         </a>
       <% }); %>
@@ -57,7 +57,7 @@
       <div class="list-group">
         <% authors.forEach(e => { %>
           <a href="javascript:;" class="list-group-item">
-            <span class="my_nxb_item"><%= e.NAME %></span>
+            <span class="my-menu-name"><%= e.NAME %></span>
             <span class="badge"><%= e.ID %></span>
           </a>
         <% }); %>

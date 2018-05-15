@@ -62,7 +62,22 @@ body {
   text-transform: uppercase;
   font-weight: 700;
 }
-/* Item list */
+/* ========== Left menu tab item home page ========== */
+.panel-collapse .list-group-item {
+  width: 100%;
+  position: relative;
+}
+
+.panel-collapse .list-group-item > .my-menu-name {
+  display: inline-block;
+  max-width: 300px;
+}
+.panel-collapse .list-group-item > .badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+/* ========== Left menu tab item home page ========== */
 .item-list-page {
   text-align: center;
 }
@@ -73,6 +88,7 @@ body {
   border-radius: 5px;
 }
 
+/* ========== Thumbnail item home page ========== */
 .thumbnail {
   border: 0 none;
   cursor: pointer;
@@ -108,6 +124,7 @@ body {
   max-height: 250px;
 }
 
+/* ========== Thumbnail item home page ========== */
 
 .label-login {
   margin: 0;
