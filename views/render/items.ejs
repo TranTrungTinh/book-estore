@@ -8,18 +8,14 @@
 
   <div class="container-fluid">
     <div class="row" id="home-page">
-      <% const { categories, authors, publishers, items } = results; %>
+      <% const { categories, authors, publishers, items, count } = results; %>
       <div class="col-sm-12 col-md-3" id="menu-list">
           <%- include('../body/menu.list.ejs', {categories, authors, publishers}) %>
       </div>
       <div class="col-sm-12 col-md-9" id="main-content">
-        <%- include('../body/item.list.ejs', {items}) %>
+          <%- include('../body/item.list.ejs', {items, count, page}) %>
       </div>
     </div>
-<!--     
-    <div class="row" id="detail-page"></div>
-    <div class="row" id="acount-page"></div>
-    <div class="row" id="item-cart-page"></div> -->
   </div>
   
   <%- include('../footer/footer.ejs') %>

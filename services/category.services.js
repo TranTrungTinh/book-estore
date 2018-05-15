@@ -1,31 +1,25 @@
 const { Book } = require('../models/book.models');
 
 class CategoryServices {
-  static async showBookWithIDCategory(idCategory) {
-    const categories = await Book.getAll('DANHMUCSACH');
-    if(!categories[0]) throw new Error('Khong tim thay');
+  static async showBookWithIDCategory(currentPage, idCategory) {
+    const books = await Book.getAllCategoryAuthorPublisher();
+    const categories = books[0];
+    const publishers = books[1];
+    const authors = books[2];
+    if(!categories && !publishers && !authors) throw new Error('Khong tim thay');
 
-    const authors = await Book.getAll('TACGIA');
-    if(!authors[0]) throw new Error('Khong tim thay');
-
-    const publishers = await Book.getAll('NHAXUATBAN');
-    if(!publishers[0]) throw new Error('Khong tim thay');
-
-    const items = await Book.getBookWithIDCategory(idCategory);
-    if(!items[0]) throw new Error('Khong tim thay');
-
-    return {categories, authors, publishers, items};
+    const items = await Book.getBookWithIDCategory(currentPage, idCategory);
+    if(!items[0] && !items[1]) throw new Error('Khong tim thay');
+    const count = Math.ceil(items[0][0].count / 8);
+    return {categories, authors, publishers, items: items[1], count};
   }
 
   static async showBookWithIDAuthor(idAuthor) {
-    const categories = await Book.getAll('DANHMUCSACH');
-    if(!categories[0]) throw new Error('Khong tim thay');
-
-    const authors = await Book.getAll('TACGIA');
-    if(!authors[0]) throw new Error('Khong tim thay');
-
-    const publishers = await Book.getAll('NHAXUATBAN');
-    if(!publishers[0]) throw new Error('Khong tim thay');
+    const books = await Book.getAllCategoryAuthorPublisher();
+    const categories = books[0];
+    const publishers = books[1];
+    const authors = books[2];
+    if(!categories && !publishers && !authors) throw new Error('Khong tim thay');
 
     const items = await Book.getBookWithIDAuthor(idAuthor);
     if(!items[0]) throw new Error('Khong tim thay');
@@ -34,14 +28,11 @@ class CategoryServices {
   } 
 
   static async showBookWithIDPublisher(idPublisher) {
-    const categories = await Book.getAll('DANHMUCSACH');
-    if(!categories[0]) throw new Error('Khong tim thay');
-
-    const authors = await Book.getAll('TACGIA');
-    if(!authors[0]) throw new Error('Khong tim thay');
-
-    const publishers = await Book.getAll('NHAXUATBAN');
-    if(!publishers[0]) throw new Error('Khong tim thay');
+    const books = await Book.getAllCategoryAuthorPublisher();
+    const categories = books[0];
+    const publishers = books[1];
+    const authors = books[2];
+    if(!categories && !publishers && !authors) throw new Error('Khong tim thay');
 
     const items = await Book.getBookWithIDPublisher(idPublisher);
     if(!items[0]) throw new Error('Khong tim thay');

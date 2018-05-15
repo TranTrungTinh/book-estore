@@ -12,7 +12,7 @@
     aria-expanded="true">
     <div class="list-group">
       <% categories.forEach(e => { %>
-        <a href="/category/<%= e.ID %>" class="list-group-item">
+        <a href="/category/<%= e.ID %>?page=1" class="list-group-item">
           <span class="my-menu-name"><%= e.NAME %></span>
           <span class="badge"><%= e.ID %></span>
         </a>

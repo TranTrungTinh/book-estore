@@ -8,8 +8,10 @@ categoryRouter.use(parser.urlencoded({extended: false}));
 categoryRouter.use(parser.json());
 
 categoryRouter.get('/:id', (req, res) => {
-  CategoryServices.showBookWithIDCategory(req.params.id)
-  .then(results => res.render('render/items', { results }))
+  const path = `/category/${req.params.id}?page=`;
+  const {page} = req.query;
+  CategoryServices.showBookWithIDCategory(page, req.params.id)
+  .then(results => res.render('render/items', { results, path, page }))
   .catch(error => res.send(error.message));
 });
 

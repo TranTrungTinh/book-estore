@@ -6,7 +6,8 @@ const pool = mysql.createPool({
     password: 'root',
     database: 'BookEStore',
     port: 8889,
-    connectionLimit : 20
+    connectionLimit : 20,
+    multipleStatements: true
 });
 
 const queryDB = (sql , arrData) => {

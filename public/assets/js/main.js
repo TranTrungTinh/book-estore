@@ -32,6 +32,11 @@ $('#collapseListGroupHeadingTG').click(() => {
 });
 /* ============ Toggle Menu Tab ============*/
 
+/* ============ Page number ============*/
+// $('.pagination a').click(e => {
+//   $(this).addClass('active');
+// });
+/* ============ Page number ============*/
 
 // Handle list group item
 $('#menu-list').on('click', '.list-group-item' , e => {

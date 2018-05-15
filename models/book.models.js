@@ -1,30 +1,28 @@
 const { queryDB } = require('../helpers/connectDatabase');
+const rowOfPage = 8;
 
 class Book {
-  static getAll(nameTable) {
-    const slq = `SELECT * FROM ${nameTable} LIMIT 10`;
+  static getAllCategoryAuthorPublisher() {
+    const slq = `SELECT * FROM DANHMUCSACH LIMIT 10;
+                 SELECT * FROM NHAXUATBAN LIMIT 10;
+                 SELECT * FROM TACGIA LIMIT 10;`;
+    return queryDB(slq);
+  }
+  static getTopNewSaleView() {
+    const slq = `SELECT * FROM THONGTINSACH ORDER BY VIEWS LIMIT 10;
+                 SELECT * FROM THONGTINSACH ORDER BY SALES DESC LIMIT 10;
+                 SELECT * FROM THONGTINSACH ORDER BY VIEWS DESC LIMIT 10;`;
     return queryDB(slq);
   }
 
-  static getTopNew() {
-    const slq = `SELECT * FROM THONGTINSACH ORDER BY VIEWS LIMIT 10`;
-    return queryDB(slq);
-  }
+  static getBookWithIDCategory(currentPage, idCategory) {
+    const start = (+currentPage - 1) * rowOfPage || 0;
 
-  static getTopSale() {
-    const slq = `SELECT * FROM THONGTINSACH ORDER BY SALES DESC LIMIT 10`;
-    return queryDB(slq);
-  }
-
-  static getTopView() {
-    const slq = `SELECT * FROM THONGTINSACH ORDER BY VIEWS DESC LIMIT 10`;
-    return queryDB(slq);
-  }
-
-  static getBookWithIDCategory(idCategory) {
-    const sql = `SELECT NAME, IMAGE, PRICE, SALES
-                FROM THONGTINSACH WHERE ID_CATEGORY = ?`;
-    return queryDB(sql, [idCategory]);
+    const sql = `SELECT COUNT(ID) as count
+                 FROM THONGTINSACH WHERE ID_CATEGORY = ${idCategory};
+                 SELECT NAME, IMAGE, PRICE, SALES
+                 FROM THONGTINSACH WHERE ID_CATEGORY = ${idCategory} LIMIT ${start}, ${rowOfPage}`;
+    return queryDB(sql);
   }
 
   static getBookWithIDAuthor(idAuthor) {

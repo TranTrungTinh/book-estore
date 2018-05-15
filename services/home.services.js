@@ -2,23 +2,17 @@ const { Book } = require('../models/book.models');
 
 class HomeServices {
   static async show() {
-    const categories = await Book.getAll('DANHMUCSACH');
-    if(!categories[0]) throw new Error('Khong tim thay');
+    const books = await Book.getAllCategoryAuthorPublisher();
+    const categories = books[0];
+    const publishers = books[1];
+    const authors = books[2];
+    if(!categories && !publishers && !authors) throw new Error('Khong tim thay');
 
-    const authors = await Book.getAll('TACGIA');
-    if(!authors[0]) throw new Error('Khong tim thay');
-
-    const publishers = await Book.getAll('NHAXUATBAN');
-    if(!publishers[0]) throw new Error('Khong tim thay');
-
-    const news = await Book.getTopNew();
-    if(!publishers[0]) throw new Error('Khong tim thay');
-    
-    const sales = await Book.getTopSale();
-    if(!publishers[0]) throw new Error('Khong tim thay');
-    
-    const views = await Book.getTopView();
-    if(!publishers[0]) throw new Error('Khong tim thay');
+    const tops = await Book.getTopNewSaleView();
+    const news = tops[0];
+    const sales = tops[1];
+    const views = tops[2];
+    if(!news && !sales && !views) throw new Error('Khong tim thay');
 
     const result = { categories, authors, publishers, news, sales, views };
     return result;
