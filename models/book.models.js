@@ -26,6 +26,18 @@ class Book {
                 FROM THONGTINSACH WHERE ID_CATEGORY = ?`;
     return queryDB(sql, [idCategory]);
   }
+
+  static getBookWithIDAuthor(idAuthor) {
+    const sql = `SELECT NAME, IMAGE, PRICE, SALES
+                FROM THONGTINSACH WHERE ID_AUTHOR = ?`;
+    return queryDB(sql, [idAuthor]);
+  }
+
+  static getBookWithIDPublisher(idPublisher) {
+    const sql = `SELECT NAME, IMAGE, PRICE, SALES
+                FROM THONGTINSACH WHERE ID_PUBLISHER = ?`;
+    return queryDB(sql, [idPublisher]);
+  }
   
 }
 

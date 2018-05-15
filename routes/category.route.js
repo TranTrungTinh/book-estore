@@ -13,4 +13,16 @@ categoryRouter.get('/:id', (req, res) => {
   .catch(error => res.send(error.message));
 });
 
+categoryRouter.get('/author/:id', (req, res) => {
+  CategoryServices.showBookWithIDAuthor(req.params.id)
+  .then(results => res.render('render/items', { results }))
+  .catch(error => res.send(error.message));
+});
+
+categoryRouter.get('/publisher/:id', (req, res) => {
+  CategoryServices.showBookWithIDPublisher(req.params.id)
+  .then(results => res.render('render/items', { results }))
+  .catch(error => res.send(error.message));
+});
+
 module.exports = { categoryRouter };
