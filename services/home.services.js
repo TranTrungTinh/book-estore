@@ -1,6 +1,6 @@
 const { Book } = require('../models/book.models');
 
-class HomePage {
+class HomeServices {
   static async show() {
     const categories = await Book.getAll('DANHMUCSACH');
     if(!categories[0]) throw new Error('Khong tim thay');
@@ -25,4 +25,4 @@ class HomePage {
   }
 }
 
-module.exports = {HomePage};
+module.exports = { HomeServices };

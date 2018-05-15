@@ -3,174 +3,26 @@
   <div class="col-sm-12">
     <div class="alert alert-info margin-bottom-small fs-20" id="my-title-list"></div>
   </div>
-  <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book01.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
-        <p>So luong da ban: <span class="badge">10</span></p>
-        <button type="button" class="btn btn-danger btn-block btn-lg">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          <span>Thêm vào giỏ hàng</span>
-        </button>
+  <% items.forEach(e => { %>
+    <% const {NAME, IMAGE, PRICE, SALES} = e; %>
+    <div class="col-sm-4 col-md-3">
+      <div class="thumbnail">
+        <img src="./assets/media/images/<%= IMAGE%>" alt="Item-Cover-Image" class="my_banner_cover">
+        <div class="caption">
+          <h4><%= NAME%></h4>
+          <p>
+            <span class="price-tag"><%= PRICE%>&nbsp;₫</span> 
+            <strike><%= +PRICE + +PRICE*0.3%>&nbsp;₫</strike>
+          </p>
+          <p>Số lượng đã bán: <span class="badge"><%= SALES%></span></p>
+          <button type="button" class="btn btn-danger btn-block btn-lg">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            <span>Thêm vào giỏ hàng</span>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book02.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
-        <p>So luong da ban: <span class="badge">10</span></p>
-        <button type="button" class="btn btn-danger btn-block btn-lg">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          <span>Thêm vào giỏ hàng</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book03.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
-        <p>So luong da ban: <span class="badge">10</span></p>
-        <button type="button" class="btn btn-danger btn-block btn-lg">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          <span>Thêm vào giỏ hàng</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book04.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
-        <p>So luong da ban: <span class="badge">10</span></p>
-        <button type="button" class="btn btn-danger btn-block btn-lg">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          <span>Thêm vào giỏ hàng</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book05.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
-        <p>So luong da ban: <span class="badge">10</span></p>
-        <button type="button" class="btn btn-danger btn-block btn-lg">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          <span>Thêm vào giỏ hàng</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book06.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
-        <p>So luong da ban: <span class="badge">10</span></p>
-        <button type="button" class="btn btn-danger btn-block btn-lg">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          <span>Thêm vào giỏ hàng</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book07.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
-        <p>So luong da ban: <span class="badge">10</span></p>
-        <button type="button" class="btn btn-danger btn-block btn-lg">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          <span>Thêm vào giỏ hàng</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book08.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
-        <p>So luong da ban: <span class="badge">10</span></p>
-        <button type="button" class="btn btn-danger btn-block btn-lg">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          <span>Thêm vào giỏ hàng</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book09.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
-        <p>So luong da ban: <span class="badge">10</span></p>
-        <button type="button" class="btn btn-danger btn-block btn-lg">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          <span>Thêm vào giỏ hàng</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book10.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
-        <p>So luong da ban: <span class="badge">10</span></p>
-        <button type="button" class="btn btn-danger btn-block btn-lg">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          <span>Thêm vào giỏ hàng</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book01.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
-        <p>So luong da ban: <span class="badge">10</span></p>
-        <button type="button" class="btn btn-danger btn-block btn-lg">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          <span>Thêm vào giỏ hàng</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4 col-md-3">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book02.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p><span class="price-tag">59.000&nbsp;₫</span> <strike>98.000&nbsp;₫</strike></p>
-        <p>So luong da ban: <span class="badge">10</span></p>
-        <button type="button" class="btn btn-danger btn-block btn-lg">
-          <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          <span>Thêm vào giỏ hàng</span>
-        </button>
-      </div>
-    </div>
-  </div>
+  <% }) %>
   <div class="col-sm-12 item-list-page">
     <nav aria-label="Page navigation">
       <ul class="pagination  pagination-lg">

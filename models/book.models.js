@@ -20,6 +20,12 @@ class Book {
     const slq = `SELECT * FROM THONGTINSACH ORDER BY VIEWS DESC LIMIT 10`;
     return queryDB(slq);
   }
+
+  static getBookWithIDCategory(idCategory) {
+    const sql = `SELECT NAME, IMAGE, PRICE, SALES
+                FROM THONGTINSACH WHERE ID_CATEGORY = ?`;
+    return queryDB(sql, [idCategory]);
+  }
   
 }
 
