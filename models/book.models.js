@@ -20,7 +20,7 @@ class Book {
 
     const sql = `SELECT COUNT(ID) as count
                  FROM THONGTINSACH WHERE ID_CATEGORY = ${idCategory};
-                 SELECT NAME, IMAGE, PRICE, SALES
+                 SELECT ID, NAME, IMAGE, PRICE, SALES
                  FROM THONGTINSACH WHERE ID_CATEGORY = ${idCategory} LIMIT ${start}, ${rowOfPage}`;
     return queryDB(sql);
   }
@@ -29,7 +29,7 @@ class Book {
     const start = (+currentPage - 1) * rowOfPage || 0;
     const sql = `SELECT COUNT(ID) as count
                  FROM THONGTINSACH WHERE ID_AUTHOR = ${idAuthor};
-                 SELECT NAME, IMAGE, PRICE, SALES
+                 SELECT ID, NAME, IMAGE, PRICE, SALES
                  FROM THONGTINSACH WHERE ID_AUTHOR = ${idAuthor} LIMIT ${start}, ${rowOfPage}`;
     return queryDB(sql);
   }
@@ -38,8 +38,22 @@ class Book {
     const start = (+currentPage - 1) * rowOfPage || 0;
     const sql = `SELECT COUNT(ID) as count
                  FROM THONGTINSACH WHERE ID_PUBLISHER = ${idPublisher};
-                 SELECT NAME, IMAGE, PRICE, SALES
+                 SELECT ID, NAME, IMAGE, PRICE, SALES
                  FROM THONGTINSACH WHERE ID_PUBLISHER = ${idPublisher} LIMIT ${start}, ${rowOfPage}`;
+    return queryDB(sql);
+  }
+
+  static getBookInfo(idBook) {
+    const sql = `SELECT * FROM THONGTINSACH WHERE ID = ${idBook};
+
+                 SELECT dm.* FROM THONGTINSACH b, DANHMUCSACH dm 
+                 WHERE b.ID = ${idBook} AND dm.ID = b.ID_CATEGORY;
+
+                 SELECT nxb.* FROM THONGTINSACH b, NHAXUATBAN nxb 
+                 WHERE b.ID = ${idBook} AND nxb.ID = b.ID_PUBLISHER;
+
+                 SELECT tg.* FROM THONGTINSACH b, TACGIA tg 
+                 WHERE b.ID = ${idBook} AND tg.ID = b.ID_AUTHOR;`;
     return queryDB(sql);
   }
   

@@ -4,7 +4,7 @@
     <div class="alert alert-info margin-bottom-small fs-20" id="my-title-list"></div>
   </div>
   <% items.forEach(e => { %>
-    <% const {NAME, IMAGE, PRICE, SALES} = e; %>
+    <% const {ID, NAME, IMAGE, PRICE, SALES} = e; %>
     <div class="col-sm-4 col-md-3">
       <div class="thumbnail">
         <img src="./assets/media/images/<%= IMAGE%>" alt="Item-Cover-Image" class="my_banner_cover">
@@ -21,6 +21,7 @@
             <span>Thêm vào giỏ hàng</span>
           </button>
         </div>
+        <input type="hidden" value="<%= ID%>"/>
       </div>
     </div>
   <% }) %>

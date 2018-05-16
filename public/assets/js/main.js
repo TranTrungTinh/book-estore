@@ -44,8 +44,15 @@ $('#menu-list').on('click', '.list-group-item' , e => {
   localSaveItem('titleList', title);
 });
 
-$('#main-content').on('click', '.thumbnail > img', e => {
+$('#main-content').on('click', '.thumbnail', e => {
   
+  const _this = e.target.nodeName;
+  if(_this === 'SPAN' || _this === 'BUTTON') { return; }
+  const idBook = e.currentTarget.lastElementChild.defaultValue;
+
+  location.href = '/book/' + idBook;
+
+
   // const _this = e.currentTarget
   // const image = _this.children[0].attributes[0].nodeValue;
   // const title = _this.children[1].children[0].innerText;
@@ -56,12 +63,12 @@ $('#main-content').on('click', '.thumbnail > img', e => {
   // if (localStorage.getItem('book')) 
   //   localStorage.removeItem('book');
   // localStorage.setObject('book', book);
-  window.location.href = '/book';
+  // window.location.href = '/book';
 });
 
 // Shopping cart button
 $(document).on('click', '#btn-shopping-cart' , e => {
-  window.location.href = '/shopping-cart';
+ location.href = '/shopping-cart';
 });
 
 //Handle account btn
