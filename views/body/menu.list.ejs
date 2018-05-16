@@ -33,7 +33,7 @@
     aria-expanded="true">
     <div class="list-group">
       <% publishers.forEach(e => { %>
-        <a href="/category/publisher/<%= e.ID %>" class="list-group-item">
+        <a href="/category/publisher/<%= e.ID %>?page=1" class="list-group-item">
           <span class="my-menu-name"><%= e.NAME %></span>
           <span class="badge"><%= e.ID %></span>
         </a>
@@ -56,7 +56,7 @@
     <div class="list-group">
       <div class="list-group">
         <% authors.forEach(e => { %>
-          <a href="/category/author/<%= e.ID %>" class="list-group-item">
+          <a href="/category/author/<%= e.ID %>?page=1" class="list-group-item">
             <span class="my-menu-name"><%= e.NAME %></span>
             <span class="badge"><%= e.ID %></span>
           </a>

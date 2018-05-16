@@ -25,16 +25,22 @@ class Book {
     return queryDB(sql);
   }
 
-  static getBookWithIDAuthor(idAuthor) {
-    const sql = `SELECT NAME, IMAGE, PRICE, SALES
-                FROM THONGTINSACH WHERE ID_AUTHOR = ?`;
-    return queryDB(sql, [idAuthor]);
+  static getBookWithIDAuthor(currentPage, idAuthor) {
+    const start = (+currentPage - 1) * rowOfPage || 0;
+    const sql = `SELECT COUNT(ID) as count
+                 FROM THONGTINSACH WHERE ID_AUTHOR = ${idAuthor};
+                 SELECT NAME, IMAGE, PRICE, SALES
+                 FROM THONGTINSACH WHERE ID_AUTHOR = ${idAuthor} LIMIT ${start}, ${rowOfPage}`;
+    return queryDB(sql);
   }
 
-  static getBookWithIDPublisher(idPublisher) {
-    const sql = `SELECT NAME, IMAGE, PRICE, SALES
-                FROM THONGTINSACH WHERE ID_PUBLISHER = ?`;
-    return queryDB(sql, [idPublisher]);
+  static getBookWithIDPublisher(currentPage, idPublisher) {
+    const start = (+currentPage - 1) * rowOfPage || 0;
+    const sql = `SELECT COUNT(ID) as count
+                 FROM THONGTINSACH WHERE ID_PUBLISHER = ${idPublisher};
+                 SELECT NAME, IMAGE, PRICE, SALES
+                 FROM THONGTINSACH WHERE ID_PUBLISHER = ${idPublisher} LIMIT ${start}, ${rowOfPage}`;
+    return queryDB(sql);
   }
   
 }

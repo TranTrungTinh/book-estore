@@ -16,14 +16,18 @@ categoryRouter.get('/:id', (req, res) => {
 });
 
 categoryRouter.get('/author/:id', (req, res) => {
-  CategoryServices.showBookWithIDAuthor(req.params.id)
-  .then(results => res.render('render/items', { results }))
+  const path = `/category/author/${req.params.id}?page=`;
+  const {page} = req.query;
+  CategoryServices.showBookWithIDAuthor(page, req.params.id)
+  .then(results => res.render('render/items', { results, path, page }))
   .catch(error => res.send(error.message));
 });
 
 categoryRouter.get('/publisher/:id', (req, res) => {
-  CategoryServices.showBookWithIDPublisher(req.params.id)
-  .then(results => res.render('render/items', { results }))
+  const path = `/category/publisher/${req.params.id}?page=`;
+  const {page} = req.query;
+  CategoryServices.showBookWithIDPublisher(page, req.params.id)
+  .then(results => res.render('render/items', { results, path, page }))
   .catch(error => res.send(error.message));
 });
 

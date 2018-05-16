@@ -28,9 +28,9 @@ app.get('/', (req, res) => res.redirect('/home'));
 //   res.render('render/account');
 // });
 
-// app.get('/admin', (req, res) => {
-//   res.render('render/admin');
-// });
+app.get('/admin', (req, res) => {
+  res.render('render/admin');
+});
 
 // app.post('/signin', parser, (req, res) => {
 //   const {email, password} = req.body;
