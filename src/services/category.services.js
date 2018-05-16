@@ -4,8 +4,8 @@ class CategoryServices {
   static async showBookWithIDCategory(currentPage, idCategory) {
     const books = await Book.getAllCategoryAuthorPublisher();
     const categories = books[0];
-    const publishers = books[1];
-    const authors = books[2];
+    const authors = books[1];
+    const publishers = books[2];
     if(!categories && !publishers && !authors) throw new Error('Khong tim thay');
 
     const items = await Book.getBookWithIDCategory(currentPage, idCategory);
@@ -17,8 +17,8 @@ class CategoryServices {
   static async showBookWithIDAuthor(currentPage, idAuthor) {
     const books = await Book.getAllCategoryAuthorPublisher();
     const categories = books[0];
-    const publishers = books[1];
-    const authors = books[2];
+    const authors = books[1];
+    const publishers = books[2];
     if(!categories && !publishers && !authors) throw new Error('Khong tim thay');
 
     const items = await Book.getBookWithIDAuthor(currentPage, idAuthor);
@@ -31,8 +31,8 @@ class CategoryServices {
   static async showBookWithIDPublisher(currentPage, idPublisher) {
     const books = await Book.getAllCategoryAuthorPublisher();
     const categories = books[0];
-    const publishers = books[1];
-    const authors = books[2];
+    const authors = books[1];
+    const publishers = books[2];
     if(!categories && !publishers && !authors) throw new Error('Khong tim thay');
 
     const items = await Book.getBookWithIDPublisher(currentPage, idPublisher);

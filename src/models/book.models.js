@@ -3,15 +3,32 @@ const rowOfPage = 8;
 
 class Book {
   static getAllCategoryAuthorPublisher() {
-    const slq = `SELECT * FROM DANHMUCSACH LIMIT 10;
-                 SELECT * FROM NHAXUATBAN LIMIT 10;
-                 SELECT * FROM TACGIA LIMIT 10;`;
+    const slq = `SELECT dm.*, COUNT(b.ID) as COUNT
+                 FROM THONGTINSACH b, DANHMUCSACH dm
+                 WHERE b.ID_CATEGORY = dm.ID
+                 GROUP BY dm.NAME
+                 LIMIT 10;
+                 
+                 SELECT tg.*, COUNT(b.ID) as COUNT
+                 FROM THONGTINSACH b, TACGIA tg
+                 WHERE b.ID_AUTHOR = tg.ID
+                 GROUP BY tg.NAME
+                 ORDER BY COUNT DESC
+                 LIMIT 10;
+                 
+                 SELECT nxb.*, COUNT(b.ID) as COUNT
+                 FROM THONGTINSACH b, NHAXUATBAN nxb
+                 WHERE b.ID_PUBLISHER = nxb.ID
+                 GROUP BY nxb.NAME
+                 ORDER BY COUNT DESC
+                 LIMIT 10;`;
     return queryDB(slq);
   }
   static getTopNewSaleView() {
-    const slq = `SELECT * FROM THONGTINSACH ORDER BY VIEWS LIMIT 10;
-                 SELECT * FROM THONGTINSACH ORDER BY SALES DESC LIMIT 10;
-                 SELECT * FROM THONGTINSACH ORDER BY VIEWS DESC LIMIT 10;`;
+    const subSql = 'SELECT ID, NAME, IMAGE, PRICE, SALES FROM THONGTINSACH ORDER BY';
+    const slq = `${subSql} VIEWS LIMIT 10;
+                 ${subSql} SALES DESC LIMIT 10;
+                 ${subSql} VIEWS DESC LIMIT 10;`;
     return queryDB(slq);
   }
 

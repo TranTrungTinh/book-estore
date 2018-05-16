@@ -4,8 +4,8 @@ class HomeServices {
   static async show() {
     const books = await Book.getAllCategoryAuthorPublisher();
     const categories = books[0];
-    const publishers = books[1];
-    const authors = books[2];
+    const authors = books[1];
+    const publishers = books[2];
     if(!categories && !publishers && !authors) throw new Error('Khong tim thay');
 
     const tops = await Book.getTopNewSaleView();
