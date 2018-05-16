@@ -14,8 +14,7 @@ class HomeServices {
     const views = tops[2];
     if(!news && !sales && !views) throw new Error('Khong tim thay');
 
-    const result = { categories, authors, publishers, news, sales, views };
-    return result;
+    return { categories, authors, publishers, news, sales, views };
   }
 }
 

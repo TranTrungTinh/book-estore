@@ -6,7 +6,8 @@ const { bookRouter } = require('./routes/book.route');
 const app = express();
 
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.set('views' , './src/views');
+app.use(express.static('src/public'));
 app.use('/home', homeRouter);
 app.use('/category', categoryRouter);
 app.use('/book', bookRouter);

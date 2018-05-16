@@ -13,9 +13,9 @@ const pool = mysql.createPool({
 const queryDB = (sql , arrData) => {
     return new Promise((resolve , reject) => {
         pool.getConnection((err , connection) => {
-            if(err) reject(new Error('Khong ket noi duoc'));
+            if(err) reject(new Error('CANNOT_CONNECTED_DATABASE'));
             connection.query(sql , arrData , (errQuery, results, fields) =>{
-                if(errQuery) reject(new Error('Co loi'));
+                if(errQuery) reject(new Error('INVALID_QUERY_SQL'));
                 resolve(results);
                 connection.release();
             });

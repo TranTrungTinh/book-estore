@@ -6,8 +6,8 @@
   "author": "Tran Trung Tinh <trantrungtinh4954@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js -e js,ejs,css"
+    "start": "node src/index.js",
+    "server": "nodemon src/index.js -e js,ejs,css"
   },
   "dependencies": {
     "body-parser": "^1.18.2",

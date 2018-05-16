@@ -1,5 +1,9 @@
-<% const {ID, NAME, IMAGE, PRICE, VIEWS, SALES, DESCRIPTION} = results.book; %>
-<% const {category, publisher, author} = results; %>
+<% 
+  const {
+    ID, NAME, IMAGE, PRICE, VIEWS, SALES, DESCRIPTION, 
+    C_NAME, P_NAME, A_NAME, ID_CATEGORY, ID_PUBLISHER, ID_AUTHOR
+  } = results;
+%>
 
 <div class="row item_root_detail">
   <div class="col-sm-12 col-md-5">
@@ -14,16 +18,16 @@
           </div>
           <div class="col-sm-12">
             <div class="row">
-              <div class="col-sm-4 col-md-3">
+              <div class="col-sm-12 col-md-5">
                 <span>Tác giả: </span>
-                <a href="javascript:;"><%= author.NAME%></a>
+                <a href="javascript:;"><%= A_NAME%></a>
               </div>
-              <div class="col-sm-4 col-md-3">
+              <div class="col-sm-12 col-md-4">
                 <span>Thể loại: </span>
-                <a href="javascript:;"><%=category.NAME%></a>
+                <a href="javascript:;"><%= C_NAME%></a>
               </div>
-              <div class="col-sm-4 col-md-3">
-                <a href="javascript:;"><%=publisher.NAME%></a>
+              <div class="col-sm-12 col-md-3">
+                <a href="javascript:;"><%= P_NAME%></a>
               </div>
             </div>
           </div>

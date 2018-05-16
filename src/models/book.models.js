@@ -44,16 +44,12 @@ class Book {
   }
 
   static getBookInfo(idBook) {
-    const sql = `SELECT * FROM THONGTINSACH WHERE ID = ${idBook};
-
-                 SELECT dm.* FROM THONGTINSACH b, DANHMUCSACH dm 
-                 WHERE b.ID = ${idBook} AND dm.ID = b.ID_CATEGORY;
-
-                 SELECT nxb.* FROM THONGTINSACH b, NHAXUATBAN nxb 
-                 WHERE b.ID = ${idBook} AND nxb.ID = b.ID_PUBLISHER;
-
-                 SELECT tg.* FROM THONGTINSACH b, TACGIA tg 
-                 WHERE b.ID = ${idBook} AND tg.ID = b.ID_AUTHOR;`;
+    const sql = `SELECT b.*, dm.NAME as C_NAME, nxb.NAME as P_NAME, tg.NAME as A_NAME
+                 FROM THONGTINSACH b, DANHMUCSACH dm, NHAXUATBAN nxb, TACGIA tg
+                 WHERE b.ID = ${idBook}
+                 AND dm.ID = b.ID_CATEGORY
+                 AND nxb.ID = b.ID_PUBLISHER
+                 AND tg.ID = b.ID_AUTHOR`;
     return queryDB(sql);
   }
   
