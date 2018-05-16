@@ -44,6 +44,6 @@ app.get('/admin', (req, res) => {
 app.listen(3000, () => console.log('Server started port 3000'));
 require('reload')(app);
 
-// handle error round
+// handle error route
 app.get('/error', (req, res) => res.render('render/error'));
 app.get('*', (req, res) => res.redirect('/error'));

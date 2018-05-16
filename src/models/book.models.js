@@ -7,6 +7,7 @@ class Book {
                  FROM THONGTINSACH b, DANHMUCSACH dm
                  WHERE b.ID_CATEGORY = dm.ID
                  GROUP BY dm.NAME
+                 ORDER BY COUNT DESC
                  LIMIT 10;
                  
                  SELECT tg.*, COUNT(b.ID) as COUNT
@@ -24,6 +25,7 @@ class Book {
                  LIMIT 10;`;
     return queryDB(slq);
   }
+
   static getTopNewSaleView() {
     const subSql = 'SELECT ID, NAME, IMAGE, PRICE, SALES FROM THONGTINSACH ORDER BY';
     const slq = `${subSql} VIEWS LIMIT 10;
@@ -34,7 +36,6 @@ class Book {
 
   static getBookWithIDCategory(currentPage, idCategory) {
     const start = (+currentPage - 1) * rowOfPage || 0;
-
     const sql = `SELECT COUNT(ID) as count
                  FROM THONGTINSACH WHERE ID_CATEGORY = ${idCategory};
                  SELECT ID, NAME, IMAGE, PRICE, SALES
@@ -67,6 +68,19 @@ class Book {
                  AND dm.ID = b.ID_CATEGORY
                  AND nxb.ID = b.ID_PUBLISHER
                  AND tg.ID = b.ID_AUTHOR`;
+    return queryDB(sql);
+  }
+
+  static getBookWithPrice(currentPage, priceStart, priceEnd) {
+    const start = (+currentPage - 1) * rowOfPage || 0;
+    const sql = `SELECT COUNT(ID) as count
+                 FROM THONGTINSACH 
+                 WHERE PRICE BETWEEN ${priceStart} AND ${priceEnd};
+
+                 SELECT ID, NAME, IMAGE, PRICE, SALES
+                 FROM THONGTINSACH
+                 WHERE PRICE BETWEEN ${priceStart} AND ${priceEnd}
+                 LIMIT ${start}, ${rowOfPage}`;
     return queryDB(sql);
   }
   

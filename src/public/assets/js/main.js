@@ -32,11 +32,20 @@ $('#collapseListGroupHeadingTG').click(() => {
 });
 /* ============ Toggle Menu Tab ============*/
 
-/* ============ Page number ============*/
-// $('.pagination a').click(e => {
-//   $(this).addClass('active');
-// });
-/* ============ Page number ============*/
+/* ============ Filter book with price ============*/
+$('#btnFilter').click(e => {
+  const start = $('#price-start').val();
+  const end = $('#price-end').val();
+  if(+start >= +end) return swal(
+    'KHÔNG THỂ LỌC',
+    'Vui lòng chọn lại mức giá',
+    'warning'
+  );
+  const title = `Kết quả tìm kiếm cho giá từ ${start} đến ${end} VND`;
+  localSaveItem('titleList', title);
+  location.href = `/book/price/filter?start=${start}&end=${end}&page=1`;
+});
+/* ============ Filter book with price ============*/
 
 // Handle list group item
 $('#menu-list').on('click', '.list-group-item' , e => {
@@ -76,7 +85,7 @@ $('#btn-account').click(e => {
   const name = localStorage.getItem('account') || '';
   if (!name) return $('#myModelLogin').modal('show');
   $('#toggle-account').text(name);
-  window.location.href = '/account';
+  location.href = '/account';
 });
 
 
