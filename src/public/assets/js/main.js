@@ -47,6 +47,29 @@ $('#btnFilter').click(e => {
 });
 /* ============ Filter book with price ============*/
 
+/* ============ Filter book with name search ============*/
+// by Enter
+$(document).on('keypress', '#txtSearch', e => {
+  if(e.keyCode == 13) {
+    e.preventDefault();
+    const keyWord = $('#txtSearch').val() || '';
+    if(!keyWord) return;
+    const title = `Kết quả tìm kiếm cho '${keyWord}':`;
+    localSaveItem('titleList', title);
+    location.href = `/book/name/filter?search=${keyWord}&page=1`;
+  }
+});
+
+// by btnSearch
+$('#btnSearch').click(e => {
+  const keyWord = $('#txtSearch').val() || '';
+  if(!keyWord) return swal("Có lỗi xảy ra!", "Vui lòng nhập từ khoá", "error");
+  const title = `Kết quả tìm kiếm cho '${keyWord}':`;
+  localSaveItem('titleList', title);
+  location.href = `/book/name/filter?search=${keyWord}&page=1`;
+});
+/* ============ Filter book with name search ============*/
+
 // Handle list group item
 $('#menu-list').on('click', '.list-group-item' , e => {
   const title = e.currentTarget.firstElementChild.firstChild.nodeValue;

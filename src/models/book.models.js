@@ -83,6 +83,19 @@ class Book {
                  LIMIT ${start}, ${rowOfPage}`;
     return queryDB(sql);
   }
+
+  static getBookWithName(currentPage, nameSearch) {
+    const start = (+currentPage - 1) * rowOfPage || 0;
+    const sql = `SELECT COUNT(ID) as count
+                 FROM THONGTINSACH 
+                 WHERE NAME LIKE '%${nameSearch}%';
+
+                 SELECT ID, NAME, IMAGE, PRICE, SALES
+                 FROM THONGTINSACH
+                 WHERE NAME LIKE '%${nameSearch}%'
+                 LIMIT ${start}, ${rowOfPage}`;
+    return queryDB(sql);
+  }
   
 }
 
