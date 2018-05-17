@@ -20,6 +20,16 @@ function localSaveItem(key, value) {
 /* ============ Function ============*/
 
 
+
+/* ============ Handle left menu click ============*/
+$('#menu-list').on('click', '.list-group-item' , e => {
+  const title = e.currentTarget.firstElementChild.firstChild.nodeValue;
+  localSaveItem('titleList', title);
+});
+/* ============ Handle left menu click ============*/
+
+
+
 /* ============ Toggle Menu Tab ============*/
 $('#collapseListGroupHeadingVN').click(() => {
   $('#collapseListGroupVN').collapse('toggle');
@@ -32,7 +42,9 @@ $('#collapseListGroupHeadingTG').click(() => {
 });
 /* ============ Toggle Menu Tab ============*/
 
-/* ============ Filter book with price ============*/
+
+
+/* ============ Filter book with price in [10.000 ; 20.000]============*/
 $('#btnFilter').click(e => {
   const start = $('#price-start').val();
   const end = $('#price-end').val();
@@ -45,7 +57,9 @@ $('#btnFilter').click(e => {
   localSaveItem('titleList', title);
   location.href = `/book/price/filter?start=${start}&end=${end}&page=1`;
 });
-/* ============ Filter book with price ============*/
+/* ============ Filter book with price in [10.000 ; 20.000]============*/
+
+
 
 /* ============ Filter book with name search ============*/
 // by Enter
@@ -70,46 +84,36 @@ $('#btnSearch').click(e => {
 });
 /* ============ Filter book with name search ============*/
 
-// Handle list group item
-$('#menu-list').on('click', '.list-group-item' , e => {
-  const title = e.currentTarget.firstElementChild.firstChild.nodeValue;
-  localSaveItem('titleList', title);
-});
 
+
+/* ============ Views book detail ============*/
 $('#main-content').on('click', '.thumbnail', e => {
-  
   const _this = e.target.nodeName;
   if(_this === 'SPAN' || _this === 'BUTTON') { return; }
   const idBook = e.currentTarget.lastElementChild.defaultValue;
-
   location.href = '/book/' + idBook;
-
-
-  // const _this = e.currentTarget
-  // const image = _this.children[0].attributes[0].nodeValue;
-  // const title = _this.children[1].children[0].innerText;
-  // const price = _this.children[1].children[1].firstElementChild.innerText;
-  // const sales = _this.children[1].children[2].firstElementChild.innerText;
-  // const book = { title, image, price, sales };
-
-  // if (localStorage.getItem('book')) 
-  //   localStorage.removeItem('book');
-  // localStorage.setObject('book', book);
-  // window.location.href = '/book';
 });
+/* ============ Views book detail ============*/
 
-// Shopping cart button
+
+
+/* ============ Shopping cart ============*/
 $(document).on('click', '#btn-shopping-cart' , e => {
- location.href = '/shopping-cart';
+  location.href = '/shopping-cart';
 });
+/* ============ Shopping cart ============*/
 
-//Handle account btn
+
+
+/* ============ Account Icon Click ============*/
 $('#btn-account').click(e => {
   const name = localStorage.getItem('account') || '';
   if (!name) return $('#myModelLogin').modal('show');
   $('#toggle-account').text(name);
   location.href = '/account';
 });
+/* ============ Account Icon Click ============*/
+
 
 
 /* ============ Handle Login - Logout ============*/
@@ -138,8 +142,25 @@ $('#btn-logout').click(e => {
   .then(yes => {
     if(yes) {
       localStorage.removeItem('account');
-      window.location.href = '/'
+      window.location.href = '/home'
     }
   });
+});
+
+$('#btn-signup').click(e => {
+  e.preventDefault();
+  const name = $('#inputNameRegister').val() || '';
+  const email = $('#inputEmailRegister').val() || '';
+  const password = $('#inputPasswordRegister').val() || '';
+  const gender = $('input[id=genderMale]:checked').val() ? 'NAM' : 'NU';
+  if(!name || !email || !password) return swal("WARNING","Vui lòng nhập đầy đủ thông tin","warning");
+  const userInfo = {name, email, password, gender }
+  $.post('/user/signup', userInfo, data => {
+    const {success, message} = data;
+    if(message === 'EMAIL_EXISTED') return swal("ERROR","Email đã có người đăng ký !!!","error");
+    if(success) return swal("SUCCESS","Đăng ký thành công !!!","success")
+    .then(() => location.href = '/home');
+  });
+
 });
 /* ============ Handle Login - Logout ============*/

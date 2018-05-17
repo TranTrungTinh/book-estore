@@ -1,11 +1,8 @@
 const { Router } = require('express');
 const { CategoryServices } = require('../services/category.services');
-const parser = require('body-parser');
 
 const categoryRouter = Router();
 
-categoryRouter.use(parser.urlencoded({extended: false}));
-categoryRouter.use(parser.json());
 
 categoryRouter.get('/:id', (req, res) => {
   const path = `/category/${req.params.id}?page=`;

@@ -2,15 +2,18 @@ const express = require('express');
 const { homeRouter } = require('./routes/home.route');
 const { categoryRouter } = require('./routes/category.route');
 const { bookRouter } = require('./routes/book.route');
+const { userRouter } = require('./routes/user.route');
 
 const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views' , './src/views');
 app.use(express.static('src/public'));
+
 app.use('/home', homeRouter);
 app.use('/category', categoryRouter);
 app.use('/book', bookRouter);
+app.use('/user', userRouter);
 
 
 app.get('/', (req, res) => res.redirect('/home'));
