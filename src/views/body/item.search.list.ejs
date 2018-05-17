@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="alert alert-success margin-bottom-small fs-20">
+      <span id="my-title-list"></span>
+      <span><%= count*8%> kết quả</span>
+    </div>
+  </div>
+  <% items.forEach(e => { %>
+    <% const {ID, NAME, IMAGE, PRICE, SALES} = e; %>
+    <div class="col-sm-4 col-md-3">
+      <div class="thumbnail">
+        <img src="./assets/media/images/<%= IMAGE%>" alt="Item-Cover-Image" class="my_banner_cover">
+        <div class="caption">
+          <h4><%= NAME%></h4>
+          <p>
+            <span class="price-tag"><%= PRICE%>&nbsp;₫</span> 
+            <strike><%= +PRICE + +PRICE*0.3%>&nbsp;₫</strike>
+            <span class="price-discount">-30%</span>
+          </p>
+          <p>Số lượng đã bán: <span class="badge"><%= SALES%></span></p>
+          <button type="button" class="btn btn-danger btn-block btn-lg">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            <span>Thêm vào giỏ hàng</span>
+          </button>
+        </div>
+        <input type="hidden" value="<%= ID%>"/>
+      </div>
+    </div>
+  <% }) %>
+  <div class="col-sm-12 item-list-page">
+    <nav aria-label="Page navigation">
+      <ul class="pagination pagination-lg">
+        <% for(let i = 1; i <= count; i++) { %>
+          <% if(i == page) { %>
+            <li class="active"><a href="<%= path + i%>"><%= i%></a></li>
+          <% } else { %>
+            <li><a href="<%= path + i%>"><%= i%></a></li>
+          <% } %>
+        <% } %>
+      </ul>
+    </nav>
+  </div>
+</div>
+<script>
+  document.getElementById('my-title-list').innerText = localStorage.getItem('titleList');
+</script>
+
+

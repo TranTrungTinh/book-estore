@@ -41,7 +41,7 @@ $('#btnFilter').click(e => {
     'Vui lòng chọn lại mức giá',
     'warning'
   );
-  const title = `Kết quả tìm kiếm cho giá từ ${start} đến ${end} VND`;
+  const title = `Kết quả tìm kiếm cho giá từ '${start} đến ${end}' VND:`;
   localSaveItem('titleList', title);
   location.href = `/book/price/filter?start=${start}&end=${end}&page=1`;
 });

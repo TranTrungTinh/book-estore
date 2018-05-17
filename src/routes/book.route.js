@@ -15,7 +15,7 @@ bookRouter.get('/price/filter', (req, res) => {
   const path = `/book/price/filter?start=${start}&end=${end}&page=`;  
   if(!start || !end) return res.redirect('/error');
   BookServices.showBookWithPrice(page, start, end)
-  .then(results => res.render('render/items', { results, page, path }))
+  .then(results => res.render('render/items-search', { results, page, path }))
   .catch(error => res.send(error.message));
 });
 
