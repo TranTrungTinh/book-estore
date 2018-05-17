@@ -28,7 +28,7 @@ class Book {
 
   static getTopNewSaleView() {
     const subSql = 'SELECT ID, NAME, IMAGE, PRICE, SALES FROM THONGTINSACH ORDER BY';
-    const slq = `${subSql} VIEWS LIMIT 10;
+    const slq = `${subSql} SALES LIMIT 10;
                  ${subSql} SALES DESC LIMIT 10;
                  ${subSql} VIEWS DESC LIMIT 10;`;
     return queryDB(slq);
@@ -67,7 +67,19 @@ class Book {
                  WHERE b.ID = ${idBook}
                  AND dm.ID = b.ID_CATEGORY
                  AND nxb.ID = b.ID_PUBLISHER
-                 AND tg.ID = b.ID_AUTHOR`;
+                 AND tg.ID = b.ID_AUTHOR;
+                 
+                 SELECT ID, NAME, IMAGE, PRICE, SALES
+                 FROM THONGTINSACH
+                 WHERE ID <> ${idBook}
+                 AND ID_CATEGORY = ( SELECT ID_CATEGORY FROM THONGTINSACH WHERE ID = ${idBook} )
+                 LIMIT 5;
+                 
+                 SELECT ID, NAME, IMAGE, PRICE, SALES
+                 FROM THONGTINSACH
+                 WHERE ID <> ${idBook}
+                 AND ID_PUBLISHER = ( SELECT ID_PUBLISHER FROM THONGTINSACH WHERE ID = ${idBook} )
+                 LIMIT 5;`;
     return queryDB(sql);
   }
 

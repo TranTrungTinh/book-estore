@@ -3,8 +3,11 @@ const { Book } = require('../models/book.models');
 class BookServices {
   static async showBookInfo(idBook) {
     const results = await Book.getBookInfo(idBook);
-    if(!results[0]) throw new Error('Khong tim thay');
-    return results[0];
+    if(!results[0][0]) throw new Error('Khong tim thay');
+    const book = results[0][0];
+    const bookSameCategories = results[1];
+    const bookSamePublishers = results[2];
+    return {book, bookSameCategories, bookSamePublishers};
   }
 
   static async showBookWithPrice(currentPage, priceStart, priceEnd) {

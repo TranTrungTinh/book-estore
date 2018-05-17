@@ -2,7 +2,8 @@
   const {
     ID, NAME, IMAGE, PRICE, VIEWS, SALES, DESCRIPTION, 
     C_NAME, P_NAME, A_NAME, ID_CATEGORY, ID_PUBLISHER, ID_AUTHOR
-  } = results;
+  } = results.book;
+  const { bookSameCategories, bookSamePublishers } = results;
 %>
 
 <div class="row item_root_detail">
@@ -89,168 +90,63 @@
   </div>
 </div>
 
-<!-- <div class="row">
+<div class="row">
   <div class="col-sm-12">
     <p class="item_same_title">sản phẩm cùng loại</p>
   </div>
 </div>
 <div class="row item_same_type">
-  <div class="col-md-2">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book01.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p>
-          <span class="price-tag">43.000&nbsp;₫</span>
-          <strike>68.000&nbsp;₫</strike>
-        </p>
-        <p>So luong da ban:
-          <span class="badge">10</span>
-        </p>
+  <% bookSameCategories.forEach(e => { %>
+    <% const {ID, NAME, IMAGE, PRICE, SALES} = e; %>
+    <div class="col-sm-12 col-md-2">
+      <div class="thumbnail">
+        <img src="./assets/media/images/<%= IMAGE%>" alt="Item-Cover-Image" class="my_banner_cover">
+        <div class="caption">
+          <h4><%= NAME%></h4>
+          <p>
+            <span class="price-tag"><%= PRICE%>&nbsp;₫</span> 
+            <strike><%= +PRICE + +PRICE*0.3%>&nbsp;₫</strike>
+            <span class="price-discount">-30%</span>
+          </p>
+          <p>Số lượng đã bán: <span class="badge"><%= SALES%></span></p>
+          <button type="button" class="btn btn-danger btn-block btn-lg">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            <span>Thêm vào giỏ hàng</span>
+          </button>
+        </div>
+        <input type="hidden" value="<%= ID%>"/>
       </div>
     </div>
-  </div>
-  <div class="col-md-2">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book02.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p>
-          <span class="price-tag">43.000&nbsp;₫</span>
-          <strike>68.000&nbsp;₫</strike>
-        </p>
-        <p>So luong da ban:
-          <span class="badge">10</span>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book03.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p>
-          <span class="price-tag">43.000&nbsp;₫</span>
-          <strike>68.000&nbsp;₫</strike>
-        </p>
-        <p>So luong da ban:
-          <span class="badge">10</span>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book04.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p>
-          <span class="price-tag">43.000&nbsp;₫</span>
-          <strike>68.000&nbsp;₫</strike>
-        </p>
-        <p>So luong da ban:
-          <span class="badge">10</span>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book05.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p>
-          <span class="price-tag">43.000&nbsp;₫</span>
-          <strike>68.000&nbsp;₫</strike>
-        </p>
-        <p>So luong da ban:
-          <span class="badge">10</span>
-        </p>
-      </div>
-    </div>
-  </div>
+  <% }) %>
 </div>
+
 <div class="row">
   <div class="col-sm-12">
     <p class="item_same_title">sản phẩm cùng nhà sản xuất</p>
   </div>
 </div>
 <div class="row item_same_producer">
-  <div class="col-md-2">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book06.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p>
-          <span class="price-tag">43.000&nbsp;₫</span>
-          <strike>68.000&nbsp;₫</strike>
-        </p>
-        <p>So luong da ban:
-          <span class="badge">10</span>
-        </p>
+  <% bookSamePublishers.forEach(e => { %>
+    <% const {ID, NAME, IMAGE, PRICE, SALES} = e; %>
+    <div class="col-sm-12 col-md-2">
+      <div class="thumbnail">
+        <img src="./assets/media/images/<%= IMAGE%>" alt="Item-Cover-Image" class="my_banner_cover">
+        <div class="caption">
+          <h4><%= NAME%></h4>
+          <p>
+            <span class="price-tag"><%= PRICE%>&nbsp;₫</span> 
+            <strike><%= +PRICE + +PRICE*0.3%>&nbsp;₫</strike>
+            <span class="price-discount">-30%</span>
+          </p>
+          <p>Số lượng đã bán: <span class="badge"><%= SALES%></span></p>
+          <button type="button" class="btn btn-danger btn-block btn-lg">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            <span>Thêm vào giỏ hàng</span>
+          </button>
+        </div>
+        <input type="hidden" value="<%= ID%>"/>
       </div>
     </div>
-  </div>
-  <div class="col-md-2">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book07.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p>
-          <span class="price-tag">43.000&nbsp;₫</span>
-          <strike>68.000&nbsp;₫</strike>
-        </p>
-        <p>So luong da ban:
-          <span class="badge">10</span>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book08.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p>
-          <span class="price-tag">43.000&nbsp;₫</span>
-          <strike>68.000&nbsp;₫</strike>
-        </p>
-        <p>So luong da ban:
-          <span class="badge">10</span>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book09.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p>
-          <span class="price-tag">43.000&nbsp;₫</span>
-          <strike>68.000&nbsp;₫</strike>
-        </p>
-        <p>So luong da ban:
-          <span class="badge">10</span>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="thumbnail">
-      <img src="./assets/media/images/book10.jpg" alt="..." class="my_banner_cover">
-      <div class="caption">
-        <h4>Chi con mot ngay de song</h4>
-        <p>
-          <span class="price-tag">43.000&nbsp;₫</span>
-          <strike>68.000&nbsp;₫</strike>
-        </p>
-        <p>So luong da ban:
-          <span class="badge">10</span>
-        </p>
-      </div>
-    </div>
-  </div>
-</div> -->
+  <% }) %>
+</div>
 <!-- <script src="./assets/js/item_detail.js"></script> -->
