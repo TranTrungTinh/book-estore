@@ -27,6 +27,13 @@ class User {
     userInfo.TOKEN = await sign({ ID: user[0].ID });
     return userInfo;
   }
+
+  static async getUserById(id) {
+    const sql = `SELECT * FROM NGUOIDUNG WHERE ID = '${id}'`;
+    const user = await queryDB(sql);
+    if(!user[0]) throw new Error('CANNOT_FIND_USER');
+    return user[0];
+  }
 }
 
 // User.getUserBy('trantrungtinh@gmail.com','123')

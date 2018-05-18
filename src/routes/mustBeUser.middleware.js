@@ -13,4 +13,15 @@ function mustBeUser(req, res, next) {
   .catch(error => res.send({ success: false, message: 'INVALID_TOKEN' }));
 }
 
-module.exports = { mustBeUser };
+function checkToken(req, res, next) {
+  const { TOKEN } = req.cookies;
+  if(!TOKEN) return res.redirect('/home');
+  verify(TOKEN)
+  .then(obj => {
+    req.idUser = obj.ID;
+    next();
+  })
+  .catch(error => res.send({ success: false, message: 'INVALID_TOKEN' }));  
+}
+
+module.exports = { mustBeUser, checkToken };

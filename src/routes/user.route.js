@@ -3,7 +3,7 @@ const parser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const { UserServices } = require('../services/user.services');
-const { mustBeUser } = require('./mustBeUser.middleware');
+const { mustBeUser, checkToken } = require('./mustBeUser.middleware');
 const { mustCheckCaptcha } = require('./mustCheckCaptcha.middleware');
 
 const userRouter = Router();
@@ -35,8 +35,10 @@ userRouter.post('/logout', (req, res) => {
   res.send({ success: true });
 });
 
-userRouter.get('/account/edit', (req, res) => {
-  res.render('render/account', { isDetail: true});
+userRouter.get('/account/edit', checkToken, (req, res) => {
+  UserServices.showUserInfoBy(req.idUser)
+  .then(user => res.render('render/account', { isDetail: true, user}))
+  .catch(error => res.send({ success: false, message: error.message }));
 });
 
 userRouter.get('/account/orders', (req, res) => {

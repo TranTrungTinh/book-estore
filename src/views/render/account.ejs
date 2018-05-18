@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="row" id="acount-page">
         <% if(isDetail) { %>
-          <%- include('../body/account.detail.ejs') %>
+          <%- include('../body/account.detail.ejs', {user}) %>
         <% } else { %>
           <%- include('../body/account.orders.ejs') %>
         <% } %>

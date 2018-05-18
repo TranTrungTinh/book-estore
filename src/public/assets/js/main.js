@@ -173,3 +173,18 @@ $('#btn-signup').click(e => {
 
 });
 /* ============ Handle Login - Logout ============*/
+
+$('#acount-info').click(e => {
+  const isActive = $('#acount-info').hasClass('active');
+  if(isActive) return;
+  $('#acount-history').removeClass('active');
+  $('#acount-info').addClass('active');
+  location.href = '/user/account/edit';
+});
+$('#acount-history').click(e => {
+  const isActive = $('#acount-history').hasClass('active');
+  if(isActive) return;
+  $('#acount-info').removeClass('active');
+  $('#acount-history').addClass('active');
+  location.href = '/user/account/orders';  
+});

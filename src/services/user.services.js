@@ -10,6 +10,10 @@ class UserServices {
   static signIn(email, password) {
     return User.getUserBy(email, password);
   }
+
+  static showUserInfoBy(idUser) {
+    return User.getUserById(idUser);
+  }
 }
 
 module.exports = { UserServices };

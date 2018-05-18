@@ -1,9 +1,12 @@
-
+<% 
+  const {NAME, EMAIL, GENDER} = user;
+  const gender = GENDER === 'NAM' ? true : false; 
+%>
 <div class="col-sm-12 col-md-3">
   <div class="row">
     <div class="col-sm-12 acount-info-name">
       <div>Tài khoản của: </div>
-      <span>Trần Trung Tính</span>
+      <span><%= NAME%></span>
     </div>
     <div class="col-sm-12 acount-info-list">
       <div class="list-group">
@@ -34,7 +37,7 @@
         <div class="form-group">
           <label for="inputAcountName" class="col-sm-2 control-label label-login-content">Họ tên</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control input-lg" id="inputAcountName" placeholder="Trần Trung Tính">
+            <input type="text" class="form-control input-lg" id="inputAcountName" value="<%= NAME%>">
           </div>
         </div>
         <div class="form-group">
@@ -46,18 +49,18 @@
         <div class="form-group">
           <label for="inputAcountEmail" class="col-sm-2 control-label label-login-content">Email</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control input-lg" id="inputAcountEmail" placeholder="trantrungtinh@gmail.com" disabled />
+            <input type="email" class="form-control input-lg" id="inputAcountEmail" placeholder="<%= EMAIL%>" disabled />
           </div>
         </div>
         <div class="form-group">
           <label for="inlineRadioOptions" class="col-sm-2 control-label label-login-content">Giới tính:</label>
           <div class="col-sm-10">
             <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" id="genderMale" checked/>
+              <input type="radio" name="inlineRadioOptions" id="genderMale" checked="<%= gender%>"/>
               <img src="./assets/media/images/glyphicons/png/glyphicons-35-old-man.png" alt="" />
             </label>
             <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" id="genderFemale" />
+              <input type="radio" name="inlineRadioOptions" id="genderFemale" checked="<%= !gender%>"/>
               <img src="./assets/media/images/glyphicons/png/glyphicons-36-woman.png" alt="" />
             </label>
           </div>
