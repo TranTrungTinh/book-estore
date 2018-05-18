@@ -8,7 +8,7 @@ function mustBeUser(req, res, next) {
   .then(obj => sign(obj))
   .then(newToken => {
     res.cookie('TOKEN', newToken);
-    res.redirect('/home');
+    res.redirect('/user/account/edit');
   })
   .catch(error => res.send({ success: false, message: 'INVALID_TOKEN' }));
 }

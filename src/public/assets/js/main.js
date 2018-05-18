@@ -107,12 +107,11 @@ $(document).on('click', '#btn-shopping-cart' , e => {
 
 /* ============ Account Icon Click ============*/
 $('#btn-account').click(e => {
-  // const check = localStorage.getItem('name') || ''
-  // if (!check) return $('#myModelLogin').modal('show');
-  // const user = localStorage.getObject('account');
-  // $('#toggle-account').text(user.name);
-  // location.href = '/home';
-  $('#myModelLogin').modal('show');
+  const check = localStorage.getItem('name') || ''
+  if (!check) return $('#myModelLogin').modal('show');
+  const user = localStorage.getObject('account');
+  $('#toggle-account').text(user.name);
+  location.href = '/user/account/edit';
 });
 /* ============ Account Icon Click ============*/
 
@@ -130,12 +129,12 @@ $('#btn-signin').click(e => {
     if(!data.success) return swal("CÓ LỖI!", "Sai email hoặc password", "error");
     localSaveItem('name', data.user.NAME);
     localSaveObject('account', data.user);
-    location.href = '/home';
+    location.href = '/user/account/edit';
   });
 });
 $('#btn-logout').click(e => {
   e.preventDefault();
-  const name = localStorage.getItem('account') || '';
+  const name = localStorage.getItem('name') || '';
   if(!name) return;
   swal({
     title: "Đăng xuất?",
@@ -144,11 +143,11 @@ $('#btn-logout').click(e => {
     buttons: true,
     dangerMode: true,
   })
-  .then(yes => {
-    if(yes) {
-      localStorage.removeItem('account');
-      location.href = '/home'
-    }
+  .then(yes => { if(!yes) return;
+    $.post('/user/logout', data => {});
+    localStorage.removeItem('account');
+    localStorage.removeItem('name');
+    location.href = '/home'
   });
 });
 

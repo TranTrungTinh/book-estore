@@ -28,4 +28,19 @@ userRouter.post('/signin', mustBeUser, (req, res) => {
   .catch(error => res.send({ success: false, message: error.message }));
 });
 
+userRouter.post('/logout', (req, res) => {
+  const {TOKEN} = req.cookies;
+  if(!TOKEN) return res.send({ success: false });
+  res.clearCookie('TOKEN');
+  res.send({ success: true });
+});
+
+userRouter.get('/account/edit', (req, res) => {
+  res.render('render/account', { isDetail: true});
+});
+
+userRouter.get('/account/orders', (req, res) => {
+  res.render('render/account', { isDetail: false});
+});
+
 module.exports = {userRouter};

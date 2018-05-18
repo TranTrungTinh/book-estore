@@ -5,7 +5,11 @@
   <%- include('../header/navigation.ejs') %>
     <div class="container-fluid">
       <div class="row" id="acount-page">
+        <% if(isDetail) { %>
           <%- include('../body/account.detail.ejs') %>
+        <% } else { %>
+          <%- include('../body/account.orders.ejs') %>
+        <% } %>
       </div>
     </div>
   <%- include('../footer/footer.ejs') %>
