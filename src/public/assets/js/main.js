@@ -107,11 +107,12 @@ $(document).on('click', '#btn-shopping-cart' , e => {
 
 /* ============ Account Icon Click ============*/
 $('#btn-account').click(e => {
-  const check = localStorage.getItem('name') || ''
-  if (!check) return $('#myModelLogin').modal('show');
-  const user = localStorage.getObject('account');
-  $('#toggle-account').text(user.name);
-  location.href = '/home';
+  // const check = localStorage.getItem('name') || ''
+  // if (!check) return $('#myModelLogin').modal('show');
+  // const user = localStorage.getObject('account');
+  // $('#toggle-account').text(user.name);
+  // location.href = '/home';
+  $('#myModelLogin').modal('show');
 });
 /* ============ Account Icon Click ============*/
 
@@ -122,7 +123,9 @@ $('#btn-signin').click(e => {
   e.preventDefault();
   const email = $('#inputEmailLogin').val() || '';
   const password = $('#inputPasswordLogin').val() || '';
+
   if(!email || !password) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
+
   $.post('/user/signin', {email, password}, data => {
     if(!data.success) return swal("CÓ LỖI!", "Sai email hoặc password", "error");
     localSaveItem('name', data.user.NAME);
@@ -155,11 +158,16 @@ $('#btn-signup').click(e => {
   const email = $('#inputEmailRegister').val() || '';
   const password = $('#inputPasswordRegister').val() || '';
   const gender = $('input[id=genderMale]:checked').val() ? 'NAM' : 'NU';
+  const captcha = $('#g-recaptcha-response').val() || '';
+
   if(!name || !email || !password) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
-  const userInfo = {name, email, password, gender }
+  if(!captcha) return swal("THÔNG BÁO","Vui lòng check captcha","info");
+
+  const userInfo = {name, email, password, gender, captcha };
   $.post('/user/signup', userInfo, data => {
     const {success, message} = data;
     if(message === 'EMAIL_EXISTED') return swal("LỖI","Email đã có người đăng ký !!!","error");
+    if(message === 'INVALID_CAPTCHA') return swal("LỖI","Sai mã captcha !!!","error");
     if(success) return swal("SUCCESS","Đăng ký thành công !!!","success")
     .then(() => location.href = '/home');
   });
