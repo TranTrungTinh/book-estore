@@ -1,5 +1,5 @@
 <!-- Main content -->
-
+<% const {priceFormat, priceDiscount, discount} = price; %>
 <div class="row padding_bottom_big">
   <div class="col-sm-12">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -11,27 +11,31 @@
         <li data-target="#myCarousel" data-slide-to="3"></li>
         <li data-target="#myCarousel" data-slide-to="4"></li>
         <li data-target="#myCarousel" data-slide-to="5"></li>
+        <li data-target="#myCarousel" data-slide-to="6"></li>
       </ol>
 
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
         <div class="item active">
-          <img src="./assets/media/images/slide01.jpg" alt="Los Angeles" style="width:100%;">
+          <img src="./assets/media/images/flashsale.jpg" alt="Image Banner Cover" >
         </div>
         <div class="item">
-          <img src="./assets/media/images/slide02.png" alt="Chicago" style="width:100%;">
+          <img src="./assets/media/images/slide02.png" alt="Image Banner Cover"> 
         </div>
         <div class="item">
-          <img src="./assets/media/images/slide03.png" alt="New York" style="width:100%;">
+          <img src="./assets/media/images/slide03.png" alt="Image Banner Cover">
         </div>
         <div class="item">
-          <img src="./assets/media/images/slide04.png" alt="New York" style="width:100%;">
+          <img src="./assets/media/images/slide04.jpg" alt="Image Banner Cover">
         </div>
         <div class="item">
-          <img src="./assets/media/images/slide05.jpg" alt="New York" style="width:100%;">
+          <img src="./assets/media/images/slide05.jpg" alt="Image Banner Cover">
         </div>
         <div class="item">
-          <img src="./assets/media/images/slide06.png" alt="New York" style="width:100%;">
+          <img src="./assets/media/images/slide06.png" alt="Image Banner Cover">
+        </div>
+        <div class="item">
+          <img src="./assets/media/images/slide01.jpg" alt="Image Banner Cover">
         </div>
       </div>
 
@@ -80,86 +84,86 @@
       <div class="carousel-inner" role="listbox">
         <div class="item active">
           <div class="row">
-            <% news.forEach((e, i) => { %>
-              <% if( i <= 3 ) { %>
-                <div class="col-sm-4 col-md-3">
-                  <div class="thumbnail">
-                    <img src="./assets/media/images/<%= e.IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                    <div class="caption">
-                      <h4><%= e.NAME%></h4>
-                      <p>
-                        <span class="price-tag"><%= e.PRICE %>&nbsp;₫</span>
-                        <strike><%= +e.PRICE + +e.PRICE*0.3%>&nbsp;₫</strike>
-                        <span class="price-discount">-30%</span>
-                      </p>
-                      <p>Số lượng đã bán:
-                        <span class="badge"><%= e.SALES%></span>
-                      </p>
-                      <button type="button" class="btn btn-danger btn-block btn-lg">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                        <span>Thêm vào giỏ hàng</span>
-                      </button>
-                    </div>
-                    <input type="hidden" value="<%= e.ID%>"/>
+            <% for(let i = 0; i <= 3; i++) { %>
+              <% const { ID, NAME, IMAGE, PRICE, SALES } = news[i] %>
+              <div class="col-sm-4 col-md-3">
+                <div class="thumbnail">
+                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
+                  <div class="caption">
+                    <h4><%= NAME%></h4>
+                    <p>
+                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
+                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
+                      <span class="price-discount">-<%= discount%>%</span>
+                    </p>
+                    <p>Số lượng đã bán:
+                      <span class="badge"><%= SALES%></span>
+                    </p>
+                    <button type="button" class="btn btn-danger btn-block btn-lg">
+                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                      <span>Thêm vào giỏ hàng</span>
+                    </button>
                   </div>
+                  <input type="hidden" value="<%= ID%>"/>
                 </div>
-            <% }}) %>
+              </div>
+            <% } %>
           </div>
         </div>
         <div class="item">
           <div class="row">
-            <% news.forEach((e, i) => { %>
-              <% if( i > 3 && i <= 7 ) { %>
-                <div class="col-sm-4 col-md-3">
-                  <div class="thumbnail">
-                    <img src="./assets/media/images/<%= e.IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                    <div class="caption">
-                      <h4><%= e.NAME%></h4>
-                      <p>
-                        <span class="price-tag"><%= e.PRICE %>&nbsp;₫</span>
-                        <strike><%= +e.PRICE + +e.PRICE*0.3%>&nbsp;₫</strike>
-                        <span class="price-discount">-30%</span>
-                      </p>
-                      <p>Số lượng đã bán:
-                        <span class="badge"><%= e.SALES %></span>
-                      </p>
-                      <button type="button" class="btn btn-danger btn-block btn-lg">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                        <span>Thêm vào giỏ hàng</span>
-                      </button>
-                    </div>
-                    <input type="hidden" value="<%= e.ID%>"/>
+            <% for(let i = 4; i <= 7; i++) { %>
+              <% const { ID, NAME, IMAGE, PRICE, SALES } = news[i] %>
+              <div class="col-sm-4 col-md-3">
+                <div class="thumbnail">
+                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
+                  <div class="caption">
+                    <h4><%= NAME%></h4>
+                    <p>
+                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
+                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
+                      <span class="price-discount">-<%= discount%>%</span>
+                    </p>
+                    <p>Số lượng đã bán:
+                      <span class="badge"><%= SALES%></span>
+                    </p>
+                    <button type="button" class="btn btn-danger btn-block btn-lg">
+                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                      <span>Thêm vào giỏ hàng</span>
+                    </button>
                   </div>
+                  <input type="hidden" value="<%= ID%>"/>
                 </div>
-            <% }}) %>
+              </div>
+            <% } %>
           </div>
         </div>
         <div class="item">
           <div class="row">
-            <% news.forEach((e, i) => { %>
-              <% if( i > 7 ) { %>
-                <div class="col-sm-4 col-md-3">
-                  <div class="thumbnail">
-                    <img src="./assets/media/images/<%= e.IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                    <div class="caption">
-                      <h4><%= e.NAME%></h4>
-                      <p>
-                        <span class="price-tag"><%= e.PRICE %>&nbsp;₫</span>
-                        <strike><%= +e.PRICE + +e.PRICE*0.3%>&nbsp;₫</strike>
-                        <span class="price-discount">-30%</span>
-                      </p>
-                      <p>Số lượng đã bán:
-                        <span class="badge"><%= e.SALES %></span>
-                      </p>
-                      <button type="button" class="btn btn-danger btn-block btn-lg">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                        <span>Thêm vào giỏ hàng</span>
-                      </button>
-                    </div>
-                    <input type="hidden" value="<%= e.ID%>"/>
+            <% for(let i = 8; i < news.length; i++) { %>
+              <% const { ID, NAME, IMAGE, PRICE, SALES } = news[i] %>
+              <div class="col-sm-4 col-md-3">
+                <div class="thumbnail">
+                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
+                  <div class="caption">
+                    <h4><%= NAME%></h4>
+                    <p>
+                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
+                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
+                      <span class="price-discount">-<%= discount%>%</span>
+                    </p>
+                    <p>Số lượng đã bán:
+                      <span class="badge"><%= SALES%></span>
+                    </p>
+                    <button type="button" class="btn btn-danger btn-block btn-lg">
+                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                      <span>Thêm vào giỏ hàng</span>
+                    </button>
                   </div>
+                  <input type="hidden" value="<%= ID%>"/>
                 </div>
-            <% }}) %>
+              </div>
+            <% } %>
           </div>
         </div>
       </div>
@@ -191,86 +195,86 @@
       <div class="carousel-inner" role="listbox">
         <div class="item active">
           <div class="row">
-            <% sales.forEach((e, i) => { %>
-              <% if( i <= 3 ) { %>
-                <div class="col-sm-4 col-md-3">
-                  <div class="thumbnail">
-                    <img src="./assets/media/images/<%= e.IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                    <div class="caption">
-                      <h4><%= e.NAME%></h4>
-                      <p>
-                        <span class="price-tag"><%= e.PRICE %>&nbsp;₫</span>
-                        <strike><%= +e.PRICE + +e.PRICE*0.3%>&nbsp;₫</strike>
-                        <span class="price-discount">-30%</span>
-                      </p>
-                      <p>Số lượng đã bán:
-                        <span class="badge"><%= e.SALES%></span>
-                      </p>
-                      <button type="button" class="btn btn-danger btn-block btn-lg">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                        <span>Thêm vào giỏ hàng</span>
-                      </button>
-                    </div>
-                    <input type="hidden" value="<%= e.ID%>"/>
+            <% for(let i = 0; i <= 3; i++) { %>
+              <% const { ID, NAME, IMAGE, PRICE, SALES } = sales[i] %>
+              <div class="col-sm-4 col-md-3">
+                <div class="thumbnail">
+                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
+                  <div class="caption">
+                    <h4><%= NAME%></h4>
+                    <p>
+                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
+                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
+                      <span class="price-discount">-<%= discount%>%</span>
+                    </p>
+                    <p>Số lượng đã bán:
+                      <span class="badge"><%= SALES%></span>
+                    </p>
+                    <button type="button" class="btn btn-danger btn-block btn-lg">
+                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                      <span>Thêm vào giỏ hàng</span>
+                    </button>
                   </div>
+                  <input type="hidden" value="<%= ID%>"/>
                 </div>
-            <% }}) %>
+              </div>
+            <% } %>
           </div>
         </div>
         <div class="item">
           <div class="row">
-            <% sales.forEach((e, i) => { %>
-              <% if( i > 3 && i <= 7 ) { %>
-                <div class="col-sm-4 col-md-3">
-                  <div class="thumbnail">
-                    <img src="./assets/media/images/<%= e.IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                    <div class="caption">
-                      <h4><%= e.NAME%></h4>
-                      <p>
-                        <span class="price-tag"><%= e.PRICE %>&nbsp;₫</span>
-                        <strike><%= +e.PRICE + +e.PRICE*0.3%>&nbsp;₫</strike>
-                        <span class="price-discount">-30%</span>
-                      </p>
-                      <p>Số lượng đã bán:
-                        <span class="badge"><%= e.SALES %></span>
-                      </p>
-                      <button type="button" class="btn btn-danger btn-block btn-lg">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                        <span>Thêm vào giỏ hàng</span>
-                      </button>
-                    </div>
-                    <input type="hidden" value="<%= e.ID%>"/>
+            <% for(let i = 4; i <= 7; i++) { %>
+              <% const { ID, NAME, IMAGE, PRICE, SALES } = sales[i] %>
+              <div class="col-sm-4 col-md-3">
+                <div class="thumbnail">
+                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
+                  <div class="caption">
+                    <h4><%= NAME%></h4>
+                    <p>
+                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
+                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
+                      <span class="price-discount">-<%= discount%>%</span>
+                    </p>
+                    <p>Số lượng đã bán:
+                      <span class="badge"><%= SALES%></span>
+                    </p>
+                    <button type="button" class="btn btn-danger btn-block btn-lg">
+                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                      <span>Thêm vào giỏ hàng</span>
+                    </button>
                   </div>
+                  <input type="hidden" value="<%= ID%>"/>
                 </div>
-            <% }}) %>
+              </div>
+            <% } %>
           </div>
         </div>
         <div class="item">
           <div class="row">
-            <% sales.forEach((e, i) => { %>
-              <% if( i > 7 ) { %>
-                <div class="col-sm-4 col-md-3">
-                  <div class="thumbnail">
-                    <img src="./assets/media/images/<%= e.IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                    <div class="caption">
-                      <h4><%= e.NAME%></h4>
-                      <p>
-                        <span class="price-tag"><%= e.PRICE %>&nbsp;₫</span>
-                        <strike><%= +e.PRICE + +e.PRICE*0.3%>&nbsp;₫</strike>
-                        <span class="price-discount">-30%</span>
-                      </p>
-                      <p>Số lượng đã bán:
-                        <span class="badge"><%= e.SALES %></span>
-                      </p>
-                      <button type="button" class="btn btn-danger btn-block btn-lg">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                        <span>Thêm vào giỏ hàng</span>
-                      </button>
-                    </div>
-                    <input type="hidden" value="<%= e.ID%>"/>
+            <% for(let i = 8; i < sales.length; i++) { %>
+              <% const { ID, NAME, IMAGE, PRICE, SALES } = sales[i] %>
+              <div class="col-sm-4 col-md-3">
+                <div class="thumbnail">
+                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
+                  <div class="caption">
+                    <h4><%= NAME%></h4>
+                    <p>
+                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
+                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
+                      <span class="price-discount">-<%= discount%>%</span>
+                    </p>
+                    <p>Số lượng đã bán:
+                      <span class="badge"><%= SALES%></span>
+                    </p>
+                    <button type="button" class="btn btn-danger btn-block btn-lg">
+                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                      <span>Thêm vào giỏ hàng</span>
+                    </button>
                   </div>
+                  <input type="hidden" value="<%= ID%>"/>
                 </div>
-            <% }}) %>
+              </div>
+            <% } %>
           </div>
         </div>
       </div>
@@ -303,86 +307,86 @@
       <div class="carousel-inner" role="listbox">
         <div class="item active">
           <div class="row">
-            <% views.forEach((e, i) => { %>
-              <% if( i <= 3 ) { %>
-                <div class="col-sm-4 col-md-3">
-                  <div class="thumbnail">
-                    <img src="./assets/media/images/<%= e.IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                    <div class="caption">
-                      <h4><%= e.NAME%></h4>
-                      <p>
-                        <span class="price-tag"><%= e.PRICE %>&nbsp;₫</span>
-                        <strike><%= +e.PRICE + +e.PRICE*0.3%>&nbsp;₫</strike>
-                        <span class="price-discount">-30%</span>
-                      </p>
-                      <p>Số lượng đã bán:
-                        <span class="badge"><%= e.SALES%></span>
-                      </p>
-                      <button type="button" class="btn btn-danger btn-block btn-lg">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                        <span>Thêm vào giỏ hàng</span>
-                      </button>
-                    </div>
-                    <input type="hidden" value="<%= e.ID%>"/>
+            <% for(let i = 0; i <= 3; i++) { %>
+              <% const { ID, NAME, IMAGE, PRICE, SALES } = views[i] %>
+              <div class="col-sm-4 col-md-3">
+                <div class="thumbnail">
+                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
+                  <div class="caption">
+                    <h4><%= NAME%></h4>
+                    <p>
+                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
+                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
+                      <span class="price-discount">-<%= discount%>%</span>
+                    </p>
+                    <p>Số lượng đã bán:
+                      <span class="badge"><%= SALES%></span>
+                    </p>
+                    <button type="button" class="btn btn-danger btn-block btn-lg">
+                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                      <span>Thêm vào giỏ hàng</span>
+                    </button>
                   </div>
+                  <input type="hidden" value="<%= ID%>"/>
                 </div>
-            <% }}) %>
+              </div>
+            <% } %>
           </div>
         </div>
         <div class="item">
           <div class="row">
-            <% views.forEach((e, i) => { %>
-              <% if( i > 3 && i <= 7 ) { %>
-                <div class="col-sm-4 col-md-3">
-                  <div class="thumbnail">
-                    <img src="./assets/media/images/<%= e.IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                    <div class="caption">
-                      <h4><%= e.NAME%></h4>
-                      <p>
-                        <span class="price-tag"><%= e.PRICE %>&nbsp;₫</span>
-                        <strike><%= +e.PRICE + +e.PRICE*0.3%>&nbsp;₫</strike>
-                        <span class="price-discount">-30%</span>
-                      </p>
-                      <p>Số lượng đã bán:
-                        <span class="badge"><%= e.SALES %></span>
-                      </p>
-                      <button type="button" class="btn btn-danger btn-block btn-lg">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                        <span>Thêm vào giỏ hàng</span>
-                      </button>
-                    </div>
-                    <input type="hidden" value="<%= e.ID%>"/>
+            <% for(let i = 4; i <= 7; i++) { %>
+              <% const { ID, NAME, IMAGE, PRICE, SALES } = views[i] %>
+              <div class="col-sm-4 col-md-3">
+                <div class="thumbnail">
+                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
+                  <div class="caption">
+                    <h4><%= NAME%></h4>
+                    <p>
+                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
+                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
+                      <span class="price-discount">-<%= discount%>%</span>
+                    </p>
+                    <p>Số lượng đã bán:
+                      <span class="badge"><%= SALES%></span>
+                    </p>
+                    <button type="button" class="btn btn-danger btn-block btn-lg">
+                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                      <span>Thêm vào giỏ hàng</span>
+                    </button>
                   </div>
+                  <input type="hidden" value="<%= ID%>"/>
                 </div>
-            <% }}) %>
+              </div>
+            <% } %>
           </div>
         </div>
         <div class="item">
           <div class="row">
-            <% views.forEach((e, i) => { %>
-              <% if( i > 7 ) { %>
-                <div class="col-sm-4 col-md-3">
-                  <div class="thumbnail">
-                    <img src="./assets/media/images/<%= e.IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                    <div class="caption">
-                      <h4><%= e.NAME%></h4>
-                      <p>
-                        <span class="price-tag"><%= e.PRICE %>&nbsp;₫</span>
-                        <strike><%= +e.PRICE + +e.PRICE*0.3%>&nbsp;₫</strike>
-                        <span class="price-discount">-30%</span>
-                      </p>
-                      <p>Số lượng đã bán:
-                        <span class="badge"><%= e.SALES %></span>
-                      </p>
-                      <button type="button" class="btn btn-danger btn-block btn-lg">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                        <span>Thêm vào giỏ hàng</span>
-                      </button>
-                    </div>
-                    <input type="hidden" value="<%= e.ID%>"/>
+            <% for(let i = 8; i < views.length; i++) { %>
+              <% const { ID, NAME, IMAGE, PRICE, SALES } = views[i] %>
+              <div class="col-sm-4 col-md-3">
+                <div class="thumbnail">
+                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
+                  <div class="caption">
+                    <h4><%= NAME%></h4>
+                    <p>
+                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
+                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
+                      <span class="price-discount">-<%= discount%>%</span>
+                    </p>
+                    <p>Số lượng đã bán:
+                      <span class="badge"><%= SALES%></span>
+                    </p>
+                    <button type="button" class="btn btn-danger btn-block btn-lg">
+                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                      <span>Thêm vào giỏ hàng</span>
+                    </button>
                   </div>
+                  <input type="hidden" value="<%= ID%>"/>
                 </div>
-            <% }}) %>
+              </div>
+            <% } %>
           </div>
         </div>
       </div>
