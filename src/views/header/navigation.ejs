@@ -2,8 +2,7 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-        aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -21,11 +20,11 @@
       <form class="navbar-form navbar-left">
         <div class="form-group has-success">
           <div class="input-group my_search">
-            <input type="text" class="form-control input-lg" placeholder="Tìm sản phẩm, danh mục hay thương hiệu mong muốn ..." id="txtSearch"
-            />
+            <input type="text" class="form-control input-lg" placeholder="Tìm sản phẩm, tên sách, báo hoặc tạp chí mong muốn ..." id="txtSearch"/>
             <span class="input-group-btn">
               <button class="btn btn-success btn-lg" type="button" id="btnSearch">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Tìm kiếm
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                <span>Tìm kiếm</span>
               </button>
             </span>
           </div>
@@ -170,6 +169,6 @@
   </div>
 </div>
 <script>
-  if(!localStorage.getItem('account')) document.getElementById('toggle-account').innerText = 'Đăng nhập';
-  else document.getElementById('toggle-account').innerText = 'Chào ' + localStorage.getItem('account');
+  if(!localStorage.getItem('name')) document.getElementById('toggle-account').innerText = 'Đăng nhập';
+  else document.getElementById('toggle-account').innerText = 'Chào ' + localStorage.getItem('name');
 </script>

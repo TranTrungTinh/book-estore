@@ -84,8 +84,8 @@
       <div class="carousel-inner" role="listbox">
         <div class="item active">
           <div class="row">
-            <% for(let i = 0; i <= 3; i++) { %>
-              <% const { ID, NAME, IMAGE, PRICE, SALES } = news[i] %>
+            <% for(let i = 0; i <= 3; i++) {
+                const { ID, NAME, IMAGE, PRICE, SALES } = news[i] %>
               <div class="col-sm-4 col-md-3">
                 <div class="thumbnail">
                   <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
@@ -93,11 +93,11 @@
                     <h4><%= NAME%></h4>
                     <p>
                       <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
-                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
-                      <span class="price-discount">-<%= discount%>%</span>
+                      <strike><%= priceDiscount(PRICE) %>&nbsp;₫</strike>
+                      <span class="price-discount">-<%= discount %>%</span>
                     </p>
                     <p>Số lượng đã bán:
-                      <span class="badge"><%= SALES%></span>
+                      <span class="badge"><%= SALES %></span>
                     </p>
                     <button type="button" class="btn btn-danger btn-block btn-lg">
                       <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>

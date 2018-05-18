@@ -130,7 +130,14 @@
     <p class="item_same_title">sản phẩm cùng nhà sản xuất</p>
   </div>
 </div>
-<div class="row item_same_producer">
+<% if(!bookSamePublishers.length) { %>
+<div class="col-sm-12">
+  <div class="alert alert-info margin-bottom-big fs-20" id="my-title-list">
+    KHÔNG CÓ SẢN PHẨM
+  </div>
+</div>
+<% } else { %>
+  <div class="row item_same_producer">
   <% bookSamePublishers.forEach(e => { %>
     <% const {ID, NAME, IMAGE, PRICE, SALES} = e; %>
     <div class="col-sm-12 col-md-2">
@@ -154,6 +161,6 @@
         <input type="hidden" value="<%= ID%>"/>
       </div>
     </div>
-  <% }) %>
+  <% })} %>
 </div>
 <!-- <script src="./assets/js/item_detail.js"></script> -->

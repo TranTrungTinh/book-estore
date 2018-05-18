@@ -6,6 +6,10 @@ class UserServices {
     await User.save(email, password, name, gender);
     return {email , name};
   }
+
+  static signIn(email, password) {
+    return User.getUserBy(email, password);
+  }
 }
 
 module.exports = { UserServices };

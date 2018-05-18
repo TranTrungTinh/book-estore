@@ -107,10 +107,11 @@ $(document).on('click', '#btn-shopping-cart' , e => {
 
 /* ============ Account Icon Click ============*/
 $('#btn-account').click(e => {
-  const name = localStorage.getItem('account') || '';
-  if (!name) return $('#myModelLogin').modal('show');
-  $('#toggle-account').text(name);
-  location.href = '/account';
+  const check = localStorage.getItem('name') || ''
+  if (!check) return $('#myModelLogin').modal('show');
+  const user = localStorage.getObject('account');
+  $('#toggle-account').text(user.name);
+  location.href = '/home';
 });
 /* ============ Account Icon Click ============*/
 
@@ -119,14 +120,15 @@ $('#btn-account').click(e => {
 /* ============ Handle Login - Logout ============*/
 $('#btn-signin').click(e => {
   e.preventDefault();
-  const email = $('#inputEmailLogin').val();
-  const password = $('#inputPasswordLogin').val();
-  $.post('/signin', {email, password}, data => {
-    if(!data.success) return swal("Loi!", "Sai email hay password", "error");
-    localStorage.setItem('account', 'Trần Trung Tính');
-    window.location.href = '/account';
+  const email = $('#inputEmailLogin').val() || '';
+  const password = $('#inputPasswordLogin').val() || '';
+  if(!email || !password) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
+  $.post('/user/signin', {email, password}, data => {
+    if(!data.success) return swal("CÓ LỖI!", "Sai email hoặc password", "error");
+    localSaveItem('name', data.user.NAME);
+    localSaveObject('account', data.user);
+    location.href = '/home';
   });
-  // console.log({email, password});
 });
 $('#btn-logout').click(e => {
   e.preventDefault();
@@ -142,7 +144,7 @@ $('#btn-logout').click(e => {
   .then(yes => {
     if(yes) {
       localStorage.removeItem('account');
-      window.location.href = '/home'
+      location.href = '/home'
     }
   });
 });
@@ -153,11 +155,11 @@ $('#btn-signup').click(e => {
   const email = $('#inputEmailRegister').val() || '';
   const password = $('#inputPasswordRegister').val() || '';
   const gender = $('input[id=genderMale]:checked').val() ? 'NAM' : 'NU';
-  if(!name || !email || !password) return swal("WARNING","Vui lòng nhập đầy đủ thông tin","warning");
+  if(!name || !email || !password) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
   const userInfo = {name, email, password, gender }
   $.post('/user/signup', userInfo, data => {
     const {success, message} = data;
-    if(message === 'EMAIL_EXISTED') return swal("ERROR","Email đã có người đăng ký !!!","error");
+    if(message === 'EMAIL_EXISTED') return swal("LỖI","Email đã có người đăng ký !!!","error");
     if(success) return swal("SUCCESS","Đăng ký thành công !!!","success")
     .then(() => location.href = '/home');
   });
