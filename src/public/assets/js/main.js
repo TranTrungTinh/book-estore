@@ -128,7 +128,7 @@ $('#btn-signin').click(e => {
   
   $.post('/user/signin', {email, password}, data => {
     if(!data.success) return swal("CÓ LỖI!", "Sai email hoặc password", "error");
-    $('#my-loader').html('<div class="loader"></div>');
+    $('#sign-in-loader').html('<div class="loader"></div>');
     setTimeout(() => {
       localSaveItem('name', data.user.NAME);
       location.href = '/user/account/edit';
@@ -164,15 +164,18 @@ $('#btn-signup').click(e => {
   if(!name || !email || !password) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
   if(!captcha) return swal("THÔNG BÁO","Vui lòng check captcha","info");
 
+  $('#sign-up-loader').html('<div class="loader"></div>');
+
   const userInfo = {name, email, password, gender, captcha };
   $.post('/user/signup', userInfo, data => {
     const {success, message} = data;
-    if(message === 'EMAIL_EXISTED') return swal("LỖI","Email đã có người đăng ký !!!","error");
-    if(message === 'INVALID_CAPTCHA') return swal("LỖI","Sai mã captcha !!!","error");
-    if(success) return swal("SUCCESS","Đăng ký thành công !!!","success")
-    .then(() => location.href = '/home');
+    if(message === 'EMAIL_EXISTED') return swal("LỖI","Email đã có người đăng ký !!!","error")
+    .then(() => setTimeout(() => location.href = '/home'), 1500);
+    if(message === 'INVALID_CAPTCHA') return swal("LỖI","Sai mã captcha !!!","error")
+    .then(() => setTimeout(() => location.href = '/home'), 1500);    
+    if(success) return swal("THÀNH CÔNG","Đăng ký thành công !!!","success")
+    .then(() => setTimeout(() => location.href = '/home'), 2500);
   });
-
 });
 /* ============ Handle Login - Logout ============*/
 
@@ -194,4 +197,22 @@ $('#acount-history').click(e => {
   $('#acount-history').addClass('active');
   location.href = '/user/account/orders';  
 });
+
+$('#btn-update').click(e => {
+  e.preventDefault();
+  const name = $('#inputAcountName').val() || '';
+  const phone = $('#inputAcountPhone').val() || '';
+  const gender = $('input[id=genderFemale]:checked').val() ? 'NU' : 'NAM';
+  const birthday = $('#birthday').val();
+  const userInfo = { name, phone, gender, birthday };
+
+  $('#update-loader').html('<div class="loader"></div>');
+  $.post('/user/account/update', userInfo, data => {
+    if(!data.success) return; 
+    setTimeout(() => {
+      localSaveItem('name', data.name);
+      location.href = '/user/account/edit'
+    }, 1500);
+  });
+})
 /* ============ Account page ============*/

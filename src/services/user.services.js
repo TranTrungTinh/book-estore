@@ -14,6 +14,11 @@ class UserServices {
   static showUserInfoBy(idUser) {
     return User.getUserById(idUser);
   }
+
+  static updateUserInfo(userInfo) {
+    const {id, name, phone, birthday, gender} = userInfo;
+    return User.update(id, name, phone, birthday, gender);
+  }
 }
 
 module.exports = { UserServices };

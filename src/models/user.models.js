@@ -33,6 +33,14 @@ class User {
     if(!user[0]) throw new Error('CANNOT_FIND_USER');
     return user[0];
   }
+
+  static async update(idUser, name, phone, birthday, gender) {
+    const sql = `UPDATE NGUOIDUNG 
+    SET NAME = ?, PHONE = ?, BIRTHDAY = ?, GENDER = ? WHERE ID = ?`;
+    await queryDB(sql, [name, phone, birthday, gender, idUser]);
+    return name;
+  }
+
 }
 
 // User.getUserBy('trantrungtinh@gmail.com','123')

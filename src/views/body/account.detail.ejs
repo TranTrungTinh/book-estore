@@ -1,6 +1,7 @@
 <% 
   const {NAME, EMAIL, GENDER, PHONE, BIRTHDAY} = user;
-  const gender = GENDER === 'NAM' ? true : false; 
+  const male = GENDER === 'NAM' ? 'checked' : null; 
+  const female = GENDER === 'NU' ? 'checked' : null; 
 %>
 <div class="col-sm-12 col-md-3">
   <div class="row">
@@ -43,7 +44,7 @@
         <div class="form-group">
           <label for="inputAcountPhone" class="col-sm-2 control-label label-login-content">Số điện thoại</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control input-lg" id="inputAcountPhone" placeholder="<%= PHONE ? 'PHONE' : 'Hãy nhập SĐT để trải nghiệm tốt hơn' %>">
+            <input type="number" class="form-control input-lg" id="inputAcountPhone" placeholder="Hãy nhập SĐT để trải nghiệm tốt hơn" value="<%= PHONE ? PHONE : ''%>" >
           </div>
         </div>
         <div class="form-group">
@@ -56,11 +57,11 @@
           <label for="inlineRadioOptions" class="col-sm-2 control-label label-login-content">Giới tính:</label>
           <div class="col-sm-10">
             <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" id="genderMale" checked="<%= gender%>"/>
+              <input type="radio" name="inlineRadioOptions" id="genderMale" <%= male%>/>
               <img src="./assets/media/images/glyphicons/png/glyphicons-35-old-man.png" alt="" />
             </label>
             <label class="radio-inline">
-              <input type="radio" name="inlineRadioOptions" id="genderFemale" checked="<%= !gender%>"/>
+              <input type="radio" name="inlineRadioOptions" id="genderFemale" <%= female%>/>
               <img src="./assets/media/images/glyphicons/png/glyphicons-36-woman.png" alt="" />
             </label>
           </div>
@@ -69,7 +70,7 @@
           <label for="inputAcountBirthday" class="col-sm-2 control-label label-login-content">Ngày sinh</label>
           <div class="col-sm-10">
             <div class="input-group date" data-provide="datepicker">
-              <input type="text" class="form-control" value="<%= BIRTHDAY ? 'BIRTHDAY' : '01/01/1990' %>" id="birthday">
+              <input type="text" class="form-control" value="<%= BIRTHDAY ? BIRTHDAY : '01/01/1990' %>" id="birthday">
               <div class="input-group-addon">
                   <span class="glyphicon glyphicon-th"></span>
               </div>
@@ -77,12 +78,14 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
+          <div class="col-sm-2" id="update-loader">
+            <!-- <div class="loader"></div> -->
+          </div>
+          <div class="col-sm-10">
             <button type="button" class="btn btn-warning btn-lg btn-login" id="btn-update">Cập nhật tài khoản</button>
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 </div>

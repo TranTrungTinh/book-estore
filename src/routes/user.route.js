@@ -41,6 +41,14 @@ userRouter.get('/account/edit', checkToken, (req, res) => {
   .catch(error => res.send({ success: false, message: error.message }));
 });
 
+userRouter.post('/account/update', checkToken, (req, res) => {
+  const { name, gender, birthday, phone } = req.body;
+  const userInfo = {id: req.idUser, name, phone, gender, birthday};
+  UserServices.updateUserInfo(userInfo)
+  .then(name => res.send({ success: true, name}))
+  .catch(error => res.send({ success: false, message: error.message }));
+});
+
 userRouter.get('/account/orders', (req, res) => {
   res.render('render/account', { isDetail: false});
 });
