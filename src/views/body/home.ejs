@@ -84,7 +84,7 @@
         <div class="item active">
           <div class="row">
             <% for(let i = 0; i <= 3; i++) { %>
-              <div class="col-sm-4 col-md-3">
+              <div class="col-sm-6 col-md-4 col-lg-3">
                 <%- include('../thumbnail/thumbnail.ejs', { data: news[i], price}) %>
               </div>
             <% } %>
@@ -93,7 +93,7 @@
         <div class="item">
           <div class="row">
             <% for(let i = 4; i <= 7; i++) { %>
-              <div class="col-sm-4 col-md-3">
+              <div class="col-sm-6 col-md-4 col-lg-3">
                 <%- include('../thumbnail/thumbnail.ejs', { data: news[i], price}) %>                
               </div>
             <% } %>
@@ -102,7 +102,7 @@
         <div class="item">
           <div class="row">
             <% for(let i = 8; i < news.length; i++) { %>
-              <div class="col-sm-4 col-md-3">
+              <div class="col-sm-6 col-md-4 col-lg-3">
                 <%- include('../thumbnail/thumbnail.ejs', { data: news[i], price}) %>              
               </div>
             <% } %>
@@ -138,7 +138,7 @@
         <div class="item active">
           <div class="row">
             <% for(let i = 0; i <= 3; i++) { %>
-              <div class="col-sm-4 col-md-3">
+              <div class="col-sm-6 col-md-4 col-lg-3">
                 <%- include('../thumbnail/thumbnail.ejs', { data: sales[i], price}) %>                
               </div>
             <% } %>
@@ -147,7 +147,7 @@
         <div class="item">
           <div class="row">
             <% for(let i = 4; i <= 7; i++) { %>
-              <div class="col-sm-4 col-md-3">
+              <div class="col-sm-6 col-md-4 col-lg-3">
                 <%- include('../thumbnail/thumbnail.ejs', { data: sales[i], price}) %>
               </div>
             <% } %>
@@ -156,7 +156,7 @@
         <div class="item">
           <div class="row">
             <% for(let i = 8; i < sales.length; i++) { %>
-              <div class="col-sm-4 col-md-3">
+              <div class="col-sm-6 col-md-4 col-lg-3">
                 <%- include('../thumbnail/thumbnail.ejs', { data: sales[i], price}) %>                
               </div>
             <% } %>
@@ -193,7 +193,7 @@
         <div class="item active">
           <div class="row">
             <% for(let i = 0; i <= 3; i++) { %>
-              <div class="col-sm-4 col-md-3">
+              <div class="col-sm-6 col-md-4 col-lg-3">
                 <%- include('../thumbnail/thumbnail.ejs', { data: views[i], price}) %>                
               </div>
             <% } %>
@@ -202,7 +202,7 @@
         <div class="item">
           <div class="row">
             <% for(let i = 4; i <= 7; i++) { %>
-              <div class="col-sm-4 col-md-3">
+              <div class="col-sm-6 col-md-4 col-lg-3">
                 <%- include('../thumbnail/thumbnail.ejs', { data: views[i], price}) %>                
               </div>
             <% } %>
@@ -211,7 +211,7 @@
         <div class="item">
           <div class="row">
             <% for(let i = 8; i < views.length; i++) { %>
-              <div class="col-sm-4 col-md-3">
+              <div class="col-sm-6 col-md-4 col-lg-3">
                 <%- include('../thumbnail/thumbnail.ejs', { data: views[i], price}) %>                
               </div>
             <% } %>

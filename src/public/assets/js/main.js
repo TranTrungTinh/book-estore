@@ -176,6 +176,10 @@ $('#btn-signup').click(e => {
 });
 /* ============ Handle Login - Logout ============*/
 
+
+
+
+/* ============ Account page ============*/
 $('#acount-info').click(e => {
   const isActive = $('#acount-info').hasClass('active');
   if(isActive) return;
@@ -190,3 +194,4 @@ $('#acount-history').click(e => {
   $('#acount-history').addClass('active');
   location.href = '/user/account/orders';  
 });
+/* ============ Account page ============*/
