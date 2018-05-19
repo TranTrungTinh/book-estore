@@ -4,7 +4,6 @@
     C_NAME, P_NAME, A_NAME, ID_CATEGORY, ID_PUBLISHER, ID_AUTHOR
   } = results.book;
   const { bookSameCategories, bookSamePublishers } = results;
-  const {priceFormat, priceDiscount, discount} = price;
 %>
 
 <div class="row item_root_detail">
@@ -37,11 +36,11 @@
       </div>
       <div class="col-sm-12 item_detail_price">
         <p>
-          <span class="item_price"><%= priceFormat(PRICE)%> ₫</span>
+          <span class="item_price"><%= price.priceFormat(PRICE)%> ₫</span>
           <span class="item_vat">Đã có VAT</span>
         </p>
-        <p class="item_detail_views">Tiết kiệm: <span class="price-discount"><%= discount%>%</span></p>
-        <p class="item_detail_views">Giá thị trường: <%= priceDiscount(PRICE) %> ₫</>
+        <p class="item_detail_views">Tiết kiệm: <span class="price-discount"><%= price.discount%>%</span></p>
+        <p class="item_detail_views">Giá thị trường: <%= price.priceDiscount(PRICE) %> ₫</>
         <div class="row">
           <div class="col-sm-4 col-md-3">
             <p class="item_detail_views">
@@ -100,28 +99,9 @@
 </div>
 <div class="row item_same_type">
   <% bookSameCategories.forEach(e => { %>
-    <% const {ID, NAME, IMAGE, PRICE, SALES} = e; %>
     <div class="col-sm-12 col-md-2">
-      <div class="thumbnail">
-        <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-        <div class="caption">
-          <h4><%= NAME%></h4>
-          <p>
-            <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
-            <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
-            <span class="price-discount">-<%= discount%>%</span>
-          </p>
-          <p>Số lượng đã bán:
-            <span class="badge"><%= SALES%></span>
-          </p>
-          <button type="button" class="btn btn-danger btn-block btn-lg">
-            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-            <span>Thêm vào giỏ hàng</span>
-          </button>
+      <%- include('../thumbnail/thumbnail.ejs', { data: e, price}) %>           
         </div>
-        <input type="hidden" value="<%= ID%>"/>
-      </div>
-    </div>
   <% }) %>
 </div>
 
@@ -139,28 +119,8 @@
 <% } else { %>
   <div class="row item_same_producer">
   <% bookSamePublishers.forEach(e => { %>
-    <% const {ID, NAME, IMAGE, PRICE, SALES} = e; %>
     <div class="col-sm-12 col-md-2">
-      <div class="thumbnail">
-        <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-        <div class="caption">
-          <h4><%= NAME%></h4>
-          <p>
-            <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
-            <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
-            <span class="price-discount">-<%= discount%>%</span>
-          </p>
-          <p>Số lượng đã bán:
-            <span class="badge"><%= SALES%></span>
-          </p>
-          <button type="button" class="btn btn-danger btn-block btn-lg">
-            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-            <span>Thêm vào giỏ hàng</span>
-          </button>
-        </div>
-        <input type="hidden" value="<%= ID%>"/>
-      </div>
+      <%- include('../thumbnail/thumbnail.ejs', { data: e, price}) %> 
     </div>
   <% })} %>
 </div>
-<!-- <script src="./assets/js/item_detail.js"></script> -->

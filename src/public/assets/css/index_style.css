@@ -166,6 +166,9 @@ body {
 
 /* ========== Thumbnail item home page ========== */
 
+
+
+/* ========== Log in page ========== */
 .label-login {
   margin: 0;
   font-size: 36px;
@@ -182,6 +185,24 @@ body {
   text-align: justify;
   color: #7f8c8d;
 }
+.loader {
+  border: 6px solid #f3f3f3; /* Light grey */
+  border-top: 6px solid #7f8c8d; /* Blue */
+  margin: 10px auto;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* ========== Log in page ========== */
+
+
+
 
 /* Search title */
 #my_title_search {

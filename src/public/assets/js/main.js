@@ -107,10 +107,11 @@ $(document).on('click', '#btn-shopping-cart' , e => {
 
 /* ============ Account Icon Click ============*/
 $('#btn-account').click(e => {
-  const check = localStorage.getItem('name') || ''
-  if (!check) return $('#myModelLogin').modal('show');
-  const user = localStorage.getObject('account');
-  $('#toggle-account').text(user.name);
+  const currentPage = location.pathname.toString();
+  if(currentPage === '/user/account/edit') return;
+  const name = localStorage.getItem('name') || ''
+  if (!name) return $('#myModelLogin').modal('show');
+  $('#toggle-account').text(name);
   location.href = '/user/account/edit';
 });
 /* ============ Account Icon Click ============*/
@@ -124,12 +125,14 @@ $('#btn-signin').click(e => {
   const password = $('#inputPasswordLogin').val() || '';
 
   if(!email || !password) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
-
+  
   $.post('/user/signin', {email, password}, data => {
     if(!data.success) return swal("CÓ LỖI!", "Sai email hoặc password", "error");
-    localSaveItem('name', data.user.NAME);
-    localSaveObject('account', data.user);
-    location.href = '/user/account/edit';
+    $('#my-loader').html('<div class="loader"></div>');
+    setTimeout(() => {
+      localSaveItem('name', data.user.NAME);
+      location.href = '/user/account/edit';
+    }, 2000);
   });
 });
 $('#btn-logout').click(e => {
@@ -145,7 +148,6 @@ $('#btn-logout').click(e => {
   })
   .then(yes => { if(!yes) return;
     $.post('/user/logout', data => {});
-    localStorage.removeItem('account');
     localStorage.removeItem('name');
     location.href = '/home'
   });

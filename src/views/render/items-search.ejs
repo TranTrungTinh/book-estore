@@ -1,6 +1,5 @@
 
 <html lang="en">
-<base href="http://localhost:3000">
   <%- include('../header/header.ejs') %>
 <body>
     
@@ -13,7 +12,7 @@
           <%- include('../body/menu.list.ejs', {categories, authors, publishers}) %>
       </div>
       <div class="col-sm-12 col-md-9" id="main-content">
-          <%- include('../body/item.search.list.ejs', {items, count, page}) %>
+          <%- include('../body/item.search.list.ejs', {items, count, page, price}) %>
       </div>
     </div>
   </div>

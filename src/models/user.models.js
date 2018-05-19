@@ -22,8 +22,7 @@ class User {
     if(!user[0]) throw new Error('INVALID_USER_INFO');
     const same = await compare(rawPassword, user[0].PASSWORD);
     if (!same) throw new Error('INVALID_USER_INFO');
-    const {NAME, EMAIL, GENDER, BIRTHDAY} = user[0];
-    const userInfo = {NAME, EMAIL, GENDER, BIRTHDAY};
+    const userInfo = { NAME: user[0].NAME };
     userInfo.TOKEN = await sign({ ID: user[0].ID });
     return userInfo;
   }

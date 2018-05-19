@@ -1,5 +1,4 @@
 <!-- Main content -->
-<% const {priceFormat, priceDiscount, discount} = price; %>
 <div class="row padding_bottom_big">
   <div class="col-sm-12">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -84,28 +83,9 @@
       <div class="carousel-inner" role="listbox">
         <div class="item active">
           <div class="row">
-            <% for(let i = 0; i <= 3; i++) {
-                const { ID, NAME, IMAGE, PRICE, SALES } = news[i] %>
+            <% for(let i = 0; i <= 3; i++) { %>
               <div class="col-sm-4 col-md-3">
-                <div class="thumbnail">
-                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                  <div class="caption">
-                    <h4><%= NAME%></h4>
-                    <p>
-                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
-                      <strike><%= priceDiscount(PRICE) %>&nbsp;₫</strike>
-                      <span class="price-discount">-<%= discount %>%</span>
-                    </p>
-                    <p>Số lượng đã bán:
-                      <span class="badge"><%= SALES %></span>
-                    </p>
-                    <button type="button" class="btn btn-danger btn-block btn-lg">
-                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                      <span>Thêm vào giỏ hàng</span>
-                    </button>
-                  </div>
-                  <input type="hidden" value="<%= ID%>"/>
-                </div>
+                <%- include('../thumbnail/thumbnail.ejs', { data: news[i], price}) %>
               </div>
             <% } %>
           </div>
@@ -113,27 +93,8 @@
         <div class="item">
           <div class="row">
             <% for(let i = 4; i <= 7; i++) { %>
-              <% const { ID, NAME, IMAGE, PRICE, SALES } = news[i] %>
               <div class="col-sm-4 col-md-3">
-                <div class="thumbnail">
-                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                  <div class="caption">
-                    <h4><%= NAME%></h4>
-                    <p>
-                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
-                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
-                      <span class="price-discount">-<%= discount%>%</span>
-                    </p>
-                    <p>Số lượng đã bán:
-                      <span class="badge"><%= SALES%></span>
-                    </p>
-                    <button type="button" class="btn btn-danger btn-block btn-lg">
-                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                      <span>Thêm vào giỏ hàng</span>
-                    </button>
-                  </div>
-                  <input type="hidden" value="<%= ID%>"/>
-                </div>
+                <%- include('../thumbnail/thumbnail.ejs', { data: news[i], price}) %>                
               </div>
             <% } %>
           </div>
@@ -141,27 +102,8 @@
         <div class="item">
           <div class="row">
             <% for(let i = 8; i < news.length; i++) { %>
-              <% const { ID, NAME, IMAGE, PRICE, SALES } = news[i] %>
               <div class="col-sm-4 col-md-3">
-                <div class="thumbnail">
-                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                  <div class="caption">
-                    <h4><%= NAME%></h4>
-                    <p>
-                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
-                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
-                      <span class="price-discount">-<%= discount%>%</span>
-                    </p>
-                    <p>Số lượng đã bán:
-                      <span class="badge"><%= SALES%></span>
-                    </p>
-                    <button type="button" class="btn btn-danger btn-block btn-lg">
-                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                      <span>Thêm vào giỏ hàng</span>
-                    </button>
-                  </div>
-                  <input type="hidden" value="<%= ID%>"/>
-                </div>
+                <%- include('../thumbnail/thumbnail.ejs', { data: news[i], price}) %>              
               </div>
             <% } %>
           </div>
@@ -196,27 +138,8 @@
         <div class="item active">
           <div class="row">
             <% for(let i = 0; i <= 3; i++) { %>
-              <% const { ID, NAME, IMAGE, PRICE, SALES } = sales[i] %>
               <div class="col-sm-4 col-md-3">
-                <div class="thumbnail">
-                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                  <div class="caption">
-                    <h4><%= NAME%></h4>
-                    <p>
-                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
-                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
-                      <span class="price-discount">-<%= discount%>%</span>
-                    </p>
-                    <p>Số lượng đã bán:
-                      <span class="badge"><%= SALES%></span>
-                    </p>
-                    <button type="button" class="btn btn-danger btn-block btn-lg">
-                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                      <span>Thêm vào giỏ hàng</span>
-                    </button>
-                  </div>
-                  <input type="hidden" value="<%= ID%>"/>
-                </div>
+                <%- include('../thumbnail/thumbnail.ejs', { data: sales[i], price}) %>                
               </div>
             <% } %>
           </div>
@@ -224,27 +147,8 @@
         <div class="item">
           <div class="row">
             <% for(let i = 4; i <= 7; i++) { %>
-              <% const { ID, NAME, IMAGE, PRICE, SALES } = sales[i] %>
               <div class="col-sm-4 col-md-3">
-                <div class="thumbnail">
-                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                  <div class="caption">
-                    <h4><%= NAME%></h4>
-                    <p>
-                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
-                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
-                      <span class="price-discount">-<%= discount%>%</span>
-                    </p>
-                    <p>Số lượng đã bán:
-                      <span class="badge"><%= SALES%></span>
-                    </p>
-                    <button type="button" class="btn btn-danger btn-block btn-lg">
-                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                      <span>Thêm vào giỏ hàng</span>
-                    </button>
-                  </div>
-                  <input type="hidden" value="<%= ID%>"/>
-                </div>
+                <%- include('../thumbnail/thumbnail.ejs', { data: sales[i], price}) %>
               </div>
             <% } %>
           </div>
@@ -252,27 +156,8 @@
         <div class="item">
           <div class="row">
             <% for(let i = 8; i < sales.length; i++) { %>
-              <% const { ID, NAME, IMAGE, PRICE, SALES } = sales[i] %>
               <div class="col-sm-4 col-md-3">
-                <div class="thumbnail">
-                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                  <div class="caption">
-                    <h4><%= NAME%></h4>
-                    <p>
-                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
-                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
-                      <span class="price-discount">-<%= discount%>%</span>
-                    </p>
-                    <p>Số lượng đã bán:
-                      <span class="badge"><%= SALES%></span>
-                    </p>
-                    <button type="button" class="btn btn-danger btn-block btn-lg">
-                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                      <span>Thêm vào giỏ hàng</span>
-                    </button>
-                  </div>
-                  <input type="hidden" value="<%= ID%>"/>
-                </div>
+                <%- include('../thumbnail/thumbnail.ejs', { data: sales[i], price}) %>                
               </div>
             <% } %>
           </div>
@@ -308,27 +193,8 @@
         <div class="item active">
           <div class="row">
             <% for(let i = 0; i <= 3; i++) { %>
-              <% const { ID, NAME, IMAGE, PRICE, SALES } = views[i] %>
               <div class="col-sm-4 col-md-3">
-                <div class="thumbnail">
-                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                  <div class="caption">
-                    <h4><%= NAME%></h4>
-                    <p>
-                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
-                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
-                      <span class="price-discount">-<%= discount%>%</span>
-                    </p>
-                    <p>Số lượng đã bán:
-                      <span class="badge"><%= SALES%></span>
-                    </p>
-                    <button type="button" class="btn btn-danger btn-block btn-lg">
-                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                      <span>Thêm vào giỏ hàng</span>
-                    </button>
-                  </div>
-                  <input type="hidden" value="<%= ID%>"/>
-                </div>
+                <%- include('../thumbnail/thumbnail.ejs', { data: views[i], price}) %>                
               </div>
             <% } %>
           </div>
@@ -336,27 +202,8 @@
         <div class="item">
           <div class="row">
             <% for(let i = 4; i <= 7; i++) { %>
-              <% const { ID, NAME, IMAGE, PRICE, SALES } = views[i] %>
               <div class="col-sm-4 col-md-3">
-                <div class="thumbnail">
-                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                  <div class="caption">
-                    <h4><%= NAME%></h4>
-                    <p>
-                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
-                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
-                      <span class="price-discount">-<%= discount%>%</span>
-                    </p>
-                    <p>Số lượng đã bán:
-                      <span class="badge"><%= SALES%></span>
-                    </p>
-                    <button type="button" class="btn btn-danger btn-block btn-lg">
-                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                      <span>Thêm vào giỏ hàng</span>
-                    </button>
-                  </div>
-                  <input type="hidden" value="<%= ID%>"/>
-                </div>
+                <%- include('../thumbnail/thumbnail.ejs', { data: views[i], price}) %>                
               </div>
             <% } %>
           </div>
@@ -364,27 +211,8 @@
         <div class="item">
           <div class="row">
             <% for(let i = 8; i < views.length; i++) { %>
-              <% const { ID, NAME, IMAGE, PRICE, SALES } = views[i] %>
               <div class="col-sm-4 col-md-3">
-                <div class="thumbnail">
-                  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
-                  <div class="caption">
-                    <h4><%= NAME%></h4>
-                    <p>
-                      <span class="price-tag"><%= priceFormat(PRICE) %>&nbsp;₫</span>
-                      <strike><%= priceDiscount(PRICE)%>&nbsp;₫</strike>
-                      <span class="price-discount">-<%= discount%>%</span>
-                    </p>
-                    <p>Số lượng đã bán:
-                      <span class="badge"><%= SALES%></span>
-                    </p>
-                    <button type="button" class="btn btn-danger btn-block btn-lg">
-                      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                      <span>Thêm vào giỏ hàng</span>
-                    </button>
-                  </div>
-                  <input type="hidden" value="<%= ID%>"/>
-                </div>
+                <%- include('../thumbnail/thumbnail.ejs', { data: views[i], price}) %>                
               </div>
             <% } %>
           </div>

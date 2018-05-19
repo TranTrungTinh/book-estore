@@ -1,5 +1,5 @@
 <% 
-  const {NAME, EMAIL, GENDER} = user;
+  const {NAME, EMAIL, GENDER, PHONE} = user;
   const gender = GENDER === 'NAM' ? true : false; 
 %>
 <div class="col-sm-12 col-md-3">
@@ -43,7 +43,7 @@
         <div class="form-group">
           <label for="inputAcountPhone" class="col-sm-2 control-label label-login-content">Số điện thoại</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control input-lg" id="inputAcountPhone" placeholder="0979899100">
+            <input type="text" class="form-control input-lg" id="inputAcountPhone" placeholder="<%= PHONE ? 'PHONE' : 'Hãy nhập SĐT để trải nghiệm tốt hơn' %>">
           </div>
         </div>
         <div class="form-group">

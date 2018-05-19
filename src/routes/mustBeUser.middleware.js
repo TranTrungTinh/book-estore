@@ -19,6 +19,10 @@ function checkToken(req, res, next) {
   verify(TOKEN)
   .then(obj => {
     req.idUser = obj.ID;
+    return sign(obj);
+  })
+  .then(newToken => {
+    res.cookie('TOKEN', newToken);
     next();
   })
   .catch(error => res.send({ success: false, message: 'INVALID_TOKEN' }));  
