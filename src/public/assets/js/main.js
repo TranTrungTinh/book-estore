@@ -89,9 +89,16 @@ $('#btnSearch').click(e => {
 /* ============ Views book detail ============*/
 $('#main-content').on('click', '.thumbnail', e => {
   const _this = e.target.nodeName;
-  if(_this === 'SPAN' || _this === 'BUTTON') { return; }
   const idBook = e.currentTarget.lastElementChild.defaultValue;
-  location.href = '/book/' + idBook;
+  const title = e.currentTarget.children[1].children[0].innerText;
+  
+  if(_this !== 'SPAN' && _this !== 'BUTTON') return location.href = '/book/' + idBook;
+
+  $.post('/shopping-cart/cart', { idBook }, data => {
+    if(!data.success) return swal("OH OH",`Đã có "${title}" trong giỏ hàng`,"warning");;
+    swal("XONG",`Đã thêm "${title}" vào giỏ hàng`,"success");
+  });
+  
 });
 /* ============ Views book detail ============*/
 

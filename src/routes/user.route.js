@@ -3,8 +3,8 @@ const parser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const { UserServices } = require('../services/user.services');
-const { mustBeUser, checkToken } = require('./mustBeUser.middleware');
-const { mustCheckCaptcha } = require('./mustCheckCaptcha.middleware');
+const { mustBeUser, checkToken } = require('../middleware/mustBeUser.middleware');
+const { mustCheckCaptcha } = require('../middleware/mustCheckCaptcha.middleware');
 
 const userRouter = Router();
 
