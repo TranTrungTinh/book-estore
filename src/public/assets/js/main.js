@@ -94,9 +94,17 @@ $('#main-content').on('click', '.thumbnail', e => {
   
   if(_this !== 'SPAN' && _this !== 'BUTTON') return location.href = '/book/' + idBook;
 
+  const count = localStorage.getItem('count') || '';
+  if(!count) return swal("CẢNH BÁO","Bạn phải đăng nhập trước khi mua hàng","warning")
+  .then(() => $('#myModelLogin').modal('show'));
+
   $.post('/shopping-cart/cart', { idBook }, data => {
     if(!data.success) return swal("OH OH",`Đã có "${title}" trong giỏ hàng`,"warning");;
-    swal("XONG",`Đã thêm "${title}" vào giỏ hàng`,"success");
+    swal("XONG",`Đã thêm "${title}" vào giỏ hàng`,"success")
+    .then(() => {
+      localSaveItem('count', data.count);
+      location.reload();
+    });
   });
   
 });
@@ -106,6 +114,10 @@ $('#main-content').on('click', '.thumbnail', e => {
 
 /* ============ Shopping cart ============*/
 $(document).on('click', '#btn-shopping-cart' , e => {
+  const count = localStorage.getItem('count') || '';
+  if(!count) return swal("CẢNH BÁO","Bạn phải đăng nhập trước khi mua hàng","warning")
+  .then(() => $('#myModelLogin').modal('show'));
+
   location.href = '/shopping-cart';
 });
 /* ============ Shopping cart ============*/
@@ -138,6 +150,7 @@ $('#btn-signin').click(e => {
     $('#sign-in-loader').html('<div class="loader"></div>');
     setTimeout(() => {
       localSaveItem('name', data.user.NAME);
+      localSaveItem('count', '0');
       location.href = '/user/account/edit';
     }, 2000);
   });

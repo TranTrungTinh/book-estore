@@ -50,7 +50,7 @@
           <button class="btn btn-danger navbar-btn btn-lg my_shopping_cart height-50" type="button" id="btn-shopping-cart">
             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
             <span>&nbsp;Giỏ hàng&nbsp;&nbsp;</span>
-            <span class="badge fs-20">3</span>
+            <span class="badge fs-20" id="btn-item-count"></span>
           </button>
         </li>
       </ul>
@@ -179,6 +179,6 @@
   </div>
 </div>
 <script>
-  if(!localStorage.getItem('name')) document.getElementById('toggle-account').innerText = 'Đăng nhập';
-  else document.getElementById('toggle-account').innerText = 'Chào ' + localStorage.getItem('name');
+  document.getElementById('toggle-account').innerText = localStorage.getItem('name') ? 'Chào ' + localStorage.getItem('name') : 'Đăng nhập';
+  document.getElementById('btn-item-count').innerText = localStorage.getItem('count') ? localStorage.getItem('count') : '0';
 </script>

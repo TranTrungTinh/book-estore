@@ -1,3 +1,7 @@
+<% const { priceDiscount, priceFormat, discount } = price; %>
+<% let TOTAL = 0; %>
+
+
 <div class="row padding_bottom_big">
   <div class="alert alert-warning item-cart-title" role="alert">
     <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
@@ -9,119 +13,56 @@
 <div class="row">
   <div class="col-sm-12">
     <p class="cart-title">GIỎ HÀNG (
-      <span>3</span> sản phẩm)</p>
+      <span id="item-count"></span> sản phẩm)</p>
   </div>
   <div class="row">
     <div class="col-sm-8">
-      <div class="row item-cart-content">
-        <div class="col-sm-3">
-          <img src="./assets/media/images/book06.jpg" alt="..." class="my_banner_cover">
-        </div>
-        <div class="col-sm-4 item-cart-author">
-          <p>Tuổi Trẻ Đáng Giá Bao Nhiêu Tuổi</p>
-          <p>- Tac gia:
-            <a href="javascript:;">Nguyen van a</a>
-          </p>
-          <p>Chi con
-            <span>3</span> san pham</p>
-          <p>
-            <a href="javascript:;">Xoá</a>
-          </p>
-        </div>
-        <div class="col-sm-2 item-cart-price">
-          <p>59.000 ₫</p>
-          <p>
-            <strike>98.000 ₫</strike>
-          </p>
-          <p>
-            <span class="label label-warning">-23%</span>
-          </p>
-        </div>
-        <div class="col-sm-3 item-cart-total">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">-</button>
-            </span>
-            <input type="text" class="form-control" value="1" />
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">+</button>
-            </span>
-          </div>
+    <% if(!carts.length) { %>
+      <div class="col-sm-12">
+        <div class="alert alert-info margin-bottom-big fs-20" id="my-title-list">
+          KHÔNG CÓ SẢN PHẨM
         </div>
       </div>
-      <div class="row item-cart-content">
-        <div class="col-sm-3">
-          <img src="./assets/media/images/book10.jpg" alt="..." class="my_banner_cover">
-        </div>
-        <div class="col-sm-4 item-cart-author">
-          <p>Tuổi Trẻ Đáng Giá Bao Nhiêu</p>
-          <p>- Tac gia:
-            <a href="javascript:;">Nguyen van a</a>
-          </p>
-          <p>Chi con
-            <span>3</span> san pham</p>
-          <p>
-            <a href="javascript:;">Xoá</a>
-          </p>
-        </div>
-        <div class="col-sm-2 item-cart-price">
-          <p>59.000 ₫</p>
-          <p>
-            <strike>98.000 ₫</strike>
-          </p>
-          <p>
-            <span class="label label-warning">-23%</span>
-          </p>
-        </div>
-        <div class="col-sm-3 item-cart-total">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">-</button>
-            </span>
-            <input type="text" class="form-control" value="1" />
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">+</button>
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="row item-cart-content">
-          <div class="col-sm-3">
-            <img src="./assets/media/images/book09.jpg" alt="..." class="my_banner_cover">
-          </div>
-          <div class="col-sm-4 item-cart-author">
-            <p>Tuổi Trẻ Đáng Giá Bao Nhiêu</p>
-            <p>- Tac gia:
-              <a href="javascript:;">Nguyen van a</a>
-            </p>
-            <p>Chi con
-              <span>3</span> san pham</p>
-            <p>
-              <a href="javascript:;">Xoá</a>
-            </p>
-          </div>
-          <div class="col-sm-2 item-cart-price">
-            <p>59.000 ₫</p>
-            <p>
-              <strike>98.000 ₫</strike>
-            </p>
-            <p>
-              <span class="label label-warning">-23%</span>
-            </p>
-          </div>
-          <div class="col-sm-3 item-cart-total">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">-</button>
-              </span>
-              <input type="text" class="form-control" value="1" />
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">+</button>
-              </span>
+    <% } else { %>
+      <% carts.forEach(e => { %>
+        <% const { ID, NAME, PRICE, IMAGE, SALES, AMOUNT } = e %>
+        <% TOTAL += +PRICE; %>
+          <div class="row item-cart-content">
+            <div class="col-sm-3">
+              <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
+            </div>
+            <div class="col-sm-4 item-cart-author">
+              <p><%= NAME%></p>
+              <p> <input type="hidden" value="<%= ID%>"> </p>
+              <p>Đã bán <span><%= SALES%></span> sản phẩm</p>
+              <p><a href="javascript:;">
+                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+              </a></p>
+            </div>
+            <div class="col-sm-2 item-cart-price">
+              <p><%= priceFormat(PRICE)%> ₫</p>
+              <p>
+                <strike><%= priceDiscount(PRICE)%> ₫</strike>
+              </p>
+              <p>
+                <span class="label label-warning">-<%= discount%>%</span>
+              </p>
+            </div>
+            <div class="col-sm-3 item-cart-total">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">-</button>
+                </span>
+                <input type="text" class="form-control" value="1" />
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">+</button>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
+        <% }) %>
     </div>
+
     <div class="col-sm-4 item-cart-root-buy">
       <div class="row">
         <div class="col-sm-12 item-cart-buy">
@@ -130,7 +71,7 @@
               Thành tiền: 
             </div>
             <div class="col-sm-6">
-              <p>150.100 ₫</p>
+              <p><%= priceFormat(TOTAL)%> ₫</p>
               <p>(Đã bao gồm VAT)</p>
             </div>
           </div>
@@ -140,6 +81,10 @@
         </div>
       </div>
     </div>
+  <% } %>
   </div>
 
 </div>
+<script>
+  document.getElementById('item-count').innerText = localStorage.getItem('count') ? localStorage.getItem('count') : '0';
+</script>
