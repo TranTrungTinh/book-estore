@@ -22,7 +22,7 @@ if (page !== -1) { // pagination exists
 
     // ====================================================================
     // selected page is in last 5 pages AND there are equal or more than 5 pages
-    else if (navList.length > 5 && page > navList.length - 4) {
+    else if (navList.length > 5 && page > navList.length - 3) {
         for (let i = navList.length - 1; i > navList.length - 4; i--) {
             $(navList[i]).show()
         }
@@ -34,7 +34,7 @@ if (page !== -1) { // pagination exists
 
     // ====================================================================
     // selected page is in middle AND there are equal or more than 5 pages
-    if (navList.length > 5 && page > 4 && page < navList.length - 3) {
+    if (navList.length > 3 && page > 3 && page < navList.length - 2) {
         // so show 2 li before & 2 li after the current seleected page
         $(navList[page - 2]).show()
         $(navList[page - 3]).show()
