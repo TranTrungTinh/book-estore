@@ -112,6 +112,38 @@ $('#main-content').on('click', '.thumbnail', e => {
 
 
 
+/* ============ Detail page ============*/
+$('#btnSub').click(e => {
+  e.preventDefault();
+  let count = $('#txtTotal').val();
+  if(+count > 1) 
+    $('#txtTotal').val(+(--count));
+});
+$('#btnAdd').click(e => {
+  e.preventDefault();
+  let count = $('#txtTotal').val();
+  $('#txtTotal').val(+(++count));
+});
+
+$('#addItem-btn').click(e => {
+  const pathname = location.pathname.toString();
+  const flateIndex = pathname.lastIndexOf('/');
+  const idBook = pathname.substring(flateIndex + 1);
+  const amount = $('#txtTotal').val();
+  $.post('/shopping-cart/cart', { idBook, amount }, data => {
+    if(!data.success) return swal("OH OH",`Sách đã có trong giỏ hàng`,"warning");;
+    swal("XONG",`Đã thêm sách vào giỏ hàng`,"success")
+    .then(() => {
+      localSaveItem('count', data.count);
+      location.href = '/home';
+    });
+  });
+});
+/* ============ Detail page ============*/
+
+
+
+
 /* ============ Shopping cart ============*/
 $(document).on('click', '#btn-shopping-cart' , e => {
   const count = localStorage.getItem('count') || '';
@@ -119,6 +151,35 @@ $(document).on('click', '#btn-shopping-cart' , e => {
   .then(() => $('#myModelLogin').modal('show'));
 
   location.href = '/shopping-cart';
+});
+
+$('.item-cart-total').on('click', 'span:first-child > button', e => {
+  // Handle button descrease
+  const _this = e.delegateTarget.children["0"];
+  let amount = _this.children[1].defaultValue;
+  const idBook = _this.children[2].defaultValue;
+
+  if(+amount === 1) return;
+  amount = +amount - 1;
+  $.post('/shopping-cart/update', { idBook, amount }, data => {
+    if(!data.success) return;
+    location.reload();
+  });
+
+});
+
+$('.item-cart-total').on('click', 'span:last-child > button', e => {
+  // Handle button increase
+  const _this = e.delegateTarget.children["0"];
+  let amount = _this.children[1].defaultValue;
+  const idBook = _this.children[2].defaultValue;
+
+  amount = +amount + 1;
+  $.post('/shopping-cart/update', { idBook, amount }, data => {
+    if(!data.success) return;
+    location.reload();
+  });
+  
 });
 /* ============ Shopping cart ============*/
 

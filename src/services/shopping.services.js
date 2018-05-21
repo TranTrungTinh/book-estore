@@ -1,8 +1,8 @@
 const { Cart } = require('../models/cart.models');
 
 class shoppingServices {
-  static async saveItem(idUser, idBook) {
-    const results = await Cart.save(idUser, idBook);
+  static async saveItem(idUser, idBook, amount) {
+    const results = await Cart.save(idUser, idBook, amount);
     return results[1][0].COUNT;
   }
 
@@ -10,6 +10,11 @@ class shoppingServices {
     const results = await Cart.getCarts(idUser);
     if(!results[0]) throw new Error('CANNOT_FIND_CART');
     return results;
+  }
+
+  static async updateItem(idUser, idBook, amount) {
+    const results = await Cart.updateCart(idUser, idBook, amount);
+    return results[1][0].COUNT;
   }
 }
 
