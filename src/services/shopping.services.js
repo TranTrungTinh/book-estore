@@ -16,6 +16,11 @@ class shoppingServices {
     const results = await Cart.updateCart(idUser, idBook, amount);
     return results[1][0].COUNT;
   }
+
+  static async deleteItem(idUser, idBook) {
+    const results = await Cart.deleteCart(idUser, idBook);
+    return results[1][0].COUNT;
+  }
 }
 
 module.exports = { shoppingServices };

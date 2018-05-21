@@ -165,7 +165,6 @@ $('.item-cart-total').on('click', 'span:first-child > button', e => {
     if(!data.success) return;
     location.reload();
   });
-
 });
 
 $('.item-cart-total').on('click', 'span:last-child > button', e => {
@@ -179,7 +178,16 @@ $('.item-cart-total').on('click', 'span:last-child > button', e => {
     if(!data.success) return;
     location.reload();
   });
-  
+});
+
+$('.item-cart-author').on('click', 'a', e => {
+  // Handle delete item in cart
+  e.preventDefault();
+  const idBook = e.currentTarget.attributes[1].value;
+  $.post('/shopping-cart/delete', { idBook }, data => {
+    if(!data.success) return;
+    location.reload();
+  });
 });
 /* ============ Shopping cart ============*/
 

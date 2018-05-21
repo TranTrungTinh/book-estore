@@ -2,12 +2,12 @@ const { queryDB } = require('../helpers/connectDatabase');
 
 class Cart {
   static async save(idUser, idBook, amount) {
-    const selectSql = `SELECT * FROM GIOHANG WHERE ID_BOOK = ${idBook}`;
-    const result = await queryDB(selectSql);
+    const selectSql = `SELECT * FROM GIOHANG WHERE ID_BOOK = ? AND ID_USER = ?`;
+    const result = await queryDB(selectSql, [idBook, idUser]);
     if(result[0]) throw new Error('BOOK_EXISTED');
 
     const sql = `INSERT INTO GIOHANG(ID_USER, ID_BOOK, AMOUNT) VALUES (?, ?, ?);
-                 SELECT COUNT(*) as COUNT FROM GIOHANG;`;
+                 SELECT COUNT(*) as COUNT FROM GIOHANG WHERE ID_USER = ${idUser};`;
     return queryDB(sql, [idUser, idBook, amount]);
   }
 
@@ -21,8 +21,14 @@ class Cart {
 
   static updateCart(idUser, idBook, amount) {
     const sql = `UPDATE GIOHANG SET AMOUNT = ? WHERE ID_USER = ? AND ID_BOOK = ?;
-                 SELECT COUNT(*) as COUNT FROM GIOHANG;`;
+                 SELECT COUNT(*) as COUNT FROM GIOHANG WHERE ID_USER = ${idUser};`;
     return queryDB(sql, [amount, idUser, idBook]);
+  }
+
+  static deleteCart(idUser, idBook) {
+    const sql = `DELETE FROM GIOHANG WHERE ID_USER = ? AND ID_BOOK = ?;
+                 SELECT COUNT(*) as COUNT FROM GIOHANG WHERE ID_USER = ${idUser};`;
+    return queryDB(sql, [idUser, idBook]);
   }
 }
 

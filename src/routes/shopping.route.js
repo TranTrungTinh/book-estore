@@ -35,5 +35,12 @@ shoppingRouter.post('/update', (req, res) => {
   .then(count => res.send({ success: true, count }))
   .catch(error => res.send({ success: false, message: error.message }));
 });
+shoppingRouter.post('/delete', (req, res) => {
+  const { idBook } = req.body;
+
+  shoppingServices.deleteItem(req.idUser, idBook)
+  .then(count => res.send({ success: true, count }))
+  .catch(error => res.send({ success: false, message: error.message }));
+});
 
 module.exports = { shoppingRouter };
