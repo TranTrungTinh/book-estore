@@ -3,8 +3,10 @@ const parser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const { UserServices } = require('../services/user.services');
+const { OrderServices } = require('../services/order.services');
 const { mustBeUser, checkToken } = require('../middleware/mustBeUser.middleware');
 const { mustCheckCaptcha } = require('../middleware/mustCheckCaptcha.middleware');
+const { showStatus } = require('../helpers/getCurrentDate');
 
 const userRouter = Router();
 
@@ -49,8 +51,14 @@ userRouter.post('/account/update', checkToken, (req, res) => {
   .catch(error => res.send({ success: false, message: error.message }));
 });
 
-userRouter.get('/account/orders', (req, res) => {
-  res.render('render/account', { isDetail: false});
+userRouter.get('/account/orders', checkToken, (req, res) => {
+  OrderServices.showHistoryOrderByIdUser(req.idUser)
+  .then(orders => res.render('render/account', { isDetail: false, orders, showStatus }))
+  .catch(error => console.log(error.message));
 });
+
+userRouter.get('/account/order/history/:id', (req, res) => {
+  res.render('render/historyOrder');
+})
 
 module.exports = {userRouter};

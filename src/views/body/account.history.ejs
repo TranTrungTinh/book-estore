@@ -1,0 +1,85 @@
+<div class="col-sm-12 col-md-3">
+    <div class="row">
+      <div class="col-sm-12 acount-info-name">
+        <div>Tài khoản của: </div>
+        <span id="accountName" ></span>
+      </div>
+      <div class="col-sm-12 acount-info-list">
+        <div class="list-group">
+          <a href="javascript:;" class="list-group-item" id="acount-info">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <span class="acount-info-title">Thông tin tài khoản</span>
+          </a>
+          <a href="javascript:;" class="list-group-item active" id="acount-history">
+            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+            <span class="acount-info-title">Lịch sử mua hàng</span>
+          </a>
+          <a href="javascript:;" class="list-group-item" id="btn-logout">
+            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+            <span class="acount-info-title">Đăng xuất</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="col-sm-12 col-md-9">
+    <div class="row">
+      <div class="col-sm-12 acount-info-name">
+        <p>Thông tin tài khoản</p>
+      </div>
+      <div class="col-sm-12 acount-history-panel">
+        <div class="row">
+          <div class="pull-left">Chi tiết đơn hàng #225814527 - Giao hàng thành công</div>
+          <div class="pull-right">Ngày đặt hàng: 00:18 11/04/2018</div>
+        </div>
+        <div class="padding_bottom_big"></div>
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Sản phẩm</th>
+                      <th>Giá</th> 
+                      <th>Số lượng</th>
+                      <th>Tạm tính</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <td class="col-md-6">
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <img src="./assets/media/images/0124.jpg" alt="" style="width: 120px; height: 90px;">
+                            </div>
+                            <div class="col-sm-9">
+                              <span>Adapter Sạc 2 Cổng Anker PowerPort 2 Lite 12W A2129J11 (Đen) - Hàng Chính Hãng</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="col-md-2">275.000 ₫</td> 
+                        <td class="col-md-2">1</td>
+                        <td class="col-md-2">290.000 ₫</td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-offset-8 col-sm-3">
+            <p>
+              <span class="pull-left">Tổng tạm tính: </span>
+              <span class="pull-right">334.000 ₫</span>
+            </p>
+            <p>
+                <span class="pull-left">Tổng cộng: </span>
+                <span class="pull-right">334.000 ₫</span>
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('accountName').innerText = localStorage.getItem('name') ? localStorage.getItem('name') : 'Customer';
+  </script>

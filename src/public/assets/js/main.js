@@ -159,11 +159,12 @@ $('.item-cart-total').on('click', 'span:first-child > button', e => {
   let amount = _this.children[1].defaultValue;
   const idBook = _this.children[2].defaultValue;
 
-  if(+amount === 1) return;
+  if(+amount <= 1) return;
   amount = +amount - 1;
   $.post('/shopping-cart/update', { idBook, amount }, data => {
     if(!data.success) return;
-    location.reload();
+    setTimeout( () => location.reload(), 500);
+    // location.reload();
   });
 });
 
@@ -176,7 +177,8 @@ $('.item-cart-total').on('click', 'span:last-child > button', e => {
   amount = +amount + 1;
   $.post('/shopping-cart/update', { idBook, amount }, data => {
     if(!data.success) return;
-    location.reload();
+    setTimeout( () => location.reload(), 500);    
+    // location.reload();
   });
 });
 
@@ -186,8 +188,22 @@ $('.item-cart-author').on('click', 'a', e => {
   const idBook = e.currentTarget.attributes[1].value;
   $.post('/shopping-cart/delete', { idBook }, data => {
     if(!data.success) return;
-    location.reload();
+    localSaveItem('count', data.count);
+    setTimeout( () => location.reload(), 500);
   });
+});
+
+$('#orderCartBtn').click(e => {
+
+  const total = $('#totalPrice').text() || '';
+  if(!total) return;
+
+  $.post('/shopping-cart/order', { total }, data => {
+    if(!data.success) return console.log(data);
+    swal("THÀNH CÔNG","Đơn hàng của bạn đã được ghi nhận !!!","success")
+    .then(() => location.href = '/home');
+  });
+
 });
 /* ============ Shopping cart ============*/
 

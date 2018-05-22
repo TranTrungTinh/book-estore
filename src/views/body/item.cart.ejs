@@ -71,13 +71,15 @@
               Thành tiền: 
             </div>
             <div class="col-sm-6">
-              <p><%= priceFormat(TOTAL)%> ₫</p>
+              <p><span id="totalPrice"><%= priceFormat(TOTAL)%></span> ₫</p>
               <p>(Đã bao gồm VAT)</p>
             </div>
           </div>
         </div>
         <div class="col-sm-12">
-          <button type="button" class="btn btn-danger btn-block btn-lg">Tiến hành đặt hàng</button>
+          <button type="button" class="btn btn-danger btn-block btn-lg" id="orderCartBtn">
+            Tiến hành đặt hàng
+          </button>
         </div>
       </div>
     </div>

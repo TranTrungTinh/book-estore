@@ -13,4 +13,5 @@ function priceDiscount(price) {
   return priceFormat(money);
 }
 
+
 module.exports = { priceFormat, priceDiscount, discount };

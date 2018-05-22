@@ -30,6 +30,16 @@ class Cart {
                  SELECT COUNT(*) as COUNT FROM GIOHANG WHERE ID_USER = ${idUser};`;
     return queryDB(sql, [idUser, idBook]);
   }
+
+  static getCartByIdAndDelete(idUser) {
+    const sql = `SELECT g.ID_BOOK, g.AMOUNT, s.NAME, s.PRICE
+                 FROM GIOHANG g, THONGTINSACH s
+                 WHERE g.ID_USER = ${idUser}
+                 AND g.ID_BOOK = s.ID;
+
+                 DELETE FROM GIOHANG WHERE ID_USER = ${idUser};`;
+    return queryDB(sql);
+  }
 }
 
 module.exports = { Cart };

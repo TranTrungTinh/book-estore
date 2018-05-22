@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 
 const { checkToken } = require('../middleware/mustBeUser.middleware');
 const { shoppingServices } = require('../services/shopping.services');
+const { OrderServices } = require('../services/order.services');
 const { priceDiscount, priceFormat, discount } = require('../helpers/priceFormat');
 
 const shoppingRouter = Router();
@@ -40,6 +41,12 @@ shoppingRouter.post('/delete', (req, res) => {
 
   shoppingServices.deleteItem(req.idUser, idBook)
   .then(count => res.send({ success: true, count }))
+  .catch(error => res.send({ success: false, message: error.message }));
+});
+
+shoppingRouter.post('/order', (req, res) => {
+  OrderServices.saveOrderByIdUser(req.idUser, req.body.total)
+  .then(() => res.send({ success: true }))
   .catch(error => res.send({ success: false, message: error.message }));
 });
 
