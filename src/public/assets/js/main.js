@@ -198,12 +198,20 @@ $('#orderCartBtn').click(e => {
   const total = $('#totalPrice').text() || '';
   if(!total) return;
 
-  $.post('/shopping-cart/order', { total }, data => {
-    if(!data.success) return console.log(data);
-    swal("THÀNH CÔNG","Đơn hàng của bạn đã được ghi nhận !!!","success")
-    .then(() => location.href = '/home');
+  swal({
+    title: "XÁC NHẬN !!!",
+    text: "Bạn chắc chắn đặt hàng",
+    icon: "info",
+    buttons: true,
+    dangerMode: true,
+  }).then(yes => { if(!yes) return;
+    $.post('/shopping-cart/order', { total }, data => {
+      if(!data.success) return console.log(data);
+      localSaveItem('count', '0');
+      swal("THÀNH CÔNG","Đơn hàng của bạn đã được ghi nhận !!!","success")
+      .then(() => location.href = '/home');
+    });
   });
-
 });
 /* ============ Shopping cart ============*/
 
@@ -254,6 +262,7 @@ $('#btn-logout').click(e => {
   .then(yes => { if(!yes) return;
     $.post('/user/logout', data => {});
     localStorage.removeItem('name');
+    localStorage.removeItem('count');
     location.href = '/home'
   });
 });

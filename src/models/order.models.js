@@ -18,11 +18,11 @@ class Order {
     const idOrder = Math.round(Math.random() * 100000) + '';
     const currentDate = getCurrentDate();
 
-    let content = "";
+    const length = carts.length;
+    let content = carts[0].NAME;
+    if(length >= 1) content += `...và ${length - 1} sản phẩm khác`;
     for (let index = 0; index < carts.length; index++) {
-      const { ID_BOOK, AMOUNT, NAME, PRICE } = carts[index];
-      content += `${NAME}. `;
-      await this.saveOrderDetail(idOrder, ID_BOOK, AMOUNT);
+      await this.saveOrderDetail(idOrder, carts[index].ID_BOOK, carts[index].AMOUNT);
     }
     
     const sql = `INSERT INTO DONHANG(ID, ID_USER, DATE_CREATED, CONTENT, TOTAL_COST)

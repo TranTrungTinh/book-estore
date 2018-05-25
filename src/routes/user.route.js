@@ -41,7 +41,7 @@ userRouter.post('/logout', (req, res) => {
 userRouter.get('/account/edit', checkToken, (req, res) => {
   UserServices.showUserInfoBy(req.idUser)
   .then(user => res.render('render/account', { isDetail: true, user}))
-  .catch(error => res.send({ success: false, message: error.message }));
+  .catch(error => res.render('render/account', { isDetail: true }));
 });
 
 userRouter.post('/account/update', checkToken, (req, res) => {
@@ -55,7 +55,7 @@ userRouter.post('/account/update', checkToken, (req, res) => {
 userRouter.get('/account/orders', checkToken, (req, res) => {
   OrderServices.showHistoryOrderByIdUser(req.idUser)
   .then(orders => res.render('render/account', { isDetail: false, orders, showStatus }))
-  .catch(error => res.send({ success: false, message: error.message }));
+  .catch(error => res.render('render/account', { isDetail: false, orders: [], showStatus}));
 });
 
 userRouter.get('/account/order/history/:id', (req, res) => {

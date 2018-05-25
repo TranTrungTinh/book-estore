@@ -1,6 +1,15 @@
 
 <html>
-    <%- include('../header/header.ejs') %>
+  <base href="http://localhost:3000">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="./assets/media/icon/icon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/bootstrap-datepicker3.standalone.min.css">
+  <link rel="stylesheet" href="./assets/css/index_style.css">
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+  <title>Account | Book e-Store</title>
 <body>
   <%- include('../header/navigation.ejs') %>
     <div class="container-fluid">
@@ -14,5 +23,6 @@
     </div>
   <%- include('../footer/footer.ejs') %>
   <%- include('../footer/script.ejs') %>
+  <script src="./assets/js/bootstrap-datepicker.min.js"></script>
 </body>
 </html>
