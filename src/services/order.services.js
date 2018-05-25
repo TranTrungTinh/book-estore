@@ -12,6 +12,12 @@ class OrderServices {
     return results;
   }
 
+  static async showOrderDetailByIdOrder(idOrder) {
+    const results = await Order.getDetailOrderByIdOrder(idOrder);
+    if(!results[0]) throw new Error("CANNOT_FIND_ORDER");
+    return results;
+  }
+
 }
 
 module.exports = { OrderServices }

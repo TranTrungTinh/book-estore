@@ -1,3 +1,4 @@
+<!-- <title>Đơn hàng của tôi | Book eStore</title> -->
 <div class="col-sm-12 col-md-3">
   <div class="row">
     <div class="col-sm-12 acount-info-name">
@@ -26,38 +27,32 @@
 <div class="col-sm-12 col-md-9">
   <div class="row">
     <div class="col-sm-12 acount-info-name">
-      <p>Thông tin tài khoản</p>
+      <p>Đơn hàng của tôi</p>
     </div>
     <div class="col-sm-12 acount-history-panel">
+      <div class="row">
       <% if(!orders.length) { %>
         <div>Không có lịch sử mua hàng</div>
       <% } else { %>
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr class="info">
-                <th>Mã đơn hàng</th>
-                <th>Ngày mua</th> 
-                <th>Sản phẩm</th>
-                <th>Tổng tiền</th> 
-                <th>Trạng thái<br>đơn hàng</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% orders.forEach(e => { %>
-                <% const {ID, DATE_CREATED, CONTENT, TOTAL_COST, STATE} = e; %>
-                <tr>
-                  <td class="col-md-2"><a href="/user/account/order/history/<%= ID%>"><%= ID%></a></td>
-                  <td class="col-md-2"><%= DATE_CREATED%></td> 
-                  <td class="col-md-4"><%= CONTENT%></td>
-                  <td class="col-md-2"><%= TOTAL_COST%> ₫</td> 
-                  <td class="col-md-2"><%= showStatus(STATE)%></td>
-                </tr>
-              <% }); %>
-            </tbody>
-          </table>
+        <div class="col-xs-12 order-item-header">
+          <div class="col-xs-2">Mã đơn hàng</div>
+          <div class="col-xs-2">Ngày mua</div>
+          <div class="col-xs-4">Sản phẩm</div>
+          <div class="col-xs-2">Tổng tiền</div>
+          <div class="col-xs-2">Trạng thái<br>đơn hàng</div>
         </div>
+        <% orders.forEach(e => { %>
+        <% const {ID, DATE_CREATED, CONTENT, TOTAL_COST, STATE} = e; %>
+          <div class="col-xs-12 order-item-body">
+            <div class="col-xs-2"><a href="/user/account/order/history/<%= ID%>"><%= ID%></a></div>
+            <div class="col-xs-2"><%= DATE_CREATED%></div>
+            <div class="col-xs-4"><%= CONTENT%></div>
+            <div class="col-xs-2"><%= TOTAL_COST%> ₫</div>
+            <div class="col-xs-2"><%= showStatus(STATE)%></div>
+          </div>
+        <% }); %>
       <% } %>
+      </div>
     </div>
   </div>
 </div>

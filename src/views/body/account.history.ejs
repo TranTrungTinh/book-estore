@@ -25,57 +25,49 @@
   </div>
   <div class="col-sm-12 col-md-9">
     <div class="row">
-      <div class="col-sm-12 acount-info-name">
-        <p>Thông tin tài khoản</p>
+      <div class="col-sm-12 history-order">
+        <div class="pull-left">Chi tiết đơn hàng #<%= orders[0].ID%> - <strong><%= showStatus(orders[0].STATE)%></strong></div>
+        <div class="pull-right">Ngày đặt hàng: <%= orders[0].DATE_CREATED%></div>
       </div>
       <div class="col-sm-12 acount-history-panel">
-        <div class="row">
-          <div class="pull-left">Chi tiết đơn hàng #225814527 - Giao hàng thành công</div>
-          <div class="pull-right">Ngày đặt hàng: 00:18 11/04/2018</div>
-        </div>
         <div class="padding_bottom_big"></div>
         <div class="row">
-            <div class="table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Sản phẩm</th>
-                      <th>Giá</th> 
-                      <th>Số lượng</th>
-                      <th>Tạm tính</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                        <td class="col-md-6">
-                          <div class="row">
-                            <div class="col-sm-3">
-                              <img src="./assets/media/images/0124.jpg" alt="" style="width: 120px; height: 90px;">
-                            </div>
-                            <div class="col-sm-9">
-                              <span>Adapter Sạc 2 Cổng Anker PowerPort 2 Lite 12W A2129J11 (Đen) - Hàng Chính Hãng</span>
-                            </div>
-                          </div>
-                        </td>
-                        <td class="col-md-2">275.000 ₫</td> 
-                        <td class="col-md-2">1</td>
-                        <td class="col-md-2">290.000 ₫</td>
-                      </tr>
-                  </tbody>
-                </table>
-              </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-offset-8 col-sm-3">
-            <p>
-              <span class="pull-left">Tổng tạm tính: </span>
-              <span class="pull-right">334.000 ₫</span>
-            </p>
-            <p>
-                <span class="pull-left">Tổng cộng: </span>
-                <span class="pull-right">334.000 ₫</span>
-              </p>
+          <div class="col-xs-12 history-row-header">
+            <div class="col-xs-6">Sản phẩm</div>
+            <div class="col-xs-2">Giá</div>
+            <div class="col-xs-2">Số lượng</div>
+            <div class="col-xs-2">Tạm tính</div>
           </div>
+        <% orders.forEach(e => { %>
+        <% const { NAME, IMAGE, PRICE, AMOUNT } = e; %>
+        <% const TEMP = +PRICE * +AMOUNT; %>
+          <div class="col-xs-12 history-row-body">
+            <div class="col-xs-6 history-name">
+              <div class="col-xs-2">
+                <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_CORVER">
+              </div>
+              <div class="col-xs-10">
+                <span><%= NAME%></span>
+              </div>
+            </div>
+            <div class="col-xs-2"><%= priceFormat(PRICE)%> ₫</div>
+            <div class="col-xs-2"><%= AMOUNT%></div>
+            <div class="col-xs-2"><%= priceFormat(TEMP)%> ₫</div>
+          </div>
+        <% }); %>
+          
+        <div class="col-xs-12 history-row-total">
+            <div class="col-xs-6"></div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-2 history-title">
+              <p>Tổng cộng</p>
+            </div>
+            <div class="col-xs-2 history-total">
+              <p><%= orders[0].TOTAL_COST%> ₫</p>
+            </div>
+        </div>
+        <div class="col-xs-4 padding_top_big">
+          <a href="/user/account/orders" style="font-size: 17px; color: dodgerblue;"> << Quay lại đơn hàng của tôi</a>
         </div>
       </div>
     </div>

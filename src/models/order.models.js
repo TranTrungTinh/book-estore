@@ -37,6 +37,15 @@ class Order {
     return queryDB(sql);
   }
 
+  static getDetailOrderByIdOrder(idOrder) {
+    const sql = `SELECT d.ID, d.STATE, DATE_FORMAT(d.DATE_CREATED,'%d/%m/%Y') AS DATE_CREATED, d.TOTAL_COST, t.NAME, t.IMAGE, t.PRICE, c.AMOUNT 
+                 FROM DONHANG d, CHITIETDONHANG c, THONGTINSACH t
+                 WHERE d.ID = ${idOrder}
+                 AND c.ID_ORDER = d.ID
+                 AND c.ID_BOOK = t.ID`;
+    return queryDB(sql);
+  }
+
 }
 
 module.exports = { Order }

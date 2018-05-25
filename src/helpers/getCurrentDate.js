@@ -12,7 +12,7 @@ function getCurrentDate() {
 function showStatus(state) {
   if(state == 3) return 'Giao hàng thành công';
   if(state == 2) return 'Đang giao hàng';
-  return 'Đang xử lý';
+  return 'Chưa giao';
 }
 
 module.exports = { getCurrentDate, showStatus };
