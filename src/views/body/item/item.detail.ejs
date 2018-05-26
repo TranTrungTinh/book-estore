@@ -100,7 +100,7 @@
 <div class="row item_same_type">
   <% bookSameCategories.forEach(e => { %>
     <div class="col-sm-12 col-md-2">
-      <%- include('../thumbnail/thumbnail.ejs', { data: e, price}) %>           
+      <%- include('../../thumbnail/thumbnail.ejs', { data: e, price}) %>           
         </div>
   <% }) %>
 </div>
@@ -120,7 +120,7 @@
   <div class="row item_same_producer">
   <% bookSamePublishers.forEach(e => { %>
     <div class="col-sm-12 col-md-2">
-      <%- include('../thumbnail/thumbnail.ejs', { data: e, price}) %> 
+      <%- include('../../thumbnail/thumbnail.ejs', { data: e, price}) %> 
     </div>
   <% })} %>
 </div>

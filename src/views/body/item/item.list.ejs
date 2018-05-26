@@ -1,13 +1,10 @@
 <div class="row">
   <div class="col-sm-12">
-    <div class="alert alert-success margin-bottom-small fs-20">
-      <span id="my-title-list"></span>
-      <span><%= count*8%> kết quả</span>
-    </div>
+    <div class="alert alert-info margin-bottom-small fs-20" id="my-title-list"></div>
   </div>
   <% items.forEach(e => { %>
     <div class="col-sm-6 col-md-4 col-lg-3">
-      <%- include('../thumbnail/thumbnail.ejs', { data: e, price}) %>      
+      <%- include('../../thumbnail/thumbnail.ejs', { data: e, price}) %>                    
     </div>
   <% }) %>
   <div class="col-sm-12 item-list-page">

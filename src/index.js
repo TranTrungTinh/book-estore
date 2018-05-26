@@ -4,6 +4,7 @@ const { categoryRouter } = require('./routes/category.route');
 const { bookRouter } = require('./routes/book.route');
 const { userRouter } = require('./routes/user.route');
 const { shoppingRouter } = require('./routes/shopping.route');
+const { adminRouter } = require('./routes/admin.route');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use('/category', categoryRouter);
 app.use('/book', bookRouter);
 app.use('/user', userRouter);
 app.use('/shopping-cart', shoppingRouter);
+app.use('/admin', adminRouter);
 
 
 app.get('/', (req, res) => res.redirect('/home'));

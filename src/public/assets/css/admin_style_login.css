@@ -28,13 +28,13 @@ input[type=text] {
     background:linear-gradient(135deg, #5b247a 0%,#1bcedf 100%);
 }
 .modal-dialog {
-    left: 50%;
+    left: 35%;
     margin: 0;
     max-width: 500px;
     min-width: 320px;
     position: absolute;
-    top: 50%;
-    transform: translate(-50%,-60%);
+    top: 30%;
+    transform: translate(-50%,-50%);
     width: 100%;
 }
     .modal-content {
