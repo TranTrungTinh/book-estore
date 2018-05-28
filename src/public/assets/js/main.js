@@ -239,11 +239,11 @@ $('#btn-signin').click(e => {
   if(!email || !password) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
   
   $.post('/user/signin', {email, password}, data => {
-    if(!data.success) return swal("CÓ LỖI!", "Sai email hoặc password", "error");
+    if(!data.success) return swal("CÓ LỖI!", "Sai email hoặc password " + data.message , "error");
     $('#sign-in-loader').html('<div class="loader"></div>');
     setTimeout(() => {
       localSaveItem('name', data.user.NAME);
-      localSaveItem('count', '0');
+      localSaveItem('count', data.user.COUNT);
       location.href = '/user/account/edit';
     }, 2000);
   });

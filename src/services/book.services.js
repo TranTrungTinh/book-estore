@@ -2,6 +2,7 @@ const { Book } = require('../models/book.models');
 
 class BookServices {
   static async showBookInfo(idBook) {
+    await Book.updateViews(idBook);
     const results = await Book.getBookInfo(idBook);
     if(!results[0][0]) throw new Error('Khong tim thay');
     const book = results[0][0];

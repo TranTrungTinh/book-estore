@@ -19,6 +19,11 @@ class Cart {
     return queryDB(sql);
   }
 
+  static getCountOfCarts(idUser) {
+    const sql = `SELECT COUNT(*) as COUNT FROM GIOHANG WHERE ID_USER = ${idUser}`;
+    return queryDB(sql);
+  }
+
   static updateCart(idUser, idBook, amount) {
     const sql = `UPDATE GIOHANG SET AMOUNT = ? WHERE ID_USER = ? AND ID_BOOK = ?;
                  SELECT COUNT(*) as COUNT FROM GIOHANG WHERE ID_USER = ${idUser};`;

@@ -1,5 +1,6 @@
 const { queryDB } = require('../helpers/connectDatabase');
 const { Cart } = require('./cart.models');
+const { Book } = require('./book.models');
 const { getCurrentDate } = require('../helpers/getCurrentDate');
 
 class Order {
@@ -15,14 +16,16 @@ class Order {
     if(!results[0].length) throw new Error('CANNOT_FIND_ITEM');
 
     const carts = results[0];
-    const idOrder = Math.round(Math.random() * 100000) + '';
+    const idOrder = Math.round(Math.random() * 10000000) + '';
     const currentDate = getCurrentDate();
 
     const length = carts.length;
     let content = carts[0].NAME;
-    if(length >= 1) content += `...và ${length - 1} sản phẩm khác`;
+    if(length >= 1) content += `... và ${length - 1} sản phẩm khác.`;
     for (let index = 0; index < carts.length; index++) {
-      await this.saveOrderDetail(idOrder, carts[index].ID_BOOK, carts[index].AMOUNT);
+      const { ID_BOOK, AMOUNT} = carts[index];
+      await this.saveOrderDetail(idOrder, ID_BOOK, AMOUNT);
+      await Book.updateSales(ID_BOOK, AMOUNT);
     }
     
     const sql = `INSERT INTO DONHANG(ID, ID_USER, DATE_CREATED, CONTENT, TOTAL_COST)

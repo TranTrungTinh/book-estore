@@ -108,6 +108,16 @@ class Book {
                  LIMIT ${start}, ${rowOfPage}`;
     return queryDB(sql);
   }
+
+  static updateViews(idBook) {
+    const sql = `UPDATE THONGTINSACH SET VIEWS = VIEWS + 1 WHERE ID = ${idBook}`;
+    return queryDB(sql);
+  }
+
+  static updateSales(idBook, amount) {
+    const sql = `UPDATE THONGTINSACH SET SALES = SALES + ? WHERE ID = ?`;
+    return queryDB(sql, [amount, idBook]);
+  }
   
 }
 

@@ -1,6 +1,7 @@
 const { queryDB } = require('../helpers/connectDatabase');
 const { hash, compare } = require('bcrypt');
 const { sign, verify } = require('../helpers/jwt');
+const { Cart } = require('./cart.models');
 const saltRound = 8;
 
 class User {
@@ -23,8 +24,9 @@ class User {
     const same = await compare(rawPassword, user[0].PASSWORD);
     if (!same) throw new Error('INVALID_USER_INFO');
     const userInfo = { NAME: user[0].NAME };
-    userInfo.TOKEN = await sign({ ID: user[0].ID });
-    return userInfo;
+    const TOKEN = await sign({ ID: user[0].ID });
+    const count = await Cart.getCountOfCarts(user[0].ID);
+    return { NAME: user[0].NAME, TOKEN, COUNT: count[0].COUNT };
   }
 
   static async getUserById(id) {
