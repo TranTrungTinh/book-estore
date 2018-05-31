@@ -62,6 +62,10 @@ body {
 .my_shopping_cart {
   margin: 10px 10px 0 0;
 }
+#toggle-account {
+  display: block;
+  width: 180px;
+}
 /* ========== Navigation startus bar slyte ========== */
 
 
@@ -76,6 +80,15 @@ body {
   font-size: 16px;
   text-transform: uppercase;
   font-weight: 700;
+}
+.carousel-control {
+  position: absolute;
+  /* top: 50%; pushes the icon in the middle of the height */
+  background-image:none !important;
+  filter:none !important;
+  z-index: 5;
+  width: 70px;
+  display: inline-block;
 }
 /* ========== Home page slide style ========== */
 

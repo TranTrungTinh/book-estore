@@ -126,6 +126,9 @@ $('#btnAdd').click(e => {
 });
 
 $('#addItem-btn').click(e => {
+  const count = localStorage.getItem('count') || '';
+  if(!count) return swal("CẢNH BÁO","Bạn phải đăng nhập trước khi mua hàng","warning")
+  .then(() => $('#myModelLogin').modal('show'));
   const pathname = location.pathname.toString();
   const flateIndex = pathname.lastIndexOf('/');
   const idBook = pathname.substring(flateIndex + 1);
@@ -274,9 +277,12 @@ $('#btn-signup').click(e => {
   const password = $('#inputPasswordRegister').val() || '';
   const gender = $('input[id=genderMale]:checked').val() ? 'NAM' : 'NU';
   const captcha = $('#g-recaptcha-response').val() || '';
+  const isGmail = email.endsWith('@gmail.com');
 
+  if(!isGmail) return swal("THÔNG BÁO","Email phải là gmail","info");
   if(!name || !email || !password) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
   if(!captcha) return swal("THÔNG BÁO","Vui lòng check captcha","info");
+
 
   $('#sign-up-loader').html('<div class="loader"></div>');
 
