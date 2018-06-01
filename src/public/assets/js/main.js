@@ -138,7 +138,7 @@ $('#addItem-btn').click(e => {
     swal("XONG",`Đã thêm sách vào giỏ hàng`,"success")
     .then(() => {
       localSaveItem('count', data.count);
-      location.href = '/home';
+      location.reload();
     });
   });
 });
@@ -185,6 +185,19 @@ $('.item-cart-total').on('click', 'span:last-child > button', e => {
   });
 });
 
+$('.item-cart-total').on('keypress', '.item-value', e => {
+  if(e.keyCode == 13) {
+    const _this = e.delegateTarget.children["0"];
+    const idBook = _this.children[2].defaultValue;
+    const amount = e.target.value;
+    if(amount < 1) return location.reload();
+    $.post('/shopping-cart/update', { idBook, amount }, data => {
+      if(!data.success) return;
+      setTimeout( () => location.reload(), 500);
+    });
+  }
+});
+
 $('.item-cart-author').on('click', 'a', e => {
   // Handle delete item in cart
   e.preventDefault();
@@ -212,7 +225,7 @@ $('#orderCartBtn').click(e => {
       if(!data.success) return console.log(data);
       localSaveItem('count', '0');
       swal("THÀNH CÔNG","Đơn hàng của bạn đã được ghi nhận !!!","success")
-      .then(() => location.href = '/home');
+      .then(() => location.href = '/user/account/orders');
     });
   });
 });
@@ -242,7 +255,7 @@ $('#btn-signin').click(e => {
   if(!email || !password) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
   
   $.post('/user/signin', {email, password}, data => {
-    if(!data.success) return swal("CÓ LỖI!", "Sai email hoặc password " + data.message , "error");
+    if(!data.success) return swal("CÓ LỖI!", "Sai email hoặc password !!!", "error");
     $('#sign-in-loader').html('<div class="loader"></div>');
     setTimeout(() => {
       localSaveItem('name', data.user.NAME);
