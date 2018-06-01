@@ -21,7 +21,7 @@ class BookServices {
     const items = await Book.getBookWithPrice(currentPage, priceStart, priceEnd);
     if(!items[0] && !items[1]) throw new Error('Khong tim thay');
     const count = Math.ceil(items[0][0].count / 8);
-    return {categories, authors, publishers, items: items[1], count};
+    return {categories, authors, publishers, items: items[1], count, length: items[0][0].count };
   }
 
   static async showBookWithName(currentPage, nameSearch) {
@@ -34,7 +34,7 @@ class BookServices {
     const items = await Book.getBookWithName(currentPage, nameSearch);
     if(!items[0] && !items[1]) throw new Error('Khong tim thay');
     const count = Math.ceil(items[0][0].count / 8);
-    return {categories, authors, publishers, items: items[1], count};
+    return {categories, authors, publishers, items: items[1], count, length: items[0][0].count};
   }
 }
 

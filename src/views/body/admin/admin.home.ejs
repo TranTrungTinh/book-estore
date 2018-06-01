@@ -1,192 +1,210 @@
-<link rel="stylesheet" href="./assets/css/admin_style.css">
+<html lang="en">
 
-<div class="row">
-<nav class="col-sm-4 col-md-4 col-lg-2" id="Navigator">
-    <ul class="nav nav-stacked">
-        <li>
-            <a href="#Products">
-                <span class="glyphicon glyphicon-inbox" aria-hidden="true">&nbsp;</span>SẢN PHẨM</a>
-        </li>
-        <li>
-            <a href="#Orders">
-                <span class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;</span>ĐƠN HÀNG</a>
-        </li>
-    </ul>
-</nav>
+<head>
+    <base href="http://localhost:3000">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin | Book eStore</title>
+    <link rel="shortcut icon" href="./assets/media/icon/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/css/normalize.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/admin_style.css">
 
-<div class="col-sm-8 col-md-8 col-lg-10" id="Content">
-    <section id="Products">
-        <h1>SẢN PHẨM</h1>
-        <hr/>
-        <div class="form-inline">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3" style="padding: 0;">
-                <select name="TypeOfInfo" aria-describedby="TypeOfInfo" id="TypeOfInfo" class="form-control" style="width:100%">
-                    <option value="product" selected>Sản phẩm</option>
-                    <option value="author">Tác giả</option>
-                    <option value="type">Loại sản phẩm</option>
-                    <option value="publisher">Nhà xuất bản</option>
-                </select>
-            </div>
+</head>
 
-            <div class="btn-add col-xs-9 col-sm-9 col-md-9 col-lg-2">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#DetailModal"
-                id="AddNewProduct">
-                    <span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        Thêm
-                    </span>
-                </button>
-            </div>
-
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2 btn-refresh">
-                <button class="btn btn-success">
-                    <span class="glyphicon glyphicon-refresh"></span>
-                </button>
-            </div>
-
-            <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-5">
-                <input type="text" name="StrToSearchProducts" id="StrToSearchProducts" class="form-control" placeholder="Nội dung, từ khóa...">
-            </div>
-        </div>
-
-        <div class="table-scroll">
-            <table class="table table-condensed table-bordered table-hover table-striped" id="ProductsPanel">
-                <thead>
-                    <tr>
-                        <th>Hình ảnh</th>
-                        <th>Tựa đề</th>
-                        <th>Đơn giá</th>
-                        <th>Tồn kho</th>
-                        <th>Tác giả</th>
-                        <th>Thể loại</th>
-                        <th>Nhà sản xuất</th>
-                        <th>Mô tả</th>
-                    </tr>
-                </thead>
-                <tbody class="table-scroll">
-                    <%- include('./admin.products.list.ejs') %>
-                </tbody>
-            </table>
-        </div>
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li class="disabled">
-                    <a href="#">&laquo;</a>
+<body>
+    <div class="row">
+        <nav class="col-sm-4 col-md-4 col-lg-2" id="Navigator">
+            <ul class="nav nav-stacked">
+                <li>
+                    <a href="#Products">
+                        <span class="glyphicon glyphicon-inbox" aria-hidden="true">&nbsp;</span>SẢN PHẨM</a>
                 </li>
-                <li class="active">
-                    <a href="#">1</a>
-                </li>
-                <li class="disabled">
-                    <a href="#">&raquo;</a>
+                <li>
+                    <a href="#Orders">
+                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true">&nbsp;</span>ĐƠN HÀNG</a>
                 </li>
             </ul>
         </nav>
-    </section>
 
-    <section id="Orders">
-        <h1>ĐƠN HÀNG</h1>
-        <hr/>
+        <div class="col-sm-8 col-md-8 col-lg-10" id="Content">
+            <section id="Products">
+                <h1>SẢN PHẨM</h1>
+                <hr/>
+                <div class="form-inline">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3" style="padding: 0;">
+                        <select name="TypeOfInfo" aria-describedby="TypeOfInfo" id="TypeOfInfo" class="form-control" style="width:100%">
+                            <option value="product" selected>Sản phẩm</option>
+                            <option value="author">Tác giả</option>
+                            <option value="type">Loại sản phẩm</option>
+                            <option value="publisher">Nhà xuất bản</option>
+                        </select>
+                    </div>
 
-        <div class="form-inline">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5" style="padding: 0">
-                <select name="TypeOfInfo" aria-describedby="TypeOfInfo" class="form-control">
-                    <option value="all" selected>Tất cả</option>
-                    <option value="pending">Chưa giao</option>
-                    <option value="delivering">Đang giao</option>
-                    <option value="done">Đã giao</option>
-                    <option value="cancel">Hủy</option>
-                </select>
-            </div>
+                    <div class="btn-add col-xs-9 col-sm-9 col-md-9 col-lg-2">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#DetailModal" id="AddNewProduct">
+                            <span>
+                                <span class="glyphicon glyphicon-plus"></span>
+                                Thêm
+                            </span>
+                        </button>
+                    </div>
 
-            <div class="btn-refresh col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                <button class="btn btn-success">
-                    <span class="glyphicon glyphicon-refresh"></span>
-                </button>
-            </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2 btn-refresh">
+                        <button class="btn btn-success">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                        </button>
+                    </div>
 
-            <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-5">
-                <input type="text" name="StrToSearchOrders" id="StrToSearchOrders" class="form-control" placeholder="Mã đơn hàng">
-            </div>
-        </div>
-
-        <div class="table-scroll">
-            <table class="table table-condensed table-bordered">
-                <thead>
-                    <th>Mã đơn hàng</th>
-                    <th>Mã khách hàng</th>
-                    <th>Ngày đặt</th>
-                    <th>Trạng thái</th>
-                </thead>
-                <tbody class="table-scroll">
-                    <%- include('./admin.order.list.ejs') %>
-                </tbody>
-            </table>
-        </div>
-
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li class="disabled">
-                    <a href="#">&laquo;</a>
-                </li>
-                <li class="active">
-                    <a href="#">1</a>
-                </li>
-                <li class="disabled">
-                    <a href="#">&raquo;</a>
-                </li>
-            </ul>
-        </nav>
-    </section>
-</div>
-
-<!-- modal -->
-<div class="modal fade" id="DetailModal" role="dialog">
-    <div class="modal-dialog ">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Thông tin chi tiết sản phẩm</h4>
+                    <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                        <input type="text" name="StrToSearchProducts" id="StrToSearchProducts" class="form-control" placeholder="Nội dung, từ khóa...">
+                    </div>
                 </div>
-                <div class="modal-body form-group">
-                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                        <label>Hình ảnh</label>
-                        <div class="img-wrapper img-wrapper-md">
-                            <img src="" alt="Hình ảnh">
+
+                <div class="table-scroll">
+                    <table class="table table-condensed table-bordered table-hover table-striped" id="ProductsPanel">
+                        <thead>
+                            <tr>
+                                <th>Hình ảnh</th>
+                                <th>Tựa đề</th>
+                                <th>Đơn giá</th>
+                                <th>Tồn kho</th>
+                                <th>Tác giả</th>
+                                <th>Thể loại</th>
+                                <th>Nhà sản xuất</th>
+                                <th>Mô tả</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-scroll">
+                            <%- include('./admin.products.list.ejs') %>
+                        </tbody>
+                    </table>
+                </div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="disabled">
+                            <a href="#">&laquo;</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">1</a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#">&raquo;</a>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+
+            <section id="Orders">
+                <h1>ĐƠN HÀNG</h1>
+                <hr/>
+
+                <div class="form-inline">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5" style="padding: 0">
+                        <select name="TypeOfInfo" aria-describedby="TypeOfInfo" class="form-control">
+                            <option value="all" selected>Tất cả</option>
+                            <option value="pending">Chưa giao</option>
+                            <option value="delivering">Đang giao</option>
+                            <option value="done">Đã giao</option>
+                            <option value="cancel">Hủy</option>
+                        </select>
+                    </div>
+
+                    <div class="btn-refresh col-xs-12 col-sm-12 col-md-12 col-lg-2">
+                        <button class="btn btn-success">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                        </button>
+                    </div>
+
+                    <div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                        <input type="text" name="StrToSearchOrders" id="StrToSearchOrders" class="form-control" placeholder="Mã đơn hàng">
+                    </div>
+                </div>
+
+                <div class="table-scroll">
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                            <th>Mã đơn hàng</th>
+                            <th>Mã khách hàng</th>
+                            <th>Ngày đặt</th>
+                            <th>Trạng thái</th>
+                        </thead>
+                        <tbody class="table-scroll">
+                            <%- include('./admin.order.list.ejs') %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="disabled">
+                            <a href="#">&laquo;</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">1</a>
+                        </li>
+                        <li class="disabled">
+                            <a href="#">&raquo;</a>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+        </div>
+
+        <!-- modal -->
+        <div class="modal fade" id="DetailModal" role="dialog">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <form>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Thông tin chi tiết sản phẩm</h4>
                         </div>
-                        <input type="file" name="ProductImage" accept="image/*" class="btn btn-default">
-                        <!-- title -->
-                        <label for="ProductTitle">Tựa đề</label>
-                        <input type="text" name="ProductTitle" minlength="1" class="form-control" required>
-                        <!-- price -->
-                        <label for="ProductPrice">Đơn giá</label>
-                        <input type="number" name="ProductPrice" min="0" class="form-control" required>
-                        <!-- amount -->
-                        <label for="ProductAmount">Tồn kho</label>
-                        <input type="number" name="ProductAmount" min="0" class="form-control" value="0" required>
-                    </div>
-                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                        <!-- author -->
-                        <label for="ProductAuthor">Tác giả</label>
-                        <input type="text" name="ProductAuthor" placeholder="Họ và tên..." minlength="1" class="form-control" required>
-                        <!-- type -->
-                        <label for="ProductType">Thể loại</label>
-                        <input type="text" name="ProductType" placeholder="Trinh thám, lãng mạn..." minlength="1" class="form-control" required>
-                        <!-- publichser -->
-                        <label for="ProductPublisher">Nhà xuất bản</label>
-                        <input type="text" name="ProductPublisher" placeholder="NXB Trẻ, NXB Kim Đồng..." minlength="1" class="form-control" required>
-                        <!-- desciption -->
-                        <label>Mô tả</label>
-                        <textarea class="form-control"></textarea>
-                    </div>
+                        <div class="modal-body form-group">
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <label>Hình ảnh</label>
+                                <div class="img-wrapper img-wrapper-md">
+                                    <img src="" alt="Hình ảnh">
+                                </div>
+                                <input type="file" name="ProductImage" accept="image/*" class="btn btn-default">
+                                <!-- title -->
+                                <label for="ProductTitle">Tựa đề</label>
+                                <input type="text" name="ProductTitle" minlength="1" class="form-control" required>
+                                <!-- price -->
+                                <label for="ProductPrice">Đơn giá</label>
+                                <input type="number" name="ProductPrice" min="0" class="form-control" required>
+                                <!-- amount -->
+                                <label for="ProductAmount">Tồn kho</label>
+                                <input type="number" name="ProductAmount" min="0" class="form-control" value="0" required>
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                                <!-- author -->
+                                <label for="ProductAuthor">Tác giả</label>
+                                <input type="text" name="ProductAuthor" placeholder="Họ và tên..." minlength="1" class="form-control" required>
+                                <!-- type -->
+                                <label for="ProductType">Thể loại</label>
+                                <input type="text" name="ProductType" placeholder="Trinh thám, lãng mạn..." minlength="1" class="form-control" required>
+                                <!-- publichser -->
+                                <label for="ProductPublisher">Nhà xuất bản</label>
+                                <input type="text" name="ProductPublisher" placeholder="NXB Trẻ, NXB Kim Đồng..." minlength="1" class="form-control" required>
+                                <!-- desciption -->
+                                <label>Mô tả</label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="ModalSave">Lưu thông tin</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="ModalCancel">Hủy</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="ModalDelete">Xóa</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="ModalSave">Lưu thông tin</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="ModalCancel">Hủy</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="ModalDelete">Xóa</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-</div>
+    <script src="./assets/js/jquery-3.3.1.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+</body>
+
+</html>
