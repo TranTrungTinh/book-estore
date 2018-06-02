@@ -17,14 +17,15 @@
   <div class="modal" id="DetailModal" role="dialog" style="display: block;">
       <div class="modal-dialog ">
           <div class="modal-content">
-              <form action="" method="POST">
+              <form action="/admin/login" method="POST">
                   <div class="modal-header">
                       <h1 class="modal-title">Quản trị</h1>
                       <h2 class="modal-title">Book eStore</h2>
                   </div>
                   <div class="modal-body form-group">
-                      <input type="text" name="Username" id="" class="form-control" placeholder="Email" required autocomplete="on" autofocus>
-                      <input type="text" name="Password" id="" class="form-control" placeholder="Password" required>
+                      <input type="text" name="username" id="txtU" class="form-control" placeholder="Username" required autofocus>
+                      <br>
+                      <input type="password" name="password" id="txtP" class="form-control" placeholder="Password" required>
                   </div>
                   <div class="modal-footer">
                       <input type="submit" class="btn btn-primary" id="ModalLogin" value="Đăng nhập" />
@@ -35,7 +36,20 @@
   </div>
 </div>
     <script src="./assets/js/jquery-3.3.1.min.js"></script>
+    <script src="./assets/js/sweetalert.min.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
+    <script>
+        $('#ModalLogin').click(e => {
+            e.preventDefault();
+            const username = $('#txtU').val() || '';
+            const password = $('#txtP').val() || '';
+            if(!username || !password) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
+            $.post('/admin/login', { username, password }, data => {
+                if(!data.success) return swal("CÓ LỖI!", "Sai username hoặc password !!!", "error");
+                location.href = '/admin/edit';
+            });
+        });
+    </script>
 </body>
 
 </html>

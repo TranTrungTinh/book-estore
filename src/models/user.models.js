@@ -6,7 +6,7 @@ const saltRound = 8;
 
 class User {
   static async save(email, rawPassword, name, gender){
-    const selectSql = `SELECT ID FROM NGUOIDUNG WHERE EMAIL = '${email}'`;
+    const selectSql = `SELECT ID FROM NGUOIDUNG WHERE EMAIL = '${email}' AND PERMISSION <> 1`;
     const result = await queryDB(selectSql);
     if(result[0]) throw new Error('EMAIL_EXISTED');
 
@@ -30,7 +30,7 @@ class User {
   }
 
   static async getUserById(id) {
-    const sql = `SELECT * FROM NGUOIDUNG WHERE ID = '${id}'`;
+    const sql = `SELECT * FROM NGUOIDUNG WHERE ID = '${id}' AND PERMISSION <> 1`;
     const user = await queryDB(sql);
     if(!user[0]) throw new Error('CANNOT_FIND_USER');
     return user[0];
@@ -45,7 +45,7 @@ class User {
 
 }
 
-// User.getUserBy('trantrungtinh@gmail.com','123')
+// User.save('admin','admin','TRƯƠNG HOÀNG DUY','NAM')
 // .then(result => console.log(result))
 // .catch(err => console.log(err.message));
 

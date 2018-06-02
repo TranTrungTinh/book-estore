@@ -264,7 +264,22 @@ body {
   font-size: 16px;
 }
 
+
 /*============ Detail page ============ */
+.empty-cart {
+  background-color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 20px;
+}
+.empty-cart > img {
+  width: auto;
+  height: 250px;
+}
+.empty-cart > a {
+  margin: 15px;
+}
+
 .item_root_detail {
   margin: 5px 20px;
   background-color: #fff;

@@ -3,10 +3,17 @@
 
 
 <div class="row padding_bottom_big">
-  <div class="alert alert-warning item-cart-title" role="alert">
-    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
-    <span>Miễn Phí Vận Chuyển cho đơn hàng có giá trị từ 250.000 VNĐ cho tất cả các tỉnh thành trên toàn quốc.</span>
-  </div>
+  <% if(!carts.length) { %>
+    <div class="alert alert-danger item-cart-title" role="alert">
+      <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+      <span>Giỏ hàng không có sản phẩm. Vui lòng thực hiện lại.</span>
+    </div>
+  <% } else { %>
+    <div class="alert alert-warning item-cart-title" role="alert">
+      <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+      <span>Miễn Phí Vận Chuyển cho đơn hàng có giá trị từ 250.000 VNĐ cho tất cả các tỉnh thành trên toàn quốc.</span>
+    </div>
+  <% } %>
 </div>
 
 <div class="row">
@@ -15,14 +22,16 @@
       <span id="item-count"></span> sản phẩm )</p>
   </div>
   <div class="row">
-    <div class="col-sm-8">
     <% if(!carts.length) { %>
       <div class="col-sm-12">
-        <div class="alert alert-info margin-bottom-big fs-20" id="my-title-list">
-          KHÔNG CÓ SẢN PHẨM
+        <div class="empty-cart">
+          <img src="./assets/media/images/cart-empty.png" alt="Cart-Empty">
+          <p>Không có sản phẩm nào trong giỏ hàng của bạn</p>
+          <a href="/home" type="button" class="btn btn-warning btn-lg">Tiếp tục mua sắm</a>        
         </div>
       </div>
     <% } else { %>
+    <div class="col-sm-8">
       <% carts.forEach(e => { %>
         <% const { ID, NAME, PRICE, IMAGE, SALES, AMOUNT } = e %>
         <% TOTAL += +PRICE * +AMOUNT; %>
