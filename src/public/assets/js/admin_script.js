@@ -19,9 +19,9 @@ function loadListBySection(id) {
 }
 
 // load section as first nav item
-window.onload = () => {
-    loadListBySection($('#Content section')[0].id);
-};
+// window.onload = () => {
+//     loadListBySection($('#Content section')[0].id);
+// };
 
 $('#Navigator > .nav > li').click((e) => {
     // load/reload section accordingly
@@ -30,7 +30,7 @@ $('#Navigator > .nav > li').click((e) => {
     for (let i = 0; i < sections.length; i++) {
         let sectionId = sections[i].id;
         if (('#' + sectionId) === e.target.getAttribute('href')) {
-            loadListBySection(sectionId);
+            // loadListBySection(sectionId);
             $('#' + sectionId).show('slide');
         } else {
             $('#' + sectionId).hide();

@@ -18,7 +18,7 @@ class User {
   }
 
   static async getUserBy(email, rawPassword) {
-    const sql = `SELECT * FROM NGUOIDUNG WHERE EMAIL = '${email}'`; 
+    const sql = `SELECT * FROM NGUOIDUNG WHERE EMAIL = '${email}' AND PERMISSION <> 1`; 
     const user = await queryDB(sql);
     if(!user[0]) throw new Error('INVALID_USER_INFO');
     const same = await compare(rawPassword, user[0].PASSWORD);
