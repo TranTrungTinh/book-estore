@@ -1,99 +1,161 @@
-/*=============================== start @media ===============================*/
+/*=============================== @media ===============================*/
 
-/* 750px */
-@media screen and (max-width: 750px) {
-    .modal-dialog {
-        transform: translateY(-30%)!important;
-    }
-
+@media only screen 
+and (max-width : 768px) {
     #Navigator {
-        position: fixed;
+        height: 80px!important;
     }
-        #Navigator > ul > li {
-            font-size: 1.3em!important;
-            height: 45px!important;
-            line-height: 45px!important;
-        }
-
-    section, .table-scroll {
-        height: 48vh!important;
+    #Navigator > ul > li {
+        display: inline-block!important;
     }
 }
 
-@media screen and (min-width: 750px) {
-    .modal-dialog {
-        min-width: 700px;
-        transform: translateY(-65%)!important;
-    }
-
-    #Navigator {
-        height: 100vh!important;
-    }
-
-    section, .table-scroll {
-        height: 62vh!important;
-    }
-}
-
-/* 1200px */
-@media screen and (max-width: 1200px) {
-    .btn-add {
-        padding-left: 0!important;
-    }
-
-    .btn-refresh {
+@media only screen 
+and (max-width : 1200px) {
+    section > div > div:nth-child(2) {
         padding: 0!important;
     }
 }
 
-@media screen and (min-width: 1200px) {
-    section, .table-scroll {
-        height: 72vh!important;
-    }
-}
+/*=============================== !@media ===============================*/
 
-/*=============================== end @media ===============================*/
+/*=============================== global ===============================*/
 
 body {
     overflow-x: hidden;
 }
 
-.btn-add  {
-    padding-right: 15px;
+.btn-add {
+    padding-left: 0!important;
 }
-    .btn-add > button, .btn-refresh > button {
-        width: 100%;
-    }
 
-.btn-refresh  {
-    padding-right: 15px;
+.btn-refresh {
+    padding: 0!important;
 }
-    #Products .btn-refresh {
-        padding-left: 0;
-    }
+
+#Content {
+    height: 100vh;
+    float: right;
+}
 
 #Content > :not(:first-child) {
     display: none;
 }
 
 .detail-wrapper {
-    box-sizing: border-box;
-    max-height: 69px;
+    height: 25px;
     overflow-y: auto;
 }
 
 div.table-scroll {
+    height: 72vh;
     margin-bottom: 10px;
+    padding: 0!important;
 }
 
 h1 {
     font-weight: bolder;
 }
 
+section {
+    height: 100vh;
+    padding: 25px;
+}
+    section > div > * {
+        margin-bottom: 15px;
+    }
+    section > div > .btn {
+        display: inline-block;
+    }
+
+
+.table-scroll {
+    overflow-y: auto;
+}
+
+tr {
+    cursor: pointer;
+}
+
+/*=============================== !global ===============================*/
+
+/*=============================== navigator ===============================*/
+
+#Navigator {
+    background-color: #1565C0;
+    border-radius: 0;
+    height: 100vh;
+    min-width: 20rem;
+    padding-right: 0;
+    position: fixed;
+    z-index: 1000;
+}
+    #Navigator > ul > li {
+        display: block;
+        font-size: 1.28em;
+        font-weight: bolder;
+        height: 85px;
+        line-height: 85px;
+        margin-bottom: 20px;
+    }
+        #Navigator a {
+            color: white;
+        }
+            #Navigator > ul > li > a:hover {
+                color: black;    
+            }
+            #Navigator > ul > li span {
+                margin-left: 20px;
+            }
+
+/*=============================== !navigator ===============================*/
+
+/*=============================== modal ===============================*/
+
+.modal-content {
+    width: 90rem;
+}
+    .modal-content form {
+        margin-bottom: 0;
+    }
+        .modal-header {
+            background-color: #1565C0;
+            color: white;
+        }
+        .modal-body {
+            margin-bottom: 0;
+            overflow-y: auto;
+            padding: auto 5px;
+        }
+            .modal-body > div > * {
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            .modal-body textarea {
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            #Modal_Product textarea {
+                height: 180px;
+            }
+            #Modal_Author textarea,
+            #Modal_Cat textarea,
+            #Modal_Publisher textarea {
+                height: 35px;
+            }
+
+textarea {
+    resize: none;
+}
+
+/*=============================== !modal ===============================*/
+
+/*=============================== product ===============================*/
+
 .img-wrapper {
     overflow: hidden;
 }
-    .img-wrapper > img {
+    .img-wrapper img {
         display: block;
         height: 100%;
         margin: 0 auto;
@@ -105,92 +167,11 @@ h1 {
         height: 128px;
     }
 
-.modal-content {
-    margin-top: 80%;
+#Products td:last-child {
+    width: 30%;
 }
-    .modal-header {
-        background-color: #1565C0;
-        color: white;
-    }
-    .modal-body {
-        margin-bottom: 0;
-        overflow-y: auto;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-        .modal-body > div > input, .modal-body > div > div.btn {
-            margin-bottom: 10px;
-            width: 100%;
-        }
-            .modal-body > div > div.btn > input {
-                width: 100%;
-            }
-        .modal-body textarea {
-            margin-bottom: 10px;
-            height: 170px;
-            width: 100%;
-        }
-
-#Navigator {
-    background-color: #1565C0;
-    border-radius: 0;
-    padding-right: 0;
-    position: relative;
-    z-index: 1000;
-}
-    #Navigator > ul > li {
-        display: block;
-        font-size: 1.28em;
-        font-weight: bolder;
-        height: 85px;
-        line-height: 85px;
-        margin-bottom: 20px;
-    }
-        #Navigator > ul > li > a {
-            color:  white;
-        }
-            #Navigator > ul > li > a:hover, #Navigator > ul > li > a:active {
-                color: black;    
-            }
-            #Navigator > ul > li > a > span {
-                margin-left: 20px;
-            }
-
-#Products > div.form-inline > div:nth-child(2) > div {
-    padding: 0;
-}
-    #Products > div.form-inline > button {
-        margin-bottom: 20px;
-        margin-right: 25px;
-    }
-#Products tr {
-    cursor: pointer;
-    max-height: 50px;
-}
-    #Products td:last-child {
-        width: 30%;
-    }
-
-section {
-    height: 100vh;
-    padding: 25px;
-}
-    section > .form-inline > * {
-        margin-bottom: 15px;
-    }
-
-select {
-    width: 100%!important;
+#Products .detail-wrapper {
+    height: 120px;
 }
 
-.table-scroll {
-    overflow-y: auto;
-}
-
-thead {
-    background: whitesmoke;
-}
-
-textarea {
-    resize: none;
-}
+/*=============================== !product ===============================*/

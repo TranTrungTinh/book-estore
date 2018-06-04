@@ -23,8 +23,8 @@ function loadListBySection(id) {
 //     loadListBySection($('#Content section')[0].id);
 // };
 
+// load/reload section accordingly
 $('#Navigator > .nav > li').click((e) => {
-    // load/reload section accordingly
     e.preventDefault();
     let sections = $('#Content section');
     for (let i = 0; i < sections.length; i++) {
@@ -40,33 +40,6 @@ $('#Navigator > .nav > li').click((e) => {
     return false;
 });
 
-var selectedProduct; // used to interact with product
-$('#Products tbody').click((e) => {
-    e.preventDefault();
-    let tr = e.target.closest('tr');
-    selectedProduct = tr;
-    // copy current selected row info into modal
-    // product image
-    $('#DetailModal img')[0].src = tr.getElementsByTagName('img')[0].src;
-    // product price, amount, author, type, publisher
-    let td = tr.getElementsByTagName('td');
-    for (let i = 1; i < td.length - 1; i++) {
-        $('#DetailModal input')[i].value = td[i].textContent;
-    }
-    // product description
-    $('#DetailModal textarea')[0].value = td[td.length - 1].textContent;
-});
-
-// clear all field content whenever..
-$('#AddNewProduct').click(() => {
-    selectedProduct = null;
-    $('#DetailModal img')[0].src = '';
-    $.each($('#DetailModal input'), (index, ele) => {
-        ele.value = '';
-    });
-    $('#DetailModal textarea')[0].value = '';
-})
-
 // refresh the entire list
 $('.btn-refresh').click((e) => {
     e.preventDefault();
@@ -75,27 +48,60 @@ $('.btn-refresh').click((e) => {
     // re-filtering
     $(section)[0].getElementsByClassName('btn-search')[0].click();
     // after this all info are reset to default as they were hard-coded
-})
+});
+
+// Authors, Categories, Publishers whose table has 2 column: id, name
+function handleOthersAppreance(id) {
+    let strToSearch = $(`#StrToSearch${id}`)[0].value;
+
+    let typeOfInfoOnCol = 0;
+    switch ($(`#${id} select`)[0].value) {
+        case 'id':
+            typeOfInfoOnCol = 0;
+            break;
+        case 'name':
+            typeOfInfoOnCol = 1;
+            break;
+        default:
+            typeOfInfoOnCol = null;
+            break;
+    }
+
+    $.each($(`#${id} tbody tr`), (index, ele) => {
+            if(strToSearch.length > 0 && 
+            ele.getElementsByTagName('td')[typeOfInfoOnCol]
+            .textContent.toLowerCase()
+            .indexOf(strToSearch.toLowerCase()) < 0) {
+                $(ele).hide();
+            }
+            else {
+                $(ele).show();
+            }
+    });
+}
 
 /*=============================== Products ===============================*/
 
 $('#StrToSearchProducts').keyup(() => {
     let typeOfInfoOnCol = 0;
-    switch ($('#Products .form-inline select')[0].value) {
-        case 'product':
+    switch ($('#Products select')[0].value) {
+        case 'id':
             typeOfInfoOnCol = 1;
             break;
-        case 'author':
-            typeOfInfoOnCol = 4;
+        case 'product':
+            typeOfInfoOnCol = 2;
             break;
-        case 'type':
+        case 'author':
             typeOfInfoOnCol = 5;
             break;
-        case 'publisher':
+        case 'type':
             typeOfInfoOnCol = 6;
             break;
+        case 'publisher':
+            typeOfInfoOnCol = 7;
+            break;
         default:
-        typeOfInfoOnCol = 0;
+            typeOfInfoOnCol = null;
             break;
     }
 
@@ -113,59 +119,65 @@ $('#StrToSearchProducts').keyup(() => {
     });
 });
 
-// add new product to Products list
-function addNewProduct(item) {
-    imgSrc = $('#DetailModal input')[0].value;
-        let tr = document.createElement('tr');
-        tr.innerHTML = '<tr data-toggle="modal" data-target="#DetailModal">' +
-            '<td class="img-wrapper img-wrapper-sm">' +
-            '<img src="' + imgSrc + '" alt="Ảnh minh họa">' +
-            '</td>' +
-            '<td>' + item.title + '</td>' +
-            '<td>' + item.price + '</td>' +
-            '<td>' + item.amount + '</td>' +
-            '<td>' + item.author + '</td>' +
-            '<td>' + item.type + '</td>' +
-            '<td>' + item.publisher + '</td>' +
-            '<td>' +
-            '<div class="detail-wrapper">' +
-            item.description +
-            '</div>' +
-            '</td>' +
-            '</tr>';
-            
-        $('#Products tbody')[0].appendChild(tr);
-}
+// clear searches & reset appearance
+$('#Products select').change(() => {
+    $('#StrToSearchProducts')[0].value = '';
+    $('#Products tbody tr').each((index, ele) => {
+        $(ele).show();
+    });
+});
 
-function updateProductInfo(item) {
-    let tds = selectedProduct.getElementsByTagName('td');
-    tds[0].getElementsByTagName('img')[0].src = imgSrc;
-    tds[1].textContent = item.title;
-    tds[2].textContent = item.price;
-    tds[3].textContent = item.amount;
-    tds[4].textContent = item.author;
-    tds[5].textContent = item.type;
-    tds[6].textContent = item.publisher;
-    tds[7].getElementsByClassName('detail-wrapper')[0].innerHTML = item.description;
-}
+var selectedProduct; // used to interact with product
+$('#Products tbody').click((e) => {
+    e.preventDefault();
+    let tr = e.target.closest('tr');
+    selectedProduct = tr;
+    // copy current selected row info into modal
+    // product image
+    $('#Modal_Product img')[0].src = tr.getElementsByTagName('img')[0].src;
+    // product price, amount, author, type, publisher
+    let td = tr.getElementsByTagName('td');
+    for (let i = 1; i < td.length - 1; i++) {
+        $('#Modal_Product input')[i].value = td[i].textContent;
+    }
+    // product description
+    $('#Modal_Product textarea')[0].value = td[td.length - 1].textContent;
+    // show modal
+    $('#Modal_Product').modal('show');
+});
 
-$('#ModalSave').click(() => {
+// clear all field content whenever..
+$('#AddNewProduct').click(() => {
+    selectedProduct = null;
+    $('#Modal_Product img')[0].src = '';
+    $.each($('#Modal_Product input'), (index, ele) => {
+        ele.value = '';
+    });
+    $('#Modal_Product textarea')[0].value = '';
+})
+
+function addNewProduct(item) {}
+
+function updateProductInfo(item) {}
+
+$('#ModalSave_Product').click(() => {
     let item = {
         imgSrc: '',
-        title: $('#DetailModal input')[1].value,
-        price: $('#DetailModal input')[2].value,
-        amount: $('#DetailModal input')[3].value,
-        author: $('#DetailModal input')[4].value,
-        type: $('#DetailModal input')[5].value,
-        publisher: $('#DetailModal input')[6].value,
-        description: $('#DetailModal textarea')[0].value
+        id: $('#Modal_Product input')[1].value,
+        title: $('#Modal_Product input')[2].value,
+        price: $('#Modal_Product input')[3].value,
+        amount: $('#Modal_Product input')[4].value,
+        author: $('#Modal_Product input')[5].value,
+        type: $('#Modal_Product input')[6].value,
+        publisher: $('#Modal_Product input')[7].value,
+        description: $('#Modal_Product textarea')[0].value
     }
 
     if(!selectedProduct) {
         addNewProduct(item);
     }
     else {
-        item.imgSrc = $('#DetailModal img')[0].src || $('#DetailModal input')[0].files[0].name;
+        item.imgSrc = $('#Modal_Product img')[0].src || $('#Modal_Product input')[0].files[0].name;
         updateProductInfo(item);
     }
 });
@@ -206,7 +218,7 @@ function changeAllOrdersStatus() {
 }
 
 function handleOrdersAppreance() {
-	let filterOrderStt = $('#Orders .form-inline select')[0].value,
+	let filterOrderStt = $('#Orders select')[0].value,
     strToSearch = $('#StrToSearchOrders')[0].value;
 	
     $.each($('#Orders tbody tr'), (index, ele) => {
@@ -231,11 +243,160 @@ $('#Orders table').change((e) => {
     changeOrderRowStatus(e.target);
 });
 
-$('#Orders .form-inline select').change(() => {
+$('#Orders select').change(() => {
     handleOrdersAppreance();
 });
 	
-
 $('#StrToSearchOrders').keyup(() => {
 	handleOrdersAppreance();
+});
+
+/*=============================== Authors ===============================*/
+
+var selectedAuthor = null;
+$('#Authors tbody').click((e) => {
+    e.preventDefault();
+    let tr = e.target.closest('tr');
+    selectedProduct = tr;
+    // copy current selected row info into modal
+    // author code
+    let td = tr.getElementsByTagName('td');
+    $('#Modal_Author input')[0].value = td[0].textContent;
+    // author name
+    $('#Modal_Author textarea')[0].value = td[1].textContent;
+    // show modal
+    $('#Modal_Author').modal('show');
+});
+
+// clear all field content whenever..
+$('#AddNewAuthor').click(() => {
+    selectedProduct = null;
+    $('#Modal_Author input')[0].value = '';
+    $('#Modal_Author textarea')[0].value = '';
+});
+
+function addNewAuthor(item) {}
+
+function updateAuthorInfo(item) {}
+
+$('#ModalSave_Author').click(() => {
+    if(!selectedAuthor) {
+        addNewProduct({title: $('#Modal_Author input')[1].value});
+    }
+    else {
+        updateProductInfo({title: $('#Modal_Author input')[1].value});
+    }
+});
+
+// clear searches & reset appearance
+$('#Authors select').change(() => {
+    // clear search string in input field
+    $('#StrToSearchAuthors')[0].value = '';
+    $('#Authors tbody tr').each((index, ele) => {
+        $(ele).show();
+    });
+});
+
+$('#StrToSearchAuthors').keyup(() => {
+    handleOthersAppreance('Authors');
+});
+
+/*=============================== Categories ===============================*/
+
+var selectedCat = null;
+$('#Cats tbody').click((e) => {
+    e.preventDefault();
+    let tr = e.target.closest('tr');
+    selectedCat = tr;
+    // copy current selected row info into modal
+    // author code
+    let td = tr.getElementsByTagName('td');
+    $('#Modal_Cat input')[0].value = td[0].textContent;
+    // author name
+    $('#Modal_Cat textarea')[0].value = td[1].textContent;
+    // show modal
+    $('#Modal_Cat').modal('show');
+});
+
+// clear all field content whenever..
+$('#AddNewCat').click(() => {
+    selectedCat = null;
+    $('#Modal_Cat input')[0].value = '';
+    $('#Modal_Cat textarea')[0].value = '';
+});
+
+function addNewCat(item) {}
+
+function updateCatInfo(item) {}
+
+$('#ModalSave_Cat').click(() => {
+    if(!selectedCat) {
+        addNewCat({title: $('#Modal_Cat input')[1].value});
+    }
+    else {
+        updateCatInfo({title: $('#Modal_Cat input')[1].value});
+    }
+});
+
+// clear searches & reset appearance
+$('#Cats select').change(() => {
+    // clear search string in input field
+    $('#StrToSearchCats')[0].value = '';
+    $('#Cats tbody tr').each((index, ele) => {
+        $(ele).show();
+    });
+});
+
+$('#StrToSearchCats').keyup(() => {
+    handleOthersAppreance('Cats');
+});
+
+/*=============================== Publishers ===============================*/
+
+var selectedPublisher = null;
+$('#Publishers tbody').click((e) => {
+    e.preventDefault();
+    let tr = e.target.closest('tr');
+    selectedPublisher = tr;
+    // copy current selected row info into modal
+    // author code
+    let td = tr.getElementsByTagName('td');
+    $('#Modal_Publisher input')[0].value = td[0].textContent;
+    // author name
+    $('#Modal_Publisher textarea')[0].value = td[1].textContent;
+    // show modal
+    $('#Modal_Publisher').modal('show');
+});
+
+// clear all field content whenever..
+$('#AddNewPublisher').click(() => {
+    selectedPublisher = null;
+    $('#Modal_Publisher input')[0].value = '';
+    $('#Modal_Publisher textarea')[0].value = '';
+});
+
+function addNewPublisher(item) {}
+
+function updatePublisherInfo(item) {}
+
+$('#ModalSave_Publisher').click(() => {
+    if(!selectedPublisher) {
+        addNewPublisher({title: $('#Modal_Publisher input')[1].value});
+    }
+    else {
+        updatePublisherInfo({title: $('#Modal_Publisher input')[1].value});
+    }
+});
+
+// clear searches & reset appearance
+$('#Publishers select').change(() => {
+    // clear search string in input field
+    $('#StrToSearchPublishers')[0].value = '';
+    $('#Publishers tbody tr').each((index, ele) => {
+        $(ele).show();
+    });
+});
+
+$('#StrToSearchPublishers').keyup(() => {
+    handleOthersAppreance('Publishers');
 });
