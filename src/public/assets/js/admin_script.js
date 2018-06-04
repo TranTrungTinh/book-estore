@@ -138,10 +138,12 @@ $('#Products tbody').click((e) => {
     // product price, amount, author, type, publisher
     let td = tr.getElementsByTagName('td');
     for (let i = 1; i < td.length - 1; i++) {
-        $('#Modal_Product input')[i].value = td[i].textContent;
+        if(i < 5) $('#Modal_Product input')[i].value = td[i].textContent;
+        else {} // check the author id and choose the coresponding option
     }
+
     // product description
-    $('#Modal_Product textarea')[0].value = td[td.length - 1].textContent;
+    //$('#Modal_Product .wysihtml5-editor')[0].innerHTML = $('p.detail-wrapper')[0].innerHTML;
     // show modal
     $('#Modal_Product').modal('show');
 });
@@ -149,7 +151,7 @@ $('#Products tbody').click((e) => {
 // clear all field content whenever..
 $('#AddNewProduct').click(() => {
     selectedProduct = null;
-    $('#Modal_Product img')[0].src = '';
+    $('#Modal_Product img')[0].src = './assets/media/images/book_default.png';
     $.each($('#Modal_Product input'), (index, ele) => {
         ele.value = '';
     });
@@ -167,10 +169,10 @@ $('#ModalSave_Product').click(() => {
         title: $('#Modal_Product input')[2].value,
         price: $('#Modal_Product input')[3].value,
         amount: $('#Modal_Product input')[4].value,
-        author: $('#Modal_Product input')[5].value,
-        type: $('#Modal_Product input')[6].value,
-        publisher: $('#Modal_Product input')[7].value,
-        description: $('#Modal_Product textarea')[0].value
+        author: $('#Modal_Product select')[0].value,
+        type: $('#Modal_Product select')[1].value,
+        publisher: $('#Modal_Product select')[2].value,
+        description: $('#Modal_Product textarea')[0].val()
     }
 
     if(!selectedProduct) {
@@ -183,11 +185,7 @@ $('#ModalSave_Product').click(() => {
 });
 
 // delete seelected Products
-$('#ModalDelete').click(() => {
-    if (selectedProduct) {
-        $('#Products tbody')[0].removeChild(selectedProduct);
-    }
-});
+$('#ModalDelete').click(() => {});
 
 /*=============================== Orders ===============================*/
 
