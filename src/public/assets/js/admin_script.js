@@ -94,7 +94,7 @@ $('#StrToSearchProducts').keyup(() => {
         case 'author':
             typeOfInfoOnCol = 5;
             break;
-        case 'type':
+        case 'catetory':
             typeOfInfoOnCol = 6;
             break;
         case 'publisher':
@@ -143,7 +143,7 @@ $('#Products tbody').click((e) => {
     }
 
     // product description
-    //$('#Modal_Product .wysihtml5-editor')[0].innerHTML = $('p.detail-wrapper')[0].innerHTML;
+    $('#txtEditor').Editor("setText", $('p.detail-wrapper')[0].innerHTML);
     // show modal
     $('#Modal_Product').modal('show');
 });
@@ -155,7 +155,7 @@ $('#AddNewProduct').click(() => {
     $.each($('#Modal_Product input'), (index, ele) => {
         ele.value = '';
     });
-    $('#Modal_Product textarea')[0].value = '';
+    $('#txtEditor').Editor("setText", '');
 })
 
 function addNewProduct(item) {}
@@ -164,7 +164,7 @@ function updateProductInfo(item) {}
 
 $('#ModalSave_Product').click(() => {
     let item = {
-        imgSrc: '',
+        imgSrc: '', /* image file path here */
         id: $('#Modal_Product input')[1].value,
         title: $('#Modal_Product input')[2].value,
         price: $('#Modal_Product input')[3].value,
@@ -172,7 +172,7 @@ $('#ModalSave_Product').click(() => {
         author: $('#Modal_Product select')[0].value,
         type: $('#Modal_Product select')[1].value,
         publisher: $('#Modal_Product select')[2].value,
-        description: $('#Modal_Product textarea')[0].val()
+        description: $('#txtEditor').Editor("getText")
     }
 
     if(!selectedProduct) {

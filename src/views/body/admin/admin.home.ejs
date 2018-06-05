@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="./assets/css/normalize.css">
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/admin_style.css">
-    <link rel="stylesheet" type="text/css" href="./assets/bootstrap-wysihtml5/lib/css/prettify.css">
-    <link rel="stylesheet" type="text/css" href="./assets/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/editor.css">
+    <link rel="stylesheet" href="./assets/css/font-awesome.min.css">
+    <script src="./assets/js/jquery-3.3.1.min.js"></script>
+    <script src="./assets/js/editor.js"></script>
 </head>
 
 <body>
@@ -51,7 +53,7 @@
                             <option value="id" selected>Mã sản phẩm</option>
                             <option value="product" selected>Tựa đề</option>
                             <option value="author">Tác giả</option>
-                            <option value="type">Danh mục</option>
+                            <option value="category">Danh mục</option>
                             <option value="publisher">Nhà xuất bản</option>
                         </select>
                     </div>
@@ -366,13 +368,13 @@
                                 <!-- amount -->
                                 <label for="ProductAmount">Tồn kho</label>
                                 <input type="number" name="ProductAmount" min="0" class="form-control" value="0" required>
-                            </div>
-                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                                 <!-- author -->
                                 <label for="ProductAuthor">Tác giả</label>
                                 <select name="ProductAuthor" class="form-control">
                                     <option value=""></option>
                                 </select>
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                                 <!-- type -->
                                 <label for="ProductType">Thể loại</label>
                                 <select name="ProductType" class="form-control">
@@ -385,13 +387,11 @@
                                 </select>
                                 <!-- desciption -->
                                 <label>Mô tả</label>
-                                <script src="./assets/js/jquery-3.3.1.min.js"></script>
-                                <script src="./assets/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.min.js"></script>
-                                <script src="./assets/bootstrap-wysihtml5/lib/js/prettify.js"></script>
-                                <script src="./assets/bootstrap-wysihtml5/src/bootstrap-wysihtml5.js"></script>
-                                <textarea class="form-control"></textarea>
+                                <div id="txtEditor"></div>
                                 <script>
-                                    $('#Modal_Product textarea').wysihtml5();
+                                    $(document).ready( function() {
+                                        $("#txtEditor").Editor();                   
+                                    });
                                 </script>
                             </div>
                         </div>

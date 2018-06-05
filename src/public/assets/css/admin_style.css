@@ -135,8 +135,8 @@ tr {
                 margin-bottom: 10px;
                 width: 100%;
             }
-            #Modal_Product textarea {
-                height: 251px;
+            .Editor-container {
+                margin: 0!important;
             }
             #Modal_Author textarea,
             #Modal_Cat textarea,
