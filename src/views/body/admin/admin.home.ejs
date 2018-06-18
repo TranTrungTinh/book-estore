@@ -44,7 +44,7 @@
         </nav>
 
         <div class="col-sm-8 col-md-9 col-lg-9" id="Content">
-        <% const bookItems = booksList.books, authorItems = authorsList.authors, catItems = categoriesList.cats, publisherItems = publishersList.publishers %>
+        <% const bookItems = booksList.books, orderItems = ordersList.orders, authorItems = authorsList.authors, catItems = categoriesList.cats, publisherItems = publishersList.publishers %>
             <section id="Products">
                 <h1>SẢN PHẨM</h1>
                 <hr/>
@@ -92,9 +92,8 @@
                                 <th>Mô tả</th>
                             </tr>
                         </thead>
-                        <% const bookCount = booksList.bookCount, bookPageCount = booksList.pageCount  %>
                         <tbody>
-                            <%- include('./admin.products.list.ejs', { bookItems, bookCount, bookPageCount }) %>
+                            <%- include('./admin.products.list.ejs', { bookItems }) %>
                         </tbody>
                     </table>
                 </div>
@@ -137,9 +136,8 @@
                             <th>Tổng số tiền</th>
                             <th>Trạng thái</th>
                         </thead>
-                        <% const orderItems = ordersList.orders, orderCount = ordersList.orderCount, orderPageCount = ordersList.pageCount %>
                         <tbody class="table-scroll">
-                            <%- include('./admin.order.list.ejs', { orderItems, orderCount, orderPageCount }) %>
+                            <%- include('./admin.order.list.ejs', { orderItems }) %>
                         </tbody>
                     </table>
                 </div>
@@ -183,9 +181,8 @@
                             <th>Mã tác giả</th>
                             <th>Bút danh</th>
                         </thead>
-                        <% const authorCount = authorsList.authorCount, authorPageCount = authorsList.pageCount %>
                         <tbody class="table-scroll">
-                            <%- include('./admin.author.list.ejs', { authorItems, authorCount, authorPageCount }) %>
+                            <%- include('./admin.author.list.ejs', { authorItems }) %>
                         </tbody>
                     </table>
                 </div>
@@ -230,9 +227,8 @@
                             <th>Mã danh mục</th>
                             <th>Tên danh mục</th>
                         </thead>
-                        <% const catCount = categoriesList.catCount, catPageCount = categoriesList.pageCount %>
                         <tbody class="table-scroll">
-                            <%- include('./admin.category.list.ejs', { catItems, catCount, catPageCount }) %>
+                            <%- include('./admin.category.list.ejs', { catItems }) %>
                         </tbody>
                     </table>
                 </div>
@@ -277,9 +273,8 @@
                             <th>Mã NXB</th>
                             <th>Tên NXB</th>
                         </thead>
-                        <% const publisherCount = publishersList.publisherCount, publisherPageCount = publishersList.pageCount %>
                         <tbody class="table-scroll">
-                            <%- include('./admin.publisher.list.ejs', { publisherItems, publisherCount, publisherPageCount }) %>
+                            <%- include('./admin.publisher.list.ejs', { publisherItems }) %>
                         </tbody>
                     </table>
                 </div>

@@ -17,50 +17,35 @@ class AdminServices {
       books.push(rawBooks[i])
     }
 
-    const bookCount = books.length,
-          pageCount = Math.round(bookCount / ITEMS_PER_PAGE)
-
-    return { books, bookCount, pageCount }
+    return { books }
   }
 
   static async showOrders() {
     const orders = await Admin.getAllOrders()
     if(!orders) throw new Error('Khong tim thay')
 
-    const orderCount = orders.length,
-          pageCount = Math.round(orderCount / ITEMS_PER_PAGE)
-
-    return { orders, orderCount, pageCount }
+    return { orders }
   }
 
   static async showAuthors() {
     const authors = await Admin.getAllAuthors()
     if(!authors) throw new Error('Khong tim thay')
 
-    const authorCount = authors.length,
-          pageCount = Math.round(authorCount / ITEMS_PER_PAGE)
-
-    return { authors, authorCount, pageCount }
+    return { authors }
   }
 
   static async showCategories() {
     const cats = await Admin.getAllCategories()
     if(!cats) throw new Error('Khong tim thay')
 
-    const catCount = cats.length,
-          pageCount = Math.round(catCount / ITEMS_PER_PAGE)
-
-    return { cats, catCount, pageCount }
+    return { cats }
   }
 
   static async showPublishers() {
     const publishers = await Admin.getAllPublishers()
     if(!publishers) throw new Error('Khong tim thay')
 
-    const publisherCount = publishers.length,
-          pageCount = Math.round(publisherCount / ITEMS_PER_PAGE)
-
-    return { publishers, publisherCount, pageCount }
+    return { publishers }
   }
   
   static async saveBook(bookInfo) {
