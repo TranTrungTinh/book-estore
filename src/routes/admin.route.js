@@ -11,7 +11,22 @@ adminRouter.use(parser.json());
 adminRouter.use(cookieParser());
 
 adminRouter.get('/edit', mustBeAdmin, (req, res) => {
-  res.render('render/admin', { isLogin: true });
+  Promise.all([ AdminServices.showBooks(), 
+                AdminServices.showOrders(),
+                AdminServices.showAuthors(), 
+                AdminServices.showCategories(), 
+                AdminServices.showPublishers() ])
+         .then(results => {
+            const booksList      = results[0],
+                  ordersList     = results[1],
+                  authorsList    = results[2],
+                  categoriesList = results[3],
+                  publishersList = results[4]
+            res.render('render/admin', { isLogin: true, booksList, ordersList, authorsList, categoriesList, publishersList });
+          })
+         .catch(err => {
+           console.log(err)
+         })
 });
 
 adminRouter.get('/login', checkTokenAdmin, (req, res) => {

@@ -1,8 +1,21 @@
-<tr>
+<!-- <tr>
   <td>GJS759CKQ1</td>
   <td><p class="detail-wrapper">Damn u Microsoft</p></td>
 </tr>
 <tr>
   <td>UT81IWOQ9A</td>
   <td><p class="detail-wrapper">Don't fucking buy github huhuhu</p></td>
-</tr>
+</tr> -->
+
+<% authorItems.forEach(e => { %>
+  <tr>
+    <td>
+      <%= e.ID %>
+    </td>
+    <td class="detail-wrapper">
+      <div class="detail-wrapper">
+        <%= e.NAME %>
+      </div>
+    </td>
+  </tr>
+<% }) %>

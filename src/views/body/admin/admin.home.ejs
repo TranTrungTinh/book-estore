@@ -44,6 +44,7 @@
         </nav>
 
         <div class="col-sm-8 col-md-9 col-lg-9" id="Content">
+        <% const bookItems = booksList.books, authorItems = authorsList.authors, catItems = categoriesList.cats, publisherItems = publishersList.publishers %>
             <section id="Products">
                 <h1>SẢN PHẨM</h1>
                 <hr/>
@@ -91,25 +92,14 @@
                                 <th>Mô tả</th>
                             </tr>
                         </thead>
+                        <% const bookCount = booksList.bookCount, bookPageCount = booksList.pageCount  %>
                         <tbody>
-                            <%- include('./admin.products.list.ejs') %>
+                            <%- include('./admin.products.list.ejs', { bookItems, bookCount, bookPageCount }) %>
                         </tbody>
                     </table>
                 </div>
                 
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li class="text" disabled>
-                            <a href="#">&laquo;</a>
-                        </li>
-                        <li class="active">
-                            <a href="#">1</a>
-                        </li>
-                        <li class="text" disabled>
-                            <a href="#">&raquo;</a>
-                        </li>
-                    </ul>
-                </nav>
+                <ul class="pagination-ul col-lg-12 col-md-12 col-sm-12 col-xs-12 pagination-lg"></ul>
             </section>
 
             <section id="Orders">
@@ -143,27 +133,18 @@
                             <th>Mã đơn hàng</th>
                             <th>Mã khách hàng</th>
                             <th>Ngày đặt</th>
+                            <th>Nội dung</th>
+                            <th>Tổng số tiền</th>
                             <th>Trạng thái</th>
                         </thead>
+                        <% const orderItems = ordersList.orders, orderCount = ordersList.orderCount, orderPageCount = ordersList.pageCount %>
                         <tbody class="table-scroll">
-                            <%- include('./admin.order.list.ejs') %>
+                            <%- include('./admin.order.list.ejs', { orderItems, orderCount, orderPageCount }) %>
                         </tbody>
                     </table>
                 </div>
                 
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li class="text" disabled>
-                            <a href="#">&laquo;</a>
-                        </li>
-                        <li class="active">
-                            <a href="#">1</a>
-                        </li>
-                        <li class="text" disabled>
-                            <a href="#">&raquo;</a>
-                        </li>
-                    </ul>
-                </nav>
+                <ul class="pagination-ul col-lg-12 col-md-12 col-sm-12 col-xs-12 pagination-lg"></ul>
             </section>
 
             <section id="Authors">
@@ -202,25 +183,14 @@
                             <th>Mã tác giả</th>
                             <th>Bút danh</th>
                         </thead>
+                        <% const authorCount = authorsList.authorCount, authorPageCount = authorsList.pageCount %>
                         <tbody class="table-scroll">
-                            <%- include('./admin.author.list.ejs') %>
+                            <%- include('./admin.author.list.ejs', { authorItems, authorCount, authorPageCount }) %>
                         </tbody>
                     </table>
                 </div>
                 
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li class="text" disabled>
-                            <a href="#">&laquo;</a>
-                        </li>
-                        <li class="active">
-                            <a href="#">1</a>
-                        </li>
-                        <li class="text" disabled>
-                            <a href="#">&raquo;</a>
-                        </li>
-                    </ul>
-                </nav>
+                <ul class="pagination-ul col-lg-12 col-md-12 col-sm-12 col-xs-12 pagination-lg"></ul>
             </section>
 
             <section id="Cats">
@@ -260,25 +230,14 @@
                             <th>Mã danh mục</th>
                             <th>Tên danh mục</th>
                         </thead>
+                        <% const catCount = categoriesList.catCount, catPageCount = categoriesList.pageCount %>
                         <tbody class="table-scroll">
-                            <%- include('./admin.category.list.ejs') %>
+                            <%- include('./admin.category.list.ejs', { catItems, catCount, catPageCount }) %>
                         </tbody>
                     </table>
                 </div>
                 
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li class="text" disabled>
-                            <a href="#">&laquo;</a>
-                        </li>
-                        <li class="active">
-                            <a href="#">1</a>
-                        </li>
-                        <li class="text" disabled>
-                            <a href="#">&raquo;</a>
-                        </li>
-                    </ul>
-                </nav>
+                <ul class="pagination-ul col-lg-12 col-md-12 col-sm-12 col-xs-12 pagination-lg"></ul>
             </section>
 
             <section id="Publishers">
@@ -318,25 +277,14 @@
                             <th>Mã NXB</th>
                             <th>Tên NXB</th>
                         </thead>
+                        <% const publisherCount = publishersList.publisherCount, publisherPageCount = publishersList.pageCount %>
                         <tbody class="table-scroll">
-                            <%- include('./admin.publisher.list.ejs') %>
+                            <%- include('./admin.publisher.list.ejs', { publisherItems, publisherCount, publisherPageCount }) %>
                         </tbody>
                     </table>
                 </div>
                 
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li class="text" disabled>
-                            <a href="#">&laquo;</a>
-                        </li>
-                        <li class="active">
-                            <a href="#">1</a>
-                        </li>
-                        <li class="text" disabled>
-                            <a href="#">&raquo;</a>
-                        </li>
-                    </ul>
-                </nav>
+                <ul class="pagination-ul col-lg-12 col-md-12 col-sm-12 col-xs-12 pagination-lg"></ul>
             </section>
         </div>
 
@@ -371,26 +319,38 @@
                                 <!-- author -->
                                 <label for="ProductAuthor">Tác giả</label>
                                 <select name="ProductAuthor" class="form-control">
-                                    <option value=""></option>
+                                <% authorItems.forEach(e => { %>
+                                    <option value="<%= e.ID%>">
+                                        <%= e.NAME%>
+                                    </option>
+                                <% }) %>
                                 </select>
                             </div>
                             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                                <!-- type -->
-                                <label for="ProductType">Thể loại</label>
-                                <select name="ProductType" class="form-control">
-                                    <option value=""></option>
+                                <!-- cat -->
+                                <label for="ProductCat">Thể loại</label>
+                                <select name="ProductCat" class="form-control">
+                                <% catItems.forEach(e => { %>
+                                    <option value="<%= e.ID%>">
+                                        <%= e.NAME%>
+                                    </option>
+                                <% }) %>
                                 </select>
-                                <!-- publichser -->
+                                <!-- publisher -->
                                 <label for="ProductPublisher">Nhà xuất bản</label>
                                 <select name="ProductPublisher" class="form-control">
-                                    <option value=""></option>
+                                <% publisherItems.forEach(e => { %>
+                                    <option value="<%= e.ID%>">
+                                        <%= e.NAME%>
+                                    </option>
+                                <% }) %>
                                 </select>
                                 <!-- desciption -->
                                 <label>Mô tả</label>
                                 <div id="txtEditor"></div>
                                 <script>
                                     $(document).ready( function() {
-                                        $("#txtEditor").Editor();                   
+                                        $("#txtEditor").Editor();  
                                     });
                                 </script>
                             </div>
@@ -419,7 +379,6 @@
                                 <input type="text" disabled name="AuthorCode" class="form-control">
                             </div>
                             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                                <!-- desciption -->
                                 <label>Bút danh</label>
                                 <textarea class="form-control"></textarea>
                             </div>
@@ -447,7 +406,6 @@
                                 <input type="text" disabled name="AuthorCode" class="form-control">
                             </div>
                             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                                <!-- desciption -->
                                 <label>Tên danh mục</label>
                                 <textarea class="form-control"></textarea>
                             </div>
@@ -475,7 +433,6 @@
                                 <input type="text" disabled name="AuthorCode" class="form-control">
                             </div>
                             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                                <!-- desciption -->
                                 <label>Tên NXB</label>
                                 <textarea class="form-control"></textarea>
                             </div>
@@ -491,6 +448,7 @@
     </div>
 
     <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/jquery.twbsPagination.min.js"></script>
     <script src="./assets/js/admin_script.js"></script>
 </body>
 

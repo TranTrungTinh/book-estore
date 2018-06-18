@@ -1,6 +1,6 @@
 
 <% if(isLogin) { %>
-    <%- include('../body/admin/admin.home.ejs') %>
+    <%- include('../body/admin/admin.home.ejs', { booksList, ordersList, authorsList, categoriesList, publishersList }) %>
 <% } else { %>
     <%- include('../body/admin/admin.login.ejs') %>
 <% } %>

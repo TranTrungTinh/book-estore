@@ -1,65 +1,62 @@
-<tr>
+<!--<tr>
   <td>GJS759CKQ1</td>
   <td>786K1NAKHL</td>
-  <td>2018-04-17</td>
+  <td>2018-04-17 17:05:45</td>
   <td>
       <select class="form-control">
           <option value="pending" selected>Chưa giao</option>
           <option value="delivering">Đang giao</option>
           <option value="done">Đã giao</option>
-          <option value="cancel">Huỷ</option>
       </select>
   </td>
-</tr>
-<tr>
-  <td>UT81IWOQ9A</td>
-  <td>IOTT7SHJGMA</td>
-  <td>2018-04-16</td>
-  <td>
-      <select class="form-control">
-          <option value="pending">Chưa giao</option>
-          <option value="delivering" selected>Đang giao</option>
-          <option value="done">Đã giao</option>
-          <option value="cancel">Huỷ</option>
-      </select>
-  </td>
-</tr>
-<tr>
-  <td>JGIT9AO1L5</td>
-  <td>JGMZ7VBCTZ</td>
-  <td>2018-03-22</td>
-  <td>
-      <select class="form-control">
-          <option value="pending">Chưa giao</option>
-          <option value="delivering">Đang giao</option>
-          <option value="done" selected>Đã giao</option>
-          <option value="cancel">Huỷ</option>
-      </select>
-  </td>
-</tr>
-<tr>
-  <td>YUT7RIO01M</td>
-  <td>JHLQMANX9Z</td>
-  <td>2018-03-01</td>
-  <td>
-      <select class="form-control">
-          <option value="pending" selected>Chưa giao</option>
-          <option value="delivering">Đang giao</option>
-          <option value="done">Đã giao</option>
-          <option value="cancel">Huỷ</option>
-      </select>
-  </td>
-</tr>
-<tr>
-  <td>THGJMZ6578</td>
-  <td>OKHLAQM57N</td>
-  <td>2018-02-28</td>
-  <td>
-      <select class="form-control">
-          <option value="pending">Chưa giao</option>
-          <option value="delivering">Đang giao</option>
-          <option value="done">Đã giao</option>
-          <option value="cancel" selected>Huỷ</option>
-      </select>
-  </td>
-</tr>
+</tr>-->
+
+<% orderItems.forEach(e => { %>
+    <% if(e.STATE === 1) { %>
+    <tr class="warning">
+    <% } %>
+    <% if(e.STATE === 2) { %>
+    <tr class="active">
+    <% } %>
+    <% if(e.STATE === 3) { %>
+    <tr class="success">
+    <% } %>
+        <td>
+            <%= e.ID %>
+        </td>
+        <td>
+            <%= e.ID_USER %>
+        </td>
+        <% const date = new Date(e.DATE_CREATED) %>
+        <td>
+            <%= date.getFullYear() + "/" + (+date.getMonth() + 1) + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() %>
+        </td>
+        <td>
+            <div class=".detail-wrapper">
+                <%- e.CONTENT %>
+            </div>
+        </td>
+        <td>
+            <%= e.TOTAL_COST %>
+        </td>
+        <td>
+            <select class="form-control">
+                <% if(e.STATE === 1) { %>
+                <option value="pending" selected>Chưa giao</option>
+                <option value="delivering">Đang giao hàng</option>
+                <option value="done">Giao hàng thành công</option>
+                <% } %>
+                <% if(e.STATE === 2) { %>
+                <option value="pending">Chưa giao</option>
+                <option value="delivering" selected>Đang giao hàng</option>
+                <option value="done">Giao hàng thành công</option>
+                <% } %>
+                <% if(e.STATE === 3) { %>
+                <option value="pending">Chưa giao</option>
+                <option value="delivering">Đang giao hàng</option>
+                <option value="done" selected>Giao hàng thành công</option>
+                <% } %>
+            </select>
+        </tr>
+    </tr>
+<% }) %>
