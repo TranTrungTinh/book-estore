@@ -10,7 +10,7 @@ categoryRouter.get('/:id', (req, res) => {
   const {page} = req.query;
   CategoryServices.showBookWithIDCategory(page, req.params.id)
   .then(results => res.render('render/items', { results, path, page, price: {priceFormat, priceDiscount, discount}}))
-  .catch(error => res.send(error.message));
+  .catch(error => res.redirect('/error'));
 });
 
 categoryRouter.get('/author/:id', (req, res) => {
@@ -18,7 +18,7 @@ categoryRouter.get('/author/:id', (req, res) => {
   const {page} = req.query;
   CategoryServices.showBookWithIDAuthor(page, req.params.id)
   .then(results => res.render('render/items', { results, path, page, price: {priceFormat, priceDiscount, discount} }))
-  .catch(error => res.send(error.message));
+  .catch(error => res.redirect('/error'));
 });
 
 categoryRouter.get('/publisher/:id', (req, res) => {
@@ -26,7 +26,7 @@ categoryRouter.get('/publisher/:id', (req, res) => {
   const {page} = req.query;
   CategoryServices.showBookWithIDPublisher(page, req.params.id)
   .then(results => res.render('render/items', { results, path, page, price: {priceFormat, priceDiscount, discount} }))
-  .catch(error => res.send(error.message));
+  .catch(error => res.redirect('/error'));
 });
 
 module.exports = { categoryRouter };

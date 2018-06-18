@@ -11,13 +11,13 @@ class AdminServices {
   static async showBooks() {
     const rawBooks = await Admin.getAllBooks()
     
-    if(!rawBooks) throw new Error('Khong tim thay')
-    var books = []
-    for (let i = 0; i < rawBooks.length; i++) {
-      books.push(rawBooks[i])
-    }
-
-    return { books }
+    if(!rawBooks) throw new Error('Khong tim thay');
+    // console.log(rawBooks);
+    // var books = []
+    // for (let i = 0; i < rawBooks.length; i++) {
+    //   books.push(rawBooks[i])
+    // }
+    return { books: rawBooks };
   }
 
   static async showOrders() {
@@ -28,65 +28,65 @@ class AdminServices {
   }
 
   static async showAuthors() {
-    const authors = await Admin.getAllAuthors()
-    if(!authors) throw new Error('Khong tim thay')
+    const authors = await Admin.getAllAuthors();
+    if(!authors) throw new Error('Khong tim thay');
 
-    return { authors }
+    return { authors };
   }
 
   static async showCategories() {
-    const cats = await Admin.getAllCategories()
-    if(!cats) throw new Error('Khong tim thay')
+    const cats = await Admin.getAllCategories();
+    if(!cats) throw new Error('Khong tim thay');
 
-    return { cats }
+    return { cats };
   }
 
   static async showPublishers() {
-    const publishers = await Admin.getAllPublishers()
-    if(!publishers) throw new Error('Khong tim thay')
+    const publishers = await Admin.getAllPublishers();
+    if(!publishers) throw new Error('Khong tim thay');
 
-    return { publishers }
+    return { publishers };
   }
   
-  static async saveBook(bookInfo) {
-    const { name, price, inventory, description, authorId, catId, publisherId } = bookInfo
-    return Admin.saveMewBook(name, price, inventory, description, authorId, catId, publisherId)
+  static saveBook(bookInfo) {
+    const { name, price, inventory, description, authorId, catId, publisherId } = bookInfo;
+    return Admin.saveMewBook(name, price, inventory, description, authorId, catId, publisherId);
   }
 
-  static async saveAuthor(authorName) {
-    return Admin.saveNewAuthor(authorName)
+  static saveAuthor(authorName) {
+    return Admin.saveNewAuthor(authorName);
   }
 
-  static async saveCategory(catName) {
-    return Admin.saveNewCategory(catName)
+  static saveCategory(catName) {
+    return Admin.saveNewCategory(catName);
   }
 
-  static async savePublisher(publisherName) {
-    return Admin.saveNewPublisher(publisherName)
+  static savePublisher(publisherName) {
+    return Admin.saveNewPublisher(publisherName);
   }
 
-  static async updateBookInfo(bookInfo) {
-    const { id, name, price, inventory, description, authorId, catId, publisherId } = bookInfo
-    return Admin.updateBook(id, name, price, inventory, description, authorId, catId, publisherId)
+  static updateBookInfo(bookInfo) {
+    const { id, name, price, inventory, description, authorId, catId, publisherId } = bookInfo;
+    return Admin.updateBook(id, name, price, inventory, description, authorId, catId, publisherId);
   }
 
-  static async updateAuthorInfo(authorInfo) {
-    const {id, name} = authorInfo
-    return Admin.updateAuthor(id, name)
+  static updateAuthorInfo(authorInfo) {
+    const {id, name} = authorInfo;
+    return Admin.updateAuthor(id, name);
   }
 
-  static async updateCategoryInfo(catInfo) {
-    const {id, name} = catInfo
-    return Admin.updateCategory(id, name)
+  static updateCategoryInfo(catInfo) {
+    const {id, name} = catInfo;
+    return Admin.updateCategory(id, name);
   }
 
-  static async updatePublisherInfo(publisherInfo) {
-    const {id, name} = publisherInfo
-    return Admin.updatePublisher(id, name)
+  static updatePublisherInfo(publisherInfo) {
+    const {id, name} = publisherInfo;
+    return Admin.updatePublisher(id, name);
   }
 
-  static async deleteBookInfo(idBook) {
-    return Admin.deleteBook(idBook)
+  static deleteBookInfo(idBook) {
+    return Admin.deleteBook(idBook);
   }
 }
 

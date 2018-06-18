@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 
 const { AdminServices } = require('../services/admin.services');
 const { mustBeAdmin, checkTokenAdmin } = require('../middleware/mustBeAdmin.middleware');
+const { priceFormat } = require('../helpers/priceFormat');
 
 const adminRouter = Router();
 adminRouter.use(parser.urlencoded({extended: false}));
@@ -22,7 +23,7 @@ adminRouter.get('/edit', mustBeAdmin, (req, res) => {
                   authorsList    = results[2],
                   categoriesList = results[3],
                   publishersList = results[4]
-            res.render('render/admin', { isLogin: true, booksList, ordersList, authorsList, categoriesList, publishersList });
+            res.render('render/admin', { isLogin: true, booksList, ordersList, authorsList, categoriesList, publishersList, priceFormat });
           })
          .catch(err => {
            console.log(err)
