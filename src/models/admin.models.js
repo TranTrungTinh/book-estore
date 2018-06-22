@@ -52,8 +52,8 @@ class Admin {
   static saveMewBook(name, image, price, inventory, description, authorId, catId, publisherId) {
     const newId = Math.round(Math.random() * 10000) + '';
     const sql = `INSERT INTO THONGTINSACH(ID, NAME, IMAGE, PRICE, INTENTORY, DESCRIPTION, ID_AUTHOR, ID_CATEGORY, ID_PUBLISHER)
-    VALUE (?, ?, ?, ?, ?, ?, ?, ?)`;
-    return queryDB(sql, [ newId, name, image, price, inventory, description, idCat, authorId, catId, publisherId ]);
+    VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    return queryDB(sql, [ newId, name, image, price, inventory, description, authorId, catId, publisherId ]);
   }
 
   static saveNewCategory(catName) {

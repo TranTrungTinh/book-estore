@@ -1,10 +1,17 @@
 <div class="row">
-  <div class="col-sm-12">
-    <div class="alert alert-success margin-bottom-small fs-20">
-      <span id="my-title-list"></span>
-      <span><%= length%> kết quả</span>
+  
+  <% if(!items.length) { %>
+    <div class="col-sm-12 no-matching">
+      <p><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></p>
+      <p>No matching items found</p>
     </div>
-  </div>
+  <% } else { %>
+    <div class="col-sm-12">
+      <div class="alert alert-success margin-bottom-small fs-20">
+        <span id="my-title-list"></span>
+        <span><%= length%> kết quả</span>
+      </div>
+    </div>
   <% items.forEach(e => { %>
     <div class="col-sm-6 col-md-4 col-lg-3">
       <%- include('../../thumbnail/thumbnail.ejs', { data: e, price}) %>      
@@ -40,6 +47,7 @@
       </ul>
     </nav>
   </div>
+  <% } %>
 </div>
 <script>
   document.getElementById('my-title-list').innerText = localStorage.getItem('titleList');

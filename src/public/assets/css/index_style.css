@@ -133,7 +133,11 @@ body {
   height: 250px;
 }
 
-
+.no-matching {
+  text-align: center;
+  font-size: 30px;
+  margin: 30px auto;
+}
 /* ========== Thumbnail item home page ========== */
 .thumbnail {
   border: 0 none;

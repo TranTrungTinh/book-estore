@@ -292,8 +292,8 @@ $('#btn-signup').click(e => {
   const captcha = $('#g-recaptcha-response').val() || '';
   const isGmail = email.endsWith('@gmail.com');
 
-  if(!isGmail) return swal("THÔNG BÁO","Email phải là gmail","info");
   if(!name || !email || !password) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
+  if(!isGmail) return swal("THÔNG BÁO","Email phải là gmail","info");
   if(!captcha) return swal("THÔNG BÁO","Vui lòng check captcha","info");
 
 

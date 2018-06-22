@@ -1,7 +1,14 @@
 <div class="row">
-  <div class="col-sm-12">
-    <div class="alert alert-info margin-bottom-small fs-20" id="my-title-list"></div>
-  </div>
+  
+  <% if(!items.length) { %>
+    <div class="col-sm-12 no-matching">
+      <p><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></p>
+      <p>No matching items found</p>
+    </div>
+  <% } else { %>
+    <div class="col-sm-12">
+      <div class="alert alert-info margin-bottom-small fs-20" id="my-title-list"></div>
+    </div>
   <% items.forEach(e => { %>
     <div class="col-sm-6 col-md-4 col-lg-3">
       <%- include('../../thumbnail/thumbnail.ejs', { data: e, price}) %>                    
@@ -20,6 +27,7 @@
       </ul>
     </nav>
   </div>
+  <% } %>
 </div>
 <script>
   document.getElementById('my-title-list').innerText = localStorage.getItem('titleList');

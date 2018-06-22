@@ -1,29 +1,28 @@
 <div class="col-sm-12 col-md-3">
-    <div class="row">
-      <div class="col-sm-12 acount-info-name">
-        <div>Tài khoản của: </div>
-        <span id="accountName" ></span>
-      </div>
-      <div class="col-sm-12 acount-info-list">
-        <div class="list-group">
-          <a href="javascript:;" class="list-group-item" id="acount-info">
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <span class="acount-info-title">Thông tin tài khoản</span>
-          </a>
-          <a href="javascript:;" class="list-group-item active" id="acount-history">
-            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-            <span class="acount-info-title">Lịch sử mua hàng</span>
-          </a>
-          <a href="javascript:;" class="list-group-item" id="btn-logout">
-            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-            <span class="acount-info-title">Đăng xuất</span>
-          </a>
-        </div>
+  <div class="row">
+    <div class="col-sm-12 acount-info-name">
+      <div>Tài khoản của: </div>
+      <span id="accountName" ></span>
+    </div>
+    <div class="col-sm-12 acount-info-list">
+      <div class="list-group">
+        <a href="javascript:;" class="list-group-item" id="acount-info">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          <span class="acount-info-title">Thông tin tài khoản</span>
+        </a>
+        <a href="javascript:;" class="list-group-item active" id="acount-history">
+          <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+          <span class="acount-info-title">Lịch sử mua hàng</span>
+        </a>
+        <a href="javascript:;" class="list-group-item" id="btn-logout">
+          <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+          <span class="acount-info-title">Đăng xuất</span>
+        </a>
       </div>
     </div>
-    
   </div>
-  <div class="col-sm-12 col-md-9">
+</div>
+<div class="col-sm-12 col-md-9">
     <div class="row">
       <div class="col-sm-12 history-order">
         <div class="pull-left">Chi tiết đơn hàng #<%= orders[0].ID%> - <strong><%= showStatus(orders[0].STATE)%></strong></div>
@@ -72,6 +71,7 @@
       </div>
     </div>
   </div>
+</div>
   <script>
     document.getElementById('accountName').innerText = localStorage.getItem('name') ? localStorage.getItem('name') : 'Customer';
   </script>
