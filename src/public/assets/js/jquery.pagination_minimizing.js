@@ -1,6 +1,7 @@
 const page = parseInt(location.href.substr(location.href.indexOf('page=') + 5))
 if (page !== -1) { // pagination exists
-    var navList = $('.pagination > li')
+    // skip li[0], li[1], li[length-3], li[length-2] as for First, Previous, Next, Last
+    var navList = $('.pagination > li').slice(2, $('.pagination > li').length - 2)
     // deactivate remaining pages
     for (let i = 0; i < navList.length; i++) {
         $(navList[i]).className = ''

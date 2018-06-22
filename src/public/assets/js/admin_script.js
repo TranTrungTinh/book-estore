@@ -46,55 +46,92 @@ $('.btn-refresh').click((e) => {
 })
 
 // Authors, Categories, Publishers whose table has 2 column: id, name
-function handleOthersAppreance(id) {
-    let strToSearch = $(`#StrToSearch${id}`)[0].value
+function handleOthersAppreance(sectionId) {
+    let strToSearch = $(`#StrToSearch${sectionId}`)[0].value
 
     let typeOfInfoOnCol = 0
-    switch ($(`#${id} select`)[0].value) {
-        case 'id':
-            typeOfInfoOnCol = 0
-            break
+    switch ($(`#${sectionId} select`)[0].value) {
         case 'name':
             typeOfInfoOnCol = 1
             break
         default:
-            typeOfInfoOnCol = null
+            typeOfInfoOnCol = 0
             break
     }
+    
+    var container = $(`#${sectionId} tbody`)[0]
+    $(container).empty()
 
-    $.each($(`#${id} tbody tr`), (index, ele) => {
-        if (strToSearch.length > 0 &&
+    let sectionNumberId = -1
+    switch(sectionId) {
+        case 'Authors': 
+        sectionNumberId = 2
+        break
+        case 'Cats': 
+        sectionNumberId = 3
+        break
+        case 'Publishers': 
+        sectionNumberId = 4
+        break
+    }
+
+    var data = itemsList[sectionNumberId]
+
+    $.each(data, (index, ele) => {
+        if (!(strToSearch.length > 0 &&
             ele.getElementsByTagName('td')[typeOfInfoOnCol]
             .textContent.toLowerCase()
-            .indexOf(strToSearch.toLowerCase()) < 0) {
-            $(ele).hide()
-        } else {
-            $(ele).show()
+            .indexOf(strToSearch.toLowerCase()) < 0)) {
+            container.appendChild(ele)
         }
     })
 }
 
 // Pagination
-$('.pagination-ul').each((index, ele) => {
-    var sectionId = $(ele).closest('section').attr('id')
-    var container = $(`#${sectionId} tbody`)[0]
-    var data = $(`#${sectionId} tbody tr`)
-    var arr = Object.keys(data).map((key) => { return data[key] })
+var itemsList = [$('#Products tbody tr'), $('#Orders tbody tr'), $('#Authors tbody tr'), $('#Cats tbody tr'), $('#Publishers tbody tr')]
 
+$('.pagination-ul').each((index, ele) => {
+    let sectionId = $(ele).closest('section').attr('id'),
+        container = $(`#${sectionId} tbody`)[0],
+        data = itemsList[index]
+    
     $(ele).twbsPagination({
-        totalPages: Math.round(data.length / 8),
-        visiblePages: 7,
+        totalPages: Math.ceil(data.length / 8),
+        visiblePages: 5,
         onPageClick: (event, page) => {
             const start = (+page - 1) * 8 || 0
-            var html = ''
-            for (let i = start; i < start + 8; i++) {
-                if(i > arr.length - 3) continue
-                html += arr[i].outerHTML
+            $(container).empty()
+            for (let i = start; i < start + 8 && i < data.length; i++) {
+                container.appendChild(data[i])
             }
-            container.innerHTML = html
         }
     })
 })
+
+function updatePagination(sectionId) {
+    let pgUl = $(`#${sectionId} .pagination-ul`)[0],
+        data = $(`#${sectionId} tbody tr`)
+    let newTotalPages = Math.ceil(data.length / 8)
+    let defaultOpts = {
+            totalPages: newTotalPages
+        }
+    
+    $(pgUl).twbsPagination('destroy')
+
+    $(pgUl).twbsPagination($.extend({}, defaultOpts, {
+        startPage: 1,
+        totalPages: newTotalPages,
+        onPageClick: (event, page) => {
+            const start = (+page - 1) * 8 || 0,
+                container = $(`#${sectionId} tbody`)[0]
+            $(container).empty()
+            for (let i = start; i < start + 8; i++) {
+                if(i > data.length - 1) continue // skip some shitty
+                container.appendChild(data[i])
+            }
+        }
+    }))
+}
 
 /*=============================== Products ===============================*/
 
@@ -121,24 +158,29 @@ $('#StrToSearchProducts').keyup(() => {
             break
     }
 
-    let strToSearch = $('#StrToSearchProducts')[0].value
-    $.each($('#Products tbody tr'), (index, ele) => {
-        if (strToSearch.length > 0 &&
+    let strToSearch = $('#StrToSearchProducts')[0].value,
+        productsList = itemsList[0].slice()
+        container = $('#Products tbody')[0]
+    $(container).empty()
+    $.each(productsList, (index, ele) => {
+        if (!(strToSearch.length > 0 &&
             ele.getElementsByTagName('td')[typeOfInfoOnCol]
             .textContent.toLowerCase()
-            .indexOf(strToSearch.toLowerCase()) < 0) {
-            $(ele).hide()
-        } else {
-            $(ele).show()
+            .indexOf(strToSearch.toLowerCase()) < 0)) {
+            container.appendChild(ele)
         }
     })
+
+    updatePagination('Products')
 })
 
 // clear searches & reset appearance
 $('#Products select').change(() => {
+    const container = $('#Products tbody')[0]
+    $(container).empty()
     $('#StrToSearchProducts')[0].value = ''
-    $('#Products tbody tr').each((index, ele) => {
-        $(ele).show()
+    itemsList[0].each((index, ele) => {
+        container.appendChild(ele)
     })
 })
 
@@ -152,9 +194,13 @@ $('#Products tbody').click((e) => {
     // product image
     $('#Modal_Product img')[0].src = tr.getElementsByTagName('img')[0].src
     // product price, amount, author, category, publisher
-    let td = tr.getElementsByTagName('td')
+    let tds = tr.getElementsByTagName('td')
     for (let i = 1; i < 5; i++) {
-        if (i < 5) $('#Modal_Product input')[i].value = td[i].textContent
+        // price
+        if(i === 3)
+            $('#Modal_Product input')[i].value = tds[i].textContent.replace(',','').trim()
+        else
+            $('#Modal_Product input')[i].value = tds[i].textContent.trim()
     }
     let authorId = tr.getElementsByTagName('span')[0].textContent,
         catId = tr.getElementsByTagName('span')[1].textContent,
@@ -163,7 +209,7 @@ $('#Products tbody').click((e) => {
     let optionsAuthor = $('#Modal_Product select:nth-of-type(1) > option'),
         optionsCat = $('#Modal_Product select:nth-of-type(2) > option'),
         optionsPublisher = $('#Modal_Product select:nth-of-type(3) > option')
-    
+
     for (let i = 0; i < optionsAuthor.length; i++) {
         if (optionsAuthor[i].getAttribute('value') === authorId) {
             optionsAuthor[i].setAttribute('selected', true)
@@ -187,7 +233,7 @@ $('#Products tbody').click((e) => {
     }
 
     // product description
-    $('#txtEditor').Editor("setText", selectedProduct.getElementsByClassName('detail-wrapper')[3].innerHTML)
+    $('#txtEditor').Editor("setText", selectedProduct.getElementsByClassName('detail-wrapper')[4].innerHTML)
     // show modal
     $('#Modal_Product').modal('show')
 })
@@ -259,18 +305,18 @@ function changeAllOrdersStatus() {
 
 function handleOrdersAppreance() {
     let filterOrderStt = $('#Orders select')[0].value,
-        strToSearch = $('#StrToSearchOrders')[0].value
+        strToSearch = $('#StrToSearchOrders')[0].value,
+        ordersList = itemsList[1].slice()
+        container = $('#Orders tbody')[0]
+    $(container).empty()
 
-    $.each($('#Orders tbody tr'), (index, ele) => {
+    $.each(ordersList, (index, ele) => {
         let rowOrderStt = ele.getElementsByTagName('select')[0].value,
             orderCode = ele.getElementsByTagName('td')[0].textContent
 
-        if (orderCode.toLowerCase().indexOf(strToSearch.toLowerCase()) < 0 ||
-            (filterOrderStt !== 'all' && filterOrderStt !== rowOrderStt)) {
-            $(ele).hide()
-        } else if (orderCode.toLowerCase().indexOf(strToSearch.toLowerCase()) > -1 &&
+        if (orderCode.toLowerCase().indexOf(strToSearch.toLowerCase()) > -1 &&
             (filterOrderStt === 'all' || filterOrderStt === rowOrderStt)) {
-            $(ele).show()
+            container.appendChild(ele)
         }
     })
 }
@@ -282,11 +328,13 @@ $('#Orders table').change((e) => {
 })
 
 $('#Orders select').change(() => {
-    handleOrdersAppreance()
+    handleOrdersAppreance('Orders')
+    updatePagination('Orders')
 })
 
 $('#StrToSearchOrders').keyup(() => {
-    handleOrdersAppreance()
+    handleOrdersAppreance('Orders')
+    updatePagination('Orders')
 })
 
 /*=============================== Authors ===============================*/
@@ -299,9 +347,9 @@ $('#Authors tbody').click((e) => {
     // copy current selected row info into modal
     // author code
     let td = tr.getElementsByTagName('td')
-    $('#Modal_Author input')[0].value = td[0].textContent
+    $('#Modal_Author input')[0].value = td[0].textContent.trim()
     // author name
-    $('#Modal_Author textarea')[0].value = td[1].getElementsByClassName('detail-wrapper')[0].textContent
+    $('#Modal_Author input')[1].value = td[1].getElementsByClassName('detail-wrapper')[0].textContent.trim()
     // show modal
     $('#Modal_Author').modal('show')
 })
@@ -309,8 +357,9 @@ $('#Authors tbody').click((e) => {
 // clear all field content whenever..
 $('#AddNewAuthor').click(() => {
     selectedAuthor = null
-    $('#Modal_Author input')[0].value = ''
-    $('#Modal_Author textarea')[0].value = ''
+    $('#Modal_Author input').each((index, ele) => {
+        ele.value = ''
+    })
 })
 
 function addNewAuthor(item) {}
@@ -331,15 +380,19 @@ $('#ModalSave_Author').click(() => {
 
 // clear searches & reset appearance
 $('#Authors select').change(() => {
+    const container = $('#Authors tbody')[0]
+    $(container).empty()
     // clear search string in input field
     $('#StrToSearchAuthors')[0].value = ''
-    $('#Authors tbody tr').each((index, ele) => {
-        $(ele).show()
+    itemsList[2].each((index, ele) => {
+        container.appendChild(ele)
     })
+    updatePagination('Authors')
 })
 
 $('#StrToSearchAuthors').keyup(() => {
     handleOthersAppreance('Authors')
+    updatePagination('Authors')
 })
 
 /*=============================== Categories ===============================*/
@@ -352,9 +405,9 @@ $('#Cats tbody').click((e) => {
     // copy current selected row info into modal
     // author code
     let td = tr.getElementsByTagName('td')
-    $('#Modal_Cat input')[0].value = td[0].textContent
+    $('#Modal_Cat input')[0].value = td[0].textContent.trim()
     // author name
-    $('#Modal_Cat textarea')[0].value = td[1].getElementsByClassName('detail-wrapper')[0].textContent
+    $('#Modal_Cat input')[1].value = td[1].getElementsByClassName('detail-wrapper')[0].textContent.trim()
     // show modal
     $('#Modal_Cat').modal('show')
 })
@@ -362,8 +415,9 @@ $('#Cats tbody').click((e) => {
 // clear all field content whenever..
 $('#AddNewCat').click(() => {
     selectedCat = null
-    $('#Modal_Cat input')[0].value = ''
-    $('#Modal_Cat textarea')[0].value = ''
+    $('#Modal_Cat input').each((index, ele) => {
+        ele.value = ''
+    })
 })
 
 function addNewCat(item) {}
@@ -384,15 +438,19 @@ $('#ModalSave_Cat').click(() => {
 
 // clear searches & reset appearance
 $('#Cats select').change(() => {
+    const container = $('#Cats tbody')[0]
+    $(container).empty()
     // clear search string in input field
     $('#StrToSearchCats')[0].value = ''
-    $('#Cats tbody tr').each((index, ele) => {
-        $(ele).show()
+    itemsList[3].each((index, ele) => {
+        container.appendChild(ele)
     })
+    updatePagination('Cats')
 })
 
 $('#StrToSearchCats').keyup(() => {
     handleOthersAppreance('Cats')
+    updatePagination('Cats')
 })
 
 /*=============================== Publishers ===============================*/
@@ -405,9 +463,9 @@ $('#Publishers tbody').click((e) => {
     // copy current selected row info into modal
     // author code
     let td = tr.getElementsByTagName('td')
-    $('#Modal_Publisher input')[0].value = td[0].textContent
+    $('#Modal_Publisher input')[0].value = td[0].textContent.trim()
     // author name
-    $('#Modal_Publisher textarea')[0].value = td[1].getElementsByClassName('detail-wrapper')[0].textContent
+    $('#Modal_Publisher input')[1].value = td[1].getElementsByClassName('detail-wrapper')[0].textContent.trim()
     // show modal
     $('#Modal_Publisher').modal('show')
 })
@@ -415,8 +473,9 @@ $('#Publishers tbody').click((e) => {
 // clear all field content whenever..
 $('#AddNewPublisher').click(() => {
     selectedPublisher = null
-    $('#Modal_Publisher input')[0].value = ''
-    $('#Modal_Publisher textarea')[0].value = ''
+    $('#Modal_Publisher input').each((index, ele) => {
+        ele.value = ''
+    })
 })
 
 function addNewPublisher(item) {}
@@ -437,13 +496,17 @@ $('#ModalSave_Publisher').click(() => {
 
 // clear searches & reset appearance
 $('#Publishers select').change(() => {
+    const container = $('#Publishers tbody')[0]
+    $(container).empty()
     // clear search string in input field
     $('#StrToSearchPublishers')[0].value = ''
-    $('#Publishers tbody tr').each((index, ele) => {
-        $(ele).show()
+    itemsList[4].each((index, ele) => {
+        container.appendChild(ele)
     })
+    updatePagination('Publishers')    
 })
 
 $('#StrToSearchPublishers').keyup(() => {
     handleOthersAppreance('Publishers')
+    updatePagination('Publishers')
 })

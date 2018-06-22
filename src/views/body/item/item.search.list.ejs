@@ -12,13 +12,30 @@
   <% }) %>
   <div class="col-sm-12 item-list-page">
     <nav aria-label="Page navigation">
+      <% const prevPageIndex = page - 1, nextPageIndex = +page + 1 %>
       <ul class="pagination pagination-lg">
+        <% if(page != 1) { %>
+        <li><a href="<%= path %>1">First</a></li>
+        <li><a href="<%= path + prevPageIndex %>">Previous</a></li>
+        <% } else { %>
+        <li><a href="javascript:;" class="btn disabled">First</a></li>
+        <li><a href="javascript:;" class="btn disabled">Previous</a></li>
+        <% } %>
+        
         <% for(let i = 1; i <= count; i++) { %>
           <% if(i == page) { %>
             <li class="active"><a href="javascript:;"><%= i%></a></li>
           <% } else { %>
             <li><a href="<%= path + i%>"><%= i%></a></li>
           <% } %>
+        <% } %>
+
+        <% if(page != count) { %>
+        <li><a href="<%= path + nextPageIndex %>">Next</a></li>
+        <li><a href="<%= path + count %>">Last</a></li>
+        <% } else { %>
+        <li><a href="javascript:;" class="btn disabled">Next</a></li>
+        <li><a href="javascript:;" class="btn disabled">Last</a></li>
         <% } %>
       </ul>
     </nav>

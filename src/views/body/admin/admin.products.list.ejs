@@ -26,7 +26,11 @@
             <img src="<%= path + e.IMAGE %>" alt="Hình ảnh">
         </td>
         <td><%= e.ID %></td>
-        <td><%= e.NAME %></td>
+        <td>
+            <div class="detail-wrapper">
+                <%= e.NAME %>
+            </div>
+        </td>
         <td><%= priceFormat(e.PRICE) %></td>
         <td><%= e.INVENTORY %></td>
         <td>
