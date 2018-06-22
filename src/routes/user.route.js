@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 
 const { UserServices } = require('../services/user.services');
 const { OrderServices } = require('../services/order.services');
-const { mustBeUser, checkToken } = require('../middleware/mustBeUser.middleware');
+const { mustBeUser } = require('../middleware/mustBeUser.middleware');
 const { mustCheckCaptcha } = require('../middleware/mustCheckCaptcha.middleware');
 const { showStatus } = require('../helpers/getCurrentDate');
 const { priceFormat } = require('../helpers/priceFormat');
@@ -21,7 +21,7 @@ userRouter.post('/signup', mustCheckCaptcha, (req, res) => {
   .catch(error => res.send({ success: false, message: error.message }));
 });
 
-userRouter.post('/signin', mustBeUser, (req, res) => {
+userRouter.post('/signin', (req, res) => {
   const { email, password } = req.body;
   UserServices.signIn(email, password)
   .then(user => {
@@ -38,13 +38,13 @@ userRouter.post('/logout', (req, res) => {
   res.send({ success: true });
 });
 
-userRouter.get('/account/edit', checkToken, (req, res) => {
+userRouter.get('/account/edit', mustBeUser, (req, res) => {
   UserServices.showUserInfoBy(req.idUser)
   .then(user => res.render('render/account', { isDetail: true, user}))
   .catch(error => res.render('render/account', { isDetail: true }));
 });
 
-userRouter.post('/account/update', checkToken, (req, res) => {
+userRouter.post('/account/update', mustBeUser, (req, res) => {
   const { name, gender, birthday, phone } = req.body;
   const userInfo = {id: req.idUser, name, phone, gender, birthday};
   UserServices.updateUserInfo(userInfo)
@@ -52,7 +52,7 @@ userRouter.post('/account/update', checkToken, (req, res) => {
   .catch(error => res.send({ success: false, message: error.message }));
 });
 
-userRouter.get('/account/orders', checkToken, (req, res) => {
+userRouter.get('/account/orders', mustBeUser, (req, res) => {
   OrderServices.showHistoryOrderByIdUser(req.idUser)
   .then(orders => res.render('render/account', { isDetail: false, orders, showStatus }))
   .catch(error => res.render('render/account', { isDetail: false, orders: [], showStatus}));
@@ -61,7 +61,7 @@ userRouter.get('/account/orders', checkToken, (req, res) => {
 userRouter.get('/account/order/history/:id', (req, res) => {
   OrderServices.showOrderDetailByIdOrder(req.params.id)
   .then(orders => res.render('render/historyOrder', {  orders, showStatus, priceFormat }))
-  .catch(error => res.send({ success: false, message: error.message }));
+  .catch(error => res.redirect('/error'));
 })
 
-module.exports = {userRouter};
+module.exports = { userRouter };

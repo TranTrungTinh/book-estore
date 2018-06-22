@@ -2,7 +2,7 @@ const { Router } = require('express');
 const parser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-const { checkToken } = require('../middleware/mustBeUser.middleware');
+const { mustBeUser } = require('../middleware/mustBeUser.middleware');
 const { shoppingServices } = require('../services/shopping.services');
 const { OrderServices } = require('../services/order.services');
 const { priceDiscount, priceFormat, discount } = require('../helpers/priceFormat');
@@ -12,7 +12,7 @@ const shoppingRouter = Router();
 shoppingRouter.use(parser.urlencoded({extended: false}));
 shoppingRouter.use(parser.json());
 shoppingRouter.use(cookieParser());
-shoppingRouter.use(checkToken)
+shoppingRouter.use(mustBeUser);
 
 shoppingRouter.get('/', (req, res) => {
   const price = { priceDiscount, priceFormat, discount };
