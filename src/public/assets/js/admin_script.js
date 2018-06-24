@@ -19,7 +19,7 @@ $('#Navigator > .nav > li').click((e) => {
 
 // Authors, Categories, Publishers whose table has 2 column: id, name
 function handleOthersAppreance(sectionId) {
-    let strToSearch = $(`#StrToSearch${sectionId}`)[0].value
+    let strToSearch = $(`#StrToSearch${sectionId}`)[0].value.trim().toLowerCase()
 
     let typeOfInfoOnCol = 0
     switch ($(`#${sectionId} select`)[0].value) {
@@ -31,7 +31,7 @@ function handleOthersAppreance(sectionId) {
             break
     }
     
-    var container = $(`#${sectionId} tbody`)[0]
+    let container = $(`#${sectionId} tbody`)[0]
     $(container).empty()
 
     let sectionNumberId = -1
@@ -47,13 +47,10 @@ function handleOthersAppreance(sectionId) {
         break
     }
 
-    var data = itemsList[sectionNumberId]
-
+    let data = itemsList[sectionNumberId]
     $.each(data, (index, ele) => {
-        if (!(strToSearch.length > 0 &&
-            ele.getElementsByTagName('td')[typeOfInfoOnCol]
-            .textContent.toLowerCase()
-            .indexOf(strToSearch.toLowerCase()) < 0)) {
+        let pattern = ele.getElementsByTagName('td')[typeOfInfoOnCol].textContent.trim().toLowerCase()
+        if (!(strToSearch.length > 0 && pattern.indexOf(strToSearch) < 0)) {
             container.appendChild(ele)
         }
     })
@@ -167,15 +164,14 @@ $('#StrToSearchProducts').keyup(() => {
             break
     }
 
-    let strToSearch = $('#StrToSearchProducts')[0].value,
+    let strToSearch = $('#StrToSearchProducts')[0].value.trim().toLowerCase(),
         productsList = itemsList[0].slice()
         container = $('#Products tbody')[0]
     $(container).empty()
+
     $.each(productsList, (index, ele) => {
-        if (!(strToSearch.length > 0 &&
-            ele.getElementsByTagName('td')[typeOfInfoOnCol]
-            .textContent.toLowerCase()
-            .indexOf(strToSearch.toLowerCase()) < 0)) {
+        let pattern = ele.getElementsByTagName('td')[typeOfInfoOnCol].textContent.trim().toLowerCase()
+        if (!(strToSearch.length > 0 && pattern.indexOf(strToSearch) < 0)) {
             container.appendChild(ele)
         }
     })
@@ -208,30 +204,33 @@ $('#Products tbody').click((e) => {
             $('#Modal_Product input')[i].value = tds[i].textContent.trim()
     }
 
-    let authorId = tr.getElementsByTagName('span')[0].textContent,
-        catId = tr.getElementsByTagName('span')[1].textContent,
-        publisherId = tr.getElementsByTagName('span')[2].textContent
+    let authorId = tr.getElementsByTagName('span')[0].textContent.trim(),
+        catId = tr.getElementsByTagName('span')[1].textContent.trim(),
+        publisherId = tr.getElementsByTagName('span')[2].textContent.trim()
 
     let optionsAuthor = $('#Modal_Product select:nth-of-type(1) > option'),
         optionsCat = $('#Modal_Product select:nth-of-type(2) > option'),
         optionsPublisher = $('#Modal_Product select:nth-of-type(3) > option')
 
     for (let i = 0; i < optionsAuthor.length; i++) {
-        if (optionsAuthor[i].getAttribute('value') === authorId) {
+        const optionId = optionsAuthor[i].value.trim()
+        if (optionId === authorId) {
             optionsAuthor[i].setAttribute('selected', true)
         } else {
             optionsAuthor[i].removeAttribute('selected')
         }
     }
     for (let i = 0; i < optionsCat.length; i++) {
-        if (optionsCat[i].getAttribute('value') === catId) {
+        const optionId = optionsCat[i].value.trim()
+        if (optionId === catId) {
             optionsCat[i].setAttribute('selected', true)
         } else {
             optionsCat[i].removeAttribute('selected')
         }
     }
     for (let i = 0; i < optionsPublisher.length; i++) {
-        if (optionsPublisher[i].getAttribute('value') === publisherId) {
+        const optionId = optionsPublisher[i].value.trim()
+        if (optionId === publisherId) {
             optionsPublisher[i].setAttribute('selected', true)
         } else {
             optionsPublisher[i].removeAttribute('selected')
@@ -287,11 +286,10 @@ $('#ModalDelete').click(() => {
         $.post('/admin/deletebook', { bookId }, res => {
             if(!res.success) alert(res.message)
             else {
+                // find the row with coresponding id
                 for (let i = 0; i < itemsList[0].length; i++) {
-                    // find the row with coresponding id
-                    if(itemsList[0][i]
-                    .getElementsByTagName('td')[1]
-                    .textContent.trim() === bookId) {
+                    const rowId = itemsList[0][i].getElementsByTagName('td')[1].textContent.trim()
+                    if(rowId === bookId) {
                         itemsList[0].splice(i, 1)
                     }
                     break
@@ -324,17 +322,17 @@ function changeOrderRowStatus(sel) {
 }
 
 function handleOrdersAppreance() {
-    let filterOrderStt = $('#Orders select')[0].value,
-        strToSearch = $('#StrToSearchOrders')[0].value,
+    let filterOrderStt = $('#Orders select')[0].value.trim().toLowerCase(),
+        strToSearch = $('#StrToSearchOrders')[0].value.trim(),
         ordersList = itemsList[1].slice()
         container = $('#Orders tbody')[0]
     $(container).empty()
 
     $.each(ordersList, (index, ele) => {
-        let rowOrderStt = ele.getElementsByTagName('select')[0].value,
-            orderCode = ele.getElementsByTagName('td')[0].textContent
+        let rowOrderStt = ele.getElementsByTagName('select')[0].value.trim().toLowerCase(),
+            orderId = ele.getElementsByTagName('td')[0].textContent.trim()
 
-        if (orderCode.toLowerCase().indexOf(strToSearch.toLowerCase()) > -1 &&
+        if (orderId.indexOf(strToSearch) > -1 &&
             (filterOrderStt === 'all' || filterOrderStt === rowOrderStt)) {
             container.appendChild(ele)
         }
@@ -349,19 +347,19 @@ function updateOrderInfo(order) {
         else {
             for (let i = 0; i < itemsList[2].length; i++) {
                 // find the row with coresponding id
-                if(itemsList[2][i]
-                .getElementsByTagName('td')[0]
-                .textContent.trim() === orderId) {
-                    let options = itemsList[2][i].getElementsByTagName('options')
-                    if(options.value === orderStt) {
-                        options.setAttribute('selected', true)
-                    }
-                    else {
-                        options.removeAttribute('selected')
-                    }
+                let rowId = itemsList[2][i].getElementsByTagName('td')[0].textContent.trim()
+                if(rowId === orderId) {
+                    itemsList[2][i].getElementsByTagName('options').each((index, option) => {
+                        if(option.value.trim() === orderStt) {
+                            option.setAttribute('selected', true)
+                        }
+                        else {
+                            option.removeAttribute('selected')
+                        }
+                    })
                     changeOrderRowStatus(itemsList[2][i].getElementsByTagName('select')[0])
+                    break
                 }
-                break
             }
             updatePagination('Orders')
         }
@@ -443,8 +441,8 @@ function updateAuthorInfo(author) {
                 .getElementsByTagName('td')[0]
                 .textContent.trim() === authorId) {
                     itemsList[2][i].getElementsByClassName('detail-wrapper')[0].textContent = authorName
+                    break
                 }
-                break
             }
         }
     })
@@ -523,8 +521,8 @@ function updateCatInfo(cat) {
                 .getElementsByTagName('td')[0]
                 .textContent.trim() === catId) {
                     itemsList[3][i].getElementsByClassName('detail-wrapper')[0].textContent = catName
+                    break
                 }
-                break
             }
         }
     })
@@ -538,7 +536,7 @@ $('#ModalSave_Cat').click(() => {
         const catId = $('#Modal_Cat input')[0].value || ''
         updateCatInfo({ catId, catName })
     }
-    updateTable('Authors')
+    updateTable('Cats')
     updatePagination('Cats')
 })
 
@@ -603,8 +601,8 @@ function updatePublisherInfo(publisher) {
                 .getElementsByTagName('td')[0]
                 .textContent.trim() === publisherId) {
                     itemsList[4][i].getElementsByClassName('detail-wrapper')[0].textContent = publisherName
+                    break
                 }
-                break
             }
         }
     })
@@ -618,7 +616,7 @@ $('#ModalSave_Publisher').click(() => {
         const publisherId = $('#Modal_Publisher input')[0].value || ''
         updatePublisherInfo({ publisherId, publisherName })
     }
-    updateTable('Authors')
+    updateTable('Publishers')
     updatePagination('Publishers')
 })
 
