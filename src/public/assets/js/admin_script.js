@@ -153,7 +153,7 @@ $('#StrToSearchProducts').keyup(() => {
         case 'author':
             typeOfInfoOnCol = 5
             break
-        case 'catetory':
+        case 'category':
             typeOfInfoOnCol = 6
             break
         case 'publisher':
