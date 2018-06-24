@@ -27,6 +27,7 @@ adminRouter.get('/edit', mustBeAdmin, (req, res) => {
           })
          .catch(err => {
            console.log(err)
+           res.send({ success: false })
          })
 });
 
@@ -43,5 +44,106 @@ adminRouter.post('/login', (req, res) => {
   })
   .catch(error => res.send({ success: false }));
 });
+
+adminRouter.post('/saveauthor', (req, res) => {
+  const { authorName } = req.body
+  AdminServices.saveAuthor(authorName)
+  .then(newId => {
+    res.send({ success: true, newId })
+  })
+  .catch(err => {
+    console.log(err)
+    res.send({ success: false })
+  })
+})
+
+adminRouter.post('/savecat', (req, res) => {
+  const { catName } = req.body
+  AdminServices.saveCategory(catName)
+  .then(newId => {
+    res.send({ success: true, newId })
+  })
+  .catch(err => {
+    console.log(err)
+    res.send({ success: false })
+  })
+})
+
+adminRouter.post('/savepublisher', (req, res) => {
+  const { publisherName } = req.body
+  AdminServices.savePublisher(publisherName)
+  .then(newId => {
+    res.send({ success: true, newId })
+  })
+  .catch(err => {
+    console.log(err)
+    res.send({ success: false })
+  })
+})
+
+adminRouter.post('/updateorder', (req, res) => {
+  const { orderId, orderStt } = req.body
+  AdminServices.updateOrderInfo({ orderId, orderStt })
+  .then((updatedId) => {
+    if(updatedId) res.send({ success: true })
+    else res.send({ success: false, message: 'ID not found' })
+  })
+  .catch(err => {
+    console.log(err)
+    res.send({ success: false, message: 'Error querying database' })
+  })
+})
+
+adminRouter.post('/updateauthor', (req, res) => {
+  const { authorId, authorName } = req.body
+  AdminServices.updateAuthorInfo({ authorId, authorName })
+  .then((updatedId) => {
+    if(updatedId) res.send({ success: true })
+    else res.send({ success: false, message: 'ID not found' })
+  })
+  .catch(err => {
+    console.log(err)
+    res.send({ success: false, message: 'Error querying database' })
+  })
+})
+
+adminRouter.post('/updatecat', (req, res) => {
+  const { catId, catName } = req.body
+  AdminServices.updateCategoryInfo({ catId, catName })
+  .then((updatedId) => {
+    if(updatedId) res.send({ success: true })
+    else res.send({ success: false, message: 'ID not found' })
+  })
+  .catch(err => {
+    console.log(err)
+    res.send({ success: false, message: 'Error querying database' })
+  })
+})
+
+adminRouter.post('/updatepublisher', (req, res) => {
+  const { publisherId, publisherName } = req.body
+  AdminServices.updatePublisherInfo({ publisherId, publisherName })
+  .then((updatedId) => {
+    if(updatedId) res.send({ success: true })
+    else res.send({ success: false, message: 'ID not found' })
+  })
+  .catch(err => {
+    console.log(err)
+    res.send({ success: false, message: 'Error querying database' })
+  })
+})
+
+adminRouter.post('/deletebook', (req, res) => {
+  const { bookId } = req.body
+  AdminServices.deleteBookInfo({ bookId })
+  .then((deletedId) => {
+    if(deletedId) res.send({ success: true })
+    else res.send({ success: false, message: 'ID not found' })
+  })
+  .catch(err => {
+    console.log(err)
+    res.send({ success: false, message: 'Error querying database' })
+  })
+})
 
 module.exports = { adminRouter }

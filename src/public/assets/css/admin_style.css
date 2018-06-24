@@ -15,6 +15,10 @@ and (max-width : 1200px) {
     section > div > div:nth-child(2) {
         padding: 0!important;
     }
+
+    .btn-add {
+        padding-left: 15px!important; 
+    }
 }
 
 /*=============================== !@media ===============================*/
@@ -26,11 +30,7 @@ body {
 }
 
 .btn-add {
-    padding-left: 0!important;
-}
-
-.btn-refresh {
-    padding: 0!important;
+    padding: 0;
 }
 
 #Content {
@@ -67,7 +67,6 @@ section {
     section > div > .btn {
         display: inline-block;
     }
-
 
 .table-scroll {
     overflow-y: auto;
@@ -138,31 +137,26 @@ tr {
             .Editor-container {
                 margin: 0!important;
             }
-            #Modal_Author textarea,
-            #Modal_Cat textarea,
-            #Modal_Publisher textarea {
-                height: 35px;
-            }
-
-textarea {
-    resize: none;
-}
 
 /*=============================== !modal ===============================*/
 
 /*=============================== product ===============================*/
 
 .img-wrapper {
+    display: flex;  
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
 }
     .img-wrapper img {
-        display: block;
+        display: inline-block;
         height: 100%;
-        margin: 0 auto;
     }
+
     .img-wrapper-sm {
         height: 64px;
     }
+    
     .img-wrapper-md {
         height: 128px;
     }

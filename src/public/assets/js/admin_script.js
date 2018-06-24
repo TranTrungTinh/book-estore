@@ -1,23 +1,5 @@
 /*=============================== Globally used ===============================*/
 
-function loadList(container, url, func) {
-    container.innerHTML = ''
-    container.load(url, func)
-}
-
-function loadListBySection(id) {
-    switch (id) {
-        case 'Products':
-            loadList($('#Products tbody'), '../html/admin_products_list.html')
-            break
-        case 'Orders':
-            loadList($('#Orders tbody'), '../html/admin_orders_list.html', changeAllOrdersStatus)
-            break
-        default:
-            break
-    }
-}
-
 // load/reload section accordingly
 $('#Navigator > .nav > li').click((e) => {
     e.preventDefault()
@@ -33,16 +15,6 @@ $('#Navigator > .nav > li').click((e) => {
     }
 
     return false
-})
-
-// refresh the entire list
-$('.btn-refresh').click((e) => {
-    e.preventDefault()
-    let section = e.target.closest('section')
-    loadListBySection(section.id)
-    // re-filtering
-    $(section)[0].getElementsByClassName('btn-search')[0].click()
-    // after this all info are reset to default as they were hard-coded
 })
 
 // Authors, Categories, Publishers whose table has 2 column: id, name
@@ -85,6 +57,43 @@ function handleOthersAppreance(sectionId) {
             container.appendChild(ele)
         }
     })
+}
+
+function updateTable(sectionId) {
+    let sectionNumberId = -1
+    switch(sectionId) {
+        case 'Products':
+        sectionNumberId = 0
+        break
+        case 'Orders':
+        sectionNumberId = 1
+        break
+        case 'Authors':
+        sectionNumberId = 2
+        break
+        case 'Cats':
+        sectionNumberId = 3
+        break
+        case 'Publishers':
+        sectionNumberId = 4
+        break
+    }
+
+    const container = $(`#${sectionId} tbody`)[0]
+    $(container).empty()
+    // clear search string in input field
+    $(`#StrToSearch${sectionId}`)[0].value = ''
+    itemsList[sectionNumberId].each((index, ele) => {
+        container.appendChild(ele)
+    })
+}
+
+function compareToSort(a, b) {
+    const idA = +a.getElementsByTagName('td')[0].textContent.trim(),
+        idB = +b.getElementsByTagName('td')[0].textContent.trim()
+    if(idA < idB) return -1
+    if(idA > idB) return 1
+    return 0
 }
 
 // Pagination
@@ -176,12 +185,8 @@ $('#StrToSearchProducts').keyup(() => {
 
 // clear searches & reset appearance
 $('#Products select').change(() => {
-    const container = $('#Products tbody')[0]
-    $(container).empty()
-    $('#StrToSearchProducts')[0].value = ''
-    itemsList[0].each((index, ele) => {
-        container.appendChild(ele)
-    })
+    updateTable('Products')
+    updatePagination('Products')
 })
 
 var selectedProduct // determine whether modal save new product or update existed product
@@ -202,6 +207,7 @@ $('#Products tbody').click((e) => {
         else
             $('#Modal_Product input')[i].value = tds[i].textContent.trim()
     }
+
     let authorId = tr.getElementsByTagName('span')[0].textContent,
         catId = tr.getElementsByTagName('span')[1].textContent,
         publisherId = tr.getElementsByTagName('span')[2].textContent
@@ -275,7 +281,27 @@ $('#ModalSave_Product').click(() => {
 })
 
 // delete selected Products
-$('#ModalDelete').click(() => {})
+$('#ModalDelete').click(() => {
+    const bookId = $('#Modal_Product input')[1].value || ''
+    if(bookId) {
+        $.post('/admin/deletebook', { bookId }, res => {
+            if(!res.success) alert(res.message)
+            else {
+                for (let i = 0; i < itemsList[0].length; i++) {
+                    // find the row with coresponding id
+                    if(itemsList[0][i]
+                    .getElementsByTagName('td')[1]
+                    .textContent.trim() === bookId) {
+                        itemsList[0].splice(i, 1)
+                    }
+                    break
+                }
+                updateTable('Products')
+                updatePagination('Products')
+            }
+        })
+    }
+})
 
 /*=============================== Orders ===============================*/
 
@@ -292,14 +318,8 @@ function changeOrderRowStatus(sel) {
             tr.className = 'success'
             break
         default:
+            tr.className = ''
             break
-    }
-}
-
-function changeAllOrdersStatus() {
-    let sel = $('#Orders table')[0].getElementsByTagName('select')
-    for (let i = 0; i < sel.length; i++) {
-        changeOrderRowStatus(sel[i])
     }
 }
 
@@ -321,13 +341,40 @@ function handleOrdersAppreance() {
     })
 }
 
+function updateOrderInfo(order) {
+    const { orderId, orderStt } = order
+
+    $.post('/admin/updateorder', { orderId, orderStt }, res => {
+        if(!res.success) alert(res.message)
+        else {
+            for (let i = 0; i < itemsList[2].length; i++) {
+                // find the row with coresponding id
+                if(itemsList[2][i]
+                .getElementsByTagName('td')[0]
+                .textContent.trim() === orderId) {
+                    let options = itemsList[2][i].getElementsByTagName('options')
+                    if(options.value === orderStt) {
+                        options.setAttribute('selected', true)
+                    }
+                    else {
+                        options.removeAttribute('selected')
+                    }
+                    changeOrderRowStatus(itemsList[2][i].getElementsByTagName('select')[0])
+                }
+                break
+            }
+            updatePagination('Orders')
+        }
+    })
+}
+
 // change order row color when its status changed
 $('#Orders table').change((e) => {
     e.preventDefault()
     changeOrderRowStatus(e.target)
 })
 
-$('#Orders select').change(() => {
+$('#Orders select[name=TypeOfInfo]').change(() => {
     handleOrdersAppreance('Orders')
     updatePagination('Orders')
 })
@@ -335,6 +382,15 @@ $('#Orders select').change(() => {
 $('#StrToSearchOrders').keyup(() => {
     handleOrdersAppreance('Orders')
     updatePagination('Orders')
+})
+
+$('#Orders tbody select').change((e) => {
+    e.preventDefault()
+    let tr = $(e.target).closest('tr')[0]
+    const orderId = tr.getElementsByTagName('td')[0].textContent.trim(),
+        orderStt = tr.getElementsByTagName('select')[0].value.trim()
+    
+    updateOrderInfo({ orderId, orderStt })
 })
 
 /*=============================== Authors ===============================*/
@@ -362,31 +418,53 @@ $('#AddNewAuthor').click(() => {
     })
 })
 
-function addNewAuthor(item) {}
+function addNewAuthor(author) {
+    const { authorName } = author
+    $.post('/admin/saveauthor', { authorName }, res => {
+        if(!res.success) alert('Failed adding new author!')
+        else {
+            const { newId } = res,
+                tr = document.createElement('tr')
+            tr.innerHTML = `<td>${newId}</td><td><div class="detail-wrapper">${authorName}</div></td>`
+            itemsList[2].push(tr)
+            itemsList[2].sort(compareToSort)
+        }
+    })
+}
 
-function updateAuthorInfo(item) {}
+function updateAuthorInfo(author) {
+    const { authorId, authorName } = author
+    $.post('/admin/updateauthor', { authorId, authorName }, res => {
+        if(!res.success) alert(res.message)
+        else {
+            for (let i = 0; i < itemsList[2].length; i++) {
+                // find the row with coresponding id
+                if(itemsList[2][i]
+                .getElementsByTagName('td')[0]
+                .textContent.trim() === authorId) {
+                    itemsList[2][i].getElementsByClassName('detail-wrapper')[0].textContent = authorName
+                }
+                break
+            }
+        }
+    })
+}
 
 $('#ModalSave_Author').click(() => {
+    const authorName = $('#Modal_Author input')[1].value || ''
     if (!selectedAuthor) {
-        addNewProduct({
-            title: $('#Modal_Author input')[1].value
-        })
+        addNewAuthor({ authorName })
     } else {
-        updateProductInfo({
-            title: $('#Modal_Author input')[1].value
-        })
+        const authorId = $('#Modal_Author input')[0].value || ''
+        updateAuthorInfo({ authorId, authorName })
     }
+    updateTable('Authors')
+    updatePagination('Authors')
 })
 
 // clear searches & reset appearance
 $('#Authors select').change(() => {
-    const container = $('#Authors tbody')[0]
-    $(container).empty()
-    // clear search string in input field
-    $('#StrToSearchAuthors')[0].value = ''
-    itemsList[2].each((index, ele) => {
-        container.appendChild(ele)
-    })
+    updateTable('Authors')
     updatePagination('Authors')
 })
 
@@ -420,31 +498,53 @@ $('#AddNewCat').click(() => {
     })
 })
 
-function addNewCat(item) {}
+function addNewCat(cat) {
+    const { catName } = cat
+    $.post('/admin/savecat', { catName }, res => {
+        if(!res.success) alert('Failed adding new category!')
+        else {
+            const { newId } = res,
+                tr = document.createElement('tr')
+            tr.innerHTML = `<td>${newId}</td><td><div class="detail-wrapper">${catName}</div></td>`
+            itemsList[3].push(tr)
+            itemsList[3].sort(compareToSort)
+        }
+    })
+}
 
-function updateCatInfo(item) {}
+function updateCatInfo(cat) {
+    const { catId, catName } = cat
+    $.post('/admin/updatecat', { catId, catName }, res => {
+        if(!res.success) alert(res.message)
+        else {
+            for (let i = 0; i < itemsList[3].length; i++) {
+                // find the row with coresponding id
+                if(itemsList[3][i]
+                .getElementsByTagName('td')[0]
+                .textContent.trim() === catId) {
+                    itemsList[3][i].getElementsByClassName('detail-wrapper')[0].textContent = catName
+                }
+                break
+            }
+        }
+    })
+}
 
 $('#ModalSave_Cat').click(() => {
+    const catName = $('#Modal_Cat input')[1].value || ''
     if (!selectedCat) {
-        addNewCat({
-            title: $('#Modal_Cat input')[1].value
-        })
+        addNewCat({ catName })
     } else {
-        updateCatInfo({
-            title: $('#Modal_Cat input')[1].value
-        })
+        const catId = $('#Modal_Cat input')[0].value || ''
+        updateCatInfo({ catId, catName })
     }
+    updateTable('Authors')
+    updatePagination('Cats')
 })
 
 // clear searches & reset appearance
 $('#Cats select').change(() => {
-    const container = $('#Cats tbody')[0]
-    $(container).empty()
-    // clear search string in input field
-    $('#StrToSearchCats')[0].value = ''
-    itemsList[3].each((index, ele) => {
-        container.appendChild(ele)
-    })
+    updateTable('Cats')
     updatePagination('Cats')
 })
 
@@ -478,31 +578,53 @@ $('#AddNewPublisher').click(() => {
     })
 })
 
-function addNewPublisher(item) {}
+function addNewPublisher(publisher) {
+    const { publisherName } = publisher
+    $.post('/admin/savepublisher', { publisherName }, res => {
+        if(!res.success) alert('Failed adding new publisher!')
+        else {
+            const { newId } = res,
+                tr = document.createElement('tr')
+            tr.innerHTML = `<td>${newId}</td><td><div class="detail-wrapper">${publisherName}</div></td>`
+            itemsList[4].push(tr)
+            itemsList[4].sort(compareToSort)
+        }
+    })
+}
 
-function updatePublisherInfo(item) {}
+function updatePublisherInfo(publisher) {
+    const { publisherId, publisherName } = publisher
+    $.post('/admin/updatepublisher', { publisherId, publisherName }, res => {
+        if(!res.success) alert(res.message)
+        else {
+            for (let i = 0; i < itemsList[4].length; i++) {
+                // find the row with coresponding id
+                if(itemsList[4][i]
+                .getElementsByTagName('td')[0]
+                .textContent.trim() === publisherId) {
+                    itemsList[4][i].getElementsByClassName('detail-wrapper')[0].textContent = publisherName
+                }
+                break
+            }
+        }
+    })
+}
 
 $('#ModalSave_Publisher').click(() => {
+    const publisherName = $('#Modal_Publisher input')[1].value || ''
     if (!selectedPublisher) {
-        addNewPublisher({
-            title: $('#Modal_Publisher input')[1].value
-        })
+        addNewPublisher({ publisherName })
     } else {
-        updatePublisherInfo({
-            title: $('#Modal_Publisher input')[1].value
-        })
+        const publisherId = $('#Modal_Publisher input')[0].value || ''
+        updatePublisherInfo({ publisherId, publisherName })
     }
+    updateTable('Authors')
+    updatePagination('Publishers')
 })
 
 // clear searches & reset appearance
 $('#Publishers select').change(() => {
-    const container = $('#Publishers tbody')[0]
-    $(container).empty()
-    // clear search string in input field
-    $('#StrToSearchPublishers')[0].value = ''
-    itemsList[4].each((index, ele) => {
-        container.appendChild(ele)
-    })
+    updateTable('Publishers')
     updatePagination('Publishers')    
 })
 

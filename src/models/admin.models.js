@@ -49,29 +49,49 @@ class Admin {
     return queryDB(sql);
   }
 
-  static saveMewBook(name, image, price, inventory, description, authorId, catId, publisherId) {
-    const newId = Math.round(Math.random() * 10000) + '';
+  static async saveMewBook(name, image, price, inventory, description, authorId, catId, publisherId) {
+    let newId = Math.round(Math.random() * 10000) + '';
+    if(+newId < 10) newId = '000' + newId
+    else if(+newId < 100) newId = '00' + newId
+    else if(+newId < 1000) newId = '0' + newId
+
     const sql = `INSERT INTO THONGTINSACH(ID, NAME, IMAGE, PRICE, INTENTORY, DESCRIPTION, ID_AUTHOR, ID_CATEGORY, ID_PUBLISHER)
     VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    return queryDB(sql, [ newId, name, image, price, inventory, description, authorId, catId, publisherId ]);
+    await queryDB(sql, [ newId, name, image, price, inventory, description, authorId, catId, publisherId ]);
+    
+    return newId
   }
 
-  static saveNewCategory(catName) {
-    const newId = Math.round(Math.random() * 1000) + ''
-    const sql = `INSERT INTO DANHMUCSACH(ID, NAME) VALUES (?, ?)`;
-    return queryDB(sql, [ catName ]);
-  }
+  static async saveNewAuthor(authorName) {
+    let newId = Math.round(Math.random() * 1000) + '';
+    if(+newId < 10) newId = '00' + newId;
+    else if(+newId < 100) newId = '0' + newId;
 
-  static saveNewAuthor(authorName) {
-    const newId = Math.round(Math.random() * 1000) + '';
     const sql = `INSERT INTO TACGIA(ID, NAME) VALUES (?, ?)`;
-    return queryDB(sql, [ authorName ]);
+    await queryDB(sql, [ newId, authorName ]);
+
+    return newId;
   }
 
-  static saveNewPublisher(publisherName) {
-    const newId = Math.round(Math.random() * 1000) + '';
+  static async saveNewCategory(catName) {
+    let newId = Math.round(Math.random() * 100) + '';
+    if(+newId < 10) newId = '00' + newId;
+    
+    const sql = `INSERT INTO DANHMUCSACH(ID, NAME) VALUES (?, ?)`;
+    await queryDB(sql, [ newId, catName ]);
+
+    return newId;
+  }
+
+  static async saveNewPublisher(publisherName) {
+    let newId = Math.round(Math.random() * 1000) + '';
+    if(+newId < 10) newId = '00' + newId;
+    else if(+newId < 100) newId = '0' + newId;
+
     const sql = `INSERT INTO NHAXUATBAN(ID, NAME) VALUES (?, ?)`;
-    return queryDB(sql, [ publisherName ]);
+    await queryDB(sql, [ newId, publisherName ]);
+
+    return newId;
   }
 
   static updateBook(idBook, name, image, price, inventory, description, idAuthor, idCat, idPublisher) {
@@ -81,31 +101,87 @@ class Admin {
     return queryDB(sql, [ name, image, price, inventory, description, idCat, idAuthor, idPublisher, idBook ]);
   }
 
-  static updateCategory(catId, catName) {
-    const sql = `UPDATE DANHMUCSACH
-                SET NAME = ?
-                WHERE ID = ?`;
-    return queryDB(sql, [ catName, catId ]);
+  static async updateOrder(orderId, orderStt) {
+    const checkExistSql = `SELECT ID FROM DONHANG WHERE ID = ?`
+    const exists = await queryDB(checkExistSql, [ orderId ])
+    
+    let orderState = -1
+    switch(orderStt) {
+      case 'delivering':
+      orderState = 2
+      break
+      case 'done':
+      orderState = 3
+      break
+      case 'pending':
+      default:
+      orderState = 1
+      break
+    }
+    
+    if(exists) {
+      const sql = `UPDATE DONHANG
+                SET STATE = ?
+                WHERE ID = ?`
+      await queryDB(sql, [ orderState, orderId ]);
+    }
+
+    return exists
   }
 
-  static updateAuthor(authorId, authorName) {
-    const sql = `UPDATE TACGIA
+  static async updateAuthor(authorId, authorName) {
+    const checkExistSql = `SELECT ID FROM TACGIA WHERE ID = ?`
+    const exists = await queryDB(checkExistSql, [ authorId ])
+
+    if(exists) {
+      const sql = `UPDATE TACGIA
                 SET NAME = ?
                 WHERE ID = ?`
-    return queryDB(sql, [ authorName, authorId ]);
-  }
-  
-  static updatePublisher(publisherId, publisherName) {
-    const sql = `UPDATE NHAXUATBAN
-                SET NAME = ?
-                WHERE ID = ?`;
-    return queryDB(sql, [ publisherName, publisherId ]);
+      await queryDB(sql, [ authorName, authorId ]);
+    }
+
+    return exists
   }
 
-  static deleteBook(bookId) {
-    const sql = `DELETE FROM THONGTINSACH
-                WHERE ID = ?`;
-    return queryDB(sql, [ bookId ]);
+  static async updateCategory(catId, catName) {
+    const checkExistSql = `SELECT ID FROM DANHMUCSACH WHERE ID = ?`
+    const exists = await queryDB(checkExistSql, [ catId ])
+
+    if(exists) {
+      const sql = `UPDATE DANHMUCSACH
+                  SET NAME = ?
+                  WHERE ID = ?`;
+      await queryDB(sql, [ catName, catId ]);
+    }
+
+    return exists
+  }
+  
+  static async updatePublisher(publisherId, publisherName) {
+    const checkExistSql = `SELECT ID FROM NHAXUATBAN WHERE ID = ?`
+    const exists = await queryDB(checkExistSql, [ publisherId ])
+
+    if(exists) {
+      const sql = `UPDATE NHAXUATBAN
+                  SET NAME = ?
+                  WHERE ID = ?`;
+      await queryDB(sql, [ publisherName, publisherId ]);
+    }
+
+    return exists
+  }
+
+  static async deleteBook(bookId) {
+    const checkExistSql = `SELECT ID FROM THONGTINSACH WHERE ID = ?`
+    const exists = await queryDB(checkExistSql, [ bookId ])
+    
+    if(exists) {
+      const sql = `DELETE FROM THONGTINSACH
+                  WHERE ID = ?`;
+      queryDB(sql, [ bookId ]);
+    }
+
+    return exists
   }
 
 }

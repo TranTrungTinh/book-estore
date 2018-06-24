@@ -1,7 +1,5 @@
 const { Admin } = require('../models/admin.models');
 
-const ITEMS_PER_PAGE = 8
-
 class AdminServices {
 
   static signInWith(email, password) {
@@ -53,16 +51,16 @@ class AdminServices {
     return Admin.saveMewBook(name, price, inventory, description, authorId, catId, publisherId);
   }
 
-  static saveAuthor(authorName) {
-    return Admin.saveNewAuthor(authorName);
+  static async saveAuthor(authorName) {
+    return await Admin.saveNewAuthor(authorName);
   }
 
-  static saveCategory(catName) {
-    return Admin.saveNewCategory(catName);
+  static async saveCategory(catName) {
+    return await Admin.saveNewCategory(catName);
   }
 
-  static savePublisher(publisherName) {
-    return Admin.saveNewPublisher(publisherName);
+  static async savePublisher(publisherName) {
+    return await Admin.saveNewPublisher(publisherName);
   }
 
   static updateBookInfo(bookInfo) {
@@ -70,23 +68,29 @@ class AdminServices {
     return Admin.updateBook(id, name, price, inventory, description, authorId, catId, publisherId);
   }
 
-  static updateAuthorInfo(authorInfo) {
-    const {id, name} = authorInfo;
-    return Admin.updateAuthor(id, name);
+  static async updateOrderInfo(orderInfo) {
+    const {orderId, orderStt} = orderInfo;
+    return Admin.updateOrder(orderId, orderStt);
   }
 
-  static updateCategoryInfo(catInfo) {
-    const {id, name} = catInfo;
-    return Admin.updateCategory(id, name);
+  static async updateAuthorInfo(authorInfo) {
+    const {authorId, authorName} = authorInfo;
+    return Admin.updateAuthor(authorId, authorName);
   }
 
-  static updatePublisherInfo(publisherInfo) {
-    const {id, name} = publisherInfo;
-    return Admin.updatePublisher(id, name);
+  static async updateCategoryInfo(catInfo) {
+    const {catId, catName} = catInfo;
+    return Admin.updateCategory(catId, catName);
   }
 
-  static deleteBookInfo(idBook) {
-    return Admin.deleteBook(idBook);
+  static async updatePublisherInfo(publisherInfo) {
+    const {publisherId, publisherName} = publisherInfo;
+    return Admin.updatePublisher(publisherId, publisherName);
+  }
+
+  static async deleteBookInfo(idBook) {
+    const { bookId } = idBook
+    return Admin.deleteBook(bookId);
   }
 }
 
