@@ -50,12 +50,9 @@ class Admin {
   }
 
   static async saveNewBook(newId, name, image, price, amount, description, author, type, publisher) {
-
     const sql = `INSERT INTO THONGTINSACH(ID, NAME, IMAGE, PRICE, INVENTORY, DESCRIPTION, ID_AUTHOR, ID_CATEGORY, ID_PUBLISHER)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    await queryDB(sql, [ newId, name, image, price, amount, description, author, type, publisher]);
-    
-    return newId;
+    return queryDB(sql, [ newId, name, image, price, amount, description, author, type, publisher]);
   }
 
   static async saveNewAuthor(authorName) {

@@ -1,12 +1,15 @@
 <% const { ID, NAME, IMAGE, PRICE, SALES } = data; %>
 <div class="thumbnail" title="<%= NAME%>">
+  <div class="deal">
+    <p class="deal-price">-<%= price.discount %>%</p>
+  </div>
   <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
   <div class="caption">
     <h4><%= NAME%></h4>
     <p>
       <span class="price-tag"><%= price.priceFormat(PRICE) %>&nbsp;₫</span>
       <strike><%= price.priceDiscount(PRICE) %>&nbsp;₫</strike>
-      <span class="price-discount">-<%= price.discount %>%</span>
+      <!-- <span class="price-discount">-<%= price.discount %>%</span> -->
     </p>
     <p>Số lượng đã bán:
       <span class="badge"><%= SALES %></span>

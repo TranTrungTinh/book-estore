@@ -55,9 +55,8 @@ adminRouter.post('/savebook', (req, res) => {
       const bookInfo = {...req.body};
       bookInfo.id = id;
       bookInfo.image = req.file.filename;
-      console.log(bookInfo);
       AdminServices.saveBook(bookInfo)
-      .then(newId => res.send({ success: true, newId }))
+      .then(() => res.send({ success: true, filename: bookInfo.image }))
       .catch(error => res.send({ success: false, message: error.message }));
     }
   });

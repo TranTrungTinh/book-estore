@@ -266,7 +266,7 @@ function addNewProduct(formData) {
         data: formData
     }).then(data => {
         if(!data.success) return alert('UPLOAD FAIL - ' + data.message);
-        alert('UPLOAD SUCCESS');
+        alert('UPLOAD SUCCESS - ' + data.filename);
     });
 }
 

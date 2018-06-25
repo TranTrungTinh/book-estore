@@ -71,9 +71,13 @@ tr {
 /*=============================== navigator ===============================*/
 
 #logout {
-    color: darkgray!important;
-    margin-top: 98%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
+    #logout a {
+        color: darkgray!important;
+    }
 
 #Navigator {
     background-color: #1565C0;
@@ -82,8 +86,11 @@ tr {
     min-width: 20rem;
     padding-right: 0;
     position: fixed;
-    z-index: 1000;
 }
+    #Navigator > ul {
+        height: 100vh;
+        position: relative;
+    }
     #Navigator > ul > li {
         display: block;
         font-size: 1.28em;
