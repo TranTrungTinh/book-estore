@@ -139,6 +139,10 @@ function updatePagination(sectionId) {
     }))
 }
 
+$('#logout').click(e => {
+    
+}
+
 /*=============================== Products ===============================*/
 
 $('#StrToSearchProducts').keyup(() => {

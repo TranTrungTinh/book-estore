@@ -1,16 +1,6 @@
 /*=============================== @media ===============================*/
 
 @media only screen 
-and (max-width : 768px) {
-    #Navigator {
-        height: 80px!important;
-    }
-    #Navigator > ul > li {
-        display: inline-block!important;
-    }
-}
-
-@media only screen 
 and (max-width : 1200px) {
     section > div > div:nth-child(2) {
         padding: 0!important;
@@ -79,6 +69,11 @@ tr {
 /*=============================== !global ===============================*/
 
 /*=============================== navigator ===============================*/
+
+#logout {
+    color: darkgray!important;
+    margin-top: 98%;
+}
 
 #Navigator {
     background-color: #1565C0;
