@@ -8,13 +8,7 @@ class AdminServices {
 
   static async showBooks() {
     const rawBooks = await Admin.getAllBooks()
-    
     if(!rawBooks) throw new Error('Khong tim thay');
-    // console.log(rawBooks);
-    // var books = []
-    // for (let i = 0; i < rawBooks.length; i++) {
-    //   books.push(rawBooks[i])
-    // }
     return { books: rawBooks };
   }
 
@@ -47,8 +41,8 @@ class AdminServices {
   }
   
   static saveBook(bookInfo) {
-    const { name, price, inventory, description, authorId, catId, publisherId } = bookInfo;
-    return Admin.saveMewBook(name, price, inventory, description, authorId, catId, publisherId);
+    const { id, name, image, price, amount, description, author, type, publisher } = bookInfo;
+    return Admin.saveNewBook(id, name, image, price, amount, description, author, type, publisher);
   }
 
   static async saveAuthor(authorName) {

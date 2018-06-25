@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const { AdminServices } = require('../services/admin.services');
 const { mustBeAdmin, checkTokenAdmin } = require('../middleware/mustBeAdmin.middleware');
 const { priceFormat } = require('../helpers/priceFormat');
+const { upload } = require('../helpers/upload');
 
 const adminRouter = Router();
 adminRouter.use(parser.urlencoded({extended: false}));
@@ -44,6 +45,23 @@ adminRouter.post('/login', (req, res) => {
   })
   .catch(error => res.send({ success: false }));
 });
+
+adminRouter.post('/savebook', (req, res) => {
+  upload.single('image')(req, res, error => {
+    if (error) return res.send({ success: false, message: error.message });
+    if (req.file) {
+      const dotIndex = req.file.filename.lastIndexOf('.');
+      const id = req.file.filename.substring(0, dotIndex);
+      const bookInfo = {...req.body};
+      bookInfo.id = id;
+      bookInfo.image = req.file.filename;
+      console.log(bookInfo);
+      AdminServices.saveBook(bookInfo)
+      .then(newId => res.send({ success: true, newId }))
+      .catch(error => res.send({ success: false, message: error.message }));
+    }
+  });
+})
 
 adminRouter.post('/saveauthor', (req, res) => {
   const { authorName } = req.body

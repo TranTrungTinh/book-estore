@@ -21,12 +21,7 @@ app.use('/admin', adminRouter);
 
 
 app.get('/', (req, res) => res.redirect('/home'));
-
-app.get('/admin', (req, res) => {
-  res.render('render/admin');
-});
-
-
+app.get('/admin', (req, res) => res.redirect('/admin/edit'));
 // handle error route
 app.get('/error', (req, res) => res.render('render/error'));
 app.get('*', (req, res) => res.redirect('/error'));

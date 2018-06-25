@@ -49,17 +49,13 @@ class Admin {
     return queryDB(sql);
   }
 
-  static async saveMewBook(name, image, price, inventory, description, authorId, catId, publisherId) {
-    let newId = Math.round(Math.random() * 10000) + '';
-    if(+newId < 10) newId = '000' + newId
-    else if(+newId < 100) newId = '00' + newId
-    else if(+newId < 1000) newId = '0' + newId
+  static async saveNewBook(newId, name, image, price, amount, description, author, type, publisher) {
 
-    const sql = `INSERT INTO THONGTINSACH(ID, NAME, IMAGE, PRICE, INTENTORY, DESCRIPTION, ID_AUTHOR, ID_CATEGORY, ID_PUBLISHER)
-    VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    await queryDB(sql, [ newId, name, image, price, inventory, description, authorId, catId, publisherId ]);
+    const sql = `INSERT INTO THONGTINSACH(ID, NAME, IMAGE, PRICE, INVENTORY, DESCRIPTION, ID_AUTHOR, ID_CATEGORY, ID_PUBLISHER)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    await queryDB(sql, [ newId, name, image, price, amount, description, author, type, publisher]);
     
-    return newId
+    return newId;
   }
 
   static async saveNewAuthor(authorName) {

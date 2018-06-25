@@ -141,7 +141,7 @@ function updatePagination(sectionId) {
 
 $('#logout').click(e => {
     
-}
+});
 
 /*=============================== Products ===============================*/
 
@@ -257,29 +257,54 @@ $('#AddNewProduct').click(() => {
     $('#txtEditor').Editor("setText", '')
 })
 
-function addNewProduct(item) {}
+function addNewProduct(formData) {
+    $.ajax({
+        url: 'http://localhost:3000/admin/savebook',
+        type: 'POST',
+        processData: false,
+        contentType: false,
+        data: formData
+    }).then(data => {
+        if(!data.success) return alert('UPLOAD FAIL - ' + data.message);
+        alert('UPLOAD SUCCESS');
+    });
+}
 
 function updateProductInfo(item) {}
 
-$('#ModalSave_Product').click(() => {
-    let item = {
-        imgSrc: '',
-        /* image file path here */
-        id: $('#Modal_Product input')[1].value,
-        title: $('#Modal_Product input')[2].value,
-        price: $('#Modal_Product input')[3].value,
-        amount: $('#Modal_Product input')[4].value,
-        author: $('#Modal_Product select')[0].value,
-        type: $('#Modal_Product select')[1].value,
-        publisher: $('#Modal_Product select')[2].value,
-        description: $('#txtEditor').Editor("getText")
-    }
+$('#ModalSave_Product').click((e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('image', $('#Modal_Product input')[0].files[0]);
+    formData.append('id', $('#Modal_Product input')[1].value);
+    formData.append('name', $('#Modal_Product input')[2].value);
+    formData.append('price', $('#Modal_Product input')[3].value);
+    formData.append('amount', $('#Modal_Product input')[4].value);
+    formData.append('author', $('#Modal_Product select')[0].value);
+    formData.append('type', $('#Modal_Product select')[1].value);
+    formData.append('publisher', $('#Modal_Product select')[2].value);
+    formData.append('description', $('#txtEditor').Editor("getText"));
+
+    // let item = {
+    //     imgSrc: $('#Modal_Product input')[0].files[0],
+    //     /* image file path here */
+    //     id: $('#Modal_Product input')[1].value,
+    //     title: $('#Modal_Product input')[2].value,
+    //     price: $('#Modal_Product input')[3].value,
+    //     amount: $('#Modal_Product input')[4].value,
+    //     author: $('#Modal_Product select')[0].value,
+    //     type: $('#Modal_Product select')[1].value,
+    //     publisher: $('#Modal_Product select')[2].value,
+    //     description: $('#txtEditor').Editor("getText")
+    // }
 
     if (!selectedProduct) {
-        addNewProduct(item)
+        addNewProduct(formData);
     } else {
-        item.imgSrc = $('#Modal_Product img')[0].src || $('#Modal_Product input')[0].files[0].name
-        updateProductInfo(item)
+        const image = $('#Modal_Product img')[0].src || $('#Modal_Product input')[0].files[0].name;
+        formData.set('image', image);
+        updateProductInfo(formData);
     }
 })
 
