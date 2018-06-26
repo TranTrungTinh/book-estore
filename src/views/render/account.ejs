@@ -14,10 +14,12 @@
   <%- include('../header/navigation.ejs') %>
     <div class="container-fluid">
       <div class="row" id="acount-page">
-        <% if(isDetail) { %>
+        <% if(isDetail === 1) { %>
           <%- include('../body/account/account.detail.ejs', {user}) %>
-        <% } else { %>
+        <% } if(isDetail === 2) { %>
           <%- include('../body/account/account.orders.ejs', { showStatus, orders }) %>
+        <% } if(isDetail === 3) { %>
+          <%- include('../body/account/account.address.ejs') %>
         <% } %>
       </div>
     </div>

@@ -16,12 +16,12 @@ class Order {
     if(!results[0].length) throw new Error('CANNOT_FIND_ITEM');
 
     const carts = results[0];
-    const idOrder = Math.round(Math.random() * 10000000) + '';
+    const idOrder = Math.round(Math.random() * 1000000) + '';
     const currentDate = getCurrentDate();
 
     const length = carts.length;
     let content = carts[0].NAME;
-    if(length >= 1) content += `... và ${length - 1} sản phẩm khác.`;
+    if(length > 1) content += `... và ${length - 1} sản phẩm khác.`;
     for (let index = 0; index < carts.length; index++) {
       const { ID_BOOK, AMOUNT} = carts[index];
       await this.saveOrderDetail(idOrder, ID_BOOK, AMOUNT);

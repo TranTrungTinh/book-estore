@@ -323,6 +323,7 @@ $('#acount-info').click(e => {
   const isActive = $('#acount-info').hasClass('active');
   if(isActive) return;
   $('#acount-history').removeClass('active');
+  $('#acount-address').removeClass('active');
   $('#acount-info').addClass('active');
   location.href = '/user/account/edit';
 });
@@ -330,9 +331,19 @@ $('#acount-history').click(e => {
   const isActive = $('#acount-history').hasClass('active');
   if(isActive) return;
   $('#acount-info').removeClass('active');
+  $('#acount-address').removeClass('active');
   $('#acount-history').addClass('active');
   location.href = '/user/account/orders';  
 });
+$('#acount-address').click(e => {
+  const isActive = $('#acount-address').hasClass('active');
+  if(isActive) return;
+  $('#acount-info').removeClass('active');
+  $('#acount-history').removeClass('active');
+  $('#acount-address').addClass('active');
+  location.href = '/user/account/address';  
+});
+
 
 $('#btn-update').click(e => {
   e.preventDefault();

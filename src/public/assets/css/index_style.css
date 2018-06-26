@@ -620,10 +620,19 @@ button:focus { outline: 0px !important;  }
 
 .acount-info-name {
   padding: 5px;
+  position: relative;
+}
+
+.acount-info-name > img {
+  position: absolute;
+  border-radius: 50px;
+  top: -7px;
+  left: 15px;
 }
 
 .acount-info-name > div {
   font-size: 16px;  
+  font-weight: 300;
   padding: 2px 80px;
 }
 .acount-info-name > span {

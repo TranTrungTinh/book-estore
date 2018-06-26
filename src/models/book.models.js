@@ -115,8 +115,13 @@ class Book {
   }
 
   static updateSales(idBook, amount) {
-    const sql = `UPDATE THONGTINSACH SET SALES = SALES + ? WHERE ID = ?`;
-    return queryDB(sql, [amount, idBook]);
+    const sql = `UPDATE THONGTINSACH SET SALES = SALES + ?, INVENTORY = INVENTORY - ? WHERE ID = ?`;
+    return queryDB(sql, [amount, amount, idBook]);
+  }
+
+  static getInventoryById(idBook) {
+    const sql = `SELECT INVENTORY FROM THONGTINSACH WHERE ID = ?`;
+    return queryDB(sql, [idBook]);
   }
   
 }

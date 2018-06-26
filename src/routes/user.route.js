@@ -40,8 +40,8 @@ userRouter.post('/logout', (req, res) => {
 
 userRouter.get('/account/edit', mustBeUser, (req, res) => {
   UserServices.showUserInfoBy(req.idUser)
-  .then(user => res.render('render/account', { isDetail: true, user}))
-  .catch(error => res.render('render/account', { isDetail: true }));
+  .then(user => res.render('render/account', { isDetail: 1, user}))
+  .catch(error => res.render('render/account', { isDetail: 1 }));
 });
 
 userRouter.post('/account/update', mustBeUser, (req, res) => {
@@ -54,14 +54,20 @@ userRouter.post('/account/update', mustBeUser, (req, res) => {
 
 userRouter.get('/account/orders', mustBeUser, (req, res) => {
   OrderServices.showHistoryOrderByIdUser(req.idUser)
-  .then(orders => res.render('render/account', { isDetail: false, orders, showStatus }))
-  .catch(error => res.render('render/account', { isDetail: false, orders: [], showStatus}));
+  .then(orders => res.render('render/account', { isDetail: 2, orders, showStatus }))
+  .catch(error => res.render('render/account', { isDetail: 2, orders: [], showStatus}));
 });
 
 userRouter.get('/account/order/history/:id', (req, res) => {
   OrderServices.showOrderDetailByIdOrder(req.params.id)
   .then(orders => res.render('render/historyOrder', {  orders, showStatus, priceFormat }))
   .catch(error => res.redirect('/error'));
-})
+});
+
+userRouter.get('/account/address', mustBeUser, (req, res) => {
+  OrderServices.showHistoryOrderByIdUser(req.idUser)
+  .then(orders => res.render('render/account', { isDetail: 3 }))
+  .catch(error => res.render('render/account', { isDetail: 3 }));
+});
 
 module.exports = { userRouter };
