@@ -411,15 +411,14 @@ $('#StrToSearchOrders').keyup(() => {
     updatePagination('Orders')
 })
 
-$('#Orders tbody select').change((e) => {
-    e.preventDefault()
+$('#Orders tbody').on('change', 'select', e => {
+    e.preventDefault();
     let tr = $(e.target).closest('tr')[0]
     const orderId = tr.getElementsByTagName('td')[0].textContent.trim(),
         orderStt = tr.getElementsByTagName('select')[0].value.trim()
     
-    updateOrderInfo({ orderId, orderStt })
-})
-
+    updateOrderInfo({ orderId, orderStt });
+} )
 /*=============================== Authors ===============================*/
 
 var selectedAuthor = null // see selectedProduct

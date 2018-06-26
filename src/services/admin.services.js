@@ -45,39 +45,39 @@ class AdminServices {
     return Admin.saveNewBook(id, name, image, price, amount, description, author, type, publisher);
   }
 
-  static async saveAuthor(authorName) {
-    return await Admin.saveNewAuthor(authorName);
+  static saveAuthor(authorName) {
+    return Admin.saveNewAuthor(authorName);
   }
 
-  static async saveCategory(catName) {
-    return await Admin.saveNewCategory(catName);
+  static saveCategory(catName) {
+    return Admin.saveNewCategory(catName);
   }
 
-  static async savePublisher(publisherName) {
-    return await Admin.saveNewPublisher(publisherName);
+  static savePublisher(publisherName) {
+    return Admin.saveNewPublisher(publisherName);
   }
 
   static updateBookInfo(bookInfo) {
-    const { id, name, price, inventory, description, authorId, catId, publisherId } = bookInfo;
-    return Admin.updateBook(id, name, price, inventory, description, authorId, catId, publisherId);
+    const { id, name, image, price, amount, description, author, type, publisher } = bookInfo;
+    return Admin.updateBook(id, name, iamge, price, amount, description, author, type, publisher);
   }
 
-  static async updateOrderInfo(orderInfo) {
+  static updateOrderInfo(orderInfo) {
     const {orderId, orderStt} = orderInfo;
     return Admin.updateOrder(orderId, orderStt);
   }
 
-  static async updateAuthorInfo(authorInfo) {
+  static updateAuthorInfo(authorInfo) {
     const {authorId, authorName} = authorInfo;
     return Admin.updateAuthor(authorId, authorName);
   }
 
-  static async updateCategoryInfo(catInfo) {
+  static updateCategoryInfo(catInfo) {
     const {catId, catName} = catInfo;
     return Admin.updateCategory(catId, catName);
   }
 
-  static async updatePublisherInfo(publisherInfo) {
+  static updatePublisherInfo(publisherInfo) {
     const {publisherId, publisherName} = publisherInfo;
     return Admin.updatePublisher(publisherId, publisherName);
   }

@@ -1,6 +1,7 @@
 const { queryDB } = require('../helpers/connectDatabase');
 const { compare, hash } = require('bcrypt');
 const { sign } = require('../helpers/jwt');
+const { checkExistsAndDelete } = require('../helpers/checkExistsAndDelete');
 
 class Admin {
 
@@ -30,7 +31,7 @@ class Admin {
   }
 
   static getAllOrders() {
-    const sql = `SELECT * FROM DONHANG ORDER BY DATE_CREATED`;
+    const sql = `SELECT * FROM DONHANG ORDER BY DATE_CREATED DESC`;
     return queryDB(sql);
   }
 
@@ -87,11 +88,11 @@ class Admin {
     return newId;
   }
 
-  static updateBook(idBook, name, image, price, inventory, description, idAuthor, idCat, idPublisher) {
+  static updateBook(idBook, name, image, price, amount, description, author, type, publisher) {
     const sql = `UPDATE THONGTINSACH
                 SET NAME = ?, IMAGE = ?, PRICE = ?, INVENTORY = ?, DESCRIPTION = ?, ID_CATEGORY = ?, ID_AUTHOR = ?, ID_PUBLISHER = ?
                 WHERE ID = ?`;
-    return queryDB(sql, [ name, image, price, inventory, description, idCat, idAuthor, idPublisher, idBook ]);
+    return queryDB(sql, [ name, image, price, amount, description, type, author, publisher, idBook ]);
   }
 
   static async updateOrder(orderId, orderStt) {
@@ -165,18 +166,14 @@ class Admin {
   }
 
   static async deleteBook(bookId) {
-    const checkExistSql = `SELECT ID FROM THONGTINSACH WHERE ID = ?`
-    const exists = await queryDB(checkExistSql, [ bookId ])
+    const checkExistSql = `SELECT IMAGE FROM THONGTINSACH WHERE ID = ?`
+    const image = await queryDB(checkExistSql, [ bookId ]);
+    if(!image) throw new Error('CANNOT_FIND_BOOK');
+    const sql = `DELETE FROM THONGTINSACH WHERE ID = ?`;
+    await checkExistsAndDelete(image[0].IMAGE);
+    return queryDB(sql, [ bookId ]);
     
-    if(exists) {
-      const sql = `DELETE FROM THONGTINSACH
-                  WHERE ID = ?`;
-      queryDB(sql, [ bookId ]);
-    }
-
-    return exists
   }
-
 }
 
 module.exports = { Admin };

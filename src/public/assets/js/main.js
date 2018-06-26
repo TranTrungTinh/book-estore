@@ -88,9 +88,10 @@ $('#btnSearch').click(e => {
 
 /* ============ Views book detail ============*/
 $('#main-content').on('click', '.thumbnail', e => {
+  console.log(e);
   const _this = e.target.nodeName;
   const idBook = e.currentTarget.lastElementChild.defaultValue;
-  const title = e.currentTarget.children[1].children[0].innerText;
+  const title = e.currentTarget.children[2].children[0].innerText;
   
   if(_this !== 'SPAN' && _this !== 'BUTTON') return location.href = '/book/' + idBook;
 

@@ -60,6 +60,10 @@ adminRouter.post('/savebook', (req, res) => {
       .catch(error => res.send({ success: false, message: error.message }));
     }
   });
+});
+
+adminRouter.post('/updatebook', (req, res) => {
+  
 })
 
 adminRouter.post('/saveauthor', (req, res) => {
@@ -99,7 +103,7 @@ adminRouter.post('/savepublisher', (req, res) => {
 })
 
 adminRouter.post('/updateorder', (req, res) => {
-  const { orderId, orderStt } = req.body
+  const { orderId, orderStt } = req.body;
   AdminServices.updateOrderInfo({ orderId, orderStt })
   .then((updatedId) => {
     if(updatedId) res.send({ success: true })
