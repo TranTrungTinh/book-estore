@@ -30,21 +30,21 @@ function handleOthersAppreance(sectionId) {
             typeOfInfoOnCol = 0
             break
     }
-    
+
     let container = $(`#${sectionId} tbody`)[0]
     $(container).empty()
 
     let sectionNumberId = -1
-    switch(sectionId) {
-        case 'Authors': 
-        sectionNumberId = 2
-        break
-        case 'Cats': 
-        sectionNumberId = 3
-        break
-        case 'Publishers': 
-        sectionNumberId = 4
-        break
+    switch (sectionId) {
+        case 'Authors':
+            sectionNumberId = 2
+            break
+        case 'Cats':
+            sectionNumberId = 3
+            break
+        case 'Publishers':
+            sectionNumberId = 4
+            break
     }
 
     let data = itemsList[sectionNumberId]
@@ -58,22 +58,22 @@ function handleOthersAppreance(sectionId) {
 
 function updateTable(sectionId) {
     let sectionNumberId = -1
-    switch(sectionId) {
+    switch (sectionId) {
         case 'Products':
-        sectionNumberId = 0
-        break
+            sectionNumberId = 0
+            break
         case 'Orders':
-        sectionNumberId = 1
-        break
+            sectionNumberId = 1
+            break
         case 'Authors':
-        sectionNumberId = 2
-        break
+            sectionNumberId = 2
+            break
         case 'Cats':
-        sectionNumberId = 3
-        break
+            sectionNumberId = 3
+            break
         case 'Publishers':
-        sectionNumberId = 4
-        break
+            sectionNumberId = 4
+            break
     }
 
     const container = $(`#${sectionId} tbody`)[0]
@@ -88,8 +88,8 @@ function updateTable(sectionId) {
 function compareToSort(a, b) {
     const idA = +a.getElementsByTagName('td')[0].textContent.trim(),
         idB = +b.getElementsByTagName('td')[0].textContent.trim()
-    if(idA < idB) return -1
-    if(idA > idB) return 1
+    if (idA < idB) return -1
+    if (idA > idB) return 1
     return 0
 }
 
@@ -100,7 +100,7 @@ $('.pagination-ul').each((index, ele) => {
     let sectionId = $(ele).closest('section').attr('id'),
         container = $(`#${sectionId} tbody`)[0],
         data = itemsList[index]
-    
+
     $(ele).twbsPagination({
         totalPages: Math.ceil(data.length / 8),
         visiblePages: 5,
@@ -119,9 +119,9 @@ function updatePagination(sectionId) {
         data = $(`#${sectionId} tbody tr`)
     let newTotalPages = Math.ceil(data.length / 8)
     let defaultOpts = {
-            totalPages: newTotalPages
-        }
-    
+        totalPages: newTotalPages
+    }
+
     $(pgUl).twbsPagination('destroy')
 
     $(pgUl).twbsPagination($.extend({}, defaultOpts, {
@@ -132,7 +132,7 @@ function updatePagination(sectionId) {
                 container = $(`#${sectionId} tbody`)[0]
             $(container).empty()
             for (let i = start; i < start + 8; i++) {
-                if(i > data.length - 1) continue // skip some shitty
+                if (i > data.length - 1) continue // skip some shitty
                 container.appendChild(data[i])
             }
         }
@@ -140,7 +140,7 @@ function updatePagination(sectionId) {
 }
 
 $('#logout').click(e => {
-    
+
 });
 
 /*=============================== Products ===============================*/
@@ -148,9 +148,6 @@ $('#logout').click(e => {
 $('#StrToSearchProducts').keyup(() => {
     let typeOfInfoOnCol = 0
     switch ($('#Products select')[0].value) {
-        case 'id':
-            typeOfInfoOnCol = 1
-            break
         case 'product':
             typeOfInfoOnCol = 2
             break
@@ -163,18 +160,19 @@ $('#StrToSearchProducts').keyup(() => {
         case 'publisher':
             typeOfInfoOnCol = 7
             break
+        case 'id':
         default:
-            typeOfInfoOnCol = null
+            typeOfInfoOnCol = 0
             break
     }
 
-    let strToSearch = $('#StrToSearchProducts')[0].value.trim().toLowerCase(),
+    const strToSearch = $('#StrToSearchProducts')[0].value.trim().toLowerCase(),
         productsList = itemsList[0].slice()
-        container = $('#Products tbody')[0]
+    container = $('#Products tbody')[0]
     $(container).empty()
 
     $.each(productsList, (index, ele) => {
-        let pattern = ele.getElementsByTagName('td')[typeOfInfoOnCol].textContent.trim().toLowerCase()
+        const pattern = ele.getElementsByTagName('td')[typeOfInfoOnCol].textContent.trim().toLowerCase()
         if (!(strToSearch.length > 0 && pattern.indexOf(strToSearch) < 0)) {
             container.appendChild(ele)
         }
@@ -200,21 +198,22 @@ $('#Products tbody').click((e) => {
     $('#Modal_Product img')[0].src = tr.getElementsByTagName('img')[0].src
     // product price, amount, author, category, publisher
     let tds = tr.getElementsByTagName('td')
-    for (let i = 1; i < 5; i++) {
-        // price
-        if(i === 3)
-            $('#Modal_Product input')[i].value = tds[i].textContent.replace(',','').trim()
+    for (let i = 0; i < 5; i++) {
+        if (i === 1) continue // skip image input
+        // remove ',' in price field
+        if (i === 3)
+            $('#Modal_Product input')[i].value = tds[i].textContent.replace(',', '').trim()
         else
             $('#Modal_Product input')[i].value = tds[i].textContent.trim()
     }
 
-    let authorId = tr.getElementsByTagName('span')[0].textContent.trim(),
+    const authorId = tr.getElementsByTagName('span')[0].textContent.trim(),
         catId = tr.getElementsByTagName('span')[1].textContent.trim(),
         publisherId = tr.getElementsByTagName('span')[2].textContent.trim()
 
-    let optionsAuthor = $('#Modal_Product select:nth-of-type(1) > option'),
-        optionsCat = $('#Modal_Product select:nth-of-type(2) > option'),
-        optionsPublisher = $('#Modal_Product select:nth-of-type(3) > option')
+    const optionsAuthor = $('#Modal_Product .modal-body:first div:nth-of-type(1) select:nth-of-type(1) > option'),
+        optionsCat = $('#Modal_Product .modal-body:first div:nth-of-type(2) select:nth-of-type(1) > option'),
+        optionsPublisher = $('#Modal_Product .modal-body:first div:nth-of-type(2) select:nth-of-type(2) > option')
 
     for (let i = 0; i < optionsAuthor.length; i++) {
         const optionId = optionsAuthor[i].value.trim()
@@ -250,12 +249,118 @@ $('#Products tbody').click((e) => {
 // clear all field content whenever..
 $('#AddNewProduct').click(() => {
     selectedProduct = null
+
     $('#Modal_Product img')[0].src = './assets/media/images/book_default.png'
+
     $.each($('#Modal_Product input'), (index, ele) => {
         ele.value = ''
     })
+
+    $.each($('#Modal_Product select'), (index, ele) => {
+        [...$(ele.getElementsByTagName('option'))].forEach(option => {
+            option.removeAttribute('selected')
+        })
+    })
+
     $('#txtEditor').Editor("setText", '')
 })
+
+function makeNewBookRow(id, image, name, price, amount, authorId, authorName, catId, catName, publisherId, publisherName, description) {
+    const newBookRow = document.createElement('tr')
+
+    newBookRow.innerHTML = `<td>${id}</td>
+                        <td class="img-wrapper img-wrapper-sm">
+                            <img src="./assets/media/images/${image}" alt="Hình ảnh">
+                        </td>
+                        <td>
+                            <div class="detail-wrapper">
+                                ${name}
+                            </div>
+                        </td>
+                        <td>${price}</td>
+                        <td>${amount}</td>
+                        <td>
+                            <div class="detail-wrapper">
+                                ${authorName}
+                            </div>
+                            <span style="display:none">${authorId}</span>
+                        </td>
+                        <td>
+                            <div class="detail-wrapper">
+                                ${catName}
+                            </div>
+                            <span style="display:none">${catId}</span>
+                        </td>
+                        <td>
+                            <div class="detail-wrapper">
+                                ${publisherName}
+                            </div>
+                            <span style="display:none">${publisherId}</span>
+                        </td>
+                        <td>
+                            <div class="detail-wrapper">
+                                ${description}
+                            </div>
+                        </td>`
+    
+    return newBookRow
+}
+
+function addNewBookToTable(formData, fileName) {
+    // get new id
+    const dotIndex = fileName.lastIndexOf('.')
+    const newId = fileName.slice(0, dotIndex)
+
+    // find author name by id
+    let authorName = ''
+    const authorList = itemsList[2]
+    for (let i = 0; i < authorList.length; i++) {
+        const author = authorList[i]
+        const authorId = author.getElementsByTagName('td')[0].textContent.trim()
+        if (formData.get('author') === authorId) {
+            authorName = author.getElementsByClassName('detail-wrapper')[0].textContent.trim()
+            break
+        }
+
+    }
+
+    // find type name by id
+    let typeName = ''
+    const typeList = itemsList[3]
+    for (let i = 0; i < typeList.length; i++) {
+        const type = typeList[i]
+        const typeId = type.getElementsByTagName('td')[0].textContent.trim()
+        if (formData.get('type') === typeId) {
+            typeName = type.getElementsByClassName('detail-wrapper')[0].textContent.trim()
+            break
+        }
+
+    }
+
+    // find publisher name by id
+    let publisherName = ''
+    const publisherList = itemsList[4]
+    for (let i = 0; i < publisherList.length; i++) {
+        const publisher = publisherList[i]
+        const publisherId = publisher.getElementsByTagName('td')[0].textContent.trim()
+        if (formData.get('publisher') === publisherId) {
+            publisherName = publisher.getElementsByClassName('detail-wrapper')[0].textContent.trim()
+            break
+        }
+
+    }
+
+    // make new book row
+    const newBookRow = makeNewBookRow(newId, fileName, formData.get('name'), 
+                                    formData.get('price'), formData.get('amount'), 
+                                    formData.get('author'), authorName,
+                                    formData.get('type'), typeName,
+                                    formData.get('publisher'), publisherName,
+                                    formData.get('description'))
+
+    itemsList[0].push(newBookRow)
+    itemsList[0].sort(compareToSort)
+}
 
 function addNewProduct(formData) {
     $.ajax({
@@ -265,8 +370,11 @@ function addNewProduct(formData) {
         contentType: false,
         data: formData
     }).then(data => {
-        if(!data.success) return alert('UPLOAD FAIL - ' + data.message);
+        if (!data.success) return alert('UPLOAD FAIL - ' + data.message);
         alert('UPLOAD SUCCESS - ' + data.filename);
+        addNewBookToTable(formData, data.filename)
+        updateTable('Products')
+        updatePagination('Products')
     });
 }
 
@@ -278,8 +386,24 @@ function updateProductInfo(formData) {
         contentType: false,
         data: formData
     }).then(data => {
-        if(!data.success) return alert('UPLOAD FAIL - ' + data.message);
-        alert('UPLOAD SUCCESS - ' + data.filename);
+        if (!data.success) return alert('UPLOAD FAIL - ' + data.message);
+        alert('UPDATE SUCCESS - ' + data.filename);
+        // get updated id
+        const dotIndex = data.filename.lastIndexOf('.')
+        const updatedBookId = data.filename.slice(0, dotIndex)
+        // find coresponding row in table and delete it
+        const books = itemsList[0]
+        for (let i = 0; i < books.length; i++) {
+            bookId = books[i].getElementsByTagName('td')[0].textContent.trim()
+            if(bookId === updatedBookId) {
+                itemsList[0].splice(i, 1)
+                break
+            }
+        }
+        // re-add row with updated info to table
+        addNewBookToTable(formData, data.filename)
+        updateTable('Products')
+        updatePagination('Products')
     });
 }
 
@@ -287,8 +411,8 @@ $('#ModalSave_Product').click((e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('image', $('#Modal_Product input')[0].files[0]);
-    formData.append('id', $('#Modal_Product input')[1].value);
+    formData.append('image', $('#Modal_Product input')[1].files[0]);
+    formData.append('id', $('#Modal_Product input')[0].value);
     formData.append('name', $('#Modal_Product input')[2].value);
     formData.append('price', $('#Modal_Product input')[3].value);
     formData.append('amount', $('#Modal_Product input')[4].value);
@@ -303,7 +427,7 @@ $('#ModalSave_Product').click((e) => {
         const path = $('.img-wrapper-md').children(":first")[0].currentSrc;
         const dotIndex = path.lastIndexOf('/');
         const imagePath = path.substring(dotIndex + 1);
-        const image = $('#Modal_Product input')[0].files[0] || '';
+        const image = $('#Modal_Product input')[1].files[0] || '';
         formData.set('image', image);
         formData.append('imagePath', imagePath);
         updateProductInfo(formData);
@@ -312,24 +436,27 @@ $('#ModalSave_Product').click((e) => {
 
 // delete selected Products
 $('#ModalDelete').click(() => {
-    const bookId = $('#Modal_Product input')[1].value || ''
-    if(bookId) {
-        $.post('/admin/deletebook', { bookId }, res => {
-            if(!res.success) alert(res.message)
-            else {
-                // find the row with coresponding id
-                for (let i = 0; i < itemsList[0].length; i++) {
-                    const rowId = itemsList[0][i].getElementsByTagName('td')[1].textContent.trim()
-                    if(rowId === bookId) {
-                        itemsList[0].splice(i, 1)
-                    }
+    const bookId = $('#Modal_Product input')[0].value || ''
+    if (!bookId) return
+
+    $.post('/admin/deletebook', {
+        bookId
+    }, res => {
+        if (!res.success) alert(res.message)
+        else {
+            // find the row with coresponding id
+            const bookList = itemsList[0]
+            for (let i = 0; i < bookList.length; i++) {
+                const rowId = bookList[i].getElementsByTagName('td')[0].textContent.trim()
+                if (rowId === bookId) {
+                    itemsList[0].splice(i, 1)
                     break
                 }
-                updateTable('Products')
-                updatePagination('Products')
             }
-        })
-    }
+            updateTable('Products')
+            updatePagination('Products')
+        }
+    })
 })
 
 /*=============================== Orders ===============================*/
@@ -356,7 +483,7 @@ function handleOrdersAppreance() {
     let filterOrderStt = $('#Orders select')[0].value.trim().toLowerCase(),
         strToSearch = $('#StrToSearchOrders')[0].value.trim(),
         ordersList = itemsList[1].slice()
-        container = $('#Orders tbody')[0]
+    container = $('#Orders tbody')[0]
     $(container).empty()
 
     $.each(ordersList, (index, ele) => {
@@ -371,20 +498,25 @@ function handleOrdersAppreance() {
 }
 
 function updateOrderInfo(order) {
-    const { orderId, orderStt } = order
+    const {
+        orderId,
+        orderStt
+    } = order
 
-    $.post('/admin/updateorder', { orderId, orderStt }, res => {
-        if(!res.success) alert(res.message)
+    $.post('/admin/updateorder', {
+        orderId,
+        orderStt
+    }, res => {
+        if (!res.success) alert(res.message)
         else {
             for (let i = 0; i < itemsList[2].length; i++) {
                 // find the row with coresponding id
                 let rowId = itemsList[2][i].getElementsByTagName('td')[0].textContent.trim()
-                if(rowId === orderId) {
+                if (rowId === orderId) {
                     itemsList[2][i].getElementsByTagName('options').each((index, option) => {
-                        if(option.value.trim() === orderStt) {
+                        if (option.value.trim() === orderStt) {
                             option.setAttribute('selected', true)
-                        }
-                        else {
+                        } else {
                             option.removeAttribute('selected')
                         }
                     })
@@ -418,9 +550,12 @@ $('#Orders tbody').on('change', 'select', e => {
     let tr = $(e.target).closest('tr')[0]
     const orderId = tr.getElementsByTagName('td')[0].textContent.trim(),
         orderStt = tr.getElementsByTagName('select')[0].value.trim()
-    
-    updateOrderInfo({ orderId, orderStt });
-} )
+
+    updateOrderInfo({
+        orderId,
+        orderStt
+    });
+})
 /*=============================== Authors ===============================*/
 
 var selectedAuthor = null // see selectedProduct
@@ -447,12 +582,18 @@ $('#AddNewAuthor').click(() => {
 })
 
 function addNewAuthor(author) {
-    const { authorName } = author
-    $.post('/admin/saveauthor', { authorName }, res => {
-        if(!res.success) alert('Failed adding new author!')
+    const {
+        authorName
+    } = author
+    $.post('/admin/saveauthor', {
+        authorName
+    }, res => {
+        if (!res.success) alert('Failed adding new author!')
         else {
-            const { newId } = res,
-                tr = document.createElement('tr')
+            const {
+                newId
+            } = res,
+            tr = document.createElement('tr')
             tr.innerHTML = `<td>${newId}</td><td><div class="detail-wrapper">${authorName}</div></td>`
             itemsList[2].push(tr)
             itemsList[2].sort(compareToSort)
@@ -461,15 +602,21 @@ function addNewAuthor(author) {
 }
 
 function updateAuthorInfo(author) {
-    const { authorId, authorName } = author
-    $.post('/admin/updateauthor', { authorId, authorName }, res => {
-        if(!res.success) alert(res.message)
+    const {
+        authorId,
+        authorName
+    } = author
+    $.post('/admin/updateauthor', {
+        authorId,
+        authorName
+    }, res => {
+        if (!res.success) alert(res.message)
         else {
             for (let i = 0; i < itemsList[2].length; i++) {
                 // find the row with coresponding id
-                if(itemsList[2][i]
-                .getElementsByTagName('td')[0]
-                .textContent.trim() === authorId) {
+                if (itemsList[2][i]
+                    .getElementsByTagName('td')[0]
+                    .textContent.trim() === authorId) {
                     itemsList[2][i].getElementsByClassName('detail-wrapper')[0].textContent = authorName
                     break
                 }
@@ -481,10 +628,15 @@ function updateAuthorInfo(author) {
 $('#ModalSave_Author').click(() => {
     const authorName = $('#Modal_Author input')[1].value || ''
     if (!selectedAuthor) {
-        addNewAuthor({ authorName })
+        addNewAuthor({
+            authorName
+        })
     } else {
         const authorId = $('#Modal_Author input')[0].value || ''
-        updateAuthorInfo({ authorId, authorName })
+        updateAuthorInfo({
+            authorId,
+            authorName
+        })
     }
     updateTable('Authors')
     updatePagination('Authors')
@@ -527,12 +679,18 @@ $('#AddNewCat').click(() => {
 })
 
 function addNewCat(cat) {
-    const { catName } = cat
-    $.post('/admin/savecat', { catName }, res => {
-        if(!res.success) alert('Failed adding new category!')
+    const {
+        catName
+    } = cat
+    $.post('/admin/savecat', {
+        catName
+    }, res => {
+        if (!res.success) alert('Failed adding new category!')
         else {
-            const { newId } = res,
-                tr = document.createElement('tr')
+            const {
+                newId
+            } = res,
+            tr = document.createElement('tr')
             tr.innerHTML = `<td>${newId}</td><td><div class="detail-wrapper">${catName}</div></td>`
             itemsList[3].push(tr)
             itemsList[3].sort(compareToSort)
@@ -541,15 +699,21 @@ function addNewCat(cat) {
 }
 
 function updateCatInfo(cat) {
-    const { catId, catName } = cat
-    $.post('/admin/updatecat', { catId, catName }, res => {
-        if(!res.success) alert(res.message)
+    const {
+        catId,
+        catName
+    } = cat
+    $.post('/admin/updatecat', {
+        catId,
+        catName
+    }, res => {
+        if (!res.success) alert(res.message)
         else {
             for (let i = 0; i < itemsList[3].length; i++) {
                 // find the row with coresponding id
-                if(itemsList[3][i]
-                .getElementsByTagName('td')[0]
-                .textContent.trim() === catId) {
+                if (itemsList[3][i]
+                    .getElementsByTagName('td')[0]
+                    .textContent.trim() === catId) {
                     itemsList[3][i].getElementsByClassName('detail-wrapper')[0].textContent = catName
                     break
                 }
@@ -561,10 +725,15 @@ function updateCatInfo(cat) {
 $('#ModalSave_Cat').click(() => {
     const catName = $('#Modal_Cat input')[1].value || ''
     if (!selectedCat) {
-        addNewCat({ catName })
+        addNewCat({
+            catName
+        })
     } else {
         const catId = $('#Modal_Cat input')[0].value || ''
-        updateCatInfo({ catId, catName })
+        updateCatInfo({
+            catId,
+            catName
+        })
     }
     updateTable('Cats')
     updatePagination('Cats')
@@ -607,12 +776,18 @@ $('#AddNewPublisher').click(() => {
 })
 
 function addNewPublisher(publisher) {
-    const { publisherName } = publisher
-    $.post('/admin/savepublisher', { publisherName }, res => {
-        if(!res.success) alert('Failed adding new publisher!')
+    const {
+        publisherName
+    } = publisher
+    $.post('/admin/savepublisher', {
+        publisherName
+    }, res => {
+        if (!res.success) alert('Failed adding new publisher!')
         else {
-            const { newId } = res,
-                tr = document.createElement('tr')
+            const {
+                newId
+            } = res,
+            tr = document.createElement('tr')
             tr.innerHTML = `<td>${newId}</td><td><div class="detail-wrapper">${publisherName}</div></td>`
             itemsList[4].push(tr)
             itemsList[4].sort(compareToSort)
@@ -621,15 +796,21 @@ function addNewPublisher(publisher) {
 }
 
 function updatePublisherInfo(publisher) {
-    const { publisherId, publisherName } = publisher
-    $.post('/admin/updatepublisher', { publisherId, publisherName }, res => {
-        if(!res.success) alert(res.message)
+    const {
+        publisherId,
+        publisherName
+    } = publisher
+    $.post('/admin/updatepublisher', {
+        publisherId,
+        publisherName
+    }, res => {
+        if (!res.success) alert(res.message)
         else {
             for (let i = 0; i < itemsList[4].length; i++) {
                 // find the row with coresponding id
-                if(itemsList[4][i]
-                .getElementsByTagName('td')[0]
-                .textContent.trim() === publisherId) {
+                if (itemsList[4][i]
+                    .getElementsByTagName('td')[0]
+                    .textContent.trim() === publisherId) {
                     itemsList[4][i].getElementsByClassName('detail-wrapper')[0].textContent = publisherName
                     break
                 }
@@ -641,10 +822,15 @@ function updatePublisherInfo(publisher) {
 $('#ModalSave_Publisher').click(() => {
     const publisherName = $('#Modal_Publisher input')[1].value || ''
     if (!selectedPublisher) {
-        addNewPublisher({ publisherName })
+        addNewPublisher({
+            publisherName
+        })
     } else {
         const publisherId = $('#Modal_Publisher input')[0].value || ''
-        updatePublisherInfo({ publisherId, publisherName })
+        updatePublisherInfo({
+            publisherId,
+            publisherName
+        })
     }
     updateTable('Publishers')
     updatePagination('Publishers')
@@ -653,7 +839,7 @@ $('#ModalSave_Publisher').click(() => {
 // clear searches & reset appearance
 $('#Publishers select').change(() => {
     updateTable('Publishers')
-    updatePagination('Publishers')    
+    updatePagination('Publishers')
 })
 
 $('#StrToSearchPublishers').keyup(() => {

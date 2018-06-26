@@ -22,10 +22,10 @@
 
 <% bookItems.forEach(e => { %>
     <tr data-toggle="modal" data-target="#DetailModal">
+        <td><%= e.ID %></td>
         <td class="img-wrapper img-wrapper-sm">
             <img src="<%= path + e.IMAGE %>" alt="Hình ảnh">
         </td>
-        <td><%= e.ID %></td>
         <td>
             <div class="detail-wrapper">
                 <%= e.NAME %>
