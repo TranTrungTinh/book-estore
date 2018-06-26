@@ -270,7 +270,18 @@ function addNewProduct(formData) {
     });
 }
 
-function updateProductInfo(item) {}
+function updateProductInfo(formData) {
+    $.ajax({
+        url: `http://localhost:3000/admin/updatebook/${formData.get('id')}`,
+        type: 'POST',
+        processData: false,
+        contentType: false,
+        data: formData
+    }).then(data => {
+        if(!data.success) return alert('UPLOAD FAIL - ' + data.message);
+        alert('UPLOAD SUCCESS - ' + data.filename);
+    });
+}
 
 $('#ModalSave_Product').click((e) => {
     e.preventDefault();
@@ -286,24 +297,15 @@ $('#ModalSave_Product').click((e) => {
     formData.append('publisher', $('#Modal_Product select')[2].value);
     formData.append('description', $('#txtEditor').Editor("getText"));
 
-    // let item = {
-    //     imgSrc: $('#Modal_Product input')[0].files[0],
-    //     /* image file path here */
-    //     id: $('#Modal_Product input')[1].value,
-    //     title: $('#Modal_Product input')[2].value,
-    //     price: $('#Modal_Product input')[3].value,
-    //     amount: $('#Modal_Product input')[4].value,
-    //     author: $('#Modal_Product select')[0].value,
-    //     type: $('#Modal_Product select')[1].value,
-    //     publisher: $('#Modal_Product select')[2].value,
-    //     description: $('#txtEditor').Editor("getText")
-    // }
-
     if (!selectedProduct) {
         addNewProduct(formData);
     } else {
-        const image = $('#Modal_Product img')[0].src || $('#Modal_Product input')[0].files[0].name;
+        const path = $('.img-wrapper-md').children(":first")[0].currentSrc;
+        const dotIndex = path.lastIndexOf('/');
+        const imagePath = path.substring(dotIndex + 1);
+        const image = $('#Modal_Product input')[0].files[0] || '';
         formData.set('image', image);
+        formData.append('imagePath', imagePath);
         updateProductInfo(formData);
     }
 })

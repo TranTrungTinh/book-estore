@@ -6,6 +6,7 @@ const { AdminServices } = require('../services/admin.services');
 const { mustBeAdmin, checkTokenAdmin } = require('../middleware/mustBeAdmin.middleware');
 const { priceFormat } = require('../helpers/priceFormat');
 const { upload } = require('../helpers/upload');
+const { checkExistsAndDelete } = require('../helpers/checkExistsAndDelete');
 
 const adminRouter = Router();
 adminRouter.use(parser.urlencoded({extended: false}));
@@ -62,8 +63,17 @@ adminRouter.post('/savebook', (req, res) => {
   });
 });
 
-adminRouter.post('/updatebook', (req, res) => {
-  
+adminRouter.post('/updatebook/:idBook', (req, res) => {
+  upload.single('image')(req, res, error => {
+    if (error) return res.send({ success: false, message: error.message });
+
+    const bookInfo = {...req.body};
+    if (req.file) bookInfo.image = req.file.filename;
+    else bookInfo.image = bookInfo.imagePath;
+    AdminServices.updateBookInfo(bookInfo)
+    .then(res.send({ success: true, filename: bookInfo.image }))
+    .catch(error => res.send({ success: false, message: error.message }));
+  });
 })
 
 adminRouter.post('/saveauthor', (req, res) => {

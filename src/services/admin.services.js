@@ -59,7 +59,7 @@ class AdminServices {
 
   static updateBookInfo(bookInfo) {
     const { id, name, image, price, amount, description, author, type, publisher } = bookInfo;
-    return Admin.updateBook(id, name, iamge, price, amount, description, author, type, publisher);
+    return Admin.updateBook(id, name, image, price, amount, description, author, type, publisher);
   }
 
   static updateOrderInfo(orderInfo) {
