@@ -6,7 +6,7 @@ const { UserServices } = require('../services/user.services');
 const { OrderServices } = require('../services/order.services');
 const { mustBeUser } = require('../middleware/mustBeUser.middleware');
 const { mustCheckCaptcha } = require('../middleware/mustCheckCaptcha.middleware');
-const { showStatus } = require('../helpers/getCurrentDate');
+const { showStatus, splitAddress } = require('../helpers/getCurrentDate');
 const { priceFormat } = require('../helpers/priceFormat');
 
 const userRouter = Router();
@@ -65,9 +65,16 @@ userRouter.get('/account/order/history/:id', (req, res) => {
 });
 
 userRouter.get('/account/address', mustBeUser, (req, res) => {
-  OrderServices.showHistoryOrderByIdUser(req.idUser)
-  .then(orders => res.render('render/account', { isDetail: 3 }))
+  UserServices.showUserInfoBy(req.idUser)
+  .then(user => res.render('render/account', { isDetail: 3, user, token: splitAddress(user.ADDRESS) }))
   .catch(error => res.render('render/account', { isDetail: 3 }));
+});
+
+userRouter.post('/account/address', mustBeUser, (req, res) => {
+  const userInfo = {id: req.idUser, address: req.body.address};
+  UserServices.updateUserAddress(userInfo)
+  .then(address => res.send({ success: true, address}))
+  .catch(error => res.send({ success: false, message: error.message }));
 });
 
 module.exports = { userRouter };

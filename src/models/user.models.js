@@ -43,6 +43,12 @@ class User {
     return name;
   }
 
+  static async updateAddress(idUser, address) {
+    const sql = `UPDATE NGUOIDUNG SET ADDRESS = ? WHERE ID = ?`;
+    await queryDB(sql, [address, idUser]);
+    return address;
+  }
+
 }
 
 // User.save('admin','admin','TRƯƠNG HOÀNG DUY','NAM')

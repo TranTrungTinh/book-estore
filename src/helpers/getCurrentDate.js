@@ -15,4 +15,9 @@ function showStatus(state) {
   return 'Chưa giao';
 }
 
-module.exports = { getCurrentDate, showStatus };
+function splitAddress(address) {
+  if(!address) return [];
+  return address.split('/');
+}
+
+module.exports = { getCurrentDate, showStatus, splitAddress };

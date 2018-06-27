@@ -1,3 +1,10 @@
+<% 
+  const {NAME, PHONE} = user;
+  const hidden = !token.length ? 'hidden' : null;
+  const show = token.length ? 'hidden' : null;
+  let ADDRESS = '';
+  token.forEach(e => ADDRESS += e + ' ');
+%>
 <div class="col-sm-12 col-md-3">
   <div class="row">
     <div class="col-sm-12 acount-info-name">
@@ -33,23 +40,23 @@
       <p>Địa chỉ giao hàng</p>
     </div>
     <div class="col-sm-12 acount-address-panel">
-      <div class="acount-address-header" id="div-address-add">
+      <div class="acount-address-header" id="div-address-add" <%= show%> >
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <span>Thêm địa chỉ mới</span>
       </div>
-      <div class="acount-address-body" id="div-address-info" hidden>
+      <div class="acount-address-body" id="div-address-info" <%= hidden%> >
         <p>
-          <span>TRẦN TRUNG TÍNH</span>
+          <span><%= NAME%></span>
           <span><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>  Địa chỉ mặc định</span>
         </p>
         <p>
           <span>Địa chỉ:</span> 
-          <span>55 Đường Số 22 Khu chung cư Bình Hưng, Xã Bình Hưng, Huyện Bình Chánh, Hồ Chí Minh, Việt Nam</span>
+          <span><%=ADDRESS %></span>
         </p>
         <p>
           <span>Điện thoại:</span> 
-          <span>0972258138</span>
+          <span><%=PHONE %></span>
         </p>
       </div>
       <div class="col-sm-12 acount-info-panel" id="div-address-form" hidden>

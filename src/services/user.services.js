@@ -19,6 +19,10 @@ class UserServices {
     const {id, name, phone, birthday, gender} = userInfo;
     return User.update(id, name, phone, birthday, gender);
   }
+  static updateUserAddress(userInfo) {
+    const {id, address} = userInfo;
+    return User.updateAddress(id, address);
+  }
 }
 
 module.exports = { UserServices };

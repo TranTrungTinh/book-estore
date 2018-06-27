@@ -15,11 +15,11 @@
     <div class="container-fluid">
       <div class="row" id="acount-page">
         <% if(isDetail === 1) { %>
-          <%- include('../body/account/account.detail.ejs', {user}) %>
+          <%- include('../body/account/account.detail.ejs', { user }) %>
         <% } if(isDetail === 2) { %>
           <%- include('../body/account/account.orders.ejs', { showStatus, orders }) %>
         <% } if(isDetail === 3) { %>
-          <%- include('../body/account/account.address.ejs') %>
+          <%- include('../body/account/account.address.ejs', { user, token }) %>
         <% } %>
       </div>
     </div>

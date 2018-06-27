@@ -365,17 +365,37 @@ $('#btn-update').click(e => {
 
 $('#div-address-add').click(e => {
   e.preventDefault();
-  // $('#div-address-form').attr('hidden', false);
   $('#div-address-add').slideUp();
   $('#div-address-form').slideDown();
 });
-
+$('#div-address-info').click(e => {
+  e.preventDefault();
+  $('#div-address-info').slideUp();
+  $('#div-address-form').slideDown();
+});
 $('#btn-address-cancel').click(e => {
   e.preventDefault();
-  // $('#div-address-form').attr('hidden', false);
+  const check = localStorage.getItem('address');
   $('#div-address-form').slideUp();
-  $('#div-address-add').slideDown();
+  if(check) $('#div-address-info').slideDown();
+  else $('#div-address-add').slideDown();
 });
 
+
+$('#btn-address-update').click(e => {
+  e.preventDefault();
+  const city = $('#inputAcountCity').val() || '';
+  const district = $('#inputAcountDistrict').val() || '';
+  const village = $('#inputAcountVillage').val() || '';
+  const home = $('#inputAcountHome').val() || '';
+  if(!city || !district || !village || !home) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
+
+  const address = `${home}/${village}/${district}/${city}`;
+  $.post('/user/account/address', {address}, data => {
+    if(data.address) localSaveItem('address', data.address);
+    location.reload();
+  });
+
+});
 
 /* ============ Account page ============*/
