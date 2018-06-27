@@ -167,7 +167,18 @@ function updatePagination(sectionId) {
 }
 
 $('#logout').click(e => {
-
+    e.preventDefault();
+    swal({
+        title: "Đăng xuất?",
+        text: "Đăng xuất khỏi tài khoản admin",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then(yes => { 
+            if(!yes) return;
+            $.post('/admin/logout', () => location.href = '/admin');
+        });
 });
 
 $('section').on('click', '.btn-refresh', e => {
@@ -365,8 +376,8 @@ function addNewProduct(formData) {
         contentType: false,
         data: formData
     }).then(data => {
-        if (!data.success) return alert('UPLOAD FAIL - ' + data.message);
-        alert('UPLOAD SUCCESS - ' + data.filename);
+        if (!data.success) return swal('UPLOAD FAIL', data.message, 'error');
+        swal('UPLOAD SUCCESS', data.filename, 'success');
         $('#Products .btn-refresh').trigger('click')
     });
 }
@@ -379,9 +390,9 @@ function updateProductInfo(formData) {
         contentType: false,
         data: formData
     }).then(data => {
-        if (!data.success) return alert('UPLOAD FAIL - ' + data.message);
-        alert('UPDATE SUCCESS - ' + data.filename);
-        $('#Products .btn-refresh').trigger('click')
+        if (!data.success) return swal('UPLOAD FAIL', data.message, 'error');
+        swal('UPLOAD SUCCESS', data.filename, 'success');
+        $('#Products .btn-refresh').trigger('click');
     });
 }
 

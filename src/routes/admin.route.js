@@ -47,6 +47,14 @@ adminRouter.post('/login', (req, res) => {
   .catch(error => res.send({ success: false }));
 });
 
+adminRouter.post('/logout', (req, res) => {
+  const { ADMIN } = req.cookies;
+  if(!ADMIN) return res.send({ success: false });
+  res.clearCookie('ADMIN');
+  res.send({ success: true });
+});
+
+
 adminRouter.post('/savebook', (req, res) => {
   upload.single('image')(req, res, error => {
     if (error) return res.send({ success: false, message: error.message });
@@ -74,43 +82,28 @@ adminRouter.post('/updatebook/:idBook', (req, res) => {
     .then(res.send({ success: true, filename: bookInfo.image }))
     .catch(error => res.send({ success: false, message: error.message }));
   });
-})
+});
 
 adminRouter.post('/saveauthor', (req, res) => {
   const { authorName } = req.body
   AdminServices.saveAuthor(authorName)
-  .then(newId => {
-    res.send({ success: true, newId })
-  })
-  .catch(err => {
-    console.log(err)
-    res.send({ success: false })
-  })
-})
+  .then(newId => res.send({ success: true, newId }))
+  .catch(err => res.send({ success: false }));
+});
 
 adminRouter.post('/savecat', (req, res) => {
   const { catName } = req.body
   AdminServices.saveCategory(catName)
-  .then(newId => {
-    res.send({ success: true, newId })
-  })
-  .catch(err => {
-    console.log(err)
-    res.send({ success: false })
-  })
-})
+  .then(newId => res.send({ success: true, newId }))
+  .catch(err => res.send({ success: false }));
+});
 
 adminRouter.post('/savepublisher', (req, res) => {
   const { publisherName } = req.body
   AdminServices.savePublisher(publisherName)
-  .then(newId => {
-    res.send({ success: true, newId })
-  })
-  .catch(err => {
-    console.log(err)
-    res.send({ success: false })
-  })
-})
+  .then(newId => res.send({ success: true, newId }))
+  .catch(err => res.send({ success: false }));
+});
 
 adminRouter.post('/updateorder', (req, res) => {
   const { orderId, orderStt } = req.body;
@@ -119,11 +112,8 @@ adminRouter.post('/updateorder', (req, res) => {
     if(updatedId) res.send({ success: true })
     else res.send({ success: false, message: 'ID_NOT_FOUND' })
   })
-  .catch(err => {
-    console.log(err)
-    res.send({ success: false, message: 'ERROR_QUERYING_DATABASE' })
-  })
-})
+  .catch(err => res.send({ success: false, message: 'ERROR_QUERYING_DATABASE' }));
+});
 
 adminRouter.post('/updateauthor', (req, res) => {
   const { authorId, authorName } = req.body
@@ -132,11 +122,8 @@ adminRouter.post('/updateauthor', (req, res) => {
     if(updatedId) res.send({ success: true })
     else res.send({ success: false, message: 'ID_NOT_FOUND' })
   })
-  .catch(err => {
-    console.log(err)
-    res.send({ success: false, message: 'ERROR_QUERYING_DATABASE' })
-  })
-})
+  .catch(err => res.send({ success: false, message: 'ERROR_QUERYING_DATABASE' }));
+});
 
 adminRouter.post('/updatecat', (req, res) => {
   const { catId, catName } = req.body
@@ -145,11 +132,8 @@ adminRouter.post('/updatecat', (req, res) => {
     if(updatedId) res.send({ success: true })
     else res.send({ success: false, message: 'ID_NOT_FOUND' })
   })
-  .catch(err => {
-    console.log(err)
-    res.send({ success: false, message: 'ERROR_QUERYING_DATABASE' })
-  })
-})
+  .catch(err => res.send({ success: false, message: 'ERROR_QUERYING_DATABASE' }));
+});
 
 adminRouter.post('/updatepublisher', (req, res) => {
   const { publisherId, publisherName } = req.body
@@ -158,11 +142,8 @@ adminRouter.post('/updatepublisher', (req, res) => {
     if(updatedId) res.send({ success: true })
     else res.send({ success: false, message: 'ID_NOT_FOUND' })
   })
-  .catch(err => {
-    console.log(err)
-    res.send({ success: false, message: 'ERROR_QUERYING_DATABASE' })
-  })
-})
+  .catch(err => res.send({ success: false, message: 'ERROR_QUERYING_DATABASE'}));
+});
 
 adminRouter.post('/deletebook', (req, res) => {
   const { bookId } = req.body
@@ -171,17 +152,12 @@ adminRouter.post('/deletebook', (req, res) => {
     if(deletedId) res.send({ success: true })
     else res.send({ success: false, message: 'ID_NOT_FOUND' })
   })
-  .catch(err => {
-    console.log(err)
-    res.send({ success: false, message: 'ERROR_QUERYING_DATABASE' })
-  })
-})
+  .catch(err => res.send({ success: false, message: 'ERROR_QUERYING_DATABASE' }));
+});
 
 adminRouter.get('/refreshproducts', (req, res) => {
   AdminServices.showBooks()
-  .then(data => {
-    res.send({ data })
-  })
+  .then(data => res.send({ data }))
   .catch(err => {
     console.log(err)
     res.send({ message: 'ERROR_QUERYING_DATABASE' })
@@ -190,9 +166,7 @@ adminRouter.get('/refreshproducts', (req, res) => {
 
 adminRouter.get('/refreshorders', (req, res) => {
   AdminServices.showOrders()
-  .then(data => {
-    res.send({ data })
-  })
+  .then(data => res.send({ data }))
   .catch(err => {
     console.log(err)
     res.send({ message: 'ERROR_QUERYING_DATABASE' })
@@ -201,9 +175,7 @@ adminRouter.get('/refreshorders', (req, res) => {
 
 adminRouter.get('/refreshauthors', (req, res) => {
   AdminServices.showAuthors()
-  .then(data => {
-    res.send({ data })
-  })
+  .then(data => res.send({ data }))
   .catch(err => {
     console.log(err)
     res.send({ message: 'ERROR_QUERYING_DATABASE' })
@@ -212,9 +184,7 @@ adminRouter.get('/refreshauthors', (req, res) => {
 
 adminRouter.get('/refreshcats', (req, res) => {
   AdminServices.showCategories()
-  .then(data => {
-    res.send({ data })
-  })
+  .then(data => res.send({ data }))
   .catch(err => {
     console.log(err)
     res.send({ message: 'ERROR_QUERYING_DATABASE' })
@@ -223,13 +193,12 @@ adminRouter.get('/refreshcats', (req, res) => {
 
 adminRouter.get('/refreshpublishers', (req, res) => {
   AdminServices.showPublishers()
-  .then(data => {
-    res.send({ data })
-  })
+  .then(data => res.send({ data }))
   .catch(err => {
     console.log(err)
     res.send({ message: 'ERROR_QUERYING_DATABASE' })
   })
 })
+
 
 module.exports = { adminRouter }
