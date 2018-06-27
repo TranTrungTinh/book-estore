@@ -3,7 +3,7 @@
     <div class="col-sm-12 acount-info-name">
       <img src="./assets/media/images/avatar.png" alt="avater" class="avater-cover"/>
       <div>Tài khoản của: </div>
-      <span>aaa</span>
+      <span id="accountName" ></span>
     </div>
     <div class="col-sm-12 acount-info-list">
       <div class="list-group">
@@ -27,13 +27,71 @@
     </div>
   </div>
 </div>
-<div class="col-sm-12 col-md-9">
-    <div class="row">
-      <div class="col-sm-12 acount-info-name">
-        <p>Địa chỉ giao hàng</p>
+<div class="col-sm-12 col-md-9 my-panel-height">
+  <div class="row">
+    <div class="col-sm-12 acount-info-name">
+      <p>Địa chỉ giao hàng</p>
+    </div>
+    <div class="col-sm-12 acount-address-panel">
+      <div class="acount-address-header" id="div-address-add">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>Thêm địa chỉ mới</span>
       </div>
-      <div class="col-sm-12 acount-info-panel">
-        
+      <div class="acount-address-body" id="div-address-info" hidden>
+        <p>
+          <span>TRẦN TRUNG TÍNH</span>
+          <span><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>  Địa chỉ mặc định</span>
+        </p>
+        <p>
+          <span>Địa chỉ:</span> 
+          <span>55 Đường Số 22 Khu chung cư Bình Hưng, Xã Bình Hưng, Huyện Bình Chánh, Hồ Chí Minh, Việt Nam</span>
+        </p>
+        <p>
+          <span>Điện thoại:</span> 
+          <span>0972258138</span>
+        </p>
+      </div>
+      <div class="col-sm-12 acount-info-panel" id="div-address-form" hidden>
+        <div class="form-horizontal">
+          <div class="form-group">
+            <label for="inputAcountCity" class="col-sm-3 control-label label-login-content">Tỉnh/Thành phố:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control input-lg" id="inputAcountCity" placeholder="Nhập tỉnh/thành phố" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAcountDistrict" class="col-sm-3 control-label label-login-content">Quận/Huyện:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control input-lg" id="inputAcountDistrict" placeholder="Nhập quận/huyện" value="" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAcountVillage" class="col-sm-3 control-label label-login-content">Phường/Xã:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control input-lg" id="inputAcountVillage" placeholder="Nhập phường/xã" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAcountHome" class="col-sm-3 control-label label-login-content">Số nhà:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control input-lg" id="inputAcountHome" placeholder="Nhập số nhà " />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3" id="update-address-loader">
+              <!-- <div class="loader"></div> -->
+            </div>
+            <div class="col-sm-9">
+              <button type="button" class="btn btn-warning btn-lg btn-login" id="btn-address-update">Cập nhật địa chỉ</button>
+              <button type="button" class="btn btn-default btn-lg btn-login" id="btn-address-cancel">Huỷ</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
+<script>
+  document.getElementById('accountName').innerText = localStorage.getItem('name') ? localStorage.getItem('name') : 'Customer';
+</script>

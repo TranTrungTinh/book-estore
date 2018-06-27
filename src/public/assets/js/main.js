@@ -361,5 +361,21 @@ $('#btn-update').click(e => {
       location.href = '/user/account/edit'
     }, 1500);
   });
-})
+});
+
+$('#div-address-add').click(e => {
+  e.preventDefault();
+  // $('#div-address-form').attr('hidden', false);
+  $('#div-address-add').slideUp();
+  $('#div-address-form').slideDown();
+});
+
+$('#btn-address-cancel').click(e => {
+  e.preventDefault();
+  // $('#div-address-form').attr('hidden', false);
+  $('#div-address-form').slideUp();
+  $('#div-address-add').slideDown();
+});
+
+
 /* ============ Account page ============*/
