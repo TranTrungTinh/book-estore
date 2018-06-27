@@ -26,7 +26,7 @@ class User {
     const userInfo = { NAME: user[0].NAME };
     const TOKEN = await sign({ ID: user[0].ID });
     const count = await Cart.getCountOfCarts(user[0].ID);
-    return { NAME: user[0].NAME, TOKEN, COUNT: count[0].COUNT };
+    return { NAME: user[0].NAME, TOKEN, COUNT: count[0].COUNT , ADDRESS: user[0].ADDRESS};
   }
 
   static async getUserById(id) {

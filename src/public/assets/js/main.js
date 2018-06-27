@@ -88,7 +88,6 @@ $('#btnSearch').click(e => {
 
 /* ============ Views book detail ============*/
 $('#main-content').on('click', '.thumbnail', e => {
-  console.log(e);
   const _this = e.target.nodeName;
   const idBook = e.currentTarget.lastElementChild.defaultValue;
   const title = e.currentTarget.children[2].children[0].innerText;
@@ -263,8 +262,9 @@ $('#btn-signin').click(e => {
     setTimeout(() => {
       localSaveItem('name', data.user.NAME);
       localSaveItem('count', data.user.COUNT);
+      if(data.user.ADDRESS) localSaveItem('address', data.user.ADDRESS);
       location.href = '/user/account/edit';
-    }, 2000);
+    }, 1500);
   });
 });
 $('#btn-logout').click(e => {
@@ -282,7 +282,8 @@ $('#btn-logout').click(e => {
     $.post('/user/logout', data => {});
     localStorage.removeItem('name');
     localStorage.removeItem('count');
-    location.href = '/home'
+    localStorage.removeItem('address');
+    location.href = '/home';
   });
 });
 
@@ -375,7 +376,7 @@ $('#div-address-info').click(e => {
 });
 $('#btn-address-cancel').click(e => {
   e.preventDefault();
-  const check = localStorage.getItem('address');
+  const check = localStorage.getItem('address') ? true : false;
   $('#div-address-form').slideUp();
   if(check) $('#div-address-info').slideDown();
   else $('#div-address-add').slideDown();
@@ -389,11 +390,11 @@ $('#btn-address-update').click(e => {
   const village = $('#inputAcountVillage').val() || '';
   const home = $('#inputAcountHome').val() || '';
   if(!city || !district || !village || !home) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
-
+  $('#update-address-loader').html('<div class="loader"></div>');
   const address = `${home}/${village}/${district}/${city}`;
   $.post('/user/account/address', {address}, data => {
     if(data.address) localSaveItem('address', data.address);
-    location.reload();
+    setTimeout(() => location.reload(), 1500);
   });
 
 });

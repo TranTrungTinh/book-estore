@@ -64,25 +64,25 @@
           <div class="form-group">
             <label for="inputAcountCity" class="col-sm-3 control-label label-login-content">Tỉnh/Thành phố:</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control input-lg" id="inputAcountCity" placeholder="Nhập tỉnh/thành phố" value="">
+              <input type="text" class="form-control input-lg" id="inputAcountCity" placeholder="Nhập tỉnh/thành phố" value="<%= token[3] ? token[3] : ''%>">
             </div>
           </div>
           <div class="form-group">
             <label for="inputAcountDistrict" class="col-sm-3 control-label label-login-content">Quận/Huyện:</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control input-lg" id="inputAcountDistrict" placeholder="Nhập quận/huyện" value="" >
+              <input type="text" class="form-control input-lg" id="inputAcountDistrict" placeholder="Nhập quận/huyện" value="<%= token[2] ? token[2] : ''%>" >
             </div>
           </div>
           <div class="form-group">
             <label for="inputAcountVillage" class="col-sm-3 control-label label-login-content">Phường/Xã:</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control input-lg" id="inputAcountVillage" placeholder="Nhập phường/xã" />
+              <input type="text" class="form-control input-lg" id="inputAcountVillage" placeholder="Nhập phường/xã" value="<%= token[1] ? token[1] : ''%>"/>
             </div>
           </div>
           <div class="form-group">
             <label for="inputAcountHome" class="col-sm-3 control-label label-login-content">Số nhà:</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control input-lg" id="inputAcountHome" placeholder="Nhập số nhà " />
+              <input type="text" class="form-control input-lg" id="inputAcountHome" placeholder="Nhập số nhà " value="<%= token[0] ? token[0] : ''%>"/>
             </div>
           </div>
           <div class="form-group">
