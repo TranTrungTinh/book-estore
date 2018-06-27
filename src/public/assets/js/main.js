@@ -30,6 +30,17 @@ $('#menu-list').on('click', '.list-group-item' , e => {
 
 
 
+/* ============ Handle animation a panel click ============*/
+$('.section-scroll').click(e => {
+  e.preventDefault();
+  const { hash } = e.currentTarget;
+  if (!hash) return;
+    $('html, body').animate({ scrollTop: $(hash).offset().top }, 800);
+});
+/* ============ Handle animation a panel click ============*/
+
+
+
 /* ============ Toggle Menu Tab ============*/
 $('#collapseListGroupHeadingVN').click(() => {
   $('#collapseListGroupVN').collapse('toggle');
@@ -366,7 +377,7 @@ $('#btn-update').click(e => {
 
 $('#div-address-add').click(e => {
   e.preventDefault();
-  $('#div-address-add').slideUp();
+  $('#div-address-wrap').slideUp();
   $('#div-address-form').slideDown();
 });
 $('#div-address-info').click(e => {
@@ -379,7 +390,7 @@ $('#btn-address-cancel').click(e => {
   const check = localStorage.getItem('address') ? true : false;
   $('#div-address-form').slideUp();
   if(check) $('#div-address-info').slideDown();
-  else $('#div-address-add').slideDown();
+  else $('#div-address-wrap').slideDown();
 });
 
 

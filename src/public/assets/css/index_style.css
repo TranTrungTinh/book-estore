@@ -592,7 +592,8 @@ button:focus { outline: 0px !important;  }
   }
 }
 
-/* Acount info */
+/*============ Acount info page ============ */
+
 #acount-page {
   margin: 20px 40px;
 }
@@ -720,7 +721,28 @@ button:focus { outline: 0px !important;  }
   font-weight: 300;
   color: #4a4a4a;
 }
-/*  item cart title */
+
+.empty-address {
+  background-color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 30px;
+  padding: 10px;
+}
+.empty-address > img {
+  width: auto;
+  height: 250px;
+}
+.empty-address > p {
+  font-weight: 300;
+  font-size: 22px;
+}
+/*============ Acount info page ============ */
+
+
+
+/*============ Item cart title page ============ */
 #item-cart-page {
   margin: 20px;
 }
@@ -810,6 +832,8 @@ button:focus { outline: 0px !important;  }
 .item-cart-root-buy button {
   width: 408px;
 }
+/*============ Item cart title page ============ */
+
 
 /* Error page styling */
 .error-404-baner {

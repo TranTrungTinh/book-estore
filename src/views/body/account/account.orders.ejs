@@ -7,10 +7,10 @@
     <div class="col-sm-12 acount-history-panel">
       <div class="row">
       <% if(!orders.length) { %>
-        <div class="col-sm-12">
-          <div class="alert alert-danger margin-bottom-big fs-20" id="my-title-list">
-            KHÔNG CÓ LỊCH SỬ MUA HÀNG
-          </div>
+        <div class="empty-cart">
+          <img src="./assets/media/images/cart-empty.png" alt="Cart-Empty">
+          <p>Không có lịch sử mua hàng</p>
+          <a href="/home" type="button" class="btn btn-warning btn-lg">Tiếp tục mua sắm</a>        
         </div>
       <% } else { %>
         <div class="col-xs-12 order-item-header">

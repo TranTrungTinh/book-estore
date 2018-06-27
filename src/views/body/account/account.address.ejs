@@ -40,10 +40,16 @@
       <p>Địa chỉ giao hàng</p>
     </div>
     <div class="col-sm-12 acount-address-panel">
-      <div class="acount-address-header" id="div-address-add" <%= show%> >
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <span>Thêm địa chỉ mới</span>
+      <div id="div-address-wrap" <%= show%>>
+        <div class="acount-address-header" id="div-address-add">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span>Thêm địa chỉ mới</span>
+        </div>
+        <div class="empty-address" >
+          <img src="./assets/media/images/address-empty.png" alt="Not Address">
+          <p>Cập nhật địa chỉ giao hàng để chúng tôi phục vụ bạn tốt hơn !!!</p>
+        </div>
       </div>
       <div class="acount-address-body" id="div-address-info" <%= hidden%> >
         <p>
