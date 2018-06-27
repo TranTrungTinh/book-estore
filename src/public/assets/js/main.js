@@ -143,15 +143,40 @@ $('#addItem-btn').click(e => {
   const pathname = location.pathname.toString();
   const flateIndex = pathname.lastIndexOf('/');
   const idBook = pathname.substring(flateIndex + 1);
-  const amount = $('#txtTotal').val();
-  $.post('/shopping-cart/cart', { idBook, amount }, data => {
-    if(!data.success) return swal("OH OH",`Sách đã có trong giỏ hàng`,"warning");;
-    swal("XONG",`Đã thêm sách vào giỏ hàng`,"success")
-    .then(() => {
-      localSaveItem('count', data.count);
-      location.reload();
-    });
+  const amount = $('#txtTotal').val() || 1;
+  $.post('/shopping-cart/amount', { idBook }, data => {
+    if(!data.success) return;
+    if(+data.amount <= +amount) {
+      swal({
+        title: "OPP",
+        text: `Hiện chúng tôi chỉ còn ${data.amount} sản phẩm, 
+              bạn có muốn đặt tối đa ${data.amount} sản phẩm không ?`,
+        icon: "info",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then(yes => { if(!yes) return;
+        $.post('/shopping-cart/cart', { idBook, amount: data.amount }, data => {
+          if(!data.success) return swal("OH OH",`Sách đã có trong giỏ hàng`,"warning");;
+          swal("XONG",`Đã thêm sách vào giỏ hàng`,"success")
+          .then(() => {
+            localSaveItem('count', data.count);
+            location.reload();
+          });
+        });
+      });
+    } else {
+      $.post('/shopping-cart/cart', { idBook, amount }, data => {
+        if(!data.success) return swal("OH OH",`Sách đã có trong giỏ hàng`,"warning");;
+        swal("XONG",`Đã thêm sách vào giỏ hàng`,"success")
+        .then(() => {
+          localSaveItem('count', data.count);
+          location.reload();
+        });
+      });
+    }
   });
+  
 });
 /* ============ Detail page ============*/
 
@@ -189,10 +214,29 @@ $('.item-cart-total').on('click', 'span:last-child > button', e => {
   const idBook = _this.children[2].defaultValue;
 
   amount = +amount + 1;
-  $.post('/shopping-cart/update', { idBook, amount }, data => {
+  $.post('/shopping-cart/amount', { idBook }, data => {
     if(!data.success) return;
-    setTimeout( () => location.reload(), 500);    
-    // location.reload();
+    if(+data.amount <= +amount) {
+      swal({
+        title: "OPP",
+        text: `Hiện chúng tôi chỉ còn ${data.amount} sản phẩm, 
+              bạn có muốn đặt tối đa ${data.amount} sản phẩm không ?`,
+        icon: "info",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then(yes => { if(!yes) return location.reload();
+        $.post('/shopping-cart/update', { idBook, amount: data.amount }, data => {
+          if(!data.success) return;
+          setTimeout( () => location.reload(), 500);
+        });
+      });
+    } else {
+      $.post('/shopping-cart/update', { idBook, amount }, data => {
+        if(!data.success) return;
+        setTimeout( () => location.reload(), 500);
+      });
+    }
   });
 });
 
@@ -202,9 +246,29 @@ $('.item-cart-total').on('keypress', '.item-value', e => {
     const idBook = _this.children[2].defaultValue;
     const amount = e.target.value;
     if(amount < 1) return location.reload();
-    $.post('/shopping-cart/update', { idBook, amount }, data => {
+    $.post('/shopping-cart/amount', { idBook }, data => {
       if(!data.success) return;
-      setTimeout( () => location.reload(), 500);
+      if(+data.amount <= +amount) {
+        swal({
+          title: "OPP",
+          text: `Hiện chúng tôi chỉ còn ${data.amount} sản phẩm, 
+                bạn có muốn đặt tối đa ${data.amount} sản phẩm không ?`,
+          icon: "info",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then(yes => { if(!yes) return location.reload();
+          $.post('/shopping-cart/update', { idBook, amount: data.amount }, data => {
+            if(!data.success) return;
+            setTimeout( () => location.reload(), 500);
+          });
+        });
+      } else {
+        $.post('/shopping-cart/update', { idBook, amount }, data => {
+          if(!data.success) return;
+          setTimeout( () => location.reload(), 500);
+        });
+      }
     });
   }
 });

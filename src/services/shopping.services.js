@@ -1,4 +1,5 @@
 const { Cart } = require('../models/cart.models');
+const { Book } = require('../models/book.models');
 
 class shoppingServices {
   static async saveItem(idUser, idBook, amount) {
@@ -20,6 +21,11 @@ class shoppingServices {
   static async deleteItem(idUser, idBook) {
     const results = await Cart.deleteCart(idUser, idBook);
     return results[1][0].COUNT;
+  }
+
+  static async isEnoughAmount(idBook) {
+    const results = await Book.getAmountById(idBook);
+    return results[0].INVENTORY;
   }
 }
 

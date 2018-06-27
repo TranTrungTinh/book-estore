@@ -28,6 +28,11 @@ shoppingRouter.post('/cart', (req, res) => {
   .then(count => res.send({ success: true, count }))
   .catch(error => res.send({ success: false, message: error.message }));
 });
+shoppingRouter.post('/amount', (req, res) => {
+  shoppingServices.isEnoughAmount(req.body.idBook)
+  .then(amount => res.send({ success: true, amount }))
+  .catch(error => res.send({ success: false, message: error.message }));
+});
 shoppingRouter.post('/update', (req, res) => {
   const { idBook, amount } = req.body;
   const count = amount ? amount : 1;

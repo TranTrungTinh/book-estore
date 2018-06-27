@@ -123,6 +123,11 @@ class Book {
     const sql = `SELECT INVENTORY FROM THONGTINSACH WHERE ID = ?`;
     return queryDB(sql, [idBook]);
   }
+
+  static getAmountById(idBook) {
+    const sql = `SELECT INVENTORY FROM THONGTINSACH WHERE ID = ?`;
+    return queryDB(sql, [idBook]);
+  }
   
 }
 
