@@ -31,7 +31,7 @@ class Admin {
   }
 
   static getAllOrders() {
-    const sql = `SELECT * FROM DONHANG ORDER BY DATE_CREATED DESC`;
+    const sql = `SELECT *, DATE_FORMAT(DATE_CREATED,'%d/%m/%Y') AS DATE_CREATED FROM DONHANG ORDER BY DATE_CREATED DESC`;
     return queryDB(sql);
   }
 

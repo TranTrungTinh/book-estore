@@ -17,9 +17,16 @@ $('#Navigator > .nav > li').click((e) => {
     return false
 })
 
+var itemsList = [$('#Products tbody tr'),
+    $('#Orders tbody tr'),
+    $('#Authors tbody tr'),
+    $('#Cats tbody tr'),
+    $('#Publishers tbody tr')
+]
+
 // Authors, Categories, Publishers whose table has 2 column: id, name
 function handleOthersAppreance(sectionId) {
-    let strToSearch = $(`#StrToSearch${sectionId}`)[0].value.trim().toLowerCase()
+    const strToSearch = $(`#StrToSearch${sectionId}`)[0].value.trim().toLowerCase()
 
     let typeOfInfoOnCol = 0
     switch ($(`#${sectionId} select`)[0].value) {
@@ -31,7 +38,7 @@ function handleOthersAppreance(sectionId) {
             break
     }
 
-    let container = $(`#${sectionId} tbody`)[0]
+    const container = $(`#${sectionId} tbody`)[0]
     $(container).empty()
 
     let sectionNumberId = -1
@@ -56,7 +63,10 @@ function handleOthersAppreance(sectionId) {
     })
 }
 
-function updateTable(sectionId) {
+function updateTable(data, sectionId) {
+    // clear search string in input field
+    $(`#StrToSearch${sectionId}`).value = ''
+    
     let sectionNumberId = -1
     switch (sectionId) {
         case 'Products':
@@ -75,14 +85,33 @@ function updateTable(sectionId) {
             sectionNumberId = 4
             break
     }
-
+    // empty container
     const container = $(`#${sectionId} tbody`)[0]
     $(container).empty()
-    // clear search string in input field
-    $(`#StrToSearch${sectionId}`)[0].value = ''
-    itemsList[sectionNumberId].each((index, ele) => {
-        container.appendChild(ele)
+    // refill the container
+    $.each(data, (index, ele) => {
+        let newRow
+        switch (sectionNumberId) {
+            case 0:
+                newRow = makeNewBookRow(ele)
+                break
+            case 1:
+                newRow = makeNewOrderRow(ele)
+                break
+            case 2:
+                newRow = makeNewAuthorRow(ele)
+                break
+            case 3:
+                newRow = makeNewCatRow(ele)
+                break
+            case 4:
+                newRow = makeNewPublisherRow(ele)
+                break
+        }
+        container.appendChild(newRow)
     })
+    // update global data variables
+    itemsList[sectionNumberId] = $(`#${sectionId} tbody tr`)
 }
 
 function compareToSort(a, b) {
@@ -94,12 +123,10 @@ function compareToSort(a, b) {
 }
 
 // Pagination
-var itemsList = [$('#Products tbody tr'), $('#Orders tbody tr'), $('#Authors tbody tr'), $('#Cats tbody tr'), $('#Publishers tbody tr')]
-
 $('.pagination-ul').each((index, ele) => {
     let sectionId = $(ele).closest('section').attr('id'),
         container = $(`#${sectionId} tbody`)[0],
-        data = itemsList[index]
+        data = $(`#${sectionId} tbody tr`)
 
     $(ele).twbsPagination({
         totalPages: Math.ceil(data.length / 8),
@@ -142,6 +169,32 @@ function updatePagination(sectionId) {
 $('#logout').click(e => {
 
 });
+
+$('section').on('click', '.btn-refresh', e => {
+    const sectionId = $(e.target).closest('section').attr('id')
+    console.log(sectionId, 'triggered a refresh')
+    $.get(`/admin/refresh${sectionId}`, (res, stt) => {
+        switch (sectionId) {
+            case 'Products':
+                updateTable(res.data.books, sectionId)
+                break
+            case 'Orders':
+                updateTable(res.data.orders, sectionId)
+                break
+            case 'Authors':
+                updateTable(res.data.authors, sectionId)
+                break
+            case 'Cats':
+                updateTable(res.data.cats, sectionId)
+                break
+            case 'Publishers':
+                updateTable(res.data.publishers, sectionId)
+                break
+        }
+
+        updatePagination(sectionId)
+    })
+})
 
 /*=============================== Products ===============================*/
 
@@ -256,110 +309,52 @@ $('#AddNewProduct').click(() => {
         ele.value = ''
     })
 
-    $.each($('#Modal_Product select'), (index, ele) => {
-        [...$(ele.getElementsByTagName('option'))].forEach(option => {
-            option.removeAttribute('selected')
-        })
+    $.each($('#Modal_Product option'), (index, option) => {
+        option.removeAttribute('selected')
     })
 
     $('#txtEditor').Editor("setText", '')
 })
 
-function makeNewBookRow(id, image, name, price, amount, authorId, authorName, catId, catName, publisherId, publisherName, description) {
+function makeNewBookRow(data) {
     const newBookRow = document.createElement('tr')
 
-    newBookRow.innerHTML = `<td>${id}</td>
+    newBookRow.innerHTML = `<td>${data.ID}</td>
                         <td class="img-wrapper img-wrapper-sm">
-                            <img src="./assets/media/images/${image}" alt="Hình ảnh">
+                            <img src="./assets/media/images/${data.IMAGE}" alt="Hình ảnh">
                         </td>
                         <td>
                             <div class="detail-wrapper">
-                                ${name}
+                                ${data.NAME}
                             </div>
                         </td>
-                        <td>${price}</td>
-                        <td>${amount}</td>
+                        <td>${data.PRICE}</td>
+                        <td>${data.INVENTORY}</td>
                         <td>
                             <div class="detail-wrapper">
-                                ${authorName}
+                                ${data.AUTHOR_NAME}
                             </div>
-                            <span style="display:none">${authorId}</span>
+                            <span style="display:none">${data.AUTHOR_ID}</span>
                         </td>
                         <td>
                             <div class="detail-wrapper">
-                                ${catName}
+                                ${data.CATEGORY_NAME}
                             </div>
-                            <span style="display:none">${catId}</span>
+                            <span style="display:none">${data.CATEGORY_ID}</span>
                         </td>
                         <td>
                             <div class="detail-wrapper">
-                                ${publisherName}
+                                ${data.PUBLISHER_NAME}
                             </div>
-                            <span style="display:none">${publisherId}</span>
+                            <span style="display:none">${data.PUBLISHER_ID}</span>
                         </td>
                         <td>
                             <div class="detail-wrapper">
-                                ${description}
+                                ${data.DESCRIPTION}
                             </div>
                         </td>`
-    
+
     return newBookRow
-}
-
-function addNewBookToTable(formData, fileName) {
-    // get new id
-    const dotIndex = fileName.lastIndexOf('.')
-    const newId = fileName.slice(0, dotIndex)
-
-    // find author name by id
-    let authorName = ''
-    const authorList = itemsList[2]
-    for (let i = 0; i < authorList.length; i++) {
-        const author = authorList[i]
-        const authorId = author.getElementsByTagName('td')[0].textContent.trim()
-        if (formData.get('author') === authorId) {
-            authorName = author.getElementsByClassName('detail-wrapper')[0].textContent.trim()
-            break
-        }
-
-    }
-
-    // find type name by id
-    let typeName = ''
-    const typeList = itemsList[3]
-    for (let i = 0; i < typeList.length; i++) {
-        const type = typeList[i]
-        const typeId = type.getElementsByTagName('td')[0].textContent.trim()
-        if (formData.get('type') === typeId) {
-            typeName = type.getElementsByClassName('detail-wrapper')[0].textContent.trim()
-            break
-        }
-
-    }
-
-    // find publisher name by id
-    let publisherName = ''
-    const publisherList = itemsList[4]
-    for (let i = 0; i < publisherList.length; i++) {
-        const publisher = publisherList[i]
-        const publisherId = publisher.getElementsByTagName('td')[0].textContent.trim()
-        if (formData.get('publisher') === publisherId) {
-            publisherName = publisher.getElementsByClassName('detail-wrapper')[0].textContent.trim()
-            break
-        }
-
-    }
-
-    // make new book row
-    const newBookRow = makeNewBookRow(newId, fileName, formData.get('name'), 
-                                    formData.get('price'), formData.get('amount'), 
-                                    formData.get('author'), authorName,
-                                    formData.get('type'), typeName,
-                                    formData.get('publisher'), publisherName,
-                                    formData.get('description'))
-
-    itemsList[0].push(newBookRow)
-    itemsList[0].sort(compareToSort)
 }
 
 function addNewProduct(formData) {
@@ -372,9 +367,7 @@ function addNewProduct(formData) {
     }).then(data => {
         if (!data.success) return alert('UPLOAD FAIL - ' + data.message);
         alert('UPLOAD SUCCESS - ' + data.filename);
-        addNewBookToTable(formData, data.filename)
-        updateTable('Products')
-        updatePagination('Products')
+        $('#Products .btn-refresh').trigger('click')
     });
 }
 
@@ -388,22 +381,7 @@ function updateProductInfo(formData) {
     }).then(data => {
         if (!data.success) return alert('UPLOAD FAIL - ' + data.message);
         alert('UPDATE SUCCESS - ' + data.filename);
-        // get updated id
-        const dotIndex = data.filename.lastIndexOf('.')
-        const updatedBookId = data.filename.slice(0, dotIndex)
-        // find coresponding row in table and delete it
-        const books = itemsList[0]
-        for (let i = 0; i < books.length; i++) {
-            bookId = books[i].getElementsByTagName('td')[0].textContent.trim()
-            if(bookId === updatedBookId) {
-                itemsList[0].splice(i, 1)
-                break
-            }
-        }
-        // re-add row with updated info to table
-        addNewBookToTable(formData, data.filename)
-        updateTable('Products')
-        updatePagination('Products')
+        $('#Products .btn-refresh').trigger('click')
     });
 }
 
@@ -444,17 +422,7 @@ $('#ModalDelete').click(() => {
     }, res => {
         if (!res.success) alert(res.message)
         else {
-            // find the row with coresponding id
-            const bookList = itemsList[0]
-            for (let i = 0; i < bookList.length; i++) {
-                const rowId = bookList[i].getElementsByTagName('td')[0].textContent.trim()
-                if (rowId === bookId) {
-                    itemsList[0].splice(i, 1)
-                    break
-                }
-            }
-            updateTable('Products')
-            updatePagination('Products')
+            $('#Products .btn-refresh').trigger('click')
         }
     })
 })
@@ -495,6 +463,39 @@ function handleOrdersAppreance() {
             container.appendChild(ele)
         }
     })
+}
+
+function makeNewOrderRow(data) {
+    const newOrderRow = document.createElement('tr')
+
+    newOrderRow.innerHTML = `
+    <td>${data.ID}</td>
+    <td>${data.ID_USER}</td>
+    <td>${data.DATE_CREATED}</td>
+    <td>
+        <div class="detail-wrapper">${data.CONTENT}</div>
+    </td>
+    <td>${data.TOTAL_COST}</td>
+    <td>
+        <select class="form-control">
+            <option value="pending">Chưa giao</option>
+            <option value="delivering">Đang giao hàng</option>
+            <option value="done">Giao hàng thành công</option>
+        </select>
+    </td>`
+
+    if (data.STATE == 3) {
+        newOrderRow.className = 'success'
+        newOrderRow.getElementsByTagName('option')[2].setAttribute('selected', true)
+    } else if (data.STATE == 2) {
+        newOrderRow.className = 'active'
+        newOrderRow.getElementsByTagName('option')[1].setAttribute('selected', true)
+    } else {
+        newOrderRow.className = 'warning'
+        newOrderRow.getElementsByTagName('option')[0].setAttribute('selected', true)
+    }
+
+    return newOrderRow
 }
 
 function updateOrderInfo(order) {
@@ -581,6 +582,18 @@ $('#AddNewAuthor').click(() => {
     })
 })
 
+function makeNewAuthorRow(data) {
+    const newAuthorRow = document.createElement('tr')
+
+    newAuthorRow.innerHTML = `
+    <td>${data.ID}</td>
+    <td>
+        <div class="detail-wrapper">${data.NAME}</div>
+    </td>`
+
+    return newAuthorRow
+}
+
 function addNewAuthor(author) {
     const {
         authorName
@@ -588,16 +601,8 @@ function addNewAuthor(author) {
     $.post('/admin/saveauthor', {
         authorName
     }, res => {
-        if (!res.success) alert('Failed adding new author!')
-        else {
-            const {
-                newId
-            } = res,
-            tr = document.createElement('tr')
-            tr.innerHTML = `<td>${newId}</td><td><div class="detail-wrapper">${authorName}</div></td>`
-            itemsList[2].push(tr)
-            itemsList[2].sort(compareToSort)
-        }
+        if (!res.success) return alert('Failed adding new author!')
+        $('#Authors .btn-refresh').trigger('click')
     })
 }
 
@@ -610,18 +615,8 @@ function updateAuthorInfo(author) {
         authorId,
         authorName
     }, res => {
-        if (!res.success) alert(res.message)
-        else {
-            for (let i = 0; i < itemsList[2].length; i++) {
-                // find the row with coresponding id
-                if (itemsList[2][i]
-                    .getElementsByTagName('td')[0]
-                    .textContent.trim() === authorId) {
-                    itemsList[2][i].getElementsByClassName('detail-wrapper')[0].textContent = authorName
-                    break
-                }
-            }
-        }
+        if (!res.success) return alert(res.message)
+        $('#Authors .btn-refresh').trigger('click')
     })
 }
 
@@ -638,8 +633,6 @@ $('#ModalSave_Author').click(() => {
             authorName
         })
     }
-    updateTable('Authors')
-    updatePagination('Authors')
 })
 
 // clear searches & reset appearance
@@ -678,6 +671,18 @@ $('#AddNewCat').click(() => {
     })
 })
 
+function makeNewCatRow(data) {
+    const newCatRow = document.createElement('tr')
+
+    newCatRow.innerHTML = `
+    <td>${data.ID}</td>
+    <td>
+        <div class="detail-wrapper">${data.NAME}</div>
+    </td>`
+
+    return newCatRow
+}
+
 function addNewCat(cat) {
     const {
         catName
@@ -685,16 +690,8 @@ function addNewCat(cat) {
     $.post('/admin/savecat', {
         catName
     }, res => {
-        if (!res.success) alert('Failed adding new category!')
-        else {
-            const {
-                newId
-            } = res,
-            tr = document.createElement('tr')
-            tr.innerHTML = `<td>${newId}</td><td><div class="detail-wrapper">${catName}</div></td>`
-            itemsList[3].push(tr)
-            itemsList[3].sort(compareToSort)
-        }
+        if (!res.success) return alert('Failed adding new category!')
+        $('#Cats .btn-refresh').trigger('click')
     })
 }
 
@@ -707,18 +704,8 @@ function updateCatInfo(cat) {
         catId,
         catName
     }, res => {
-        if (!res.success) alert(res.message)
-        else {
-            for (let i = 0; i < itemsList[3].length; i++) {
-                // find the row with coresponding id
-                if (itemsList[3][i]
-                    .getElementsByTagName('td')[0]
-                    .textContent.trim() === catId) {
-                    itemsList[3][i].getElementsByClassName('detail-wrapper')[0].textContent = catName
-                    break
-                }
-            }
-        }
+        if (!res.success) return alert(res.message)
+        $('#Cats .btn-refresh').trigger('click')
     })
 }
 
@@ -735,8 +722,6 @@ $('#ModalSave_Cat').click(() => {
             catName
         })
     }
-    updateTable('Cats')
-    updatePagination('Cats')
 })
 
 // clear searches & reset appearance
@@ -775,6 +760,18 @@ $('#AddNewPublisher').click(() => {
     })
 })
 
+function makeNewPublisherRow(data) {
+    const newPublisherRow = document.createElement('tr')
+
+    newPublisherRow.innerHTML = `
+    <td>${data.ID}</td>
+    <td>
+        <div class="detail-wrapper">${data.NAME}</div>
+    </td>`
+
+    return newPublisherRow
+}
+
 function addNewPublisher(publisher) {
     const {
         publisherName
@@ -782,16 +779,8 @@ function addNewPublisher(publisher) {
     $.post('/admin/savepublisher', {
         publisherName
     }, res => {
-        if (!res.success) alert('Failed adding new publisher!')
-        else {
-            const {
-                newId
-            } = res,
-            tr = document.createElement('tr')
-            tr.innerHTML = `<td>${newId}</td><td><div class="detail-wrapper">${publisherName}</div></td>`
-            itemsList[4].push(tr)
-            itemsList[4].sort(compareToSort)
-        }
+        if (!res.success) return alert('Failed adding new publisher!')
+        $('#Publishers .btn-refresh').trigger('click')
     })
 }
 
@@ -804,18 +793,8 @@ function updatePublisherInfo(publisher) {
         publisherId,
         publisherName
     }, res => {
-        if (!res.success) alert(res.message)
-        else {
-            for (let i = 0; i < itemsList[4].length; i++) {
-                // find the row with coresponding id
-                if (itemsList[4][i]
-                    .getElementsByTagName('td')[0]
-                    .textContent.trim() === publisherId) {
-                    itemsList[4][i].getElementsByClassName('detail-wrapper')[0].textContent = publisherName
-                    break
-                }
-            }
-        }
+        if (!res.success) return alert(res.message)
+        $('#Publishers .btn-refresh').trigger('click')
     })
 }
 
@@ -832,8 +811,6 @@ $('#ModalSave_Publisher').click(() => {
             publisherName
         })
     }
-    updateTable('Publishers')
-    updatePagination('Publishers')
 })
 
 // clear searches & reset appearance

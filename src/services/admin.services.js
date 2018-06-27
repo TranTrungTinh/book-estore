@@ -7,9 +7,9 @@ class AdminServices {
   }
 
   static async showBooks() {
-    const rawBooks = await Admin.getAllBooks()
-    if(!rawBooks) throw new Error('Khong tim thay');
-    return { books: rawBooks };
+    const books = await Admin.getAllBooks()
+    if(!books) throw new Error('Khong tim thay');
+    return { books: books };
   }
 
   static async showOrders() {

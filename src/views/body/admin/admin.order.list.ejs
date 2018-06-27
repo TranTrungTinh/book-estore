@@ -27,12 +27,11 @@
         <td>
             <%= e.ID_USER %>
         </td>
-        <% const date = new Date(e.DATE_CREATED) %>
         <td>
-            <%= date.getFullYear() + "/" + (+date.getMonth() + 1) + "/" + date.getDate() %>
+            <%= e.DATE_CREATED %>
         </td>
         <td>
-            <div class=".detail-wrapper">
+            <div class="detail-wrapper">
                 <%- e.CONTENT %>
             </div>
         </td>
