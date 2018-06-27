@@ -163,10 +163,10 @@ button:focus { outline: 0px !important;  }
   font-weight: 500;
   font-size: 20px;
 }
-.price-discount {
+/* .price-discount {
   font-weight: 500;
   color: red;
-}
+} */
 
 .thumbnail:hover {
   transform: translateY(-2px) scale(1.02);
@@ -204,6 +204,26 @@ button:focus { outline: 0px !important;  }
   font-size: 18px;
   color: #fff; 
   text-align: center;
+}
+.newTag {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: url(../media/images/new.png);
+  background-size: contain;
+  background-position: center;
+  width: 75px;
+  height: 75px;
+}
+.emptyTag {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  background: url(../media/images/empty.png);
+  background-size: contain;
+  background-position: center;
+  width: 90px;
+  height: 90px;
 }
 
 /* ========== Thumbnail item home page ========== */

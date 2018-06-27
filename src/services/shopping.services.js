@@ -24,7 +24,7 @@ class shoppingServices {
   }
 
   static async isEnoughAmount(idBook) {
-    const results = await Book.getAmountById(idBook);
+    const results = await Book.getInventoryById(idBook);
     return results[0].INVENTORY;
   }
 }

@@ -1,9 +1,11 @@
 <% 
   const {
-    ID, NAME, IMAGE, PRICE, VIEWS, SALES, DESCRIPTION, 
+    ID, NAME, IMAGE, PRICE, VIEWS, SALES, DESCRIPTION, INVENTORY,
     C_NAME, P_NAME, A_NAME, ID_CATEGORY, ID_PUBLISHER, ID_AUTHOR
   } = results.book;
   const { bookSameCategories, bookSamePublishers } = results;
+  const state = INVENTORY === 0 ? 'disabled' : null;
+  const info = INVENTORY > 0 ? 'Thêm vào giỏ hàng' : 'Hết hàng';
 %>
 
 <div class="row item_root_detail">
@@ -81,9 +83,9 @@
           </div>
           <!-- <div class="col-sm-2"></div> -->
           <div class="col-sm-9 item_detail_add_cart">
-            <button class="btn btn-danger btn-lg" type="button" id="addItem-btn" >
+            <button class="btn btn-danger btn-lg" type="button" id="addItem-btn" <%= state %>>
               <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-              Thêm vào giỏ hàng
+              <span><%= info %></span>
             </button>
           </div>
         </div>

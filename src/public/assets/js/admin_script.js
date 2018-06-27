@@ -421,6 +421,7 @@ $('#ModalSave_Product').click((e) => {
         formData.append('imagePath', imagePath);
         updateProductInfo(formData);
     }
+    $('#Modal_Product input')[1].value = '';
 })
 
 // delete selected Products

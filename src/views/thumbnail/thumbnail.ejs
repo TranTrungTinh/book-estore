@@ -1,4 +1,10 @@
-<% const { ID, NAME, IMAGE, PRICE, SALES } = data; %>
+<% 
+  const { ID, NAME, IMAGE, PRICE, VIEWS, SALES, INVENTORY } = data;
+  const state = INVENTORY === 0 ? 'disabled' : null;
+  const showEmptyTag = INVENTORY > 0 ? 'hidden' : null;
+  const info = INVENTORY > 0 ? 'Thêm vào giỏ hàng' : 'Hết hàng';
+  const showNewTag = VIEWS <= 30 ? null : 'hidden';
+%>
 <div class="thumbnail" title="<%= NAME%>">
   <div class="deal">
     <p class="deal-price">-<%= price.discount %>%</p>
@@ -14,10 +20,12 @@
     <p>Số lượng đã bán:
       <span class="badge"><%= SALES %></span>
     </p>
-    <button type="button" class="btn btn-danger btn-block btn-lg">
+    <button type="button" class="btn btn-danger btn-block btn-lg" <%= state %>>
       <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-      <span>Thêm vào giỏ hàng</span>
+      <span><%= info %></span>
     </button>
   </div>
+  <div class="newTag" <%= showNewTag%>></div>
+  <div class="emptyTag" <%= showEmptyTag %>></div>
   <input type="hidden" value="<%= ID%>"/>
 </div>

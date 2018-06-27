@@ -6,13 +6,13 @@
 
   <div class="container-fluid">
     <div class="row" id="home-page">
-        <% const { categories, authors, publishers, news, sales, views } = results; %>
+        <% const { categories, authors, publishers, news, sales, views, types } = results; %>
         <div class="col-sm-12 col-md-3" id="menu-list">
           <%- include('../body/menu.list.ejs', {categories, authors, publishers}) %>
         </div>
 
         <div class="col-sm-12 col-md-9" id="main-content">
-          <%- include('../body/home.ejs', {news, sales, views, price}) %>
+          <%- include('../body/home.ejs', {news, sales, views, price, types}) %>
         </div>
 
     </div>
