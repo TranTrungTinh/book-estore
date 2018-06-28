@@ -183,7 +183,7 @@ $('#logout').click(e => {
 
 $('section').on('click', '.btn-refresh', e => {
     const sectionId = $(e.target).closest('section').attr('id')
-    console.log(sectionId, 'triggered a refresh')
+
     $.get(`/admin/refresh${sectionId}`, (res, stt) => {
         switch (sectionId) {
             case 'Products':
@@ -205,6 +205,9 @@ $('section').on('click', '.btn-refresh', e => {
 
         updatePagination(sectionId)
     })
+
+    // clear seatch field
+    $(`#StrToSearch${sectionId}`).value = ''
 })
 
 /*=============================== Products ===============================*/
