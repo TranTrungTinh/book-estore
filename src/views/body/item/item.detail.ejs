@@ -5,7 +5,9 @@
   } = results.book;
   const { bookSameCategories, bookSamePublishers } = results;
   const state = INVENTORY === 0 ? 'disabled' : null;
-  const info = INVENTORY > 0 ? 'Thêm vào giỏ hàng' : 'Hết hàng';
+  const info = INVENTORY > 0 ? 'Thêm vào giỏ hàng' : 'Tạm hết hàng';
+  const btnState = INVENTORY > 0 ? 'btn-danger' : 'btn-default';
+
 %>
 
 <div class="row item_root_detail">
@@ -83,7 +85,7 @@
           </div>
           <!-- <div class="col-sm-2"></div> -->
           <div class="col-sm-9 item_detail_add_cart">
-            <button class="btn btn-danger btn-lg" type="button" id="addItem-btn" <%= state %>>
+            <button class="btn <%= btnState%> btn-lg" type="button" id="addItem-btn" <%= state %>>
               <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
               <span><%= info %></span>
             </button>
