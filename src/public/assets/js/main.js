@@ -88,7 +88,7 @@ $(document).on('keypress', '#txtSearch', e => {
 // by btnSearch
 $('#btnSearch').click(e => {
   const keyWord = $('#txtSearch').val() || '';
-  if(!keyWord) return swal("Có lỗi xảy ra!", "Vui lòng nhập từ khoá", "error");
+  if(!keyWord) return swal("Có lỗi xảy ra!", "Vui lòng nhập từ khoá.", "error");
   const title = `Kết quả tìm kiếm cho '${keyWord}':`;
   localSaveItem('titleList', title);
   location.href = `/book/name/filter?search=${keyWord}&page=1`;
@@ -102,15 +102,16 @@ $('#main-content').on('click', '.thumbnail', e => {
   const _this = e.target.nodeName;
   const idBook = e.currentTarget.lastElementChild.defaultValue;
   const title = e.currentTarget.children[2].children[0].innerText;
-  
+  const exit = e.target.innerText === 'Tạm hết hàng' ? true : false;
+  if(exit) return;
   if(_this !== 'SPAN' && _this !== 'BUTTON') return location.href = '/book/' + idBook;
 
   const count = localStorage.getItem('count') || '';
-  if(!count) return swal("CẢNH BÁO","Bạn phải đăng nhập trước khi mua hàng","warning")
+  if(!count) return swal("CẢNH BÁO","Bạn phải đăng nhập trước khi mua hàng.","warning")
   .then(() => $('#myModelLogin').modal('show'));
 
   $.post('/shopping-cart/cart', { idBook }, data => {
-    if(!data.success) return swal("OH OH",`Đã có "${title}" trong giỏ hàng`,"warning");;
+    if(!data.success) return swal("OH OH",`Đã có "${title}" trong giỏ hàng.`,"warning");;
     swal("XONG",`Đã thêm "${title}" vào giỏ hàng`,"success")
     .then(() => {
       localSaveItem('count', data.count);
@@ -146,7 +147,7 @@ $('#addItem-btn').click(e => {
   const amount = $('#txtTotal').val() || 1;
   $.post('/shopping-cart/amount', { idBook }, data => {
     if(!data.success) return;
-    if(+data.amount <= +amount) {
+    if(+data.amount < +amount) {
       swal({
         title: "OPP",
         text: `Hiện chúng tôi chỉ còn ${data.amount} sản phẩm, 
@@ -186,7 +187,7 @@ $('#addItem-btn').click(e => {
 /* ============ Shopping cart ============*/
 $(document).on('click', '#btn-shopping-cart' , e => {
   const count = localStorage.getItem('count') || '';
-  if(!count) return swal("CẢNH BÁO","Bạn phải đăng nhập trước khi mua hàng","warning")
+  if(!count) return swal("CẢNH BÁO","Bạn phải đăng nhập trước khi xem giỏ hàng.","warning")
   .then(() => $('#myModelLogin').modal('show'));
 
   location.href = '/shopping-cart';
@@ -216,9 +217,9 @@ $('.item-cart-total').on('click', 'span:last-child > button', e => {
   amount = +amount + 1;
   $.post('/shopping-cart/amount', { idBook }, data => {
     if(!data.success) return;
-    if(+data.amount <= +amount) {
+    if(+data.amount < +amount) {
       swal({
-        title: "OPP",
+        title: "XÁC NHẬN !!!",
         text: `Hiện chúng tôi chỉ còn ${data.amount} sản phẩm, 
               bạn có muốn đặt tối đa ${data.amount} sản phẩm không ?`,
         icon: "info",
@@ -248,9 +249,9 @@ $('.item-cart-total').on('keypress', '.item-value', e => {
     if(amount < 1) return location.reload();
     $.post('/shopping-cart/amount', { idBook }, data => {
       if(!data.success) return;
-      if(+data.amount <= +amount) {
+      if(+data.amount < +amount) {
         swal({
-          title: "OPP",
+          title: "XÁC NHẬN !!!",
           text: `Hiện chúng tôi chỉ còn ${data.amount} sản phẩm, 
                 bạn có muốn đặt tối đa ${data.amount} sản phẩm không ?`,
           icon: "info",
@@ -271,6 +272,37 @@ $('.item-cart-total').on('keypress', '.item-value', e => {
       }
     });
   }
+});
+
+$('.item-cart-total').on('blur', '.item-value', e => {
+  const _this = e.delegateTarget.children["0"];
+  const idBook = _this.children[2].defaultValue;
+  const amount = e.target.value;
+  if(amount < 1) return location.reload();
+  $.post('/shopping-cart/amount', { idBook }, data => {
+    if(!data.success) return;
+    if(+data.amount < +amount) {
+      swal({
+        title: "XÁC NHẬN !!!",
+        text: `Hiện chúng tôi chỉ còn ${data.amount} sản phẩm, 
+              bạn có muốn đặt tối đa ${data.amount} sản phẩm không ?`,
+        icon: "info",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then(yes => { if(!yes) return location.reload();
+        $.post('/shopping-cart/update', { idBook, amount: data.amount }, data => {
+          if(!data.success) return;
+          setTimeout( () => location.reload(), 500);
+        });
+      });
+    } else {
+      $.post('/shopping-cart/update', { idBook, amount }, data => {
+        if(!data.success) return;
+        setTimeout( () => location.reload(), 500);
+      });
+    }
+  });
 });
 
 $('.item-cart-author').on('click', 'a', e => {
@@ -338,7 +370,8 @@ $('#btn-signin').click(e => {
       localSaveItem('name', data.user.NAME);
       localSaveItem('count', data.user.COUNT);
       if(data.user.ADDRESS) localSaveItem('address', data.user.ADDRESS);
-      location.href = '/user/account/edit';
+      // location.href = '/user/account/edit';
+      location.reload();
     }, 1500);
   });
 });

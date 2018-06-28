@@ -36,7 +36,7 @@ class Order {
 
   static getAllOrderByIdUser(idUser) {
     const sql = `SELECT *, DATE_FORMAT(DATE_CREATED,'%d/%m/%Y') AS DATE_CREATED 
-                 FROM DONHANG WHERE ID_USER = ${idUser} ORDER BY DATE_CREATED DESC`;
+                 FROM DONHANG WHERE ID_USER = ${idUser} ORDER BY DATE_FORMAT(DATE_CREATED,'%Y/%m/%d') DESC`;
     return queryDB(sql);
   }
 

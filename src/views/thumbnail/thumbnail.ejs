@@ -3,25 +3,28 @@
   const state = INVENTORY === 0 ? 'disabled' : null;
   const info = INVENTORY > 0 ? 'Thêm vào giỏ hàng' : 'Tạm hết hàng';
   const btnState = INVENTORY > 0 ? 'btn-danger' : 'btn-default';
-  const showNewTag = VIEWS <= 30 ? null : 'hidden';
+  const showNewTag = VIEWS <= 20 ? null : 'hidden';
 %>
 <div class="thumbnail" title="<%= NAME%>">
   <div class="deal">
     <p class="deal-price">-<%= price.discount %>%</p>
   </div>
-  <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
+  <div class="wrapper-img">
+    <img src="./assets/media/images/<%= IMAGE%>" alt="BOOK_IMAGE" class="my_banner_cover">
+  </div>
   <div class="caption">
     <h4><%= NAME%></h4>
     <p>
       <span class="price-tag"><%= price.priceFormat(PRICE) %>&nbsp;₫</span>
       <strike><%= price.priceDiscount(PRICE) %>&nbsp;₫</strike>
-      <!-- <span class="price-discount">-<%= price.discount %>%</span> -->
     </p>
     <p>Số lượng đã bán:
       <span class="badge"><%= SALES %></span>
     </p>
     <button type="button" class="btn <%= btnState%> btn-block btn-lg" <%= state %>>
-      <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+      <%if(INVENTORY > 0) {%>
+        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+      <%}%>
       <span><%= info %></span>
     </button>
   </div>
