@@ -396,8 +396,8 @@ function updateProductInfo(formData) {
         contentType: false,
         data: formData
     }).then(data => {
-        if (!data.success) return swal('UPLOAD FAIL', data.message, 'error');
-        swal('UPLOAD SUCCESS', data.filename, 'success');
+        if (!data.success) return swal('UPDATE FAIL', data.message, 'error');
+        swal('UPDATE SUCCESS', data.filename, 'success');
         $('#Products .btn-refresh').trigger('click');
     });
 }

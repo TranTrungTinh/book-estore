@@ -28,6 +28,11 @@ shoppingRouter.post('/cart', (req, res) => {
   .then(count => res.send({ success: true, count }))
   .catch(error => res.send({ success: false, message: error.message }));
 });
+shoppingRouter.post('/existeditem', (req, res) => {
+  shoppingServices.isExitedBookInCart(req.idUser, req.body.idBook)
+  .then(result => res.send({ success: true, isExisted: result }))
+  .catch(error => res.send({ success: false, message: error.message }));
+});
 shoppingRouter.post('/amount', (req, res) => {
   shoppingServices.isEnoughAmount(req.body.idBook)
   .then(amount => res.send({ success: true, amount }))

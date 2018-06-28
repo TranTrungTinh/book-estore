@@ -27,6 +27,12 @@ class shoppingServices {
     const results = await Book.getInventoryById(idBook);
     return results[0].INVENTORY;
   }
+
+  static async isExitedBookInCart(idUser, idBook) {
+    const results = await Cart.isExistedItem(idUser, idBook);
+    if(!results[0]) return false;
+    return true; 
+  }
 }
 
 module.exports = { shoppingServices };

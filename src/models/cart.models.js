@@ -45,6 +45,11 @@ class Cart {
                  DELETE FROM GIOHANG WHERE ID_USER = ${idUser};`;
     return queryDB(sql);
   }
+
+  static isExistedItem(idUser, idBook) {
+    const sql = `SELECT ID FROM GIOHANG WHERE ID_USER = ? AND ID_BOOK = ?`;
+    return queryDB(sql, [idUser, idBook]);
+  }
 }
 
 module.exports = { Cart };

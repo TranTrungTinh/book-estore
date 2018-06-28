@@ -145,20 +145,21 @@ $('#addItem-btn').click(e => {
   const flateIndex = pathname.lastIndexOf('/');
   const idBook = pathname.substring(flateIndex + 1);
   const amount = $('#txtTotal').val() || 1;
-  $.post('/shopping-cart/amount', { idBook }, data => {
-    if(!data.success) return;
-    if(+data.amount < +amount) {
+  const inventory = e.currentTarget.lastElementChild.innerText;
+  $.post('/shopping-cart/existeditem', { idBook }, data => {
+    if(data.isExisted) return swal("OH OH",`Sách đã có trong giỏ hàng.`,"warning");
+    if(+inventory < +amount) {
       swal({
-        title: "OPP",
-        text: `Hiện chúng tôi chỉ còn ${data.amount} sản phẩm, 
-              bạn có muốn đặt tối đa ${data.amount} sản phẩm không ?`,
+        title: "XÁC NHẬN !!!",
+        text: `Hiện chúng tôi chỉ còn ${inventory} sản phẩm, 
+              bạn có muốn đặt tối đa ${inventory} sản phẩm không ?`,
         icon: "info",
         buttons: true,
         dangerMode: true,
       })
       .then(yes => { if(!yes) return;
-        $.post('/shopping-cart/cart', { idBook, amount: data.amount }, data => {
-          if(!data.success) return swal("OH OH",`Sách đã có trong giỏ hàng`,"warning");;
+        $.post('/shopping-cart/cart', { idBook, amount: inventory }, data => {
+          if(!data.success) return;
           swal("XONG",`Đã thêm sách vào giỏ hàng`,"success")
           .then(() => {
             localSaveItem('count', data.count);
@@ -168,7 +169,7 @@ $('#addItem-btn').click(e => {
       });
     } else {
       $.post('/shopping-cart/cart', { idBook, amount }, data => {
-        if(!data.success) return swal("OH OH",`Sách đã có trong giỏ hàng`,"warning");;
+        if(!data.success) return;
         swal("XONG",`Đã thêm sách vào giỏ hàng`,"success")
         .then(() => {
           localSaveItem('count', data.count);
@@ -177,7 +178,6 @@ $('#addItem-btn').click(e => {
       });
     }
   });
-  
 });
 /* ============ Detail page ============*/
 
@@ -370,10 +370,29 @@ $('#btn-signin').click(e => {
       localSaveItem('name', data.user.NAME);
       localSaveItem('count', data.user.COUNT);
       if(data.user.ADDRESS) localSaveItem('address', data.user.ADDRESS);
-      // location.href = '/user/account/edit';
       location.reload();
     }, 1500);
   });
+});
+$(document).on('keypress', '#inputPasswordLogin', e => {
+  if(e.keyCode == 13) {
+    e.preventDefault();
+    const email = $('#inputEmailLogin').val() || '';
+    const password = $('#inputPasswordLogin').val() || '';
+
+    if(!email || !password) return swal("CẢNH BÁO","Vui lòng nhập đầy đủ thông tin","warning");
+  
+    $.post('/user/signin', {email, password}, data => {
+      if(!data.success) return swal("CÓ LỖI!", "Sai email hoặc password !!!", "error");
+      $('#sign-in-loader').html('<div class="loader"></div>');
+      setTimeout(() => {
+        localSaveItem('name', data.user.NAME);
+        localSaveItem('count', data.user.COUNT);
+        if(data.user.ADDRESS) localSaveItem('address', data.user.ADDRESS);
+        location.reload();
+      }, 1500);
+    });
+  }
 });
 $('#btn-logout').click(e => {
   e.preventDefault();
@@ -408,19 +427,20 @@ $('#btn-signup').click(e => {
   if(!isGmail) return swal("THÔNG BÁO","Email phải là gmail","info");
   if(!captcha) return swal("THÔNG BÁO","Vui lòng check captcha","info");
 
-
   $('#sign-up-loader').html('<div class="loader"></div>');
 
   const userInfo = {name, email, password, gender, captcha };
-  $.post('/user/signup', userInfo, data => {
-    const {success, message} = data;
-    if(message === 'EMAIL_EXISTED') return swal("LỖI","Email đã có người đăng ký !!!","error")
-    .then(() => setTimeout(() => location.href = '/home'), 1500);
-    if(message === 'INVALID_CAPTCHA') return swal("LỖI","Sai mã captcha !!!","error")
-    .then(() => setTimeout(() => location.href = '/home'), 1500);    
-    if(success) return swal("THÀNH CÔNG","Đăng ký thành công !!!","success")
-    .then(() => setTimeout(() => location.href = '/home'), 2500);
-  });
+  setTimeout(() => {
+    $.post('/user/signup', userInfo, data => {
+      const {success, message} = data;
+      if(message === 'EMAIL_EXISTED') return swal("LỖI","Email đã có người đăng ký !!!","error")
+      .then(() => location.reload());
+      if(message === 'INVALID_CAPTCHA') return swal("LỖI","Sai mã captcha !!!","error")
+      .then(() => location.reload());    
+      if(success) return swal("THÀNH CÔNG","Đăng ký thành công !!!","success")
+      .then(() => location.reload());
+    })
+  }, 1500);
 });
 /* ============ Handle Login - Logout ============*/
 
