@@ -207,7 +207,7 @@ $('section').on('click', '.btn-refresh', e => {
     })
 
     // clear seatch field
-    $(`#StrToSearch${sectionId}`).value = ''
+    $(`#StrToSearch${sectionId}`).val('')
 })
 
 /*=============================== Products ===============================*/
