@@ -318,6 +318,8 @@ $('.item-cart-author').on('click', 'a', e => {
 
 $('#orderCartBtn').click(e => {
 
+  const check = localStorage.getItem('address') ? true : false;
+  if(!check) return location.href = '/user/account/address';
   const total = $('#totalPrice').text() || '';
   if(!total) return;
 
