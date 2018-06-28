@@ -26,4 +26,4 @@ app.get('/admin', (req, res) => res.redirect('/admin/edit'));
 app.get('/error', (req, res) => res.render('render/error'));
 app.get('*', (req, res) => res.redirect('/error'));
 
-app.listen(3000, () => console.log('Server started port 3000'));
+app.listen( process.env.PORT || 3000, () => console.log('Server started port 3000'));
