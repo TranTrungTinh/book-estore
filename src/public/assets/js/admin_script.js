@@ -110,7 +110,7 @@ function updateTable(data, sectionId) {
         }
         container.appendChild(newRow)
     })
-    // update global data variables
+    // update global data variable
     itemsList[sectionNumberId] = $(`#${sectionId} tbody tr`)
 }
 
@@ -255,6 +255,7 @@ var selectedProduct // determine whether modal save new product or update existe
 // pop up modal containing infos coresponding with selected row
 $('#Products tbody').click((e) => {
     e.preventDefault()
+    $('#Modal_Product input')[1].value = ''
     let tr = e.target.closest('tr')
     selectedProduct = tr
     // copy current selected row info into modal
@@ -325,6 +326,8 @@ $('#AddNewProduct').click(() => {
     })
 
     $('#txtEditor').Editor("setText", '')
+
+    $('#Modal_Product input')[1].value = ''
 })
 
 function makeNewBookRow(data) {
@@ -421,7 +424,6 @@ $('#ModalSave_Product').click((e) => {
         formData.append('imagePath', imagePath);
         updateProductInfo(formData);
     }
-    $('#Modal_Product input')[1].value = '';
 })
 
 // delete selected Products
