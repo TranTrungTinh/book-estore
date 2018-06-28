@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const { AdminServices } = require('../services/admin.services');
 const { mustBeAdmin, checkTokenAdmin } = require('../middleware/mustBeAdmin.middleware');
 const { priceFormat } = require('../helpers/priceFormat');
+const { getCurrentDate } = require('../helpers/getCurrentDate');
 const { upload } = require('../helpers/upload');
 const { checkExistsAndDelete } = require('../helpers/checkExistsAndDelete');
 
@@ -64,6 +65,7 @@ adminRouter.post('/savebook', (req, res) => {
       const bookInfo = {...req.body};
       bookInfo.id = id;
       bookInfo.image = req.file.filename;
+      bookInfo.date = getCurrentDate();
       AdminServices.saveBook(bookInfo)
       .then(() => res.send({ success: true, filename: bookInfo.image }))
       .catch(error => res.send({ success: false, message: error.message }));

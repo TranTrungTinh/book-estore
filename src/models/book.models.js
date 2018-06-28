@@ -28,7 +28,7 @@ class Book {
 
   static getTopNewSaleView() {
     const subSql = 'SELECT ID, NAME, IMAGE, PRICE, VIEWS, SALES, INVENTORY FROM THONGTINSACH ORDER BY';
-    const slq = `${subSql} SALES LIMIT 10;
+    const slq = `${subSql} DATE_FORMAT(DATE_CREATED,'%Y/%m/%d %H:%i') DESC LIMIT 10;
                  ${subSql} SALES DESC LIMIT 10;
                  ${subSql} VIEWS DESC LIMIT 10;`;
     return queryDB(slq);

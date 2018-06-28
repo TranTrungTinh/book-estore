@@ -31,7 +31,7 @@ class Admin {
   }
 
   static getAllOrders() {
-    const sql = `SELECT *, DATE_FORMAT(DATE_CREATED,'%d/%m/%Y') AS DATE_CREATED FROM DONHANG ORDER BY DATE_FORMAT(DATE_CREATED,'%Y/%m/%d') DESC`;
+    const sql = `SELECT *, DATE_FORMAT(DATE_CREATED,'%d/%m/%Y') AS DATE_CREATED FROM DONHANG ORDER BY DATE_FORMAT(DATE_CREATED,'%Y/%m/%d %H:%i') DESC`;
     return queryDB(sql);
   }
 
@@ -50,10 +50,10 @@ class Admin {
     return queryDB(sql);
   }
 
-  static async saveNewBook(newId, name, image, price, amount, description, author, type, publisher) {
-    const sql = `INSERT INTO THONGTINSACH(ID, NAME, IMAGE, PRICE, INVENTORY, DESCRIPTION, ID_AUTHOR, ID_CATEGORY, ID_PUBLISHER)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    return queryDB(sql, [ newId, name, image, price, amount, description, author, type, publisher]);
+  static async saveNewBook(newId, name, image, price, amount, description, author, type, publisher, date) {
+    const sql = `INSERT INTO THONGTINSACH(ID, NAME, IMAGE, PRICE, INVENTORY, DESCRIPTION, ID_AUTHOR, ID_CATEGORY, ID_PUBLISHER, DATE_CREATED)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    return queryDB(sql, [ newId, name, image, price, amount, description, author, type, publisher, date]);
   }
 
   static async saveNewAuthor(authorName) {

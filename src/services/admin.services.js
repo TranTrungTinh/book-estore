@@ -41,8 +41,8 @@ class AdminServices {
   }
   
   static saveBook(bookInfo) {
-    const { id, name, image, price, amount, description, author, type, publisher } = bookInfo;
-    return Admin.saveNewBook(id, name, image, price, amount, description, author, type, publisher);
+    const { id, name, image, price, amount, description, author, type, publisher, date } = bookInfo;
+    return Admin.saveNewBook(id, name, image, price, amount, description, author, type, publisher, date);
   }
 
   static saveAuthor(authorName) {

@@ -36,12 +36,12 @@ class Order {
 
   static getAllOrderByIdUser(idUser) {
     const sql = `SELECT *, DATE_FORMAT(DATE_CREATED,'%d/%m/%Y') AS DATE_CREATED 
-                 FROM DONHANG WHERE ID_USER = ${idUser} ORDER BY DATE_FORMAT(DATE_CREATED,'%Y/%m/%d') DESC`;
+                 FROM DONHANG WHERE ID_USER = ${idUser} ORDER BY DATE_FORMAT(DATE_CREATED,'%Y/%m/%d %H:%i') DESC`;
     return queryDB(sql);
   }
 
   static getDetailOrderByIdOrder(idOrder) {
-    const sql = `SELECT d.ID, d.STATE, DATE_FORMAT(d.DATE_CREATED,'%d/%m/%Y') AS DATE_CREATED, d.TOTAL_COST, t.NAME, t.IMAGE, t.PRICE, c.AMOUNT 
+    const sql = `SELECT d.ID, d.STATE, DATE_FORMAT(d.DATE_CREATED,'%H:%i %d/%m/%Y') AS DATE_CREATED, d.TOTAL_COST, t.NAME, t.IMAGE, t.PRICE, c.AMOUNT 
                  FROM DONHANG d, CHITIETDONHANG c, THONGTINSACH t
                  WHERE d.ID = ${idOrder}
                  AND c.ID_ORDER = d.ID
