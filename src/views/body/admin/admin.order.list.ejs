@@ -13,10 +13,10 @@
 
 <% orderItems.forEach(e => { %>
     <% if(e.STATE === 1) { %>
-    <tr class="warning">
+    <tr class="active">
     <% } %>
     <% if(e.STATE === 2) { %>
-    <tr class="active">
+    <tr class="warning">
     <% } %>
     <% if(e.STATE === 3) { %>
     <tr class="success">

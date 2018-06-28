@@ -450,10 +450,10 @@ function changeOrderRowStatus(sel) {
     let tr = sel.closest('tr')
     switch (sel.value) {
         case 'pending':
-            tr.className = 'warning'
+            tr.className = 'active'
             break
         case 'delivering':
-            tr.className = 'active'
+            tr.className = 'warning'
             break
         case 'done':
             tr.className = 'success'
@@ -505,10 +505,10 @@ function makeNewOrderRow(data) {
         newOrderRow.className = 'success'
         newOrderRow.getElementsByTagName('option')[2].setAttribute('selected', true)
     } else if (data.STATE == 2) {
-        newOrderRow.className = 'active'
+        newOrderRow.className = 'warning'
         newOrderRow.getElementsByTagName('option')[1].setAttribute('selected', true)
     } else {
-        newOrderRow.className = 'warning'
+        newOrderRow.className = 'active'
         newOrderRow.getElementsByTagName('option')[0].setAttribute('selected', true)
     }
 

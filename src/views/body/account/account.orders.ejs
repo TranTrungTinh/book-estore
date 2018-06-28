@@ -21,13 +21,18 @@
           <div class="col-xs-2">Trạng thái<br>đơn hàng</div>
         </div>
         <% orders.forEach(e => { %>
-        <% const {ID, DATE_CREATED, CONTENT, TOTAL_COST, STATE} = e; %>
+        <% 
+          const {ID, DATE_CREATED, CONTENT, TOTAL_COST, STATE} = e; 
+          let style = 'clr_gray';
+          if(STATE == 2) style = 'clr_orange';
+          if(STATE == 3) style = 'clr_green';
+        %>
           <div class="col-xs-12 order-item-body">
             <div class="col-xs-2"><a href="/user/account/order/history/<%= ID%>"><%= ID%></a></div>
             <div class="col-xs-2"><%= DATE_CREATED%></div>
             <div class="col-xs-4"><%= CONTENT%></div>
             <div class="col-xs-2"><%= TOTAL_COST%> ₫</div>
-            <div class="col-xs-2"><%= showStatus(STATE)%></div>
+            <div class="col-xs-2 <%= style%>"><%= showStatus(STATE)%></div>
           </div>
         <% }); %>
       <% } %>

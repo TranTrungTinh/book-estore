@@ -28,6 +28,7 @@
 .clr_red { color: red; }
 .clr_orange { color: orange; }
 .clr_blue { color: #ced6e0;}
+.clr_gray { color: #5d5f61; }
 /* ========== Helper class styles ========== */
 
 
@@ -629,13 +630,12 @@ button:focus { outline: 0px !important;  }
 
 .history-order {
   padding: 10px 0;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 300;
   /* background-color: #fff; */
 }
 .history-order > div.pull-left {
   font-size: 22px;
-  
 }
 
 .history-row-header {
