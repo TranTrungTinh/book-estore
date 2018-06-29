@@ -3,8 +3,8 @@
   const state = INVENTORY === 0 ? 'disabled' : null;
   const info = INVENTORY > 0 ? 'Thêm vào giỏ hàng' : 'Tạm hết hàng';
   const btnState = INVENTORY > 0 ? 'btn-danger' : 'btn-default';
-  const showNewTag = VIEWS <= 20 ? null : 'hidden';
-  const showSaleTag = SALES >= 1000 ? null : 'hidden';
+  const showNewTag = VIEWS <= 10 ? null : 'hidden';
+  const showSaleTag = SALES >= 500 ? null : 'hidden';
 
 %>
 <div class="thumbnail" title="<%= NAME%>">

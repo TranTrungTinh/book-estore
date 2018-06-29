@@ -323,7 +323,7 @@ $('#orderCartBtn').click(e => {
   const total = $('#totalPrice').text() || '';
   if(!total) return;
 
-  $('#orderCartBtn').html('<p class="small-loader"></p>');
+  $('#orderCartBtn').html('<div class="small-loader"></div>');
   setTimeout(() => swal({
     title: "XÁC NHẬN !!!",
     text: "Bạn chắc chắn đặt hàng",
