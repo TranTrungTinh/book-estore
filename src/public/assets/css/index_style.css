@@ -178,13 +178,19 @@ button:focus { outline: 0px !important;  }
 .item-cover-img img:hover {
   box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.5);
 }
-.my_banner_cover {
-  width: 100%;
+.wrapper-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   height: 240px;
 }
-.my_banner_fix {
+.thumbnail .wrapper-img img {
+  display: inline-block;
+  height: 100%;
+}
+.my_banner_cover {
   max-width: 100%;
-  max-height: 240px;
 }
 .deal {
   position: absolute;
@@ -207,13 +213,26 @@ button:focus { outline: 0px !important;  }
 }
 .newTag {
   position: absolute;
-  top: -2px;
-  right: -2px;
-  background: url(../media/images/new.png);
+  top: -7px;
+  left: 0px;
+  /* background: url(../media/images/new.png); */
+  background: url(../media/images/news.png);
+  background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  width: 75px;
-  height: 75px;
+  width: 130px;
+  height: 130px;
+}
+.saleTag {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: url(../media/images/sale.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 100px;
+  height: 100px;
 }
 .emptyTag {
   position: absolute;
@@ -492,10 +511,10 @@ button:focus { outline: 0px !important;  }
   background-color: #fff;
   border-radius: 5px;
 }
-.item_root_detail > .wrapper-img {
+.item_root_detail > .detail-wrapper-img {
   vertical-align: middle;
 }
-.item_root_detail > .wrapper-img > .item_detail_img {
+.item_root_detail > .detail-wrapper-img > .item_detail_img {
   display: block;
   margin: 50px auto;
   width: 100%;

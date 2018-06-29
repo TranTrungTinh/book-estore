@@ -4,6 +4,8 @@
   const info = INVENTORY > 0 ? 'Thêm vào giỏ hàng' : 'Tạm hết hàng';
   const btnState = INVENTORY > 0 ? 'btn-danger' : 'btn-default';
   const showNewTag = VIEWS <= 20 ? null : 'hidden';
+  const showSaleTag = SALES >= 1000 ? null : 'hidden';
+
 %>
 <div class="thumbnail" title="<%= NAME%>">
   <div class="deal">
@@ -29,5 +31,6 @@
     </button>
   </div>
   <div class="newTag" <%= showNewTag%>></div>
+  <div class="saleTag" <%= showSaleTag%>></div>
   <input type="hidden" value="<%= ID%>"/>
 </div>

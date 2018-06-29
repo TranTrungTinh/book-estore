@@ -14,7 +14,7 @@ function getCurrentDate() {
 }
 
 function showStatus(state) {
-  if(state == 3) return 'Giao hàng thành công';
+  if(state == 3) return 'Đã giao hàng';
   if(state == 2) return 'Đang giao hàng';
   return 'Chưa giao';
 }
