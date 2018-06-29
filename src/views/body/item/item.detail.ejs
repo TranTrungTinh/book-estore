@@ -102,12 +102,20 @@
     <p class="item_same_title">sản phẩm cùng thể loại</p>
   </div>
 </div>
-<div class="row item_same_type">
-  <% bookSameCategories.forEach(e => { %>
-    <div class="col-sm-12 col-md-2">
-      <%- include('../../thumbnail/thumbnail.ejs', { data: e, price}) %>           
-    </div>
-  <% }) %>
+
+<% if(!bookSameCategories.length) { %>
+<div class="col-sm-12">
+  <div class="alert alert-info margin-bottom-big fs-20" id="my-title-list">
+    KHÔNG CÓ SẢN PHẨM
+  </div>
+</div>
+<% } else { %>
+<div class="row item_same_producer">
+<% bookSameCategories.forEach(e => { %>
+  <div class="col-sm-12 col-md-2">
+    <%- include('../../thumbnail/thumbnail.ejs', { data: e, price}) %>           
+  </div>
+<% })} %>
 </div>
 
 <div class="row">
@@ -122,10 +130,10 @@
   </div>
 </div>
 <% } else { %>
-  <div class="row item_same_producer">
-  <% bookSamePublishers.forEach(e => { %>
-    <div class="col-sm-12 col-md-2">
-      <%- include('../../thumbnail/thumbnail.ejs', { data: e, price}) %> 
-    </div>
-  <% })} %>
+<div class="row item_same_producer">
+<% bookSamePublishers.forEach(e => { %>
+  <div class="col-sm-12 col-md-2">
+    <%- include('../../thumbnail/thumbnail.ejs', { data: e, price}) %> 
+  </div>
+<% })} %>
 </div>

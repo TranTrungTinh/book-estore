@@ -57,9 +57,7 @@ class Admin {
   }
 
   static async saveNewAuthor(authorName) {
-    let newId = Math.round(Math.random() * 1000) + '';
-    if(+newId < 10) newId = '00' + newId;
-    else if(+newId < 100) newId = '0' + newId;
+    const newId = Math.round(Math.random() * 1000) + '';
 
     const sql = `INSERT INTO TACGIA(ID, NAME) VALUES (?, ?)`;
     await queryDB(sql, [ newId, authorName ]);
@@ -68,8 +66,7 @@ class Admin {
   }
 
   static async saveNewCategory(catName) {
-    let newId = Math.round(Math.random() * 100) + '';
-    if(+newId < 10) newId = '00' + newId;
+    const newId = Math.round(Math.random() * 100) + '';
     
     const sql = `INSERT INTO DANHMUCSACH(ID, NAME) VALUES (?, ?)`;
     await queryDB(sql, [ newId, catName ]);
@@ -78,9 +75,7 @@ class Admin {
   }
 
   static async saveNewPublisher(publisherName) {
-    let newId = Math.round(Math.random() * 1000) + '';
-    if(+newId < 10) newId = '00' + newId;
-    else if(+newId < 100) newId = '0' + newId;
+    const newId = Math.round(Math.random() * 1000) + '';
 
     const sql = `INSERT INTO NHAXUATBAN(ID, NAME) VALUES (?, ?)`;
     await queryDB(sql, [ newId, publisherName ]);

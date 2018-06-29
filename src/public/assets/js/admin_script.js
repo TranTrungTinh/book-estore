@@ -382,8 +382,8 @@ function addNewProduct(formData) {
         contentType: false,
         data: formData
     }).then(data => {
-        if (!data.success) return swal('UPLOAD FAIL', data.message, 'error');
-        swal('UPLOAD SUCCESS', data.filename, 'success');
+        if (!data.success) return swal('THẤT BẠI', data.message, 'error');
+        swal('THÀNH CÔNG', data.filename, 'success');
         $('#Products .btn-refresh').trigger('click')
     });
 }
@@ -396,8 +396,8 @@ function updateProductInfo(formData) {
         contentType: false,
         data: formData
     }).then(data => {
-        if (!data.success) return swal('UPDATE FAIL', data.message, 'error');
-        swal('UPDATE SUCCESS', data.filename, 'success');
+        if (!data.success) return swal('THẤT BẠI', data.message, 'error');
+        swal('THÀNH CÔNG', data.filename, 'success');
         $('#Products .btn-refresh').trigger('click');
     });
 }
@@ -437,10 +437,9 @@ $('#ModalDelete').click(() => {
     $.post('/admin/deletebook', {
         bookId
     }, res => {
-        if (!res.success) alert(res.message)
-        else {
-            $('#Products .btn-refresh').trigger('click')
-        }
+        if (!res.success) return swal('THÔNG BÁO', 'Thử lại lần nữa !!!', 'info');
+        swal('THÀNH CÔNG', 'Đã xoá sách', 'success');
+        $('#Products .btn-refresh').trigger('click');
     })
 })
 
@@ -525,25 +524,23 @@ function updateOrderInfo(order) {
         orderId,
         orderStt
     }, res => {
-        if (!res.success) alert(res.message)
-        else {
-            for (let i = 0; i < itemsList[2].length; i++) {
+        if (!res.success) return  swal('THÔNG BÁO', 'Thử lại lần nữa...', 'info');
+        for (let i = 0; i < itemsList[2].length; i++) {
                 // find the row with coresponding id
-                let rowId = itemsList[2][i].getElementsByTagName('td')[0].textContent.trim()
-                if (rowId === orderId) {
-                    itemsList[2][i].getElementsByTagName('options').each((index, option) => {
-                        if (option.value.trim() === orderStt) {
-                            option.setAttribute('selected', true)
-                        } else {
-                            option.removeAttribute('selected')
-                        }
-                    })
-                    changeOrderRowStatus(itemsList[2][i].getElementsByTagName('select')[0])
-                    break
-                }
+            let rowId = itemsList[2][i].getElementsByTagName('td')[0].textContent.trim()
+            if (rowId === orderId) {
+                itemsList[2][i].getElementsByTagName('options').each((index, option) => {
+                    if (option.value.trim() === orderStt) {
+                        option.setAttribute('selected', true)
+                    } else {
+                        option.removeAttribute('selected')
+                    }
+                })
+                changeOrderRowStatus(itemsList[2][i].getElementsByTagName('select')[0])
+                break
             }
-            updatePagination('Orders')
         }
+        updatePagination('Orders')
     })
 }
 
@@ -618,7 +615,7 @@ function addNewAuthor(author) {
     $.post('/admin/saveauthor', {
         authorName
     }, res => {
-        if (!res.success) return alert('Failed adding new author!')
+        if (!res.success) return swal('THÔNG BÁO', 'Thử lại lần nữa...', 'info');
         $('#Authors .btn-refresh').trigger('click')
     })
 }
@@ -632,7 +629,7 @@ function updateAuthorInfo(author) {
         authorId,
         authorName
     }, res => {
-        if (!res.success) return alert(res.message)
+        if (!res.success) return swal('THÔNG BÁO', 'Thử lại lần nữa...', 'info');
         $('#Authors .btn-refresh').trigger('click')
     })
 }
@@ -707,7 +704,7 @@ function addNewCat(cat) {
     $.post('/admin/savecat', {
         catName
     }, res => {
-        if (!res.success) return alert('Failed adding new category!')
+        if (!res.success) return swal('THÔNG BÁO', 'Thử lại lần nữa...', 'info');
         $('#Cats .btn-refresh').trigger('click')
     })
 }
@@ -721,7 +718,7 @@ function updateCatInfo(cat) {
         catId,
         catName
     }, res => {
-        if (!res.success) return alert(res.message)
+        if (!res.success) return swal('THÔNG BÁO', 'Thử lại lần nữa...', 'info');
         $('#Cats .btn-refresh').trigger('click')
     })
 }
@@ -796,7 +793,7 @@ function addNewPublisher(publisher) {
     $.post('/admin/savepublisher', {
         publisherName
     }, res => {
-        if (!res.success) return alert('Failed adding new publisher!')
+        if (!res.success) return swal('THÔNG BÁO', 'Thử lại lần nữa...', 'info');
         $('#Publishers .btn-refresh').trigger('click')
     })
 }
@@ -810,7 +807,7 @@ function updatePublisherInfo(publisher) {
         publisherId,
         publisherName
     }, res => {
-        if (!res.success) return alert(res.message)
+        if (!res.success) return swal('THÔNG BÁO', 'Thử lại lần nữa...', 'info');
         $('#Publishers .btn-refresh').trigger('click')
     })
 }
